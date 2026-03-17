@@ -272,16 +272,34 @@ export const siteContent = {
     chips: ["Amazon", "Accenture", "PwC", "St. Gallen", "HKU", "London"],
     notes: [
       {
-        icon: "building",
-        label: "Experience",
+        icon: "amazon",
+        label: "Amazon PM",
         detail:
-          "Amazon PM with technical scope, plus earlier cloud, automation, and transformation work at Accenture and PwC."
+          "Program leadership with technical scope across logistics optimization, orchestration, and AI-enabled operations.",
+        popover: {
+          kind: "note",
+          title: "Amazon PM operating context",
+          body:
+            "I worked across Amazon's first, middle, and last mile to solve network-level problems across the EU and globally, often on programs tied to SVP strategic goals. I led a team and processes handling 50+ dynamic inputs and 30+ metrics while managing ML parameter changes across 200+ nodes affecting 100,000+ trucks weekly across the EU. That operating context is why I build AI systems with a strong bias toward governance, reliable execution, automated validation, and AI audits that combine agentic workflows with deterministic tools. Under my program leadership, two ML launches before Q4 peak helped deliver record reductions in delivery misses and the fastest network speed from 2024 to 2025."
+        }
       },
       {
         icon: "cap",
-        label: "Education",
+        label: "Master's",
         detail:
-          "St. Gallen M.A. in Strategy and International Management, magna cum laude, and HKU dual degrees in Law and Business."
+          "University of St. Gallen | M.A. in Strategy and International Management, magna cum laude."
+      },
+      {
+        icon: "scale",
+        label: "HKU undergraduate",
+        detail:
+          "The University of Hong Kong | dual degrees in Law and Business.",
+        popover: {
+          kind: "note",
+          title: "HKU legal and business training",
+          body:
+            "My legal training influences how I build AI systems: not as unconstrained generation engines, but as systems operating within explicit rules, authorities, and validation layers. I believe a large share of legal and policy-intensive work can be accelerated by AI when supported by strong knowledge infrastructure, retrieval systems, and policy-aware validation. That is why I favor a policy-as-code and strict version-control approach; it is the same rigor and insist-on-the-highest-standard mindset that written laws demand."
+        }
       },
       {
         icon: "spark",

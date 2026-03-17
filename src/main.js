@@ -94,6 +94,17 @@ const iconMap = {
       <path d="M6 11.5v4.5c0 1.2 2.7 3 6 3s6-1.8 6-3v-4.5" />
     </svg>
   `,
+  scale: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 4v15" />
+      <path d="M7 21h10" />
+      <path d="M5 7h14" />
+      <path d="m8 7-3 5" />
+      <path d="m16 7 3 5" />
+      <path d="M3.8 12h4.4a2.2 2.2 0 0 1-4.4 0Z" />
+      <path d="M15.8 12h4.4a2.2 2.2 0 0 1-4.4 0Z" />
+    </svg>
+  `,
   spark: `
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
       <path d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7Z" />
@@ -311,17 +322,38 @@ const renderStatCard = (item) => `
   </article>
 `;
 
-const renderProfileNote = (item) => `
-  <article class="profile-note">
+const renderProfileNote = (item, index) => {
+  const noteBody = `
     <div class="fact-icon-wrap">
       ${renderIcon(item.icon)}
     </div>
-    <div>
+    <div class="profile-note-copy-block">
       <p class="fact-label">${item.label}</p>
       <p class="profile-note-copy">${item.detail}</p>
     </div>
-  </article>
-`;
+  `;
+
+  if (item.popover) {
+    return `
+      <button
+        class="profile-note profile-note-trigger"
+        type="button"
+        data-popover-source="profile-note"
+        data-popover-index="${index}"
+        aria-expanded="false"
+      >
+        ${noteBody}
+        <span class="profile-note-open">Inspect</span>
+      </button>
+    `;
+  }
+
+  return `
+    <article class="profile-note">
+      ${noteBody}
+    </article>
+  `;
+};
 
 const renderMiniMetric = (item) => `
   <article class="mini-metric">
@@ -608,11 +640,18 @@ const renderPopoverBody = (payload) => {
     `;
   }
 
+  if (payload.kind === "note") {
+    return `
+      <div class="popover-copy-block">
+        <p class="popover-copy">${payload.body}</p>
+      </div>
+    `;
+  }
+
   return `
     <ul class="popover-list">
       ${payload.bullets.map((item) => `<li>${item}</li>`).join("")}
     </ul>
-    ${renderPopoverAction(payload)}
   `;
 };
 
@@ -629,7 +668,7 @@ const renderPopover = (payload) => `
         </div>
       </div>
     </div>
-    <p class="popover-summary">${payload.summary}</p>
+    ${payload.summary ? `<p class="popover-summary">${payload.summary}</p>` : ""}
     ${renderPopoverBody(payload)}
     ${payload.kind === "map" ? "" : renderPopoverAction(payload)}
   </div>
@@ -744,7 +783,7 @@ const render = () => {
                 </div>
                 <p class="section-copy">${siteContent.profile.body}</p>
                 <div class="profile-note-grid">
-                  ${siteContent.profile.notes.map(renderProfileNote).join("")}
+                  ${siteContent.profile.notes.map((item, index) => renderProfileNote(item, index)).join("")}
                 </div>
               </article>
 
@@ -1017,6 +1056,11 @@ const initHeroPopover = () => {
     if (trigger.dataset.popoverSource === "proof") {
       const item = siteContent.hero.proofTags[index];
       return item ? { ...item, kind: "proof", badge: item.label } : null;
+    }
+
+    if (trigger.dataset.popoverSource === "profile-note") {
+      const item = siteContent.profile.notes[index];
+      return item?.popover ? { ...item.popover, icon: item.icon, badge: item.label } : null;
     }
 
     return null;
