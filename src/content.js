@@ -2,7 +2,7 @@ export const siteContent = {
   meta: {
     title: "Joaquin Hui Gomez | Reliable AI Systems",
     description:
-      "AI infrastructure, evaluation, and agent orchestration - from production impact to open-source contributions across MCP and Anthropic's agent ecosystem.",
+      "AI infrastructure, evaluation, and agent orchestration grounded in production work at Amazon and open-source contributions across MCP and Anthropic's agent ecosystem.",
     url: "https://joaquinh.com"
   },
   nav: [
@@ -15,11 +15,11 @@ export const siteContent = {
     eyebrow: "AI infrastructure | evaluation | agent orchestration",
     title: "I build reliable AI systems.",
     description:
-      "AI infrastructure, evaluation, and agent orchestration - from production impact to open-source contributions across MCP and Anthropic's agent ecosystem.",
+      "AI infrastructure, evaluation, and agent orchestration grounded in production work at Amazon and open-source contributions across MCP and Anthropic's agent ecosystem.",
     proofLine:
       "Internal AI hackathon winner | OSS contributor across MCP and Anthropic agent tooling | Amazon | Accenture | PwC",
     intro:
-      "I am Joaquin Hui Gomez. I care about making AI systems more reliable, measurable, and useful in practice. My background combines practical automation work, consulting and digital transformation experience at Accenture and PwC, and a strategy-and-law foundation shaped by the University of St. Gallen and the University of Hong Kong.",
+      "I am Joaquin Hui Gomez, a London-based Program Manager at Amazon focused on making AI systems more reliable, measurable, and useful in practice. My route into this work runs through strategy, law, consulting, operations, and hands-on automation, which is why I care about systems that hold up beyond the demo.",
     buttons: [
       {
         label: "View GitHub",
@@ -40,19 +40,84 @@ export const siteContent = {
         style: "secondary"
       }
     ],
+    quickFacts: [
+      { label: "Current", value: "Amazon Program Manager" },
+      { label: "Global", value: "Lived across 3 continents" },
+      { label: "Languages", value: "6 fluent languages" },
+      { label: "Technical", value: "3 AWS certifications" }
+    ],
+    snapshot: {
+      imageSrc: "/portrait.jpg",
+      imageAlt: "Portrait of Joaquin Hui Gomez",
+      title: "Program Manager at Amazon",
+      location: "London, United Kingdom",
+      blurb:
+        "Non-traditional on paper, technical in practice: cloud, automation, analytics, evaluation, and agent tooling."
+    },
     credentials: [
-      "Amazon hackathon winner",
-      "Accenture + PwC digital transformation",
-      "University of St. Gallen + HKU"
+      "St. Gallen M.A. | magna cum laude",
+      "HKU LLB + BBA",
+      "Ex-Accenture and PwC",
+      "AI, cloud, and automation builder"
     ]
   },
   stats: {
-    verifiedOn: "Last verified March 17, 2026",
+    verifiedOn: "Last verified March 17, 2026 from GitHub profile and PR search",
     items: [
       { value: "17+", label: "Contributions", detail: "public OSS and benchmark work" },
-      { value: "16", label: "Public repos", detail: "live GitHub profile count" },
-      { value: "11", label: "Open PRs", detail: "active upstream contributions" },
-      { value: "1440", label: "Hours per year", detail: "estimated internal ops impact" }
+      { value: "20", label: "Public repos", detail: "live GitHub profile count" },
+      { value: "15", label: "Open PRs", detail: "active upstream contributions" },
+      { value: "1440", label: "Hours / year", detail: "estimated internal ops impact" }
+    ]
+  },
+  background: {
+    title: "A non-traditional route into AI systems",
+    intro:
+      "Strategy, law, consulting, and operations gave me a bias toward systems that are legible, governable, and useful. That now shows up in how I build AI infrastructure, evaluation tooling, and agent workflows.",
+    cards: [
+      {
+        eyebrow: "Experience",
+        title: "Amazon, Accenture, PwC",
+        detail:
+          "Program management, automation, analytics, cloud migrations, and digital transformation in operationally demanding environments."
+      },
+      {
+        eyebrow: "Education",
+        title: "St. Gallen and HKU",
+        detail:
+          "M.A. in Strategy and International Management, magna cum laude, plus dual degrees in Law and Business."
+      },
+      {
+        eyebrow: "Global context",
+        title: "3 continents | 6 languages",
+        detail:
+          "Comfortable operating across cultures, disciplines, and stakeholder groups without losing execution speed."
+      },
+      {
+        eyebrow: "Technical crossover",
+        title: "From non-traditional to hands-on",
+        detail:
+          "Built technical depth through AI, Python, SQL, automation, and 3 AWS certifications despite starting outside a classic engineering track."
+      }
+    ],
+    journey: [
+      {
+        period: "2023 - Present",
+        title: "Amazon | Program Manager",
+        detail: "Driving AI, software, and operational automation work in London."
+      },
+      {
+        period: "2022",
+        title: "Amazon | Business Analyst Intern",
+        detail:
+          "Worked across 30M+ rows, AWS-backed automation, and dashboards, then secured a full-time L5 offer before the internship ended."
+      },
+      {
+        period: "2018 - 2021",
+        title: "PwC and Accenture",
+        detail:
+          "Cloud, analytics, automation, and digital strategy work spanning Beijing and major client transformation programs."
+      }
     ]
   },
   projects: [
@@ -236,7 +301,7 @@ export const siteContent = {
   whyAi: {
     title: "Why I care about AI systems",
     body:
-      "I care about the layer where AI stops being impressive in a demo and starts becoming trustworthy in practice. That means reliability under load, evaluation that can survive scrutiny, and orchestration patterns that create measurable outcomes for real teams.",
+      "Coming from strategy, law, consulting, and operations, I care less about model theater and more about whether an AI system can be trusted, measured, and productively owned by a real team.",
     principles: [
       {
         title: "Reliability over novelty",
@@ -249,13 +314,17 @@ export const siteContent = {
       {
         title: "Orchestration for outcomes",
         detail: "The most useful AI work is often in the glue: routing, validation, fallback logic, and operational fit."
+      },
+      {
+        title: "Technical depth with business context",
+        detail: "I am most interested in systems that are rigorous enough for engineers and legible enough for operators and decision-makers."
       }
     ]
   },
   contact: {
     title: "Contact and links",
     body:
-      "The easiest way to reach me is through GitHub or LinkedIn. Those are also the best places to see current projects, public contributions, and ongoing AI systems work.",
+      "GitHub is the best place to see current repos and PRs. LinkedIn is the fastest way to get the broader background across AI, cloud, consulting, and operations.",
     links: [
       {
         label: "GitHub",

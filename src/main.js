@@ -25,9 +25,15 @@ const setMeta = () => {
     "@type": "Person",
     name: "Joaquin Hui Gomez",
     url: siteContent.meta.url,
+    image: `${siteContent.meta.url}${siteContent.hero.profile.image}`,
+    jobTitle: "Program Manager",
+    worksFor: {
+      "@type": "Organization",
+      name: "Amazon"
+    },
     sameAs: siteContent.contact.links.map((link) => link.href),
     alumniOf: ["University of St. Gallen", "The University of Hong Kong"],
-    knowsAbout: ["AI infrastructure", "LLM evaluation", "agent orchestration"]
+    knowsAbout: ["AI infrastructure", "LLM evaluation", "agent orchestration", "reliability engineering"]
   };
 
   const existingSchema = document.querySelector('script[data-site-schema="person"]');
@@ -82,6 +88,26 @@ const renderContactLink = (item) => `
   </a>
 `;
 
+const renderHeroFact = (item) => `<span class="hero-fact">${item}</span>`;
+
+const renderIdentityCard = (item) => `
+  <article class="identity-card" data-reveal>
+    <div class="identity-value">${item.value}</div>
+    <div class="identity-label">${item.label}</div>
+    <p>${item.detail}</p>
+  </article>
+`;
+
+const renderBackgroundCard = (card) => `
+  <article class="hero-detail-card" data-reveal>
+    <p class="card-topline">${card.eyebrow}</p>
+    <h3>${card.title}</h3>
+    <ul class="mini-list">
+      ${card.lines.map((line) => `<li>${line}</li>`).join("")}
+    </ul>
+  </article>
+`;
+
 const render = () => {
   app.innerHTML = `
     <div class="site-frame">
@@ -110,6 +136,10 @@ const render = () => {
               <h1>${siteContent.hero.title}</h1>
               <p class="hero-description">${siteContent.hero.description}</p>
 
+              <div class="hero-fact-row">
+                ${siteContent.hero.quickFacts.map(renderHeroFact).join("")}
+              </div>
+
               <div class="button-row">
                 ${siteContent.hero.buttons.map(renderButton).join("")}
               </div>
@@ -117,13 +147,27 @@ const render = () => {
               <p class="proof-line">${siteContent.hero.proofLine}</p>
             </div>
 
-            <aside class="hero-aside" data-reveal>
-              <p class="intro-kicker">Background</p>
-              <p class="intro-copy">${siteContent.hero.intro}</p>
-              <div class="credential-row">
-                ${siteContent.hero.credentials
-                  .map((credential) => `<span class="credential-chip">${credential}</span>`)
-                  .join("")}
+            <aside class="hero-panel">
+              <article class="portrait-card" data-reveal>
+                <div class="portrait-media">
+                  <img src="${siteContent.hero.profile.image}" alt="${siteContent.hero.profile.alt}" />
+                  <div class="portrait-overlay">
+                    <span class="portrait-pill">${siteContent.hero.profile.role}</span>
+                    <span class="portrait-pill portrait-pill-secondary">${siteContent.hero.profile.location}</span>
+                  </div>
+                </div>
+                <div class="portrait-copy">
+                  <p class="intro-kicker">Background</p>
+                  <p class="intro-copy">${siteContent.hero.profile.summary}</p>
+                </div>
+              </article>
+
+              <div class="identity-grid">
+                ${siteContent.hero.identity.map(renderIdentityCard).join("")}
+              </div>
+
+              <div class="hero-detail-grid">
+                ${siteContent.hero.backgroundCards.map(renderBackgroundCard).join("")}
               </div>
             </aside>
           </div>
@@ -175,7 +219,7 @@ const render = () => {
               <p class="section-copy">${siteContent.openSource.intro}</p>
             </div>
 
-            <div class="contribution-grid featured-grid" data-reveal>
+            <div class="contribution-grid featured-grid">
               ${siteContent.openSource.featured.map(renderContribution).join("")}
             </div>
 
