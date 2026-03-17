@@ -66,7 +66,7 @@ export const siteContent = {
       }
     ],
     snapshot: {
-      imageSrc: "/portrait.jpg",
+      imageSrc: "/portrait-night.png",
       imageAlt: "Portrait of Joaquin Hui Gomez",
       title: "Program Manager at Amazon",
       location: "London, United Kingdom",
