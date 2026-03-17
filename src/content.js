@@ -13,13 +13,99 @@ export const siteContent = {
     { label: "Contact", href: "#contact" }
   ],
   hero: {
-    eyebrow: "AI infrastructure | evaluation | agent orchestration",
+    eyebrow: "AI infrastructure | MLOps | agent orchestration",
     lead: "I fix",
     title: "the quiet failures behind AI products.",
     description:
-      "Concurrency bugs, evaluation noise, and agent-integration edge cases that decide whether AI systems actually work.",
+      "Concurrency leaks, noisy evals, and orchestration edge cases that decide whether enterprise AI systems actually work.",
     proofLine:
-      "Amazon PM | 6 fluent languages | published judge benchmark | fixes across LiteLLM, Vercel AI SDK, MCP, and CrewAI",
+      "Skip-level L5 return offer during hiring freeze · consistently rated Exceeds · $140MM+ cumulative savings delivered",
+    proofTags: [
+      {
+        icon: "analytics",
+        label: "#MLOps",
+        title: "MLOps with live-metric validation",
+        summary:
+          "Decision systems that balance optimization, simulation, and actual production metrics rather than trusting backtests alone.",
+        bullets: [
+          "Node-level optimization across 200 delivery stations",
+          "$100MM+ annual network-speed upside",
+          "Live-metric validation because the network changes continuously"
+        ],
+        href: "#case-study",
+        cta: "See Amazon impact"
+      },
+      {
+        icon: "workflow",
+        label: "#Serverless",
+        title: "AWS-native serverless orchestration",
+        summary:
+          "Async experiment workflows built around deterministic preprocessing, queue-driven execution, and faster time-to-insight.",
+        bullets: [
+          "LLM-assisted intake with deterministic 1-5 GB input preparation",
+          "AWS-native orchestration for long-running experiment runs",
+          "1,440 hours / year of repetitive work removed"
+        ],
+        href: "#case-study",
+        cta: "Inspect the case study"
+      },
+      {
+        icon: "bridge",
+        label: "#CloudMigration",
+        title: "Cloud migration with business ownership",
+        summary:
+          "Moved operational tooling toward AWS-backed workflows while translating ambiguous business rules into production systems.",
+        bullets: [
+          "Owned automation and cloud-migration recommendations in Amazon middle-mile operations",
+          "Launched dashboards, scripts, and ETL-backed analytics into production",
+          "Bridged business stakeholders, SDEs, and research scientists"
+        ],
+        href: "#proof",
+        cta: "See broader background"
+      },
+      {
+        icon: "network",
+        label: "#AIInfra",
+        title: "AI infrastructure reliability",
+        summary:
+          "Public work focused on the quality layer underneath AI products: serving, evaluation, and tool integration.",
+        bullets: [
+          "Fixed TOCTOU rate-limiter race conditions in LiteLLM",
+          "Patched SSRF DNS-rebinding exposure in the Vercel AI SDK",
+          "Improved MCP and agent-SDK protocol reliability"
+        ],
+        href: "#open-source",
+        cta: "Open OSS work"
+      },
+      {
+        icon: "judge",
+        label: "#LLMEval",
+        title: "Evaluation before claims",
+        summary:
+          "Judge reliability work grounded in calibration, bias detection, and reproducible benchmarking.",
+        bullets: [
+          "Published a 6-model judge benchmark with Cohen's kappa",
+          "Measured position bias in cost-optimized eval judges",
+          "Built tooling before upstream contributions"
+        ],
+        href: "#open-source",
+        cta: "View benchmark work"
+      },
+      {
+        icon: "agent",
+        label: "#AgentOrchestration",
+        title: "Agent orchestration with deterministic guardrails",
+        summary:
+          "Hybrid workflows where LLMs help with planning and summarization while deterministic steps own schemas, files, and metrics.",
+        bullets: [
+          "LLM-assisted intake and recommendations around deterministic pipelines",
+          "Schema-disciplined experiment setup and post-run analysis",
+          "Protocol-level fixes across MCP and agent SDKs"
+        ],
+        href: "#projects",
+        cta: "See key projects"
+      }
+    ],
     buttons: [
       {
         label: "View GitHub",
@@ -47,22 +133,109 @@ export const siteContent = {
       {
         icon: "briefcase",
         label: "Current role",
-        value: "Amazon Program Manager"
+        value: "Amazon PM | $100MM+/yr",
+        popover: {
+          kind: "role",
+          title: "Amazon PM with technical scope",
+          summary:
+            "Program management across SDE and research partnerships, focused on production decision systems in logistics and experimentation.",
+          metrics: [
+            { value: "$100MM+/yr", label: "Node-level speed impact" },
+            { value: "$14MM", label: "Finance-validated savings" },
+            { value: "1,440 hrs/yr", label: "Manual work removed" }
+          ],
+          bullets: [
+            "Received a skip-level return offer from L4 to L5 during the hiring-freeze period",
+            "Consistently rated Exceeds and delivered cumulative $140MM+ savings over my career",
+            "Led node-level optimization across 200 delivery stations under hard cost, labor, and promise constraints",
+            "Built AWS-native experiment orchestration for 1-5 GB deterministic bundles and async simulation runs",
+            "Automated planning and audit workflows for roughly 1,000 trucks and 4-5MM packages per week"
+          ],
+          tags: ["Program management", "MLOps", "Simulation", "Serverless", "SDE partnership"]
+        }
       },
       {
         icon: "globe",
         label: "Footprint",
-        value: "Lived across 3 continents"
+        value: "Across 3 continents",
+        popover: {
+          kind: "map",
+          title: "Built and studied across 3 continents",
+          summary:
+            "Operational range shaped by academic, internship, and work footprints across Asia, Latin America, and Europe.",
+          regions: [
+            {
+              id: "asia",
+              label: "Asia",
+              subtitle: "Hong Kong and Beijing",
+              items: ["HKU undergrad", "First internships in Hong Kong and Beijing"]
+            },
+            {
+              id: "latam",
+              label: "LatAm",
+              subtitle: "Chile and Colombia",
+              items: ["Pontificia Universidad Catolica de Chile", "Universidad de los Andes, Colombia"]
+            },
+            {
+              id: "europe",
+              label: "Europe",
+              subtitle: "London, Luxembourg, St. Gallen",
+              items: ["London now", "Amazon internship in Luxembourg", "Master's at St. Gallen"]
+            }
+          ]
+        }
       },
       {
         icon: "languages",
         label: "Languages",
-        value: "6 fluent | PT + DE at B2"
+        value: "6 fluent + PT/DE",
+        popover: {
+          kind: "languages",
+          title: "Languages I work in",
+          summary:
+            "Fluent across six spoken languages, with two additional working-proficiency languages.",
+          items: [
+            { flag: "🇭🇰", label: "Cantonese", level: "Fluent" },
+            { flag: "🇨🇳", label: "Mandarin", level: "Fluent" },
+            { flag: "🇹🇼", label: "Taiwanese", level: "Fluent" },
+            { flag: "🇬🇧", label: "English", level: "Fluent" },
+            { flag: "🇪🇸", label: "Spanish", level: "Fluent" },
+            { flag: "🇫🇷", label: "French", level: "Fluent" },
+            { flag: "🇵🇹", label: "Portuguese", level: "B2" },
+            { flag: "🇩🇪", label: "German", level: "B2" }
+          ]
+        }
       },
       {
         icon: "certificate",
-        label: "Technical depth",
-        value: "3 AWS certifications"
+        label: "Technical scope",
+        value: "AWS, MLOps, eval",
+        popover: {
+          kind: "technical",
+          title: "Hands-on technical scope",
+          summary:
+            "Beyond a PM title: AWS-native orchestration, public AI infra tooling, LLM evaluation, and protocol-level debugging.",
+          certs: [
+            {
+              name: "AWS Certified AI Practitioner",
+              meta: "Issued Mar 2025 · Expires Mar 2028"
+            },
+            {
+              name: "AWS Certified Cloud Practitioner",
+              meta: "Certified Oct 2022"
+            },
+            {
+              name: "Third AWS qualification",
+              meta: "Part of the current 3x AWS-certified stack referenced in profile materials"
+            }
+          ],
+          bullets: [
+            "Built AWS-native orchestration for long-running business experiments and simulation workflows",
+            "Shipped Python and TypeScript tools for rate limiting, judge calibration, and agent evaluation",
+            "Contributed reliability fixes across Vercel AI SDK, LiteLLM, MCP servers, CrewAI, and Anthropic's agent SDK"
+          ],
+          tags: ["AWS", "Serverless", "Python", "TypeScript", "LLM eval", "AI infra"]
+        }
       }
     ],
     snapshot: {
@@ -71,14 +244,12 @@ export const siteContent = {
       title: "Amazon Program Manager",
       location: "London, United Kingdom",
       blurb:
-        "Working across SDE and research teams on experimentation, orchestration, and AI-driven operational systems."
+        "Program management with hands-on technical scope across MLOps, experimentation, serverless orchestration, and AI-enabled operations."
     },
-    intro:
-      "Fluent: Cantonese, Mandarin, Taiwanese, English, Spanish, and French. Also Portuguese (B2) and German (B2).",
     credentials: [
       "St. Gallen magna cum laude",
       "HKU LLB + BBA",
-      "Ex-Accenture | Ex-PwC"
+      "Amazon · Accenture · PwC"
     ]
   },
   stats: {
@@ -107,12 +278,6 @@ export const siteContent = {
         label: "Education",
         detail:
           "St. Gallen M.A. in Strategy and International Management, magna cum laude, and HKU dual degrees in Law and Business."
-      },
-      {
-        icon: "spark",
-        label: "Builder DNA",
-        detail:
-          "Built and ran a 3K+ user forum at age 9. The instinct to build systems early has stayed constant."
       }
     ]
   },
@@ -425,7 +590,7 @@ export const siteContent = {
     title: "'26 Amazon ATS Program AI Hackathon Most Innovative Solution",
     subtitle: "Amazon PM | applied AI and production operations",
     summary:
-      "Amazon PM work with technical scope, partnering with SDEs and research scientists to make optimization and experimentation systems easier to operate and learn from.",
+      "Amazon PM work with technical scope, partnering with SDEs and research scientists to turn optimization and experimentation systems into faster business decisions.",
     award: "Most Innovative",
     impact: "1440 hours / year estimated savings",
     metrics: [
@@ -435,19 +600,19 @@ export const siteContent = {
         detail: "annualized value from node-level speed policy tuning"
       },
       {
-        value: "200 nodes",
-        label: "Weekly tuning scope",
-        detail: "delivery-station level policy adjustment"
+        value: "$14M",
+        label: "Validated savings",
+        detail: "finance-validated impact from optimization algorithms"
       },
       {
-        value: "99.9%",
-        label: "Metric accuracy",
-        detail: "deterministic analysis on business-defined schemas"
+        value: "1,440 hrs / year",
+        label: "Ops time removed",
+        detail: "manual experiment setup and analysis reduced through orchestration"
       }
     ],
     details: [
-      "Built a simulation and experiment layer that combined deterministic analysis with LLM-assisted planning and summaries.",
-      "Used actual production metrics, not only backtests, because the network changes continuously."
+      "Built a simulation and experiment layer that combined deterministic analysis, LLM-assisted planning, and async AWS-native orchestration.",
+      "Used actual production metrics rather than backtests alone, because the network changes continuously and backward-looking wins do not always hold."
     ]
   },
   whyAi: {

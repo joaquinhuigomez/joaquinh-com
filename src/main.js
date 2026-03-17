@@ -263,16 +263,36 @@ const renderButton = (button) => {
   `;
 };
 
-const renderQuickFact = (item) => `
-  <article class="fact-card">
+const renderQuickFact = (item, index) => `
+  <button
+    class="fact-card fact-trigger"
+    type="button"
+    data-popover-source="fact"
+    data-popover-index="${index}"
+    aria-expanded="false"
+  >
     <div class="fact-icon-wrap">
       ${renderIcon(item.icon)}
     </div>
-    <div>
+    <div class="fact-copy">
       <p class="fact-label">${item.label}</p>
       <p class="fact-value">${item.value}</p>
     </div>
-  </article>
+    <span class="fact-open">Inspect</span>
+  </button>
+`;
+
+const renderProofChip = (item, index) => `
+  <button
+    class="proof-chip"
+    type="button"
+    data-popover-source="proof"
+    data-popover-index="${index}"
+    aria-expanded="false"
+  >
+    ${renderIcon(item.icon, "proof-chip-icon")}
+    <span>${item.label}</span>
+  </button>
 `;
 
 const renderStatCard = (item) => `
@@ -421,6 +441,192 @@ const renderInstagramItem = (item) => `
   </article>
 `;
 
+const renderPopoverMetric = (item) => `
+  <article class="popover-metric">
+    <strong>${item.value}</strong>
+    <span>${item.label}</span>
+  </article>
+`;
+
+const renderFlagLanguage = (item) => `
+  <article class="flag-card">
+    <span class="flag-mark" aria-hidden="true">${item.flag}</span>
+    <div>
+      <strong>${item.label}</strong>
+      <span>${item.level}</span>
+    </div>
+  </article>
+`;
+
+const renderCertItem = (item) => `
+  <article class="cert-card">
+    <strong>${item.name}</strong>
+    <span>${item.meta}</span>
+  </article>
+`;
+
+const renderRegionPanel = (item) => `
+  <article class="region-panel" data-region-block="${item.id}">
+    <p class="region-label">${item.label}</p>
+    <p class="region-subtitle">${item.subtitle}</p>
+    <ul class="popover-list compact-list">
+      ${item.items.map((entry) => `<li>${entry}</li>`).join("")}
+    </ul>
+  </article>
+`;
+
+const renderPopoverAction = (payload) =>
+  payload.href
+    ? `
+      <a class="mini-link popover-link" href="${payload.href}">
+        ${renderIcon("arrow")}
+        <span>${payload.cta || "Open evidence"}</span>
+      </a>
+    `
+    : "";
+
+const renderFootprintMap = () => `
+  <div class="map-stage">
+    <svg
+      class="footprint-map"
+      viewBox="0 0 360 190"
+      role="img"
+      aria-label="Map showing Joaquin Hui Gomez's footprints in Asia, Latin America, and Europe"
+    >
+      <rect x="0" y="0" width="360" height="190" rx="18" class="map-ocean" />
+
+      <path
+        class="map-region"
+        data-region="latam"
+        d="M60 56c15 0 30 4 37 13 7 10 9 22 7 31-2 10-10 19-15 29-5 11-4 26-13 39-7 10-18 16-25 13-8-4-11-19-8-32 4-17 4-28-3-40-5-8-13-16-12-26 2-15 14-27 32-27Z"
+      />
+      <path
+        class="map-region"
+        data-region="europe"
+        d="M172 54c10-8 28-10 42-7 12 2 23 9 26 18 3 8-4 15-13 18-10 3-14 8-20 13-7 6-16 9-24 7-9-2-17-9-19-18-2-10 1-22 8-31Z"
+      />
+      <path
+        class="map-region"
+        data-region="asia"
+        d="M223 43c18-8 44-9 66-3 15 4 31 14 36 28 5 14-5 27-21 31-14 4-26 1-37 3-10 2-17 10-28 11-15 1-30-5-38-17-8-11-9-27-1-39 5-6 12-11 23-14Z"
+      />
+
+      <path class="map-route" d="M98 118C126 98 152 85 180 79" />
+      <path class="map-route" d="M188 78C214 67 236 65 256 69" />
+      <path class="map-route" d="M180 83C164 90 145 99 126 111" />
+
+      <g class="map-marker" data-region="latam" style="--delay: 0s">
+        <circle class="marker-pulse" cx="92" cy="110" r="11" />
+        <circle class="marker-dot" cx="92" cy="110" r="4" />
+      </g>
+      <g class="map-marker" data-region="latam" style="--delay: 0.45s">
+        <circle class="marker-pulse" cx="111" cy="89" r="10" />
+        <circle class="marker-dot" cx="111" cy="89" r="4" />
+      </g>
+      <g class="map-marker" data-region="europe" style="--delay: 0.2s">
+        <circle class="marker-pulse" cx="184" cy="79" r="10" />
+        <circle class="marker-dot" cx="184" cy="79" r="4" />
+      </g>
+      <g class="map-marker" data-region="europe" style="--delay: 0.65s">
+        <circle class="marker-pulse" cx="199" cy="71" r="10" />
+        <circle class="marker-dot" cx="199" cy="71" r="4" />
+      </g>
+      <g class="map-marker" data-region="asia" style="--delay: 0.35s">
+        <circle class="marker-pulse" cx="269" cy="72" r="11" />
+        <circle class="marker-dot" cx="269" cy="72" r="4" />
+      </g>
+      <g class="map-marker" data-region="asia" style="--delay: 0.75s">
+        <circle class="marker-pulse" cx="285" cy="84" r="10" />
+        <circle class="marker-dot" cx="285" cy="84" r="4" />
+      </g>
+    </svg>
+  </div>
+`;
+
+const renderPopoverBody = (payload) => {
+  if (payload.kind === "role") {
+    return `
+      <div class="popover-metric-grid">
+        ${payload.metrics.map(renderPopoverMetric).join("")}
+      </div>
+      <ul class="popover-list">
+        ${payload.bullets.map((item) => `<li>${item}</li>`).join("")}
+      </ul>
+      <div class="tag-row popover-tag-row">
+        ${payload.tags.map((tag) => `<span class="tag-chip">${tag}</span>`).join("")}
+      </div>
+    `;
+  }
+
+  if (payload.kind === "languages") {
+    return `
+      <div class="flag-grid">
+        ${payload.items.map(renderFlagLanguage).join("")}
+      </div>
+    `;
+  }
+
+  if (payload.kind === "technical") {
+    return `
+      <div class="cert-grid">
+        ${payload.certs.map(renderCertItem).join("")}
+      </div>
+      <ul class="popover-list">
+        ${payload.bullets.map((item) => `<li>${item}</li>`).join("")}
+      </ul>
+      <div class="tag-row popover-tag-row">
+        ${payload.tags.map((tag) => `<span class="tag-chip">${tag}</span>`).join("")}
+      </div>
+    `;
+  }
+
+  if (payload.kind === "map") {
+    return `
+      ${renderFootprintMap()}
+      <div class="region-chip-row">
+        ${payload.regions
+          .map(
+            (region) => `
+              <button class="region-chip" type="button" data-region-chip="${region.id}">
+                ${region.label}
+              </button>
+            `
+          )
+          .join("")}
+      </div>
+      <div class="region-grid">
+        ${payload.regions.map(renderRegionPanel).join("")}
+      </div>
+    `;
+  }
+
+  return `
+    <ul class="popover-list">
+      ${payload.bullets.map((item) => `<li>${item}</li>`).join("")}
+    </ul>
+    ${renderPopoverAction(payload)}
+  `;
+};
+
+const renderPopover = (payload) => `
+  <div class="popover-shell">
+    <div class="popover-head">
+      <div class="popover-title-row">
+        <div class="fact-icon-wrap popover-icon">
+          ${renderIcon(payload.icon || "spark")}
+        </div>
+        <div>
+          <p class="fact-label">${payload.badge || "Detail"}</p>
+          <h3>${payload.title}</h3>
+        </div>
+      </div>
+    </div>
+    <p class="popover-summary">${payload.summary}</p>
+    ${renderPopoverBody(payload)}
+    ${payload.kind === "map" ? "" : renderPopoverAction(payload)}
+  </div>
+`;
+
 const render = () => {
   app.innerHTML = `
     <div class="site-shell">
@@ -452,6 +658,13 @@ const render = () => {
               </div>
               <p class="hero-description">${siteContent.hero.description}</p>
 
+              <div class="proof-chip-shell">
+                <p class="section-eyebrow">Keyword proof</p>
+                <div class="proof-chip-row">
+                  ${siteContent.hero.proofTags.map(renderProofChip).join("")}
+                </div>
+              </div>
+
               <div class="fact-grid">
                 ${siteContent.hero.quickFacts.map(renderQuickFact).join("")}
               </div>
@@ -477,7 +690,6 @@ const render = () => {
                 <p class="intro-kicker">Profile snapshot</p>
                 <h2 class="profile-title">${siteContent.hero.snapshot.title}</h2>
                 <p class="profile-blurb">${siteContent.hero.snapshot.blurb}</p>
-                <p class="intro-copy">${siteContent.hero.intro}</p>
                 <div class="credential-row">
                   ${siteContent.hero.credentials
                     .map((credential) => `<span class="credential-chip">${credential}</span>`)
@@ -486,6 +698,8 @@ const render = () => {
               </div>
             </aside>
           </div>
+
+          <div class="hero-popover" id="hero-popover" hidden></div>
         </section>
 
         <section id="proof" class="section">
@@ -760,6 +974,190 @@ const initContributionToggle = () => {
   });
 };
 
+const initHeroPopover = () => {
+  const popover = document.querySelector("#hero-popover");
+  const triggers = Array.from(document.querySelectorAll("[data-popover-source]"));
+
+  if (!popover || !triggers.length) {
+    return;
+  }
+
+  let activeTrigger = null;
+  let hideTimer = null;
+  let locked = false;
+
+  const clearHideTimer = () => {
+    if (hideTimer) {
+      window.clearTimeout(hideTimer);
+      hideTimer = null;
+    }
+  };
+
+  const getPayload = (trigger) => {
+    const index = Number(trigger.dataset.popoverIndex);
+    if (trigger.dataset.popoverSource === "fact") {
+      const item = siteContent.hero.quickFacts[index];
+      return item?.popover ? { ...item.popover, icon: item.icon, badge: item.label } : null;
+    }
+
+    if (trigger.dataset.popoverSource === "proof") {
+      const item = siteContent.hero.proofTags[index];
+      return item ? { ...item, kind: "proof", badge: item.label } : null;
+    }
+
+    return null;
+  };
+
+  const positionPopover = (trigger) => {
+    if (!trigger || popover.hidden) {
+      return;
+    }
+
+    const triggerRect = trigger.getBoundingClientRect();
+
+    if (window.innerWidth <= 640) {
+      popover.style.left = "1rem";
+      popover.style.top = "auto";
+      popover.style.bottom = "1rem";
+      popover.style.maxWidth = "calc(100vw - 2rem)";
+      return;
+    }
+
+    popover.style.bottom = "auto";
+    popover.style.maxWidth = "min(28rem, calc(100vw - 1.5rem))";
+
+    const popoverRect = popover.getBoundingClientRect();
+    const gap = 14;
+    const fitsBelow = triggerRect.bottom + gap + popoverRect.height <= window.innerHeight - 12;
+    const top = fitsBelow ? triggerRect.bottom + gap : triggerRect.top - popoverRect.height - gap;
+    const left = Math.min(
+      Math.max(12, triggerRect.left + triggerRect.width / 2 - popoverRect.width / 2),
+      window.innerWidth - popoverRect.width - 12
+    );
+
+    popover.style.top = `${Math.max(12, top)}px`;
+    popover.style.left = `${left}px`;
+  };
+
+  const hide = () => {
+    clearHideTimer();
+    popover.hidden = true;
+    popover.innerHTML = "";
+    popover.dataset.region = "";
+    popover.dataset.kind = "";
+    if (activeTrigger) {
+      activeTrigger.setAttribute("aria-expanded", "false");
+    }
+    activeTrigger = null;
+    locked = false;
+  };
+
+  const scheduleHide = () => {
+    if (locked) {
+      return;
+    }
+    clearHideTimer();
+    hideTimer = window.setTimeout(hide, 120);
+  };
+
+  const initMapDetail = () => {
+    const regionChips = Array.from(popover.querySelectorAll("[data-region-chip]"));
+    if (!regionChips.length) {
+      return;
+    }
+
+    const activateRegion = (region) => {
+      popover.dataset.region = region;
+    };
+
+    activateRegion("europe");
+
+    regionChips.forEach((chip) => {
+      chip.addEventListener("pointerenter", () => activateRegion(chip.dataset.regionChip));
+      chip.addEventListener("focus", () => activateRegion(chip.dataset.regionChip));
+      chip.addEventListener("click", () => activateRegion(chip.dataset.regionChip));
+    });
+  };
+
+  const open = (trigger, shouldLock = false) => {
+    const payload = getPayload(trigger);
+    if (!payload) {
+      return;
+    }
+
+    clearHideTimer();
+    locked = shouldLock;
+
+    if (activeTrigger && activeTrigger !== trigger) {
+      activeTrigger.setAttribute("aria-expanded", "false");
+    }
+
+    activeTrigger = trigger;
+    activeTrigger.setAttribute("aria-expanded", "true");
+
+    popover.dataset.kind = payload.kind || "proof";
+    popover.innerHTML = renderPopover(payload);
+    popover.hidden = false;
+    positionPopover(trigger);
+
+    if (payload.kind === "map") {
+      initMapDetail();
+    }
+  };
+
+  triggers.forEach((trigger) => {
+    trigger.addEventListener("pointerenter", () => open(trigger));
+    trigger.addEventListener("pointerleave", scheduleHide);
+    trigger.addEventListener("focus", () => open(trigger));
+    trigger.addEventListener("blur", (event) => {
+      if (popover.contains(event.relatedTarget)) {
+        return;
+      }
+      scheduleHide();
+    });
+    trigger.addEventListener("click", (event) => {
+      event.preventDefault();
+      if (activeTrigger === trigger && locked && !popover.hidden) {
+        hide();
+        return;
+      }
+      open(trigger, true);
+    });
+  });
+
+  popover.addEventListener("pointerenter", clearHideTimer);
+  popover.addEventListener("pointerleave", scheduleHide);
+
+  document.addEventListener("click", (event) => {
+    if (popover.hidden) {
+      return;
+    }
+    if (popover.contains(event.target) || event.target.closest("[data-popover-source]")) {
+      return;
+    }
+    hide();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      hide();
+    }
+  });
+
+  window.addEventListener("resize", () => positionPopover(activeTrigger));
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (locked) {
+        positionPopover(activeTrigger);
+        return;
+      }
+      hide();
+    },
+    { passive: true }
+  );
+};
+
 const initReveal = () => {
   const revealItems = document.querySelectorAll("[data-reveal]");
   revealItems.forEach((item) => item.classList.add("is-visible"));
@@ -768,4 +1166,5 @@ const initReveal = () => {
 setMeta();
 render();
 initContributionToggle();
+initHeroPopover();
 initReveal();
