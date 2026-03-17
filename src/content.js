@@ -188,7 +188,7 @@ export const siteContent = {
       {
         icon: "languages",
         label: "Languages",
-        value: "6 fluent + PT/DE",
+        value: "6 fluent",
         popover: {
           kind: "languages",
           title: "Languages I work in",
@@ -239,6 +239,7 @@ export const siteContent = {
       }
     ],
     snapshot: {
+      brandIcon: "amazon",
       imageSrc: "/portrait-night.png",
       imageAlt: "Portrait of Joaquin Hui Gomez",
       title: "Amazon Program Manager",
@@ -281,6 +282,12 @@ export const siteContent = {
         label: "Education",
         detail:
           "St. Gallen M.A. in Strategy and International Management, magna cum laude, and HKU dual degrees in Law and Business."
+      },
+      {
+        icon: "spark",
+        label: "DEI and community",
+        detail:
+          "Led the Ninos en Xela Guatemala NGO initiative in 2019 to help farmers grow communal income through organic farming and strategic planning; also active in Glamazon and Asian & Latino affinity groups at Amazon."
       }
     ]
   },

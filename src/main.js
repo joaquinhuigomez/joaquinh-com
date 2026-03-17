@@ -43,6 +43,14 @@ const iconMap = {
       <path d="m4 7 8 6 8-6" />
     </svg>
   `,
+  amazon: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9.2 16.5V9.9a2.8 2.8 0 0 1 5.6 0v6.6" />
+      <path d="M9.2 12.3h5.6" />
+      <path d="M6 18.4c3 1.7 8.5 1.9 12.2-.2" />
+      <path d="m16.8 17.7 1.7.1-.7 1.5" />
+    </svg>
+  `,
   briefcase: `
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
       <rect x="3" y="7" width="18" height="13" rx="2" />
@@ -676,7 +684,7 @@ const render = () => {
               <p class="proof-line">${siteContent.hero.proofLine}</p>
             </div>
 
-            <aside class="hero-profile" data-reveal>
+              <aside class="hero-profile" data-reveal>
               <div class="portrait-frame">
                 <img
                   class="portrait-image"
@@ -688,7 +696,10 @@ const render = () => {
 
               <div class="profile-summary">
                 <p class="intro-kicker">Profile snapshot</p>
-                <h2 class="profile-title">${siteContent.hero.snapshot.title}</h2>
+                <div class="profile-title-row">
+                  ${siteContent.hero.snapshot.brandIcon ? renderIcon(siteContent.hero.snapshot.brandIcon, "brand-inline-icon") : ""}
+                  <h2 class="profile-title">${siteContent.hero.snapshot.title}</h2>
+                </div>
                 <p class="profile-blurb">${siteContent.hero.snapshot.blurb}</p>
                 <p class="profile-blurb profile-blurb-secondary">${siteContent.hero.snapshot.detail}</p>
                 <div class="tag-row profile-tag-row">
@@ -775,8 +786,8 @@ const render = () => {
               <p class="section-note">${siteContent.openSource.statusNote}</p>
             </div>
 
-            <div class="open-layout">
-              <aside class="github-panel" data-reveal>
+            <div class="open-board">
+              <aside class="github-panel open-card-shell" data-reveal>
                 <div class="github-mark">
                   ${renderIcon("github")}
                 </div>
@@ -791,63 +802,61 @@ const render = () => {
                 </div>
               </aside>
 
-              <div class="open-main">
-                <article class="quality-panel" data-reveal>
-                  <p class="card-topline">Portfolio narrative</p>
-                  <h3>${siteContent.openSource.narrative.title}</h3>
-                  <p class="section-copy">${siteContent.openSource.narrative.body}</p>
+              <article class="quality-panel open-card-shell open-card-wide" data-reveal>
+                <p class="card-topline">Portfolio narrative</p>
+                <h3>${siteContent.openSource.narrative.title}</h3>
+                <p class="section-copy">${siteContent.openSource.narrative.body}</p>
 
-                  <div class="quality-grid">
-                    ${siteContent.openSource.narrative.failureModes.map(renderFailureMode).join("")}
-                  </div>
-
-                  <p class="quality-commercial">${siteContent.openSource.narrative.commercial}</p>
-                </article>
-
-                <div class="open-subsection" data-reveal>
-                  <div class="subsection-head">
-                    <div>
-                      <p class="section-eyebrow">Published / shipped</p>
-                      <h3>${siteContent.openSource.shipped.title}</h3>
-                    </div>
-                    <p>${siteContent.openSource.shipped.note}</p>
-                  </div>
-
-                  <div class="contribution-grid shipped-grid">
-                    ${siteContent.openSource.shipped.items.map(renderContribution).join("")}
-                  </div>
+                <div class="quality-grid">
+                  ${siteContent.openSource.narrative.failureModes.map(renderFailureMode).join("")}
                 </div>
 
-                <div class="open-subsection" data-reveal>
-                  <div class="subsection-head">
-                    <div>
-                      <p class="section-eyebrow">Pending upstream</p>
-                      <h3>${siteContent.openSource.pending.title}</h3>
-                    </div>
-                    <p>${siteContent.openSource.pending.note}</p>
+                <p class="quality-commercial">${siteContent.openSource.narrative.commercial}</p>
+              </article>
+
+              <section class="open-subsection open-card-shell" data-reveal>
+                <div class="subsection-head">
+                  <div>
+                    <p class="section-eyebrow">Published / shipped</p>
+                    <h3>${siteContent.openSource.shipped.title}</h3>
                   </div>
+                  <p>${siteContent.openSource.shipped.note}</p>
+                </div>
 
-                  <div class="contribution-grid pending-grid">
-                    ${siteContent.openSource.pending.items.map(renderContribution).join("")}
+                <div class="contribution-grid shipped-grid">
+                  ${siteContent.openSource.shipped.items.map(renderContribution).join("")}
+                </div>
+              </section>
+
+              <section class="open-subsection open-card-shell" data-reveal>
+                <div class="subsection-head">
+                  <div>
+                    <p class="section-eyebrow">Pending upstream</p>
+                    <h3>${siteContent.openSource.pending.title}</h3>
                   </div>
+                  <p>${siteContent.openSource.pending.note}</p>
                 </div>
 
-                <div class="toggle-wrap" data-reveal>
-                  <button
-                    class="button button-secondary toggle-button"
-                    id="contribution-toggle"
-                    type="button"
-                    aria-expanded="false"
-                    aria-controls="more-contributions"
-                  >
-                    View all contributions
-                  </button>
+                <div class="contribution-grid pending-grid">
+                  ${siteContent.openSource.pending.items.map(renderContribution).join("")}
                 </div>
+              </section>
+            </div>
 
-                <div class="contribution-grid extended-grid" id="more-contributions" hidden>
-                  ${siteContent.openSource.extended.map(renderContribution).join("")}
-                </div>
-              </div>
+            <div class="toggle-wrap" data-reveal>
+              <button
+                class="button button-secondary toggle-button"
+                id="contribution-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="more-contributions"
+              >
+                View all contributions
+              </button>
+            </div>
+
+            <div class="contribution-grid extended-grid" id="more-contributions" hidden>
+              ${siteContent.openSource.extended.map(renderContribution).join("")}
             </div>
           </div>
         </section>
