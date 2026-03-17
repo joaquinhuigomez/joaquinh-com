@@ -505,6 +505,23 @@ const renderCertItem = (item) => `
   </article>
 `;
 
+const renderProgrammingLanguage = (item) => `
+  <article class="language-skill-card">
+    <div class="language-skill-head">
+      <strong>${item.label}</strong>
+      <span>${item.meta}</span>
+    </div>
+    <p>${item.detail}</p>
+    ${
+      item.tags?.length
+        ? `<div class="tag-row language-tag-row">${item.tags
+            .map((tag) => `<span class="tag-chip">${tag}</span>`)
+            .join("")}</div>`
+        : ""
+    }
+  </article>
+`;
+
 const renderRegionPanel = (item) => `
   <article class="region-panel" data-region-block="${item.id}">
     <p class="region-label">${item.label}</p>
@@ -600,8 +617,17 @@ const renderPopoverBody = (payload) => {
 
   if (payload.kind === "languages") {
     return `
-      <div class="flag-grid">
-        ${payload.items.map(renderFlagLanguage).join("")}
+      <div class="popover-section">
+        <p class="popover-section-label">Natural languages</p>
+        <div class="flag-grid">
+          ${payload.naturalItems.map(renderFlagLanguage).join("")}
+        </div>
+      </div>
+      <div class="popover-section">
+        <p class="popover-section-label">Programming and data languages</p>
+        <div class="language-skill-grid">
+          ${payload.programmingItems.map(renderProgrammingLanguage).join("")}
+        </div>
       </div>
     `;
   }
@@ -769,7 +795,7 @@ const render = () => {
             </div>
 
             <div class="profile-grid">
-              <article class="bio-panel" data-reveal>
+              <article class="bio-panel profile-panel-wide" data-reveal>
                 <div class="panel-head">
                   <div>
                     <p class="section-eyebrow">About</p>
@@ -787,16 +813,22 @@ const render = () => {
                 </div>
               </article>
 
-              <article class="thesis-panel" data-reveal>
-                <p class="section-eyebrow">${siteContent.thesis.eyebrow}</p>
-                <h3>${siteContent.thesis.title}</h3>
-                <p class="thesis-meta">${siteContent.thesis.meta}</p>
-                <p class="section-copy">${siteContent.thesis.summary}</p>
-                <ul class="detail-list">
-                  ${siteContent.thesis.bullets.map((detail) => `<li>${detail}</li>`).join("")}
-                </ul>
-                <div class="mini-metric-grid">
-                  ${siteContent.thesis.stats.map(renderMiniMetric).join("")}
+              <article class="thesis-panel thesis-panel-wide" data-reveal>
+                <div class="thesis-layout">
+                  <div class="thesis-main">
+                    <p class="section-eyebrow">${siteContent.thesis.eyebrow}</p>
+                    <h3>${siteContent.thesis.title}</h3>
+                    <p class="thesis-meta">${siteContent.thesis.meta}</p>
+                    <p class="section-copy">${siteContent.thesis.summary}</p>
+                  </div>
+                  <div class="thesis-side">
+                    <ul class="detail-list">
+                      ${siteContent.thesis.bullets.map((detail) => `<li>${detail}</li>`).join("")}
+                    </ul>
+                    <div class="mini-metric-grid thesis-metric-grid">
+                      ${siteContent.thesis.stats.map(renderMiniMetric).join("")}
+                    </div>
+                  </div>
                 </div>
               </article>
             </div>
@@ -882,21 +914,6 @@ const render = () => {
               </section>
             </div>
 
-            <div class="toggle-wrap" data-reveal>
-              <button
-                class="button button-secondary toggle-button"
-                id="contribution-toggle"
-                type="button"
-                aria-expanded="false"
-                aria-controls="more-contributions"
-              >
-                View all contributions
-              </button>
-            </div>
-
-            <div class="contribution-grid extended-grid" id="more-contributions" hidden>
-              ${siteContent.openSource.extended.map(renderContribution).join("")}
-            </div>
           </div>
         </section>
 
@@ -996,6 +1013,26 @@ const render = () => {
                   ${siteContent.social.instagram.items.map(renderInstagramItem).join("")}
                 </div>
               </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section contribution-tail-section">
+          <div class="container">
+            <div class="toggle-wrap toggle-wrap-bottom" data-reveal>
+              <button
+                class="button button-secondary toggle-button"
+                id="contribution-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="more-contributions"
+              >
+                View all contributions
+              </button>
+            </div>
+
+            <div class="contribution-grid extended-grid extended-grid-bottom" id="more-contributions" hidden>
+              ${siteContent.openSource.extended.map(renderContribution).join("")}
             </div>
           </div>
         </section>

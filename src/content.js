@@ -188,13 +188,13 @@ export const siteContent = {
       {
         icon: "languages",
         label: "Languages",
-        value: "6 fluent",
+        value: "6 NLs + Python / SQL",
         popover: {
           kind: "languages",
-          title: "Languages I work in",
+          title: "Natural and programming languages I work in",
           summary:
-            "Fluent across six spoken languages, with two additional working-proficiency languages.",
-          items: [
+            "Fluent across six spoken languages, plus production Python and SQL with Shell / CLI-based workflows.",
+          naturalItems: [
             { flag: "🇭🇰", label: "Cantonese", level: "Fluent" },
             { flag: "🇨🇳", label: "Mandarin", level: "Fluent" },
             { flag: "🇹🇼", label: "Taiwanese", level: "Fluent" },
@@ -203,6 +203,22 @@ export const siteContent = {
             { flag: "🇫🇷", label: "French", level: "Fluent" },
             { flag: "🇵🇹", label: "Portuguese", level: "B2" },
             { flag: "🇩🇪", label: "German", level: "B2" }
+          ],
+          programmingItems: [
+            {
+              label: "Python",
+              meta: "~8 years overall | ~5 years in production",
+              detail:
+                "I use Python across automation, AI integrations, schema validation, and AWS serverless workflows, with particular depth in Pydantic, deterministic tooling, and agent-compatible system design. My edge is translating messy business logic into structured, reliable software.",
+              tags: ["Automation", "Pydantic", "Serverless", "AI integrations"]
+            },
+            {
+              label: "SQL / Data",
+              meta: "Analytics, pipelines, dashboards, reporting systems",
+              detail:
+                "Strong hands-on SQL, analytics, and data-engineering experience across large operational datasets. I build pipelines, metrics, dashboards, and reporting systems that turn messy raw data into reliable business signals and decisions, especially in AWS-native environments.",
+              tags: ["SQL", "Data engineering", "Dashboards", "AWS-native"]
+            }
           ]
         }
       },
@@ -266,7 +282,7 @@ export const siteContent = {
     ]
   },
   profile: {
-    title: "About",
+    title: "Operator profile",
     body:
       "I care about the unglamorous AI infrastructure problems that decide whether a product actually works: concurrency, evaluation noise, protocol correctness, and operator usability.",
     chips: ["Amazon", "Accenture", "PwC", "St. Gallen", "HKU", "London"],

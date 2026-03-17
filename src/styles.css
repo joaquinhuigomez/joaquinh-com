@@ -744,6 +744,21 @@ a {
   color: rgba(239, 246, 248, 0.74);
 }
 
+.thesis-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.thesis-side .detail-list {
+  margin-top: 0;
+}
+
+.thesis-metric-grid {
+  margin-top: 0.75rem;
+}
+
 .credential-chip,
 .contribution-status,
 .chip,
@@ -814,7 +829,7 @@ a {
 }
 
 .profile-grid {
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  grid-template-columns: 1fr;
   margin-top: 1rem;
 }
 
@@ -831,7 +846,7 @@ a {
 }
 
 .profile-note-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin-top: 0.75rem;
 }
 
@@ -1125,6 +1140,19 @@ a {
   margin-top: 0.7rem;
 }
 
+.toggle-wrap-bottom {
+  margin-top: 0;
+}
+
+.contribution-tail-section {
+  padding-top: 0;
+  padding-bottom: 2.2rem;
+}
+
+.extended-grid-bottom {
+  margin-top: 0.9rem;
+}
+
 .profile-title-row {
   justify-content: flex-start;
   align-items: center;
@@ -1192,6 +1220,20 @@ a {
   font-size: 0.84rem;
   line-height: 1.5;
   color: var(--ink-soft);
+}
+
+.popover-section {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.popover-section-label {
+  margin: 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
 }
 
 .popover-copy-block {
@@ -1274,6 +1316,45 @@ a {
 
 .flag-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.language-skill-grid {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.language-skill-card {
+  display: grid;
+  gap: 0.38rem;
+  padding: 0.68rem 0.72rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(16, 32, 42, 0.08);
+}
+
+.language-skill-head {
+  display: grid;
+  gap: 0.08rem;
+}
+
+.language-skill-head strong {
+  font-size: 0.88rem;
+  line-height: 1.2;
+}
+
+.language-skill-head span,
+.language-skill-card p {
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.language-skill-card p {
+  margin: 0;
+}
+
+.language-tag-row {
+  margin-top: 0.05rem;
 }
 
 .flag-card {
@@ -1673,6 +1754,10 @@ a {
   .cert-grid,
   .region-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .thesis-layout {
+    grid-template-columns: 1fr;
   }
 }
 
