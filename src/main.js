@@ -25,7 +25,7 @@ const setMeta = () => {
     "@type": "Person",
     name: "Joaquin Hui Gomez",
     url: siteContent.meta.url,
-    image: `${siteContent.meta.url}${siteContent.hero.profile.image}`,
+    image: `${siteContent.meta.url}${siteContent.hero.snapshot.imageSrc}`,
     jobTitle: "Program Manager",
     worksFor: {
       "@type": "Organization",
@@ -55,6 +55,13 @@ const renderButton = (button) => {
   return `<a class="${classes}" href="${button.href}"${target}>${button.label}</a>`;
 };
 
+const renderSignal = (item) => `
+  <article class="signal-card">
+    <span class="signal-label">${item.label}</span>
+    <span class="signal-value">${item.value}</span>
+  </article>
+`;
+
 const renderProject = (project) => `
   <article class="project-card" data-reveal>
     <div class="card-topline">Flagship project</div>
@@ -66,6 +73,22 @@ const renderProject = (project) => `
     <ul class="highlight-list">
       ${project.highlights.map((highlight) => `<li>${highlight}</li>`).join("")}
     </ul>
+  </article>
+`;
+
+const renderBackgroundCard = (item) => `
+  <article class="background-card" data-reveal>
+    <p class="card-topline">${item.eyebrow}</p>
+    <h3>${item.title}</h3>
+    <p>${item.detail}</p>
+  </article>
+`;
+
+const renderJourneyItem = (item) => `
+  <article class="journey-card" data-reveal>
+    <span class="journey-period">${item.period}</span>
+    <h3>${item.title}</h3>
+    <p>${item.detail}</p>
   </article>
 `;
 
@@ -86,26 +109,6 @@ const renderContactLink = (item) => `
     <span class="contact-label">${item.label}</span>
     <span class="contact-note">${item.note}</span>
   </a>
-`;
-
-const renderHeroFact = (item) => `<span class="hero-fact">${item}</span>`;
-
-const renderIdentityCard = (item) => `
-  <article class="identity-card" data-reveal>
-    <div class="identity-value">${item.value}</div>
-    <div class="identity-label">${item.label}</div>
-    <p>${item.detail}</p>
-  </article>
-`;
-
-const renderBackgroundCard = (card) => `
-  <article class="hero-detail-card" data-reveal>
-    <p class="card-topline">${card.eyebrow}</p>
-    <h3>${card.title}</h3>
-    <ul class="mini-list">
-      ${card.lines.map((line) => `<li>${line}</li>`).join("")}
-    </ul>
-  </article>
 `;
 
 const render = () => {
@@ -136,8 +139,8 @@ const render = () => {
               <h1>${siteContent.hero.title}</h1>
               <p class="hero-description">${siteContent.hero.description}</p>
 
-              <div class="hero-fact-row">
-                ${siteContent.hero.quickFacts.map(renderHeroFact).join("")}
+              <div class="hero-signal-grid">
+                ${siteContent.hero.quickFacts.map(renderSignal).join("")}
               </div>
 
               <div class="button-row">
@@ -147,27 +150,26 @@ const render = () => {
               <p class="proof-line">${siteContent.hero.proofLine}</p>
             </div>
 
-            <aside class="hero-panel">
-              <article class="portrait-card" data-reveal>
-                <div class="portrait-media">
-                  <img src="${siteContent.hero.profile.image}" alt="${siteContent.hero.profile.alt}" />
-                  <div class="portrait-overlay">
-                    <span class="portrait-pill">${siteContent.hero.profile.role}</span>
-                    <span class="portrait-pill portrait-pill-secondary">${siteContent.hero.profile.location}</span>
-                  </div>
-                </div>
-                <div class="portrait-copy">
-                  <p class="intro-kicker">Background</p>
-                  <p class="intro-copy">${siteContent.hero.profile.summary}</p>
-                </div>
-              </article>
-
-              <div class="identity-grid">
-                ${siteContent.hero.identity.map(renderIdentityCard).join("")}
+            <aside class="hero-profile" data-reveal>
+              <div class="portrait-frame">
+                <img
+                  class="portrait-image"
+                  src="${siteContent.hero.snapshot.imageSrc}"
+                  alt="${siteContent.hero.snapshot.imageAlt}"
+                />
+                <div class="portrait-badge">${siteContent.hero.snapshot.location}</div>
               </div>
 
-              <div class="hero-detail-grid">
-                ${siteContent.hero.backgroundCards.map(renderBackgroundCard).join("")}
+              <div class="profile-summary">
+                <p class="intro-kicker">Background</p>
+                <h2 class="profile-title">${siteContent.hero.snapshot.title}</h2>
+                <p class="intro-copy">${siteContent.hero.intro}</p>
+                <p class="profile-blurb">${siteContent.hero.snapshot.blurb}</p>
+                <div class="credential-row">
+                  ${siteContent.hero.credentials
+                    .map((credential) => `<span class="credential-chip">${credential}</span>`)
+                    .join("")}
+                </div>
               </div>
             </aside>
           </div>
@@ -180,6 +182,7 @@ const render = () => {
               <h2>Public work, measured impact</h2>
               <p class="section-copy">${siteContent.stats.verifiedOn}</p>
             </div>
+
             <div class="stat-grid">
               ${siteContent.stats.items
                 .map(
@@ -192,6 +195,22 @@ const render = () => {
                   `
                 )
                 .join("")}
+            </div>
+
+            <div class="background-shell">
+              <div class="background-copy" data-reveal>
+                <p class="section-eyebrow">Background</p>
+                <h3>${siteContent.background.title}</h3>
+                <p class="section-copy">${siteContent.background.intro}</p>
+              </div>
+
+              <div class="background-grid">
+                ${siteContent.background.cards.map(renderBackgroundCard).join("")}
+              </div>
+
+              <div class="journey-grid">
+                ${siteContent.background.journey.map(renderJourneyItem).join("")}
+              </div>
             </div>
           </div>
         </section>
