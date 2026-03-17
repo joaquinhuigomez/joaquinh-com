@@ -690,6 +690,10 @@ const render = () => {
                 <p class="intro-kicker">Profile snapshot</p>
                 <h2 class="profile-title">${siteContent.hero.snapshot.title}</h2>
                 <p class="profile-blurb">${siteContent.hero.snapshot.blurb}</p>
+                <p class="profile-blurb profile-blurb-secondary">${siteContent.hero.snapshot.detail}</p>
+                <div class="tag-row profile-tag-row">
+                  ${siteContent.hero.snapshot.tags.map((tag) => `<span class="tag-chip">${tag}</span>`).join("")}
+                </div>
                 <div class="credential-row">
                   ${siteContent.hero.credentials
                     .map((credential) => `<span class="credential-chip">${credential}</span>`)
@@ -736,6 +740,7 @@ const render = () => {
               <article class="thesis-panel" data-reveal>
                 <p class="section-eyebrow">${siteContent.thesis.eyebrow}</p>
                 <h3>${siteContent.thesis.title}</h3>
+                <p class="thesis-meta">${siteContent.thesis.meta}</p>
                 <p class="section-copy">${siteContent.thesis.summary}</p>
                 <ul class="detail-list">
                   ${siteContent.thesis.bullets.map((detail) => `<li>${detail}</li>`).join("")}

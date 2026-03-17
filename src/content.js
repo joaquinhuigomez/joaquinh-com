@@ -14,8 +14,8 @@ export const siteContent = {
   ],
   hero: {
     eyebrow: "AI infrastructure | MLOps | agent orchestration",
-    lead: "I fix",
-    title: "the quiet failures behind AI products.",
+    lead: "I lead and build",
+    title: "AI systems teams can trust in production.",
     description:
       "Concurrency leaks, noisy evals, and orchestration edge cases that decide whether enterprise AI systems actually work.",
     proofLine:
@@ -244,7 +244,10 @@ export const siteContent = {
       title: "Amazon Program Manager",
       location: "London, United Kingdom",
       blurb:
-        "Program management with hands-on technical scope across MLOps, experimentation, serverless orchestration, and AI-enabled operations."
+        "Amazon PM operating at the intersection of program leadership and technical execution across MLOps, experimentation, serverless orchestration, and AI-enabled operations.",
+      detail:
+        "I work across operators, business stakeholders, SDEs, and research scientists to turn ambiguous operational problems into production decision systems with measurable financial impact.",
+      tags: ["#MLOps", "#Serverless", "#AIInfra", "#ProgramLeadership", "#LLMEval"]
     },
     credentials: [
       "St. Gallen magna cum laude",
@@ -283,7 +286,8 @@ export const siteContent = {
   },
   thesis: {
     eyebrow: "Research highlight",
-    title: "St. Gallen thesis: generative AI for no-code and low-code systems",
+    title: "Master Thesis (University of St. Gallen)",
+    meta: "2024 · Supervisor: Dr. Edona Elshan",
     summary:
       "A systems view of generative AI in no-code and low-code development, built around LLMs, agents, and governance rather than prompt theater.",
     bullets: [

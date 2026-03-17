@@ -676,6 +676,14 @@ a {
   margin-top: 0.55rem;
 }
 
+.profile-tag-row {
+  margin-top: 0.6rem;
+}
+
+.profile-blurb-secondary {
+  margin-top: 0.45rem;
+}
+
 .credential-row,
 .chip-row,
 .mini-link-row,
@@ -687,6 +695,15 @@ a {
 
 .credential-row {
   margin-top: 0.65rem;
+}
+
+.thesis-meta {
+  margin: 0.45rem 0 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(239, 246, 248, 0.74);
 }
 
 .credential-chip,
