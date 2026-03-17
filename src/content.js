@@ -2,49 +2,68 @@ export const siteContent = {
   meta: {
     title: "Joaquin Hui Gomez | Reliable AI Systems",
     description:
-      "AI infrastructure, evaluation, and agent orchestration grounded in production work at Amazon and open-source contributions across MCP and Anthropic's agent ecosystem.",
+      "Reliable AI systems across production automation, evaluation, and agent orchestration, with Amazon work and open-source contributions across MCP and Anthropic's agent ecosystem.",
     url: "https://joaquinh.com"
   },
   nav: [
+    { label: "Profile", href: "#proof" },
     { label: "Projects", href: "#projects" },
     { label: "Open source", href: "#open-source" },
-    { label: "Case study", href: "#case-study" },
+    { label: "Amazon", href: "#case-study" },
     { label: "Contact", href: "#contact" }
   ],
   hero: {
     eyebrow: "AI infrastructure | evaluation | agent orchestration",
-    title: "I build reliable AI systems.",
+    lead: "I build",
+    title: "Reliable AI systems.",
     description:
-      "AI infrastructure, evaluation, and agent orchestration grounded in production work at Amazon and open-source contributions across MCP and Anthropic's agent ecosystem.",
+      "Production-minded AI infrastructure, evaluation, and orchestration grounded in Amazon work and open-source contributions across MCP, Anthropic's agent SDK, and adjacent agent ecosystems.",
     proofLine:
       "Internal AI hackathon winner | OSS contributor across MCP and Anthropic agent tooling | Amazon | Accenture | PwC",
-    intro:
-      "I am Joaquin Hui Gomez, a London-based Program Manager at Amazon focused on making AI systems more reliable, measurable, and useful in practice. My route into this work runs through strategy, law, consulting, operations, and hands-on automation, which is why I care about systems that hold up beyond the demo.",
     buttons: [
       {
         label: "View GitHub",
         href: "https://github.com/joaquinhuigomez",
         external: true,
-        style: "primary"
+        style: "primary",
+        icon: "github"
       },
       {
         label: "Open-source contributions",
         href: "#open-source",
         external: false,
-        style: "secondary"
+        style: "secondary",
+        icon: "spark"
       },
       {
         label: "Contact",
         href: "#contact",
         external: false,
-        style: "secondary"
+        style: "secondary",
+        icon: "mail"
       }
     ],
     quickFacts: [
-      { label: "Current", value: "Amazon Program Manager" },
-      { label: "Global", value: "Lived across 3 continents" },
-      { label: "Languages", value: "6 fluent languages" },
-      { label: "Technical", value: "3 AWS certifications" }
+      {
+        icon: "briefcase",
+        label: "Current role",
+        value: "Amazon Program Manager"
+      },
+      {
+        icon: "globe",
+        label: "Footprint",
+        value: "Lived across 3 continents"
+      },
+      {
+        icon: "languages",
+        label: "Languages",
+        value: "6 spoken fluently"
+      },
+      {
+        icon: "certificate",
+        label: "Technical depth",
+        value: "3 AWS certifications"
+      }
     ],
     snapshot: {
       imageSrc: "/portrait.jpg",
@@ -52,8 +71,10 @@ export const siteContent = {
       title: "Program Manager at Amazon",
       location: "London, United Kingdom",
       blurb:
-        "Non-traditional on paper, technical in practice: cloud, automation, analytics, evaluation, and agent tooling."
+        "Non-traditional on paper, technical in practice: cloud, analytics, evaluation, orchestration, and production automation."
     },
+    intro:
+      "I'm Joaquin Hui Gomez, a London-based Program Manager at Amazon focused on making AI systems reliable, measurable, and genuinely useful in practice. My route into this work runs through strategy, law, consulting, operations, and hands-on automation, which is why I care about systems that hold up beyond the demo.",
     credentials: [
       "St. Gallen M.A. | magna cum laude",
       "HKU LLB + BBA",
@@ -62,7 +83,7 @@ export const siteContent = {
     ]
   },
   stats: {
-    verifiedOn: "Last verified March 17, 2026 from GitHub profile and PR search",
+    verifiedOn: "Last verified March 17, 2026 from GitHub profile and open PR search.",
     items: [
       { value: "17+", label: "Contributions", detail: "public OSS and benchmark work" },
       { value: "20", label: "Public repos", detail: "live GitHub profile count" },
@@ -70,58 +91,51 @@ export const siteContent = {
       { value: "1440", label: "Hours / year", detail: "estimated internal ops impact" }
     ]
   },
-  background: {
-    title: "A non-traditional route into AI systems",
-    intro:
-      "Strategy, law, consulting, and operations gave me a bias toward systems that are legible, governable, and useful. That now shows up in how I build AI infrastructure, evaluation tooling, and agent workflows.",
-    cards: [
+  profile: {
+    title: "About",
+    body:
+      "I'm interested in making AI systems more reliable, measurable, and useful in practice. My work sits at the intersection of AI infrastructure, evaluation, and agent tooling: fair resource allocation, trustworthy judging, and orchestration systems that create measurable outcomes.",
+    chips: ["Amazon", "Accenture", "PwC", "St. Gallen", "HKU", "London"],
+    notes: [
       {
-        eyebrow: "Experience",
-        title: "Amazon, Accenture, PwC",
+        icon: "building",
+        label: "Experience",
         detail:
-          "Program management, automation, analytics, cloud migrations, and digital transformation in operationally demanding environments."
+          "Amazon program management plus earlier cloud, automation, analytics, and digital transformation work at Accenture and PwC."
       },
       {
-        eyebrow: "Education",
-        title: "St. Gallen and HKU",
+        icon: "cap",
+        label: "Education",
         detail:
-          "M.A. in Strategy and International Management, magna cum laude, plus dual degrees in Law and Business."
+          "St. Gallen M.A. in Strategy and International Management, magna cum laude, and HKU dual degrees in Law and Business."
       },
       {
-        eyebrow: "Global context",
-        title: "3 continents | 6 languages",
+        icon: "spark",
+        label: "Builder DNA",
         detail:
-          "Comfortable operating across cultures, disciplines, and stakeholder groups without losing execution speed."
-      },
-      {
-        eyebrow: "Technical crossover",
-        title: "From non-traditional to hands-on",
-        detail:
-          "Built technical depth through AI, Python, SQL, automation, and 3 AWS certifications despite starting outside a classic engineering track."
+          "Built and ran a 3K+ user forum at age 9. The thread is the same now, just pointed at AI systems instead of early internet communities."
       }
+    ]
+  },
+  thesis: {
+    eyebrow: "Research highlight",
+    title: "St. Gallen thesis: generative AI for no-code and low-code systems",
+    summary:
+      "At St. Gallen's SIM program, I focused on how generative AI can move from drafting assistance to governed, scalable system design. The work treated no-code and low-code development as a systems problem, not just a prompting exercise.",
+    bullets: [
+      "Proposed a triangle of LLMs, agents, and governance so speed does not come at the expense of rigor.",
+      "Built a pipeline that combined summary and prompt chaining, encoder-style semantic analysis, and a Pydantic-coordinated agent over 50K+ Reddit entries.",
+      "Used GPT-based summarization to surface emergent themes and actionable recommendations, while working well before these workflows became common portfolio boilerplate."
     ],
-    journey: [
-      {
-        period: "2023 - Present",
-        title: "Amazon | Program Manager",
-        detail: "Driving AI, software, and operational automation work in London."
-      },
-      {
-        period: "2022",
-        title: "Amazon | Business Analyst Intern",
-        detail:
-          "Worked across 30M+ rows, AWS-backed automation, and dashboards, then secured a full-time L5 offer before the internship ended."
-      },
-      {
-        period: "2018 - 2021",
-        title: "PwC and Accenture",
-        detail:
-          "Cloud, analytics, automation, and digital strategy work spanning Beijing and major client transformation programs."
-      }
+    stats: [
+      { value: "50K+", label: "Reddit entries analyzed" },
+      { value: "LLMs + agents + governance", label: "Core thesis architecture" },
+      { value: "Magna cum laude", label: "SIM at St. Gallen" }
     ]
   },
   projects: [
     {
+      icon: "rate",
       title: "Token-Aware Rate Limiter",
       href: "https://github.com/joaquinhuigomez/token-aware-rate-limiter",
       description:
@@ -134,6 +148,7 @@ export const siteContent = {
       ]
     },
     {
+      icon: "judge",
       title: "LLM Judge Calibrator",
       href: "https://github.com/joaquinhuigomez/llm-judge-calibrator",
       description:
@@ -146,6 +161,7 @@ export const siteContent = {
       ]
     },
     {
+      icon: "agent",
       title: "Agent Eval",
       href: "https://github.com/joaquinhuigomez/agent-eval",
       description:
@@ -160,14 +176,36 @@ export const siteContent = {
   ],
   openSource: {
     intro:
-      "I contribute targeted fixes and improvements to AI infrastructure and agent ecosystems, especially where reliability, developer ergonomics, or protocol correctness matter.",
+      "I contribute targeted fixes and improvements to AI infrastructure and agent ecosystems, especially where reliability, protocol correctness, and developer ergonomics matter.",
+    githubPanel: {
+      title: "GitHub is the live proof layer",
+      body:
+        "The fastest way to inspect current work is GitHub: public repos, upstream PRs, benchmark artifacts, and protocol-level fixes that show how I think about reliability.",
+      metrics: [
+        { value: "20", label: "Public repos" },
+        { value: "15", label: "Open PRs" },
+        { value: "17+", label: "Contributions" }
+      ],
+      links: [
+        {
+          label: "Profile",
+          href: "https://github.com/joaquinhuigomez",
+          icon: "github"
+        },
+        {
+          label: "Rate limiter repo",
+          href: "https://github.com/joaquinhuigomez/token-aware-rate-limiter",
+          icon: "rate"
+        }
+      ]
+    },
     featured: [
       {
         target: "Anthropic Agent SDK",
         title: "Fix debug logging corrupting JSON protocol",
         status: "Open PR",
         href: "https://github.com/anthropics/claude-agent-sdk-typescript/pull/235",
-        summary: "Routes ANTHROPIC_LOG=debug output to stderr so JSON protocol traffic is not corrupted."
+        summary: "Routes debug output to stderr so JSON protocol traffic is not corrupted."
       },
       {
         target: "MCP servers",
@@ -181,7 +219,7 @@ export const siteContent = {
         title: "Skip structured content validation on error payloads",
         status: "Open PR",
         href: "https://github.com/modelcontextprotocol/typescript-sdk/pull/1690",
-        summary: "Avoids client-side validation failures when MCP tools correctly return error payloads."
+        summary: "Avoids client-side validation failures when tools correctly return error payloads."
       },
       {
         target: "LiteLLM",
@@ -222,7 +260,7 @@ export const siteContent = {
       },
       {
         target: "LiteLLM",
-        title: "Proposed Jain's fairness index for team-level rate limiting",
+        title: "Propose Jain's fairness index for team-level rate limiting",
         status: "Proposal",
         href: "https://github.com/BerriAI/litellm/issues/20996#issuecomment-4070259346",
         summary: "Suggested a fairness metric grounded in the token-aware rate-limiting work."
@@ -243,7 +281,7 @@ export const siteContent = {
       },
       {
         target: "crewAI",
-        title: "Provider-agnostic tool schema for Bedrock and Gemini MCP tools",
+        title: "Provider-agnostic schema for Bedrock and Gemini MCP tools",
         status: "Open PR",
         href: "https://github.com/crewAIInc/crewAI/pull/4912",
         summary: "Improves cross-provider tool compatibility in agent workflows."
@@ -287,55 +325,146 @@ export const siteContent = {
   },
   caseStudy: {
     title: "Case Study: Internal AI Hackathon Winner",
-    subtitle: "Amazon internal AI hackathon",
-    award: "Most Innovative",
-    impact: "1440 hours per year estimated savings",
+    subtitle: "Amazon | TPM, applied AI, and production operations",
     summary:
-      "I built an agentic plus deterministic orchestration solution that won the Most Innovative award in Amazon's internal AI hackathon. The system focused on practical automation, structured control points, and measurable operational value rather than a demo-first experience.",
+      "My Amazon work is most interesting where TPM, technical systems, and operational decision-making overlap: taking complex optimization workflows and making them easier to tune, safer to operate, and faster for business teams to learn from.",
+    award: "Most Innovative",
+    impact: "1440 hours / year estimated savings",
+    metrics: [
+      {
+        value: "$100M / year",
+        label: "Network-speed upside",
+        detail: "annualized value from node-level speed policy tuning"
+      },
+      {
+        value: "200 nodes",
+        label: "Weekly tuning scope",
+        detail: "delivery-station level policy adjustment"
+      },
+      {
+        value: "99.9%",
+        label: "Metric accuracy",
+        detail: "deterministic analysis on business-defined schemas"
+      }
+    ],
+    workstreams: [
+      {
+        icon: "network",
+        title: "MLOps-backed network optimization",
+        detail:
+          "Led SDE and research partners to introduce node-level parameters that trade extra truck expense against speed, while keeping delivery-promise compliance as a hard constraint. The program targeted annualized speed value on the order of $100M."
+      },
+      {
+        icon: "workflow",
+        title: "Simulation and experiment engine",
+        detail:
+          "Built an orchestration layer around Amazon's internal batch-simulation platform, with SQS-backed state handling, serverless analysis steps, deterministic ZIP preparation for 1-5 GB inputs, and LLM-assisted experiment setup."
+      },
+      {
+        icon: "analytics",
+        title: "Actuals over backtests",
+        detail:
+          "I rely on observed production metrics, not only backtest simulation, because the network changes continuously. That principle shaped the engine, the reporting layer, and the recommendation workflow used to shorten time-to-insight."
+      }
+    ],
     details: [
-      "Combined agentic reasoning with deterministic orchestration so workflows stayed useful under real operational constraints.",
-      "Focused on measurable automation outcomes and clear control surfaces instead of opaque autonomous behavior.",
-      "Estimated impact was roughly 1,440 hours per year in saved internal operational effort."
+      "Paired deterministic analysis with probabilistic LLM summaries for recommendations and next-step planning.",
+      "Used LLM chat as an interface for experiment intent, while keeping heavy file preparation and evaluation in explicit deterministic tooling.",
+      "The work transfers well to TPM / AI platform roles: experiment architecture, metric design, stakeholder alignment, and operator usability."
     ]
   },
   whyAi: {
     title: "Why I care about AI systems",
     body:
-      "Coming from strategy, law, consulting, and operations, I care less about model theater and more about whether an AI system can be trusted, measured, and productively owned by a real team.",
+      "Coming from strategy, law, consulting, and operations, I care less about model theater and more about whether an AI system can be trusted, measured, and owned by a real team.",
     principles: [
       {
+        icon: "shield",
         title: "Reliability over novelty",
         detail: "If a system cannot be trusted under constraints, it is not ready for real work."
       },
       {
+        icon: "ruler",
         title: "Evaluation before claims",
-        detail: "I like tools and benchmarks that make model behavior measurable instead of anecdotal."
+        detail: "I prefer tools and benchmarks that make model behavior measurable instead of anecdotal."
       },
       {
+        icon: "nodes",
         title: "Orchestration for outcomes",
-        detail: "The most useful AI work is often in the glue: routing, validation, fallback logic, and operational fit."
+        detail: "The useful AI work is often in the glue: routing, validation, fallback logic, and operational fit."
       },
       {
+        icon: "bridge",
         title: "Technical depth with business context",
-        detail: "I am most interested in systems that are rigorous enough for engineers and legible enough for operators and decision-makers."
+        detail: "I like systems rigorous enough for engineers and legible enough for operators and decision-makers."
       }
     ]
   },
   contact: {
-    title: "Contact and links",
+    title: "Contact, code, and outside work",
     body:
-      "GitHub is the best place to see current repos and PRs. LinkedIn is the fastest way to get the broader background across AI, cloud, consulting, and operations.",
+      "GitHub is the best place to inspect current repos and PRs. LinkedIn gives the broader background. X and Instagram are intentionally lighter: more travel, photography, and life outside shipping systems.",
     links: [
       {
         label: "GitHub",
         href: "https://github.com/joaquinhuigomez",
-        note: "Repos, PRs, and project history"
+        note: "Repos, PRs, and project history",
+        icon: "github"
       },
       {
         label: "LinkedIn",
         href: "https://www.linkedin.com/in/joaquin-h-352927a9/",
-        note: "Professional profile and background"
+        note: "Professional profile and background",
+        icon: "linkedin"
+      },
+      {
+        label: "X",
+        href: "https://x.com/ViajaryTragar",
+        note: "Main profile feed",
+        icon: "x"
+      },
+      {
+        label: "Instagram",
+        href: "https://www.instagram.com/kinaventurero",
+        note: "Travel and photography",
+        icon: "instagram"
       }
     ]
+  },
+  social: {
+    x: {
+      title: "On X",
+      body:
+        "A live view of my main page on X. It is deliberately less formal than the rest of the site.",
+      href: "https://twitter.com/ViajaryTragar"
+    },
+    instagram: {
+      title: "Outside work",
+      body:
+        "Travel and photography are where I reset. These are pulled from some of the highest-liked public Instagram posts, kept intentionally secondary to the technical work.",
+      items: [
+        {
+          imageSrc: "/ig-vinicunca.jpg",
+          title: "Vinicunca",
+          likes: "309 likes",
+          meta: "Peru | Rainbow Mountain",
+          href: "https://www.instagram.com/p/B0tqsMjAf3P/"
+        },
+        {
+          imageSrc: "/ig-rigi.jpg",
+          title: "Rigi",
+          likes: "277 likes",
+          meta: "Switzerland",
+          href: "https://www.instagram.com/p/BrdtMgaAIZ5/"
+        },
+        {
+          imageSrc: "/ig-zermatt.jpg",
+          title: "Gornergrat",
+          likes: "256 likes",
+          meta: "Zermatt | Matterhorn",
+          href: "https://www.instagram.com/p/Br8YfDrhLJS/"
+        }
+      ]
+    }
   }
 };

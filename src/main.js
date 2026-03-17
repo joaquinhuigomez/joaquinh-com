@@ -4,6 +4,198 @@ import { siteContent } from "./content.js";
 const app = document.querySelector("#app");
 const currentYear = new Date().getFullYear();
 
+const iconMap = {
+  github: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 19c-4.5 1.3-4.5-2.2-6-2.7" />
+      <path d="M15 22v-3.4a3 3 0 0 0-.9-2.3c3-.3 6.1-1.5 6.1-6.6A5.1 5.1 0 0 0 19 6.1 4.7 4.7 0 0 0 18.9 3S17.8 2.7 15 4.6a10.2 10.2 0 0 0-6 0C6.2 2.7 5.1 3 5.1 3A4.7 4.7 0 0 0 5 6.1 5.1 5.1 0 0 0 3.8 9.7c0 5.1 3.1 6.3 6.1 6.6A3 3 0 0 0 9 18.6V22" />
+    </svg>
+  `,
+  linkedin: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z" />
+      <rect x="2" y="9" width="4" height="12" rx="1" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  `,
+  x: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m4 4 16 16" />
+      <path d="M20 4 9.5 14.5 4 20" />
+      <path d="M4 4h5.5l10.5 16H14.5Z" />
+    </svg>
+  `,
+  instagram: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  `,
+  mail: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m4 7 8 6 8-6" />
+    </svg>
+  `,
+  briefcase: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="7" width="18" height="13" rx="2" />
+      <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+      <path d="M3 12h18" />
+    </svg>
+  `,
+  globe: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18" />
+      <path d="M12 3a14 14 0 0 1 0 18" />
+      <path d="M12 3a14 14 0 0 0 0 18" />
+    </svg>
+  `,
+  languages: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 7h8" />
+      <path d="M9 4v3c0 4-2 7-5 9" />
+      <path d="M7 11c1.1 2 2.7 3.7 4.7 5" />
+      <path d="M15 5h6" />
+      <path d="m18 5 3 12" />
+      <path d="m21 17-6-12-3 12" />
+    </svg>
+  `,
+  certificate: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="8" r="4" />
+      <path d="m10 12-1 8 3-2 3 2-1-8" />
+    </svg>
+  `,
+  building: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4" y="3" width="16" height="18" rx="2" />
+      <path d="M9 8h1M14 8h1M9 12h1M14 12h1M9 16h1M14 16h1" />
+    </svg>
+  `,
+  cap: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m2 9 10-5 10 5-10 5Z" />
+      <path d="M6 11.5v4.5c0 1.2 2.7 3 6 3s6-1.8 6-3v-4.5" />
+    </svg>
+  `,
+  spark: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7Z" />
+      <path d="M19 3v3" />
+      <path d="M20.5 4.5h-3" />
+    </svg>
+  `,
+  rate: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 15c1.2-3.3 3.8-5 8-5s6.8 1.7 8 5" />
+      <path d="M4 15v4h4" />
+      <path d="M20 15v4h-4" />
+      <path d="M12 6v8" />
+      <path d="m9.5 8.5 2.5-2.5 2.5 2.5" />
+    </svg>
+  `,
+  judge: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3v18" />
+      <path d="m6 7 6 4 6-4" />
+      <path d="M6 7v4a3 3 0 0 0 6 0" />
+      <path d="M18 7v4a3 3 0 0 1-6 0" />
+      <path d="M8 21h8" />
+    </svg>
+  `,
+  agent: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4" y="5" width="16" height="14" rx="3" />
+      <path d="M9 10h6" />
+      <path d="M9 14h3" />
+      <path d="M12 5V3" />
+    </svg>
+  `,
+  shield: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3 5 6v6c0 4.5 3 7.8 7 9 4-1.2 7-4.5 7-9V6Z" />
+      <path d="m9.5 12 1.8 1.8 3.7-4.1" />
+    </svg>
+  `,
+  ruler: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m14 4 6 6-10 10H4v-6Z" />
+      <path d="M13 5 5 13" />
+      <path d="M16 8 8 16" />
+    </svg>
+  `,
+  nodes: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="6" cy="12" r="2.5" />
+      <circle cx="18" cy="6" r="2.5" />
+      <circle cx="18" cy="18" r="2.5" />
+      <path d="M8.2 11 15.7 7.2" />
+      <path d="M8.2 13 15.7 16.8" />
+    </svg>
+  `,
+  bridge: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 19V9" />
+      <path d="M20 19V9" />
+      <path d="M4 19h16" />
+      <path d="M7 9c1.5-2 3-3 5-3s3.5 1 5 3" />
+      <path d="M9 19v-5" />
+      <path d="M15 19v-5" />
+    </svg>
+  `,
+  network: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="5" cy="12" r="2" />
+      <circle cx="12" cy="5" r="2" />
+      <circle cx="19" cy="12" r="2" />
+      <circle cx="12" cy="19" r="2" />
+      <path d="M7 12h10" />
+      <path d="m12 7 5 4.2" />
+      <path d="m12 7-5 4.2" />
+      <path d="m12 17 5-4.2" />
+      <path d="m12 17-5-4.2" />
+    </svg>
+  `,
+  workflow: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4" width="7" height="5" rx="1.5" />
+      <rect x="14" y="4" width="7" height="5" rx="1.5" />
+      <rect x="8.5" y="15" width="7" height="5" rx="1.5" />
+      <path d="M10 6.5h4" />
+      <path d="M17.5 9v2a3 3 0 0 1-3 3h-5" />
+      <path d="M6.5 9v2a3 3 0 0 0 3 3h5" />
+    </svg>
+  `,
+  analytics: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 19h16" />
+      <path d="M7 16V9" />
+      <path d="M12 16V5" />
+      <path d="M17 16v-4" />
+      <path d="m6 7 4-2 4 3 4-2" />
+    </svg>
+  `,
+  arrow: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12h14" />
+      <path d="m13 6 6 6-6 6" />
+    </svg>
+  `,
+  chevronLeft: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m15 18-6-6 6-6" />
+    </svg>
+  `,
+  chevronRight: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m9 18 6-6-6-6" />
+    </svg>
+  `
+};
+
 const setMeta = () => {
   document.title = siteContent.meta.title;
 
@@ -48,47 +240,81 @@ const setMeta = () => {
   document.head.append(schemaScript);
 };
 
+const renderIcon = (name, className = "icon-mark") => `
+  <span class="${className}" aria-hidden="true">
+    ${iconMap[name] || iconMap.spark}
+  </span>
+`;
+
 const renderButton = (button) => {
   const classes = button.style === "primary" ? "button button-primary" : "button button-secondary";
   const target = button.external ? ' target="_blank" rel="noreferrer"' : "";
 
-  return `<a class="${classes}" href="${button.href}"${target}>${button.label}</a>`;
+  return `
+    <a class="${classes}" href="${button.href}"${target}>
+      ${renderIcon(button.icon, "button-icon")}
+      <span>${button.label}</span>
+    </a>
+  `;
 };
 
-const renderSignal = (item) => `
-  <article class="signal-card">
-    <span class="signal-label">${item.label}</span>
-    <span class="signal-value">${item.value}</span>
+const renderQuickFact = (item) => `
+  <article class="fact-card">
+    <div class="fact-icon-wrap">
+      ${renderIcon(item.icon)}
+    </div>
+    <div>
+      <p class="fact-label">${item.label}</p>
+      <p class="fact-value">${item.value}</p>
+    </div>
+  </article>
+`;
+
+const renderStatCard = (item) => `
+  <article class="stat-card" data-reveal>
+    <div class="stat-value">${item.value}</div>
+    <div class="stat-label">${item.label}</div>
+    <p class="stat-detail">${item.detail}</p>
+  </article>
+`;
+
+const renderProfileNote = (item) => `
+  <article class="profile-note">
+    <div class="fact-icon-wrap">
+      ${renderIcon(item.icon)}
+    </div>
+    <div>
+      <p class="fact-label">${item.label}</p>
+      <p class="profile-note-copy">${item.detail}</p>
+    </div>
+  </article>
+`;
+
+const renderMiniMetric = (item) => `
+  <article class="mini-metric">
+    <strong>${item.value}</strong>
+    <span>${item.label}</span>
   </article>
 `;
 
 const renderProject = (project) => `
   <article class="project-card" data-reveal>
-    <div class="card-topline">Flagship project</div>
+    <div class="project-icon-row">
+      <div class="project-icon">
+        ${renderIcon(project.icon)}
+      </div>
+      <span class="card-topline">Flagship project</span>
+    </div>
     <div class="card-heading-row">
       <h3>${project.title}</h3>
-      <a class="inline-link" href="${project.href}" target="_blank" rel="noreferrer">View repo</a>
+      <a class="inline-link" href="${project.href}" target="_blank" rel="noreferrer">
+        View repo
+      </a>
     </div>
     <p class="card-description">${project.description}</p>
     <ul class="highlight-list">
       ${project.highlights.map((highlight) => `<li>${highlight}</li>`).join("")}
     </ul>
-  </article>
-`;
-
-const renderBackgroundCard = (item) => `
-  <article class="background-card" data-reveal>
-    <p class="card-topline">${item.eyebrow}</p>
-    <h3>${item.title}</h3>
-    <p>${item.detail}</p>
-  </article>
-`;
-
-const renderJourneyItem = (item) => `
-  <article class="journey-card" data-reveal>
-    <span class="journey-period">${item.period}</span>
-    <h3>${item.title}</h3>
-    <p>${item.detail}</p>
   </article>
 `;
 
@@ -100,20 +326,78 @@ const renderContribution = (item) => `
     </div>
     <h3>${item.title}</h3>
     <p>${item.summary}</p>
-    <a class="inline-link" href="${item.href}" target="_blank" rel="noreferrer">Open link</a>
+    <a class="inline-link" href="${item.href}" target="_blank" rel="noreferrer">
+      Open link
+    </a>
+  </article>
+`;
+
+const renderGithubLink = (item) => `
+  <a class="mini-link" href="${item.href}" target="_blank" rel="noreferrer">
+    ${renderIcon(item.icon)}
+    <span>${item.label}</span>
+  </a>
+`;
+
+const renderCaseMetric = (item) => `
+  <article class="case-metric-card" data-reveal>
+    <div class="metric-value-small">${item.value}</div>
+    <div class="metric-tag">${item.label}</div>
+    <p>${item.detail}</p>
+  </article>
+`;
+
+const renderWorkstream = (item) => `
+  <article class="workstream-card" data-reveal>
+    <div class="project-icon">
+      ${renderIcon(item.icon)}
+    </div>
+    <h3>${item.title}</h3>
+    <p>${item.detail}</p>
+  </article>
+`;
+
+const renderPrinciple = (item) => `
+  <article class="principle-card" data-reveal>
+    <div class="project-icon">
+      ${renderIcon(item.icon)}
+    </div>
+    <h3>${item.title}</h3>
+    <p>${item.detail}</p>
   </article>
 `;
 
 const renderContactLink = (item) => `
   <a class="contact-link" href="${item.href}" target="_blank" rel="noreferrer">
-    <span class="contact-label">${item.label}</span>
-    <span class="contact-note">${item.note}</span>
+    <div class="contact-icon-wrap">
+      ${renderIcon(item.icon)}
+    </div>
+    <div class="contact-copy-block">
+      <span class="contact-label">${item.label}</span>
+      <span class="contact-note">${item.note}</span>
+    </div>
+    ${renderIcon("arrow", "link-arrow")}
   </a>
+`;
+
+const renderInstagramItem = (item) => `
+  <article class="instagram-card">
+    <a class="instagram-media" href="${item.href}" target="_blank" rel="noreferrer">
+      <img src="${item.imageSrc}" alt="${item.title}" loading="lazy" />
+    </a>
+    <div class="instagram-copy">
+      <div class="instagram-meta-row">
+        <strong>${item.title}</strong>
+        <span>${item.likes}</span>
+      </div>
+      <p>${item.meta}</p>
+    </div>
+  </article>
 `;
 
 const render = () => {
   app.innerHTML = `
-    <div class="site-frame">
+    <div class="site-shell">
       <div class="page-aurora page-aurora-left"></div>
       <div class="page-aurora page-aurora-right"></div>
 
@@ -133,14 +417,17 @@ const render = () => {
 
       <main id="main">
         <section id="hero" class="hero section">
-          <div class="container hero-grid">
+          <div class="container hero-layout">
             <div class="hero-copy" data-reveal>
               <p class="section-eyebrow">${siteContent.hero.eyebrow}</p>
-              <h1>${siteContent.hero.title}</h1>
+              <div class="hero-title-lockup">
+                <span class="hero-lead">${siteContent.hero.lead}</span>
+                <h1>${siteContent.hero.title}</h1>
+              </div>
               <p class="hero-description">${siteContent.hero.description}</p>
 
-              <div class="hero-signal-grid">
-                ${siteContent.hero.quickFacts.map(renderSignal).join("")}
+              <div class="fact-grid">
+                ${siteContent.hero.quickFacts.map(renderQuickFact).join("")}
               </div>
 
               <div class="button-row">
@@ -161,7 +448,7 @@ const render = () => {
               </div>
 
               <div class="profile-summary">
-                <p class="intro-kicker">Background</p>
+                <p class="intro-kicker">Profile snapshot</p>
                 <h2 class="profile-title">${siteContent.hero.snapshot.title}</h2>
                 <p class="intro-copy">${siteContent.hero.intro}</p>
                 <p class="profile-blurb">${siteContent.hero.snapshot.blurb}</p>
@@ -177,53 +464,60 @@ const render = () => {
 
         <section id="proof" class="section">
           <div class="container">
-            <div class="section-header" data-reveal>
+            <div class="section-header section-header-compact" data-reveal>
               <p class="section-eyebrow">Proof strip</p>
               <h2>Public work, measured impact</h2>
               <p class="section-copy">${siteContent.stats.verifiedOn}</p>
             </div>
 
             <div class="stat-grid">
-              ${siteContent.stats.items
-                .map(
-                  (item) => `
-                    <article class="stat-card" data-reveal>
-                      <div class="stat-value">${item.value}</div>
-                      <div class="stat-label">${item.label}</div>
-                      <p class="stat-detail">${item.detail}</p>
-                    </article>
-                  `
-                )
-                .join("")}
+              ${siteContent.stats.items.map(renderStatCard).join("")}
             </div>
 
-            <div class="background-shell">
-              <div class="background-copy" data-reveal>
-                <p class="section-eyebrow">Background</p>
-                <h3>${siteContent.background.title}</h3>
-                <p class="section-copy">${siteContent.background.intro}</p>
-              </div>
+            <div class="profile-grid">
+              <article class="bio-panel" data-reveal>
+                <div class="panel-head">
+                  <div>
+                    <p class="section-eyebrow">About</p>
+                    <h3>${siteContent.profile.title}</h3>
+                  </div>
+                  <div class="chip-row">
+                    ${siteContent.profile.chips
+                      .map((chip) => `<span class="chip">${chip}</span>`)
+                      .join("")}
+                  </div>
+                </div>
+                <p class="section-copy">${siteContent.profile.body}</p>
+                <div class="profile-note-grid">
+                  ${siteContent.profile.notes.map(renderProfileNote).join("")}
+                </div>
+              </article>
 
-              <div class="background-grid">
-                ${siteContent.background.cards.map(renderBackgroundCard).join("")}
-              </div>
-
-              <div class="journey-grid">
-                ${siteContent.background.journey.map(renderJourneyItem).join("")}
-              </div>
+              <article class="thesis-panel" data-reveal>
+                <p class="section-eyebrow">${siteContent.thesis.eyebrow}</p>
+                <h3>${siteContent.thesis.title}</h3>
+                <p class="section-copy">${siteContent.thesis.summary}</p>
+                <ul class="detail-list">
+                  ${siteContent.thesis.bullets.map((detail) => `<li>${detail}</li>`).join("")}
+                </ul>
+                <div class="mini-metric-grid">
+                  ${siteContent.thesis.stats.map(renderMiniMetric).join("")}
+                </div>
+              </article>
             </div>
           </div>
         </section>
 
         <section id="projects" class="section">
           <div class="container">
-            <div class="section-header" data-reveal>
+            <div class="section-header section-header-compact" data-reveal>
               <p class="section-eyebrow">Flagship projects</p>
               <h2>Three projects that define the portfolio</h2>
               <p class="section-copy">
                 The throughline is consistent: make AI systems fairer, easier to trust, and easier to compare in practice.
               </p>
             </div>
+
             <div class="project-grid">
               ${siteContent.projects.map(renderProject).join("")}
             </div>
@@ -232,89 +526,164 @@ const render = () => {
 
         <section id="open-source" class="section">
           <div class="container">
-            <div class="section-header" data-reveal>
+            <div class="section-header section-header-compact" data-reveal>
               <p class="section-eyebrow">Open-source contributions</p>
               <h2>Selected contributions</h2>
               <p class="section-copy">${siteContent.openSource.intro}</p>
             </div>
 
-            <div class="contribution-grid featured-grid">
-              ${siteContent.openSource.featured.map(renderContribution).join("")}
-            </div>
+            <div class="open-layout">
+              <aside class="github-panel" data-reveal>
+                <div class="github-mark">
+                  ${renderIcon("github")}
+                </div>
+                <p class="card-topline">Live proof layer</p>
+                <h3>${siteContent.openSource.githubPanel.title}</h3>
+                <p>${siteContent.openSource.githubPanel.body}</p>
+                <div class="mini-metric-grid">
+                  ${siteContent.openSource.githubPanel.metrics.map(renderMiniMetric).join("")}
+                </div>
+                <div class="mini-link-row">
+                  ${siteContent.openSource.githubPanel.links.map(renderGithubLink).join("")}
+                </div>
+              </aside>
 
-            <div class="toggle-wrap" data-reveal>
-              <button class="button button-secondary toggle-button" id="contribution-toggle" type="button" aria-expanded="false" aria-controls="more-contributions">
-                View all contributions
-              </button>
-            </div>
+              <div class="open-main">
+                <div class="contribution-grid featured-grid">
+                  ${siteContent.openSource.featured.map(renderContribution).join("")}
+                </div>
 
-            <div class="contribution-grid extended-grid" id="more-contributions" hidden>
-              ${siteContent.openSource.extended.map(renderContribution).join("")}
+                <div class="toggle-wrap" data-reveal>
+                  <button
+                    class="button button-secondary toggle-button"
+                    id="contribution-toggle"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="more-contributions"
+                  >
+                    View all contributions
+                  </button>
+                </div>
+
+                <div class="contribution-grid extended-grid" id="more-contributions" hidden>
+                  ${siteContent.openSource.extended.map(renderContribution).join("")}
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
         <section id="case-study" class="section">
-          <div class="container case-study-shell" data-reveal>
-            <div class="case-study-copy">
+          <div class="container">
+            <div class="section-header section-header-compact" data-reveal>
               <p class="section-eyebrow">Case study</p>
               <h2>${siteContent.caseStudy.title}</h2>
-              <p class="case-study-subtitle">${siteContent.caseStudy.subtitle}</p>
               <p class="section-copy">${siteContent.caseStudy.summary}</p>
-              <ul class="detail-list">
-                ${siteContent.caseStudy.details.map((detail) => `<li>${detail}</li>`).join("")}
-              </ul>
             </div>
-            <aside class="case-study-metrics">
-              <div class="case-study-card">
-                <div class="metric-tag">Award</div>
-                <div class="metric-value-small">${siteContent.caseStudy.award}</div>
+
+            <div class="case-study-layout">
+              <article class="impact-panel" data-reveal>
+                <p class="case-study-subtitle">${siteContent.caseStudy.subtitle}</p>
+                <div class="impact-highlight-row">
+                  <span class="highlight-pill">Award: ${siteContent.caseStudy.award}</span>
+                  <span class="highlight-pill">Impact: ${siteContent.caseStudy.impact}</span>
+                </div>
+                <ul class="detail-list">
+                  ${siteContent.caseStudy.details.map((detail) => `<li>${detail}</li>`).join("")}
+                </ul>
+              </article>
+
+              <div class="case-metric-grid">
+                ${siteContent.caseStudy.metrics.map(renderCaseMetric).join("")}
               </div>
-              <div class="case-study-card">
-                <div class="metric-tag">Estimated impact</div>
-                <div class="metric-value-small">${siteContent.caseStudy.impact}</div>
-              </div>
-              <div class="case-study-card">
-                <div class="metric-tag">Approach</div>
-                <div class="metric-value-small">Agentic plus deterministic orchestration</div>
-              </div>
-            </aside>
+            </div>
+
+            <div class="workstream-grid">
+              ${siteContent.caseStudy.workstreams.map(renderWorkstream).join("")}
+            </div>
           </div>
         </section>
 
         <section id="why-ai" class="section">
           <div class="container">
-            <div class="section-header" data-reveal>
+            <div class="section-header section-header-compact" data-reveal>
               <p class="section-eyebrow">Why I care about AI systems</p>
               <h2>${siteContent.whyAi.title}</h2>
               <p class="section-copy">${siteContent.whyAi.body}</p>
             </div>
+
             <div class="principle-grid">
-              ${siteContent.whyAi.principles
-                .map(
-                  (principle) => `
-                    <article class="principle-card" data-reveal>
-                      <h3>${principle.title}</h3>
-                      <p>${principle.detail}</p>
-                    </article>
-                  `
-                )
-                .join("")}
+              ${siteContent.whyAi.principles.map(renderPrinciple).join("")}
             </div>
           </div>
         </section>
 
         <section id="contact" class="section contact-section">
-          <div class="container">
-            <div class="contact-panel" data-reveal>
-              <div class="contact-copy">
+          <div class="container contact-shell">
+            <article class="contact-panel" data-reveal>
+              <div class="contact-head">
                 <p class="section-eyebrow">Contact / links</p>
                 <h2>${siteContent.contact.title}</h2>
                 <p class="section-copy">${siteContent.contact.body}</p>
               </div>
+
               <div class="contact-links">
                 ${siteContent.contact.links.map(renderContactLink).join("")}
               </div>
+            </article>
+
+            <div class="social-stack">
+              <article class="social-panel x-panel" data-reveal>
+                <div class="social-head">
+                  <div class="social-title-row">
+                    ${renderIcon("x")}
+                    <div>
+                      <h3>${siteContent.social.x.title}</h3>
+                      <p>${siteContent.social.x.body}</p>
+                    </div>
+                  </div>
+                  <a class="inline-link" href="${siteContent.social.x.href}" target="_blank" rel="noreferrer">
+                    Open profile
+                  </a>
+                </div>
+                <div class="embed-shell">
+                  <a
+                    class="twitter-timeline"
+                    data-dnt="true"
+                    data-theme="light"
+                    data-height="390"
+                    data-chrome="noheader nofooter noborders transparent"
+                    href="${siteContent.social.x.href}"
+                  >
+                    Tweets by ViajaryTragar
+                  </a>
+                </div>
+              </article>
+
+              <article class="social-panel instagram-panel" data-reveal data-carousel>
+                <div class="social-head">
+                  <div class="social-title-row">
+                    ${renderIcon("instagram")}
+                    <div>
+                      <h3>${siteContent.social.instagram.title}</h3>
+                      <p>${siteContent.social.instagram.body}</p>
+                    </div>
+                  </div>
+
+                  <div class="carousel-toolbar">
+                    <button class="carousel-button" type="button" data-carousel-prev aria-label="Previous slide">
+                      ${renderIcon("chevronLeft")}
+                    </button>
+                    <button class="carousel-button" type="button" data-carousel-next aria-label="Next slide">
+                      ${renderIcon("chevronRight")}
+                    </button>
+                  </div>
+                </div>
+
+                <div class="instagram-track" data-carousel-track>
+                  ${siteContent.social.instagram.items.map(renderInstagramItem).join("")}
+                </div>
+              </article>
             </div>
           </div>
         </section>
@@ -348,30 +717,64 @@ const initContributionToggle = () => {
 
 const initReveal = () => {
   const revealItems = document.querySelectorAll("[data-reveal]");
+  revealItems.forEach((item) => item.classList.add("is-visible"));
+};
 
-  if (!("IntersectionObserver" in window)) {
-    revealItems.forEach((item) => item.classList.add("is-visible"));
+const initCarousel = () => {
+  document.querySelectorAll("[data-carousel]").forEach((carousel) => {
+    const track = carousel.querySelector("[data-carousel-track]");
+    const previous = carousel.querySelector("[data-carousel-prev]");
+    const next = carousel.querySelector("[data-carousel-next]");
+
+    if (!track || !previous || !next) {
+      return;
+    }
+
+    const getStep = () => {
+      const card = track.querySelector(".instagram-card");
+      if (!card) {
+        return track.clientWidth * 0.9;
+      }
+
+      const styles = window.getComputedStyle(track);
+      const gap = parseFloat(styles.columnGap || styles.gap || "20");
+      return card.getBoundingClientRect().width + gap;
+    };
+
+    previous.addEventListener("click", () => {
+      track.scrollBy({ left: -getStep(), behavior: "smooth" });
+    });
+
+    next.addEventListener("click", () => {
+      track.scrollBy({ left: getStep(), behavior: "smooth" });
+    });
+  });
+};
+
+const initTwitterEmbeds = () => {
+  if (!document.querySelector(".twitter-timeline")) {
     return;
   }
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.18
-    }
-  );
+  if (window.twttr?.widgets) {
+    window.twttr.widgets.load();
+    return;
+  }
 
-  revealItems.forEach((item) => observer.observe(item));
+  if (document.querySelector('script[data-widget-script="x"]')) {
+    return;
+  }
+
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = "https://platform.twitter.com/widgets.js";
+  script.dataset.widgetScript = "x";
+  document.body.append(script);
 };
 
 setMeta();
 render();
 initContributionToggle();
 initReveal();
+initCarousel();
+initTwitterEmbeds();
