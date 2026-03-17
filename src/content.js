@@ -1,8 +1,8 @@
 export const siteContent = {
   meta: {
-    title: "Joaquin Hui Gomez | Reliable AI Systems",
+    title: "Joaquin Hui Gomez | AI Infrastructure Reliability",
     description:
-      "Reliable AI systems across production automation, evaluation, and agent orchestration, with Amazon work and open-source contributions across MCP and Anthropic's agent ecosystem.",
+      "AI infrastructure reliability across serving, evaluation, and agent orchestration, with Amazon work and open-source contributions across MCP and adjacent agent ecosystems.",
     url: "https://joaquinh.com"
   },
   nav: [
@@ -14,12 +14,12 @@ export const siteContent = {
   ],
   hero: {
     eyebrow: "AI infrastructure | evaluation | agent orchestration",
-    lead: "I build",
-    title: "Reliable AI systems.",
+    lead: "I fix",
+    title: "the quiet failures behind AI products.",
     description:
-      "Production-minded AI infrastructure, evaluation, and orchestration grounded in Amazon work and open-source contributions across MCP, Anthropic's agent SDK, and adjacent agent ecosystems.",
+      "Concurrency bugs, evaluation noise, and agent-integration edge cases that decide whether AI systems actually work.",
     proofLine:
-      "Internal AI hackathon winner | OSS contributor across MCP and Anthropic agent tooling | Amazon | Accenture | PwC",
+      "Amazon PM | 6 fluent languages | published judge benchmark | fixes across LiteLLM, Vercel AI SDK, MCP, and CrewAI",
     buttons: [
       {
         label: "View GitHub",
@@ -57,7 +57,7 @@ export const siteContent = {
       {
         icon: "languages",
         label: "Languages",
-        value: "6 spoken fluently"
+        value: "6 fluent | PT + DE at B2"
       },
       {
         icon: "certificate",
@@ -68,18 +68,17 @@ export const siteContent = {
     snapshot: {
       imageSrc: "/portrait-night.png",
       imageAlt: "Portrait of Joaquin Hui Gomez",
-      title: "Program Manager at Amazon",
+      title: "Amazon Program Manager",
       location: "London, United Kingdom",
       blurb:
-        "Non-traditional on paper, technical in practice: cloud, analytics, evaluation, orchestration, and production automation."
+        "Working across SDE and research teams on experimentation, orchestration, and AI-driven operational systems."
     },
     intro:
-      "I'm Joaquin Hui Gomez, a London-based Program Manager at Amazon focused on making AI systems reliable, measurable, and genuinely useful in practice. My route into this work runs through strategy, law, consulting, operations, and hands-on automation, which is why I care about systems that hold up beyond the demo.",
+      "Fluent: Cantonese, Mandarin, Taiwanese, English, Spanish, and French. Also Portuguese (B2) and German (B2).",
     credentials: [
-      "St. Gallen M.A. | magna cum laude",
+      "St. Gallen magna cum laude",
       "HKU LLB + BBA",
-      "Ex-Accenture and PwC",
-      "AI, cloud, and automation builder"
+      "Ex-Accenture | Ex-PwC"
     ]
   },
   stats: {
@@ -94,14 +93,14 @@ export const siteContent = {
   profile: {
     title: "About",
     body:
-      "I'm interested in making AI systems more reliable, measurable, and useful in practice. My work sits at the intersection of AI infrastructure, evaluation, and agent tooling: fair resource allocation, trustworthy judging, and orchestration systems that create measurable outcomes.",
+      "I care about the unglamorous AI infrastructure problems that decide whether a product actually works: concurrency, evaluation noise, protocol correctness, and operator usability.",
     chips: ["Amazon", "Accenture", "PwC", "St. Gallen", "HKU", "London"],
     notes: [
       {
         icon: "building",
         label: "Experience",
         detail:
-          "Amazon program management plus earlier cloud, automation, analytics, and digital transformation work at Accenture and PwC."
+          "Amazon PM with technical scope, plus earlier cloud, automation, and transformation work at Accenture and PwC."
       },
       {
         icon: "cap",
@@ -113,7 +112,7 @@ export const siteContent = {
         icon: "spark",
         label: "Builder DNA",
         detail:
-          "Built and ran a 3K+ user forum at age 9. The thread is the same now, just pointed at AI systems instead of early internet communities."
+          "Built and ran a 3K+ user forum at age 9. The instinct to build systems early has stayed constant."
       }
     ]
   },
@@ -121,11 +120,10 @@ export const siteContent = {
     eyebrow: "Research highlight",
     title: "St. Gallen thesis: generative AI for no-code and low-code systems",
     summary:
-      "At St. Gallen's SIM program, I focused on how generative AI can move from drafting assistance to governed, scalable system design. The work treated no-code and low-code development as a systems problem, not just a prompting exercise.",
+      "A systems view of generative AI in no-code and low-code development, built around LLMs, agents, and governance rather than prompt theater.",
     bullets: [
       "Proposed a triangle of LLMs, agents, and governance so speed does not come at the expense of rigor.",
-      "Built a pipeline that combined summary and prompt chaining, encoder-style semantic analysis, and a Pydantic-coordinated agent over 50K+ Reddit entries.",
-      "Used GPT-based summarization to surface emergent themes and actionable recommendations, while working well before these workflows became common portfolio boilerplate."
+      "Built a chained pipeline over 50K+ Reddit entries using summarization, encoder-style analysis, and a Pydantic-coordinated agent."
     ],
     stats: [
       { value: "50K+", label: "Reddit entries analyzed" },
@@ -139,12 +137,11 @@ export const siteContent = {
       title: "Token-Aware Rate Limiter",
       href: "https://github.com/joaquinhuigomez/token-aware-rate-limiter",
       description:
-        "A reference implementation for multi-tenant LLM rate limiting with atomic Redis token buckets, fairness metrics, and a real-time dashboard.",
+        "Multi-tenant LLM rate limiting with atomic Redis token buckets, fairness metrics, and a real-time dashboard.",
       highlights: [
         "atomic Redis Lua token bucket",
         "Jain's fairness index",
-        "real-time dashboard",
-        "designed for LLM API workloads"
+        "real-time dashboard"
       ]
     },
     {
@@ -152,12 +149,11 @@ export const siteContent = {
       title: "LLM Judge Calibrator",
       href: "https://github.com/joaquinhuigomez/llm-judge-calibrator",
       description:
-        "A framework for measuring judge reliability with position-swap evaluation, bias detection, and inter-rater consistency metrics.",
+        "Judge reliability tooling with position-swap evaluation, bias detection, and inter-rater consistency metrics.",
       highlights: [
         "position bias detection",
-        "verbosity and self-preference analysis",
-        "Cohen's kappa",
-        "publishable calibration reports"
+        "verbosity analysis",
+        "Cohen's kappa"
       ]
     },
     {
@@ -165,41 +161,40 @@ export const siteContent = {
       title: "Agent Eval",
       href: "https://github.com/joaquinhuigomez/agent-eval",
       description:
-        "A lightweight harness for comparing coding agents head-to-head on custom tasks with pass rate, cost, time, and consistency reporting.",
+        "A harness for comparing coding agents head-to-head on custom tasks with pass rate, cost, time, and consistency reporting.",
       highlights: [
         "YAML task definitions",
         "isolated execution",
-        "multi-agent comparison",
         "report generation"
       ]
     }
   ],
   openSource: {
     intro:
-      "I work on the AI infrastructure quality layer: the serving, evaluation, and integration problems that quietly determine whether AI products are actually reliable in production.",
+      "Open-source work focused on the AI infrastructure quality layer: serving, evaluation, and integration reliability.",
     statusNote:
-      "Status checked March 17, 2026. Public tools and benchmark artifacts are shipped; the upstream fixes below are submitted and pending maintainer review.",
+      "Status checked March 17, 2026. Public tools and benchmark artifacts are shipped; upstream PRs below are submitted and pending maintainer review.",
     narrative: {
-      title: "Portfolio narrative: AI Infrastructure Quality Layer",
+      title: "Why this work matters",
       body:
-        "The AI industry is shipping inference infrastructure faster than it can validate it. Teams depend on a shared open-source stack for routing, orchestration, serving, and tool integration, but reliability primitives have not kept pace with adoption.",
+        "AI companies are scaling routing, eval, and tool-use stacks faster than they are hardening them. I focus on the failure modes that quietly hit cost, quality, and debuggability.",
       commercial:
-        "If the rate limiter leaks, you cannot price predictably. If the eval pipeline carries noisy judges, you cannot trust regressions. If tool integrations silently drop data, agents fail in ways users cannot debug.",
+        "If the rate limiter leaks, you cannot price predictably. If the eval judge is noisy, you cannot trust model decisions. If tool integrations drop data, agents fail in ways users cannot debug.",
       failureModes: [
         {
           title: "Serving layer",
           detail:
-            "Rate limiters can look correct and still fail under concurrency. That turns a configuration ceiling into unpredictable spend and provider-throttling cascades."
+            "Concurrency bugs turn configured limits into unpredictable spend and provider-throttling cascades."
         },
         {
           title: "Evaluation layer",
           detail:
-            "Teams often treat LLM-as-judge systems as trustworthy by default. My published benchmark focuses on position bias and Cohen's kappa because agreement alone is not enough."
+            "LLM-as-judge pipelines look objective until you measure bias and consistency directly."
         },
         {
           title: "Integration layer",
           detail:
-            "MCP and tool-calling stacks still carry edge-case bugs that produce silent data loss, validator crashes, or protocol corruption at exactly the layer users struggle to inspect."
+            "Protocol bugs create silent data loss, validator crashes, and hard-to-debug agent behavior."
         }
       ]
     },
@@ -227,7 +222,7 @@ export const siteContent = {
     },
     shipped: {
       title: "Published and shipped",
-      note: "This work is already live today in public repos or benchmark artifacts.",
+      note: "Live today in public repos or benchmark artifacts.",
       items: [
         {
           target: "Published benchmark",
@@ -235,7 +230,8 @@ export const siteContent = {
           status: "Published",
           href: "https://github.com/joaquinhuigomez/llm-judge-calibrator/blob/master/benchmark/RESULTS.md",
           summary:
-            "Published cross-vendor calibration results with position-swap evaluation, Cohen's kappa, and a headline finding that GPT-4o-mini is highly order-sensitive as a cost-optimized judge."
+            "Cross-vendor judge calibration with position-swap evaluation and Cohen's kappa.",
+          tags: ["LLM eval", "Benchmarking", "Cohen's kappa", "Bias detection"]
         },
         {
           target: "Public tools",
@@ -243,37 +239,44 @@ export const siteContent = {
           status: "Shipped",
           href: "#projects",
           summary:
-            "Built token-aware-rate-limiter, llm-judge-calibrator, and agent-eval as working reference implementations before touching upstream infra code."
+            "Built token-aware-rate-limiter, llm-judge-calibrator, and agent-eval before touching upstream infra code.",
+          tags: ["Python", "TypeScript", "Redis", "Agent evaluation"]
         }
       ]
     },
     pending: {
       title: "Submitted upstream PRs",
-      note: "Checked March 17, 2026. These are open upstream and separated from shipped work intentionally.",
+      note: "Open upstream on March 17, 2026 and separated from shipped work intentionally.",
       items: [
         {
-          target: "Vercel AI SDK · 22.7k stars",
+          target: "Vercel AI SDK",
           title: "Prevent SSRF bypass via DNS rebinding",
           status: "Open PR",
           href: "https://github.com/vercel/ai/pull/13512",
           summary:
-            "Found and patched a DNS rebinding SSRF path in validateDownloadUrl, turning a quiet serving-layer security risk into a concrete upstream fix proposal."
+            "Found and patched a DNS rebinding SSRF path in validateDownloadUrl.",
+          stars: "22.7k",
+          tags: ["Security", "SSRF", "DNS rebinding", "TypeScript"]
         },
         {
-          target: "LiteLLM · 39.4k stars",
-          title: "Fix TOCTOU race in the TPM rate limiter",
+          target: "LiteLLM",
+          title: "Fix TOCTOU race in LiteLLM's token-per-minute limiter",
           status: "Open PR",
           href: "https://github.com/BerriAI/litellm/pull/23775",
           summary:
-            "Reserves estimated tokens pre-call so concurrent requests cannot all read zero and bypass the configured TPM ceiling under load."
+            "Reserves estimated tokens pre-call so concurrent requests cannot bypass the configured token ceiling under load.",
+          stars: "39.4k",
+          tags: ["Concurrency", "Rate limiting", "TOCTOU", "Python"]
         },
         {
-          target: "MCP servers · 81.3k stars",
+          target: "MCP servers",
           title: "Guard GitLab enterprise repository search against crashes",
           status: "Open PR",
           href: "https://github.com/modelcontextprotocol/servers/pull/3611",
           summary:
-            "Fixes an edge-case server response that can crash repository search and make MCP-backed enterprise integrations feel unreliable."
+            "Fixes an edge-case server response that can crash repository search on enterprise setups.",
+          stars: "81.3k",
+          tags: ["MCP", "GitLab", "Protocol reliability", "TypeScript"]
         },
         {
           target: "Anthropic Claude Agent SDK",
@@ -281,15 +284,18 @@ export const siteContent = {
           status: "Open PR",
           href: "https://github.com/anthropics/claude-agent-sdk-typescript/pull/235",
           summary:
-            "Moves ANTHROPIC_LOG=debug output to stderr so stdout remains valid JSON and the agent protocol does not corrupt itself during debugging."
+            "Moves debug output to stderr so stdout remains valid JSON during debugging.",
+          tags: ["Agent SDK", "JSON protocol", "Debugging", "TypeScript"]
         },
         {
-          target: "CrewAI · 46.3k stars",
+          target: "CrewAI",
           title: "Provider-agnostic tool schema for Bedrock and Gemini MCP tools",
           status: "Open PR",
           href: "https://github.com/crewAIInc/crewAI/pull/4912",
           summary:
-            "Improves provider portability so Bedrock and Gemini MCP tools behave more consistently instead of depending on provider-specific schema quirks."
+            "Improves provider portability for Bedrock and Gemini MCP tools.",
+          stars: "46.3k",
+          tags: ["Bedrock", "Gemini", "MCP", "Schema design"]
         }
       ]
     },
@@ -416,10 +422,10 @@ export const siteContent = {
     ]
   },
   caseStudy: {
-    title: "Case Study: Internal AI Hackathon Winner",
-    subtitle: "Amazon | TPM, applied AI, and production operations",
+    title: "'26 Amazon ATS Program AI Hackathon Most Innovative Solution",
+    subtitle: "Amazon PM | applied AI and production operations",
     summary:
-      "My Amazon work is most interesting where TPM, technical systems, and operational decision-making overlap: taking complex optimization workflows and making them easier to tune, safer to operate, and faster for business teams to learn from.",
+      "Amazon PM work with technical scope, partnering with SDEs and research scientists to make optimization and experimentation systems easier to operate and learn from.",
     award: "Most Innovative",
     impact: "1440 hours / year estimated savings",
     metrics: [
@@ -439,36 +445,15 @@ export const siteContent = {
         detail: "deterministic analysis on business-defined schemas"
       }
     ],
-    workstreams: [
-      {
-        icon: "network",
-        title: "MLOps-backed network optimization",
-        detail:
-          "Led SDE and research partners to introduce node-level parameters that trade extra truck expense against speed, while keeping delivery-promise compliance as a hard constraint. The program targeted annualized speed value on the order of $100M."
-      },
-      {
-        icon: "workflow",
-        title: "Simulation and experiment engine",
-        detail:
-          "Built an orchestration layer around Amazon's internal batch-simulation platform, with SQS-backed state handling, serverless analysis steps, deterministic ZIP preparation for 1-5 GB inputs, and LLM-assisted experiment setup."
-      },
-      {
-        icon: "analytics",
-        title: "Actuals over backtests",
-        detail:
-          "I rely on observed production metrics, not only backtest simulation, because the network changes continuously. That principle shaped the engine, the reporting layer, and the recommendation workflow used to shorten time-to-insight."
-      }
-    ],
     details: [
-      "Paired deterministic analysis with probabilistic LLM summaries for recommendations and next-step planning.",
-      "Used LLM chat as an interface for experiment intent, while keeping heavy file preparation and evaluation in explicit deterministic tooling.",
-      "The work transfers well to TPM / AI platform roles: experiment architecture, metric design, stakeholder alignment, and operator usability."
+      "Built a simulation and experiment layer that combined deterministic analysis with LLM-assisted planning and summaries.",
+      "Used actual production metrics, not only backtests, because the network changes continuously."
     ]
   },
   whyAi: {
-    title: "Why I care about AI systems",
+    title: "How I think about AI systems",
     body:
-      "Coming from strategy, law, consulting, and operations, I care less about model theater and more about whether an AI system can be trusted, measured, and owned by a real team.",
+      "Less model theater, more systems that can be trusted, measured, and owned by a real team.",
     principles: [
       {
         icon: "shield",
@@ -484,18 +469,13 @@ export const siteContent = {
         icon: "nodes",
         title: "Orchestration for outcomes",
         detail: "The useful AI work is often in the glue: routing, validation, fallback logic, and operational fit."
-      },
-      {
-        icon: "bridge",
-        title: "Technical depth with business context",
-        detail: "I like systems rigorous enough for engineers and legible enough for operators and decision-makers."
       }
     ]
   },
   contact: {
     title: "Contact, code, and outside work",
     body:
-      "GitHub is the best place to inspect current repos and PRs. LinkedIn gives the broader background. X and Instagram are intentionally lighter: more travel, photography, and life outside shipping systems.",
+      "GitHub is the best place to inspect current repos and PRs. LinkedIn gives the broader background. X and Instagram stay lighter.",
     links: [
       {
         label: "GitHub",
@@ -527,13 +507,15 @@ export const siteContent = {
     x: {
       title: "On X",
       body:
-        "A live view of my main page on X. It is deliberately less formal than the rest of the site.",
-      href: "https://twitter.com/ViajaryTragar"
+        "Travel, food, and a less formal side of me outside work.",
+      href: "https://twitter.com/ViajaryTragar",
+      handle: "@ViajaryTragar",
+      tags: ["Travel", "Food", "Languages"]
     },
     instagram: {
       title: "Outside work",
       body:
-        "Travel and photography are where I reset. These are pulled from some of the highest-liked public Instagram posts, kept intentionally secondary to the technical work.",
+        "Travel and photography are where I reset.",
       items: [
         {
           imageSrc: "/ig-vinicunca.jpg",
@@ -548,13 +530,6 @@ export const siteContent = {
           likes: "277 likes",
           meta: "Switzerland",
           href: "https://www.instagram.com/p/BrdtMgaAIZ5/"
-        },
-        {
-          imageSrc: "/ig-zermatt.jpg",
-          title: "Gornergrat",
-          likes: "256 likes",
-          meta: "Zermatt | Matterhorn",
-          href: "https://www.instagram.com/p/Br8YfDrhLJS/"
         }
       ]
     }

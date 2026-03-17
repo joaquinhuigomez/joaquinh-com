@@ -104,7 +104,7 @@ a {
 }
 
 .section {
-  padding: 1.25rem 0 4.25rem;
+  padding: 0.95rem 0 2.85rem;
 }
 
 .site-header {
@@ -174,7 +174,7 @@ a {
 }
 
 .hero {
-  padding-top: 4.1rem;
+  padding-top: 2.8rem;
 }
 
 .hero-layout,
@@ -187,7 +187,7 @@ a {
 }
 
 .hero-layout {
-  grid-template-columns: minmax(0, 1.06fr) minmax(340px, 0.94fr);
+  grid-template-columns: minmax(0, 1.22fr) minmax(260px, 0.72fr);
 }
 
 .hero-copy,
@@ -215,7 +215,7 @@ a {
 .hero-copy,
 .impact-panel,
 .contact-panel {
-  padding: 1.55rem;
+  padding: 1.15rem;
 }
 
 .hero-profile,
@@ -224,7 +224,7 @@ a {
 .github-panel,
 .quality-panel,
 .social-panel {
-  padding: 1.15rem;
+  padding: 0.95rem;
 }
 
 .stat-card,
@@ -233,7 +233,7 @@ a {
 .case-metric-card,
 .workstream-card,
 .principle-card {
-  padding: 1.15rem;
+  padding: 0.95rem;
 }
 
 .hero-copy {
@@ -262,6 +262,7 @@ a {
     linear-gradient(180deg, rgba(17, 37, 47, 0.98), rgba(10, 24, 31, 0.98)),
     var(--dark);
   border-color: rgba(255, 255, 255, 0.06);
+  align-self: start;
 }
 
 .x-panel {
@@ -350,13 +351,14 @@ a {
 }
 
 .hero h1 {
-  font-size: clamp(2.95rem, 7vw, 4.85rem);
-  max-width: 10ch;
+  font-size: clamp(1.45rem, 2.5vw, 1.9rem);
+  max-width: 18ch;
+  line-height: 1.15;
 }
 
 .section-header h2,
 .contact-panel h2 {
-  font-size: clamp(1.85rem, 4.2vw, 2.7rem);
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
 }
 
 .profile-title,
@@ -365,7 +367,7 @@ a {
 .github-panel h3,
 .social-panel h3,
 .impact-panel h2 {
-  font-size: clamp(1.45rem, 2.4vw, 2rem);
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
 }
 
 .hero-description,
@@ -403,9 +405,9 @@ a {
 .case-metric-card p,
 .social-head p,
 .instagram-copy p {
-  margin: 0.8rem 0 0;
-  font-size: 0.97rem;
-  line-height: 1.66;
+  margin: 0.55rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.52;
 }
 
 .fact-grid,
@@ -421,7 +423,8 @@ a {
 
 .fact-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin-top: 1.4rem;
+  gap: 0.65rem;
+  margin-top: 1rem;
 }
 
 .fact-card,
@@ -436,7 +439,7 @@ a {
 .fact-card,
 .profile-note {
   grid-template-columns: auto 1fr;
-  padding: 0.95rem;
+  padding: 0.75rem;
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.52);
   border: 1px solid rgba(16, 32, 42, 0.08);
@@ -478,7 +481,7 @@ a {
 
 .fact-value {
   margin: 0.18rem 0 0;
-  font-size: 0.98rem;
+  font-size: 0.92rem;
   font-weight: 700;
   line-height: 1.35;
 }
@@ -487,7 +490,7 @@ a {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: 1.45rem;
+  margin-top: 1rem;
 }
 
 .button {
@@ -533,12 +536,12 @@ a {
 }
 
 .proof-line {
-  margin: 1.2rem 0 0;
-  padding-top: 1rem;
+  margin: 0.9rem 0 0;
+  padding-top: 0.75rem;
   border-top: 1px solid var(--line);
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.78rem;
-  line-height: 1.7;
+  font-size: 0.72rem;
+  line-height: 1.55;
 }
 
 .portrait-frame {
@@ -546,6 +549,8 @@ a {
   overflow: hidden;
   border-radius: var(--radius-lg);
   aspect-ratio: 1 / 1;
+  width: min(100%, 220px);
+  margin: 0 auto;
   background:
     radial-gradient(circle at 18% 18%, rgba(181, 101, 66, 0.26), transparent 38%),
     radial-gradient(circle at 82% 14%, rgba(12, 90, 97, 0.24), transparent 34%),
@@ -575,7 +580,7 @@ a {
 }
 
 .profile-summary {
-  margin-top: 0.9rem;
+  margin-top: 0.65rem;
 }
 
 .credential-row,
@@ -588,7 +593,7 @@ a {
 }
 
 .credential-row {
-  margin-top: 1rem;
+  margin-top: 0.65rem;
 }
 
 .credential-chip,
@@ -602,7 +607,7 @@ a {
   border-radius: 999px;
   border: 1px solid rgba(16, 32, 42, 0.08);
   background: rgba(255, 255, 255, 0.56);
-  font-size: 0.8rem;
+  font-size: 0.74rem;
   font-weight: 600;
 }
 
@@ -614,13 +619,13 @@ a {
 
 .section-header {
   display: grid;
-  gap: 0.65rem;
+  gap: 0.45rem;
   max-width: 42rem;
-  margin-bottom: 1.3rem;
+  margin-bottom: 0.9rem;
 }
 
 .section-header-compact {
-  margin-bottom: 1.15rem;
+  margin-bottom: 0.8rem;
 }
 
 .section-copy {
@@ -629,7 +634,7 @@ a {
 
 .section-note {
   margin: 0;
-  font-size: 0.84rem;
+  font-size: 0.74rem;
   color: var(--muted);
 }
 
@@ -638,12 +643,12 @@ a {
 }
 
 .stat-card {
-  min-height: 9.2rem;
+  min-height: 7.2rem;
   background: var(--paper-strong);
 }
 
 .stat-value {
-  font-size: clamp(1.95rem, 4vw, 2.7rem);
+  font-size: clamp(1.5rem, 3vw, 2rem);
   line-height: 1;
   font-weight: 700;
 }
@@ -656,8 +661,8 @@ a {
 
 .stat-detail {
   margin: 0.58rem 0 0;
-  font-size: 0.88rem;
-  line-height: 1.55;
+  font-size: 0.78rem;
+  line-height: 1.45;
 }
 
 .profile-grid {
@@ -679,18 +684,18 @@ a {
 
 .profile-note-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: 1rem;
+  margin-top: 0.75rem;
 }
 
 .mini-metric-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: 1rem;
+  margin-top: 0.75rem;
 }
 
 .mini-metric {
   display: grid;
   gap: 0.35rem;
-  padding: 0.85rem;
+  padding: 0.7rem;
   border-radius: var(--radius-sm);
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(16, 32, 42, 0.08);
@@ -754,28 +759,27 @@ a {
 .workstream-card h3,
 .principle-card h3,
 .case-metric-card h3 {
-  font-size: 1.22rem;
+  font-size: 1.02rem;
   line-height: 1.1;
 }
 
 .card-description {
-  margin-top: 0.8rem;
+  margin-top: 0.55rem;
 }
 
-.highlight-list,
 .detail-list {
-  margin: 0.95rem 0 0;
-  padding-left: 1.1rem;
+  margin: 0.75rem 0 0;
+  padding-left: 1rem;
 }
 
-.highlight-list li,
 .detail-list li {
-  margin-top: 0.45rem;
-  line-height: 1.55;
+  margin-top: 0.32rem;
+  line-height: 1.45;
 }
 
 .open-layout {
   grid-template-columns: minmax(270px, 0.78fr) minmax(0, 1.22fr);
+  align-items: start;
 }
 
 .open-main {
@@ -791,7 +795,7 @@ a {
 
 .quality-panel h3,
 .subsection-head h3 {
-  font-size: 1.22rem;
+  font-size: 1rem;
   line-height: 1.12;
 }
 
@@ -802,12 +806,12 @@ a {
 .quality-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.8rem;
-  margin-top: 1rem;
+  gap: 0.6rem;
+  margin-top: 0.7rem;
 }
 
 .failure-card {
-  padding: 0.95rem;
+  padding: 0.7rem;
   border-radius: var(--radius-md);
   border: 1px solid rgba(16, 32, 42, 0.08);
   background: rgba(255, 255, 255, 0.56);
@@ -815,7 +819,7 @@ a {
 
 .failure-card h4 {
   margin: 0;
-  font-size: 0.98rem;
+  font-size: 0.88rem;
   line-height: 1.25;
 }
 
@@ -829,7 +833,7 @@ a {
 }
 
 .quality-commercial {
-  margin-top: 1rem;
+  margin-top: 0.7rem;
   font-weight: 600;
 }
 
@@ -853,6 +857,10 @@ a {
 .shipped-grid,
 .pending-grid,
 .extended-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.shipped-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -872,7 +880,7 @@ a {
 .mini-link {
   grid-template-columns: auto 1fr;
   align-items: center;
-  padding: 0.7rem 0.85rem;
+  padding: 0.6rem 0.75rem;
   border-radius: var(--radius-sm);
   text-decoration: none;
   background: rgba(255, 255, 255, 0.06);
@@ -885,17 +893,77 @@ a {
 }
 
 .contribution-meta {
-  align-items: flex-start;
+  align-items: center;
+}
+
+.contribution-meta-top {
+  justify-content: space-between;
+}
+
+.contribution-source {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.contribution-target {
+  color: var(--accent-strong);
+}
+
+.star-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  min-height: 1.55rem;
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(255, 248, 230, 0.9);
+  border: 1px solid rgba(181, 101, 66, 0.18);
+  color: #7a4c18;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.star-icon svg {
+  width: 0.82rem;
+  height: 0.82rem;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.project-tag-row,
+.contribution-tag-row,
+.social-tag-row {
+  margin-top: 0.55rem;
+}
+
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.45rem;
+  padding: 0.18rem 0.48rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(16, 32, 42, 0.08);
+  color: var(--ink-soft);
+  font-size: 0.7rem;
+  font-weight: 600;
 }
 
 .toggle-wrap {
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
+  margin-top: 0.7rem;
 }
 
 .case-study-layout {
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 0.8rem;
 }
 
 .impact-panel {
@@ -914,7 +982,7 @@ a {
 }
 
 .impact-highlight-row {
-  margin-top: 0.9rem;
+  margin-top: 0.65rem;
 }
 
 .highlight-pill {
@@ -932,7 +1000,7 @@ a {
 }
 
 .metric-value-small {
-  font-size: 1.45rem;
+  font-size: 1.2rem;
   font-weight: 700;
   line-height: 1.15;
 }
@@ -942,24 +1010,21 @@ a {
   font-size: 0.9rem;
 }
 
-.workstream-grid,
 .principle-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: 1rem;
+  margin-top: 0.75rem;
 }
 
 .principle-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.workstream-card:nth-child(2),
 .principle-card:nth-child(2n) {
   background:
     linear-gradient(180deg, rgba(255, 248, 241, 0.98), rgba(255, 252, 248, 0.96)),
     var(--paper);
 }
 
-.workstream-card:nth-child(3),
 .principle-card:nth-child(3n) {
   background:
     linear-gradient(180deg, rgba(246, 252, 252, 0.98), rgba(255, 251, 247, 0.94)),
@@ -967,7 +1032,7 @@ a {
 }
 
 .contact-section {
-  padding-bottom: 5.6rem;
+  padding-bottom: 3.6rem;
 }
 
 .contact-shell {
@@ -981,10 +1046,14 @@ a {
   gap: 0.9rem;
 }
 
+.social-stack {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .contact-link {
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  padding: 0.9rem 1rem;
+  padding: 0.7rem 0.85rem;
   border-radius: var(--radius-md);
   border: 1px solid rgba(16, 32, 42, 0.08);
   background: rgba(255, 255, 255, 0.58);
@@ -1035,64 +1104,34 @@ a {
   max-width: 30rem;
 }
 
-.embed-shell {
-  margin-top: 0.85rem;
-  min-height: 390px;
+.x-profile-card {
+  margin-top: 0.75rem;
+  padding: 0.8rem;
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.62);
   border: 1px solid rgba(16, 32, 42, 0.08);
-  overflow: hidden;
+  background: rgba(255, 255, 255, 0.58);
 }
 
-.twitter-timeline {
-  display: block;
-  width: 100%;
-  min-height: 390px;
-  padding: 1rem;
-  color: var(--ink-soft);
-  text-decoration: none;
+.x-profile-card strong {
+  font-size: 0.94rem;
 }
 
-.carousel-toolbar {
-  display: flex;
-  gap: 0.45rem;
-}
-
-.carousel-button {
-  display: inline-grid;
-  place-items: center;
-  width: 2.2rem;
-  height: 2.2rem;
-  padding: 0;
-  border: 1px solid rgba(16, 32, 42, 0.12);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.7);
-  color: var(--ink);
-  cursor: pointer;
-  transition:
-    transform 180ms ease,
-    border-color 180ms ease;
-}
-
-.carousel-button:hover,
-.carousel-button:focus-visible {
-  transform: translateY(-2px);
-  border-color: rgba(12, 90, 97, 0.28);
+.x-profile-card p {
+  margin-top: 0.35rem;
 }
 
 .instagram-track {
   display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(220px, 1fr);
-  gap: 0.8rem;
-  margin-top: 0.9rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+}
+
+.instagram-track-static {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  overflow: visible;
 }
 
 .instagram-card {
-  scroll-snap-align: start;
   overflow: hidden;
   border-radius: var(--radius-md);
   border: 1px solid rgba(16, 32, 42, 0.08);
@@ -1101,12 +1140,12 @@ a {
 
 .instagram-media img {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
 }
 
 .instagram-copy {
-  padding: 0.85rem;
+  padding: 0.65rem;
 }
 
 .instagram-meta-row {
@@ -1119,7 +1158,7 @@ a {
 
 .instagram-copy p {
   margin-top: 0.35rem;
-  font-size: 0.84rem;
+  font-size: 0.76rem;
 }
 
 .site-footer {
@@ -1159,7 +1198,7 @@ a {
 
   .profile-note-grid,
   .mini-metric-grid,
-  .workstream-grid {
+  .social-stack {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -1182,7 +1221,7 @@ a {
   .shipped-grid,
   .pending-grid,
   .extended-grid,
-  .workstream-grid,
+  .social-stack,
   .principle-grid {
     grid-template-columns: 1fr;
   }
@@ -1218,7 +1257,7 @@ a {
   }
 
   .hero h1 {
-    font-size: clamp(2.45rem, 16vw, 3.5rem);
+    font-size: clamp(1.28rem, 6vw, 1.6rem);
   }
 
   .button-row,
@@ -1238,7 +1277,7 @@ a {
     grid-template-columns: 1fr;
   }
 
-  .instagram-track {
-    grid-auto-columns: 82%;
+  .portrait-frame {
+    width: min(100%, 180px);
   }
 }

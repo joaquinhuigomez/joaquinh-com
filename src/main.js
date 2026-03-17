@@ -32,6 +32,11 @@ const iconMap = {
       <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
     </svg>
   `,
+  star: `
+    <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+      <path d="m12 3.8 2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4-3.9-3.8 5.4-.8Z" />
+    </svg>
+  `,
   mail: `
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
       <rect x="3" y="5" width="18" height="14" rx="2" />
@@ -312,20 +317,34 @@ const renderProject = (project) => `
       </a>
     </div>
     <p class="card-description">${project.description}</p>
-    <ul class="highlight-list">
-      ${project.highlights.map((highlight) => `<li>${highlight}</li>`).join("")}
-    </ul>
+    <div class="tag-row project-tag-row">
+      ${project.highlights.map((highlight) => `<span class="tag-chip">${highlight}</span>`).join("")}
+    </div>
   </article>
 `;
 
 const renderContribution = (item) => `
   <article class="contribution-card">
-    <div class="contribution-meta">
-      <span class="contribution-target">${item.target}</span>
+    <div class="contribution-meta contribution-meta-top">
+      <div class="contribution-source">
+        <span class="contribution-target">${item.target}</span>
+        ${
+          item.stars
+            ? `<span class="star-pill">${renderIcon("star", "star-icon")}<span>${item.stars}</span></span>`
+            : ""
+        }
+      </div>
       <span class="contribution-status">${item.status}</span>
     </div>
     <h3>${item.title}</h3>
     <p>${item.summary}</p>
+    ${
+      item.tags?.length
+        ? `<div class="tag-row contribution-tag-row">${item.tags
+            .map((tag) => `<span class="tag-chip">${tag}</span>`)
+            .join("")}</div>`
+        : ""
+    }
     <a class="inline-link" href="${item.href}" target="_blank" rel="noreferrer">
       Open link
     </a>
@@ -457,8 +476,8 @@ const render = () => {
               <div class="profile-summary">
                 <p class="intro-kicker">Profile snapshot</p>
                 <h2 class="profile-title">${siteContent.hero.snapshot.title}</h2>
-                <p class="intro-copy">${siteContent.hero.intro}</p>
                 <p class="profile-blurb">${siteContent.hero.snapshot.blurb}</p>
+                <p class="intro-copy">${siteContent.hero.intro}</p>
                 <div class="credential-row">
                   ${siteContent.hero.credentials
                     .map((credential) => `<span class="credential-chip">${credential}</span>`)
@@ -518,11 +537,8 @@ const render = () => {
         <section id="projects" class="section">
           <div class="container">
             <div class="section-header section-header-compact" data-reveal>
-              <p class="section-eyebrow">Flagship projects</p>
-              <h2>Three projects that define the portfolio</h2>
-              <p class="section-copy">
-                The throughline is consistent: make AI systems fairer, easier to trust, and easier to compare in practice.
-              </p>
+              <p class="section-eyebrow">Projects</p>
+              <h2>Key Projects</h2>
             </div>
 
             <div class="project-grid">
@@ -534,8 +550,8 @@ const render = () => {
         <section id="open-source" class="section">
           <div class="container">
             <div class="section-header section-header-compact" data-reveal>
-              <p class="section-eyebrow">Open-source contributions</p>
-              <h2>Selected contributions</h2>
+              <p class="section-eyebrow">Open source</p>
+              <h2>Git / OpenSource Contributions</h2>
               <p class="section-copy">${siteContent.openSource.intro}</p>
               <p class="section-note">${siteContent.openSource.statusNote}</p>
             </div>
@@ -641,10 +657,6 @@ const render = () => {
                 ${siteContent.caseStudy.metrics.map(renderCaseMetric).join("")}
               </div>
             </div>
-
-            <div class="workstream-grid">
-              ${siteContent.caseStudy.workstreams.map(renderWorkstream).join("")}
-            </div>
           </div>
         </section>
 
@@ -690,21 +702,16 @@ const render = () => {
                     Open profile
                   </a>
                 </div>
-                <div class="embed-shell">
-                  <a
-                    class="twitter-timeline"
-                    data-dnt="true"
-                    data-theme="light"
-                    data-height="390"
-                    data-chrome="noheader nofooter noborders transparent"
-                    href="${siteContent.social.x.href}"
-                  >
-                    Tweets by ViajaryTragar
-                  </a>
+                <div class="x-profile-card">
+                  <strong>${siteContent.social.x.handle}</strong>
+                  <p>${siteContent.social.x.body}</p>
+                  <div class="tag-row social-tag-row">
+                    ${siteContent.social.x.tags.map((tag) => `<span class="tag-chip">${tag}</span>`).join("")}
+                  </div>
                 </div>
               </article>
 
-              <article class="social-panel instagram-panel" data-reveal data-carousel>
+              <article class="social-panel instagram-panel" data-reveal>
                 <div class="social-head">
                   <div class="social-title-row">
                     ${renderIcon("instagram")}
@@ -713,18 +720,12 @@ const render = () => {
                       <p>${siteContent.social.instagram.body}</p>
                     </div>
                   </div>
-
-                  <div class="carousel-toolbar">
-                    <button class="carousel-button" type="button" data-carousel-prev aria-label="Previous slide">
-                      ${renderIcon("chevronLeft")}
-                    </button>
-                    <button class="carousel-button" type="button" data-carousel-next aria-label="Next slide">
-                      ${renderIcon("chevronRight")}
-                    </button>
-                  </div>
+                  <a class="inline-link" href="https://www.instagram.com/kinaventurero" target="_blank" rel="noreferrer">
+                    Open profile
+                  </a>
                 </div>
 
-                <div class="instagram-track" data-carousel-track>
+                <div class="instagram-track instagram-track-static">
                   ${siteContent.social.instagram.items.map(renderInstagramItem).join("")}
                 </div>
               </article>
@@ -764,61 +765,7 @@ const initReveal = () => {
   revealItems.forEach((item) => item.classList.add("is-visible"));
 };
 
-const initCarousel = () => {
-  document.querySelectorAll("[data-carousel]").forEach((carousel) => {
-    const track = carousel.querySelector("[data-carousel-track]");
-    const previous = carousel.querySelector("[data-carousel-prev]");
-    const next = carousel.querySelector("[data-carousel-next]");
-
-    if (!track || !previous || !next) {
-      return;
-    }
-
-    const getStep = () => {
-      const card = track.querySelector(".instagram-card");
-      if (!card) {
-        return track.clientWidth * 0.9;
-      }
-
-      const styles = window.getComputedStyle(track);
-      const gap = parseFloat(styles.columnGap || styles.gap || "20");
-      return card.getBoundingClientRect().width + gap;
-    };
-
-    previous.addEventListener("click", () => {
-      track.scrollBy({ left: -getStep(), behavior: "smooth" });
-    });
-
-    next.addEventListener("click", () => {
-      track.scrollBy({ left: getStep(), behavior: "smooth" });
-    });
-  });
-};
-
-const initTwitterEmbeds = () => {
-  if (!document.querySelector(".twitter-timeline")) {
-    return;
-  }
-
-  if (window.twttr?.widgets) {
-    window.twttr.widgets.load();
-    return;
-  }
-
-  if (document.querySelector('script[data-widget-script="x"]')) {
-    return;
-  }
-
-  const script = document.createElement("script");
-  script.async = true;
-  script.src = "https://platform.twitter.com/widgets.js";
-  script.dataset.widgetScript = "x";
-  document.body.append(script);
-};
-
 setMeta();
 render();
 initContributionToggle();
 initReveal();
-initCarousel();
-initTwitterEmbeds();
