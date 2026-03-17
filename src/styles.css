@@ -197,6 +197,7 @@ a {
 .thesis-panel,
 .project-card,
 .github-panel,
+.quality-panel,
 .contribution-card,
 .impact-panel,
 .case-metric-card,
@@ -221,6 +222,7 @@ a {
 .bio-panel,
 .thesis-panel,
 .github-panel,
+.quality-panel,
 .social-panel {
   padding: 1.15rem;
 }
@@ -368,6 +370,7 @@ a {
 
 .hero-description,
 .section-copy,
+.section-note,
 .card-description,
 .contribution-card p,
 .impact-panel p,
@@ -387,6 +390,7 @@ a {
 
 .hero-description,
 .section-copy,
+.section-note,
 .intro-copy,
 .profile-blurb,
 .card-description,
@@ -622,6 +626,12 @@ a {
   margin: 0;
 }
 
+.section-note {
+  margin: 0;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
 .stat-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
@@ -767,7 +777,80 @@ a {
   grid-template-columns: minmax(270px, 0.78fr) minmax(0, 1.22fr);
 }
 
-.featured-grid,
+.open-main {
+  display: grid;
+  gap: 1rem;
+}
+
+.quality-panel {
+  background:
+    linear-gradient(180deg, rgba(248, 252, 252, 0.98), rgba(255, 248, 241, 0.96)),
+    var(--paper);
+}
+
+.quality-panel h3,
+.subsection-head h3 {
+  font-size: 1.22rem;
+  line-height: 1.12;
+}
+
+.quality-panel .section-copy {
+  margin-top: 0.75rem;
+}
+
+.quality-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.failure-card {
+  padding: 0.95rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(16, 32, 42, 0.08);
+  background: rgba(255, 255, 255, 0.56);
+}
+
+.failure-card h4 {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.25;
+}
+
+.failure-card p,
+.subsection-head p,
+.quality-commercial {
+  margin: 0.55rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.quality-commercial {
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.open-subsection {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.subsection-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.subsection-head p {
+  max-width: 28rem;
+  margin: 0;
+}
+
+.shipped-grid,
+.pending-grid,
 .extended-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -1065,7 +1148,9 @@ a {
 
   .stat-grid,
   .project-grid,
-  .featured-grid,
+  .quality-grid,
+  .shipped-grid,
+  .pending-grid,
   .extended-grid,
   .principle-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1092,7 +1177,9 @@ a {
   .profile-note-grid,
   .mini-metric-grid,
   .project-grid,
-  .featured-grid,
+  .quality-grid,
+  .shipped-grid,
+  .pending-grid,
   .extended-grid,
   .workstream-grid,
   .principle-grid {
@@ -1100,6 +1187,7 @@ a {
   }
 
   .social-head,
+  .subsection-head,
   .card-heading-row,
   .contribution-meta,
   .footer-inner {

@@ -332,6 +332,13 @@ const renderContribution = (item) => `
   </article>
 `;
 
+const renderFailureMode = (item) => `
+  <article class="failure-card">
+    <h4>${item.title}</h4>
+    <p>${item.detail}</p>
+  </article>
+`;
+
 const renderGithubLink = (item) => `
   <a class="mini-link" href="${item.href}" target="_blank" rel="noreferrer">
     ${renderIcon(item.icon)}
@@ -530,6 +537,7 @@ const render = () => {
               <p class="section-eyebrow">Open-source contributions</p>
               <h2>Selected contributions</h2>
               <p class="section-copy">${siteContent.openSource.intro}</p>
+              <p class="section-note">${siteContent.openSource.statusNote}</p>
             </div>
 
             <div class="open-layout">
@@ -549,8 +557,44 @@ const render = () => {
               </aside>
 
               <div class="open-main">
-                <div class="contribution-grid featured-grid">
-                  ${siteContent.openSource.featured.map(renderContribution).join("")}
+                <article class="quality-panel" data-reveal>
+                  <p class="card-topline">Portfolio narrative</p>
+                  <h3>${siteContent.openSource.narrative.title}</h3>
+                  <p class="section-copy">${siteContent.openSource.narrative.body}</p>
+
+                  <div class="quality-grid">
+                    ${siteContent.openSource.narrative.failureModes.map(renderFailureMode).join("")}
+                  </div>
+
+                  <p class="quality-commercial">${siteContent.openSource.narrative.commercial}</p>
+                </article>
+
+                <div class="open-subsection" data-reveal>
+                  <div class="subsection-head">
+                    <div>
+                      <p class="section-eyebrow">Published / shipped</p>
+                      <h3>${siteContent.openSource.shipped.title}</h3>
+                    </div>
+                    <p>${siteContent.openSource.shipped.note}</p>
+                  </div>
+
+                  <div class="contribution-grid shipped-grid">
+                    ${siteContent.openSource.shipped.items.map(renderContribution).join("")}
+                  </div>
+                </div>
+
+                <div class="open-subsection" data-reveal>
+                  <div class="subsection-head">
+                    <div>
+                      <p class="section-eyebrow">Pending upstream</p>
+                      <h3>${siteContent.openSource.pending.title}</h3>
+                    </div>
+                    <p>${siteContent.openSource.pending.note}</p>
+                  </div>
+
+                  <div class="contribution-grid pending-grid">
+                    ${siteContent.openSource.pending.items.map(renderContribution).join("")}
+                  </div>
                 </div>
 
                 <div class="toggle-wrap" data-reveal>

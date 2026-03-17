@@ -176,7 +176,33 @@ export const siteContent = {
   ],
   openSource: {
     intro:
-      "I contribute targeted fixes and improvements to AI infrastructure and agent ecosystems, especially where reliability, protocol correctness, and developer ergonomics matter.",
+      "I work on the AI infrastructure quality layer: the serving, evaluation, and integration problems that quietly determine whether AI products are actually reliable in production.",
+    statusNote:
+      "Status checked March 17, 2026. Public tools and benchmark artifacts are shipped; the upstream fixes below are submitted and pending maintainer review.",
+    narrative: {
+      title: "Portfolio narrative: AI Infrastructure Quality Layer",
+      body:
+        "The AI industry is shipping inference infrastructure faster than it can validate it. Teams depend on a shared open-source stack for routing, orchestration, serving, and tool integration, but reliability primitives have not kept pace with adoption.",
+      commercial:
+        "If the rate limiter leaks, you cannot price predictably. If the eval pipeline carries noisy judges, you cannot trust regressions. If tool integrations silently drop data, agents fail in ways users cannot debug.",
+      failureModes: [
+        {
+          title: "Serving layer",
+          detail:
+            "Rate limiters can look correct and still fail under concurrency. That turns a configuration ceiling into unpredictable spend and provider-throttling cascades."
+        },
+        {
+          title: "Evaluation layer",
+          detail:
+            "Teams often treat LLM-as-judge systems as trustworthy by default. My published benchmark focuses on position bias and Cohen's kappa because agreement alone is not enough."
+        },
+        {
+          title: "Integration layer",
+          detail:
+            "MCP and tool-calling stacks still carry edge-case bugs that produce silent data loss, validator crashes, or protocol corruption at exactly the layer users struggle to inspect."
+        }
+      ]
+    },
     githubPanel: {
       title: "GitHub is the live proof layer",
       body:
@@ -199,21 +225,75 @@ export const siteContent = {
         }
       ]
     },
-    featured: [
-      {
-        target: "Anthropic Agent SDK",
-        title: "Fix debug logging corrupting JSON protocol",
-        status: "Open PR",
-        href: "https://github.com/anthropics/claude-agent-sdk-typescript/pull/235",
-        summary: "Routes debug output to stderr so JSON protocol traffic is not corrupted."
-      },
-      {
-        target: "MCP servers",
-        title: "Fix GitLab enterprise search crash",
-        status: "Open PR",
-        href: "https://github.com/modelcontextprotocol/servers/pull/3611",
-        summary: "Guards GitLab repository search against undefined responses on enterprise instances."
-      },
+    shipped: {
+      title: "Published and shipped",
+      note: "This work is already live today in public repos or benchmark artifacts.",
+      items: [
+        {
+          target: "Published benchmark",
+          title: "6-model judge reliability benchmark with Cohen's kappa",
+          status: "Published",
+          href: "https://github.com/joaquinhuigomez/llm-judge-calibrator/blob/master/benchmark/RESULTS.md",
+          summary:
+            "Published cross-vendor calibration results with position-swap evaluation, Cohen's kappa, and a headline finding that GPT-4o-mini is highly order-sensitive as a cost-optimized judge."
+        },
+        {
+          target: "Public tools",
+          title: "Three standalone reliability tools shipped in public",
+          status: "Shipped",
+          href: "#projects",
+          summary:
+            "Built token-aware-rate-limiter, llm-judge-calibrator, and agent-eval as working reference implementations before touching upstream infra code."
+        }
+      ]
+    },
+    pending: {
+      title: "Submitted upstream PRs",
+      note: "Checked March 17, 2026. These are open upstream and separated from shipped work intentionally.",
+      items: [
+        {
+          target: "Vercel AI SDK · 22.7k stars",
+          title: "Prevent SSRF bypass via DNS rebinding",
+          status: "Open PR",
+          href: "https://github.com/vercel/ai/pull/13512",
+          summary:
+            "Found and patched a DNS rebinding SSRF path in validateDownloadUrl, turning a quiet serving-layer security risk into a concrete upstream fix proposal."
+        },
+        {
+          target: "LiteLLM · 39.4k stars",
+          title: "Fix TOCTOU race in the TPM rate limiter",
+          status: "Open PR",
+          href: "https://github.com/BerriAI/litellm/pull/23775",
+          summary:
+            "Reserves estimated tokens pre-call so concurrent requests cannot all read zero and bypass the configured TPM ceiling under load."
+        },
+        {
+          target: "MCP servers · 81.3k stars",
+          title: "Guard GitLab enterprise repository search against crashes",
+          status: "Open PR",
+          href: "https://github.com/modelcontextprotocol/servers/pull/3611",
+          summary:
+            "Fixes an edge-case server response that can crash repository search and make MCP-backed enterprise integrations feel unreliable."
+        },
+        {
+          target: "Anthropic Claude Agent SDK",
+          title: "Route debug output away from the JSON protocol stream",
+          status: "Open PR",
+          href: "https://github.com/anthropics/claude-agent-sdk-typescript/pull/235",
+          summary:
+            "Moves ANTHROPIC_LOG=debug output to stderr so stdout remains valid JSON and the agent protocol does not corrupt itself during debugging."
+        },
+        {
+          target: "CrewAI · 46.3k stars",
+          title: "Provider-agnostic tool schema for Bedrock and Gemini MCP tools",
+          status: "Open PR",
+          href: "https://github.com/crewAIInc/crewAI/pull/4912",
+          summary:
+            "Improves provider portability so Bedrock and Gemini MCP tools behave more consistently instead of depending on provider-specific schema quirks."
+        }
+      ]
+    },
+    extended: [
       {
         target: "MCP TypeScript SDK",
         title: "Skip structured content validation on error payloads",
@@ -222,21 +302,33 @@ export const siteContent = {
         summary: "Avoids client-side validation failures when tools correctly return error payloads."
       },
       {
-        target: "LiteLLM",
-        title: "Fix concurrent TPM bypass race condition",
-        status: "Open PR",
-        href: "https://github.com/BerriAI/litellm/pull/23775",
-        summary: "Reserves estimated tokens pre-call so concurrent requests cannot slip past the limiter."
-      },
-      {
         target: "FastChat",
         title: "Add judge consistency and position-bias metrics",
         status: "Open PR",
         href: "https://github.com/lm-sys/FastChat/pull/3810",
         summary: "Adds position-bias reporting and Cohen's kappa so llm_judge outputs are easier to trust."
-      }
-    ],
-    extended: [
+      },
+      {
+        target: "Mastra",
+        title: "Extract content from MCP tool responses without outputSchema",
+        status: "Open PR",
+        href: "https://github.com/mastra-ai/mastra/pull/14372",
+        summary: "Improves interoperability for MCP tools that omit explicit output schema definitions."
+      },
+      {
+        target: "Vercel AI SDK",
+        title: "Include full error object in chat SSE stream error chunks",
+        status: "Open PR",
+        href: "https://github.com/vercel/ai/pull/13511",
+        summary: "Improves observability when providers return structured error details in streaming responses."
+      },
+      {
+        target: "LangChain.js",
+        title: "Route Anthropic HumanMessage contentBlocks through the standard formatter",
+        status: "Open PR",
+        href: "https://github.com/langchain-ai/langchainjs/pull/10435",
+        summary: "Keeps Anthropic content blocks aligned with the framework's standard message formatting path."
+      },
       {
         target: "token-aware-rate-limiter",
         title: "Public reference implementation",
