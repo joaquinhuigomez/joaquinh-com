@@ -8,6 +8,7 @@ export const siteContent = {
   nav: [
     { label: "Profile", href: "#proof" },
     { label: "Projects", href: "#projects" },
+    { label: "Voice lab", href: "/labs/voice-workspace/" },
     { label: "Open source", href: "#open-source" },
     { label: "Amazon", href: "#case-study" },
     { label: "Contact", href: "#contact" }
@@ -70,7 +71,7 @@ export const siteContent = {
         summary:
           "Public work focused on the quality layer underneath AI products: serving, evaluation, and tool integration.",
         bullets: [
-          "Fixed TOCTOU rate-limiter race conditions in LiteLLM",
+          "Merged an MCP tool-response interoperability fix in Mastra",
           "Patched SSRF DNS-rebinding exposure in the Vercel AI SDK",
           "Improved MCP and agent-SDK protocol reliability"
         ],
@@ -120,6 +121,13 @@ export const siteContent = {
         external: false,
         style: "secondary",
         icon: "spark"
+      },
+      {
+        label: "Voice workspace",
+        href: "/labs/voice-workspace/",
+        external: false,
+        style: "secondary",
+        icon: "workflow"
       },
       {
         label: "Contact",
@@ -172,7 +180,7 @@ export const siteContent = {
             },
             {
               id: "latam",
-              label: "LatAm",
+              label: "Latin America",
               subtitle: "Chile and Colombia",
               items: ["Pontificia Universidad Catolica de Chile", "Universidad de los Andes, Colombia"]
             },
@@ -248,7 +256,7 @@ export const siteContent = {
           bullets: [
             "Built AWS-native orchestration for long-running business experiments and simulation workflows",
             "Shipped Python and TypeScript tools for rate limiting, judge calibration, and agent evaluation",
-            "Contributed reliability fixes across Vercel AI SDK, LiteLLM, MCP servers, CrewAI, and Anthropic's agent SDK"
+            "Contributed reliability fixes across Vercel AI SDK, Mastra, MCP servers, CrewAI, OpenAI Agents, and Anthropic's agent SDK"
           ],
           tags: ["AWS", "Serverless", "Python", "TypeScript", "LLM eval", "AI infra"]
         }
@@ -273,11 +281,11 @@ export const siteContent = {
     ]
   },
   stats: {
-    verifiedOn: "Last verified March 17, 2026 from GitHub profile and open PR search.",
+    verifiedOn: "Last verified March 18, 2026 from GitHub profile and live PR search.",
     items: [
-      { value: "17+", label: "Contributions", detail: "public OSS and benchmark work" },
-      { value: "20", label: "Public repos", detail: "live GitHub profile count" },
-      { value: "15", label: "Open PRs", detail: "active upstream contributions" },
+      { value: "41", label: "PRs authored", detail: "public GitHub PR history" },
+      { value: "45", label: "Public repos", detail: "live GitHub profile count" },
+      { value: "32", label: "Open PRs", detail: "active upstream contributions" },
       { value: "1440", label: "Hours / year", detail: "estimated internal ops impact" }
     ]
   },
@@ -343,6 +351,20 @@ export const siteContent = {
   },
   projects: [
     {
+      icon: "workflow",
+      title: "Multilingual Voice Workspace",
+      href: "/labs/voice-workspace/",
+      external: false,
+      ctaLabel: "Open lab",
+      description:
+        "A premium multilingual speech-to-draft workspace with raw transcript preservation, uncertainty surfacing, and controlled rewrite, translation, and prompt-generation modes.",
+      highlights: [
+        "raw vs processed separation",
+        "uncertainty flags",
+        "correction logging"
+      ]
+    },
+    {
       icon: "rate",
       title: "Token-Aware Rate Limiter",
       href: "https://github.com/joaquinhuigomez/token-aware-rate-limiter",
@@ -383,7 +405,7 @@ export const siteContent = {
     intro:
       "Open-source work focused on the AI infrastructure quality layer: serving, evaluation, and integration reliability.",
     statusNote:
-      "Status checked March 17, 2026. Public tools and benchmark artifacts are shipped; upstream PRs below are submitted and pending maintainer review.",
+      "Status checked March 18, 2026. Merged upstream work, public tools, and still-open PRs are separated intentionally.",
     narrative: {
       title: "Why this work matters",
       body:
@@ -413,9 +435,9 @@ export const siteContent = {
       body:
         "The fastest way to inspect current work is GitHub: public repos, upstream PRs, benchmark artifacts, and protocol-level fixes that show how I think about reliability.",
       metrics: [
-        { value: "20", label: "Public repos" },
-        { value: "15", label: "Open PRs" },
-        { value: "17+", label: "Contributions" }
+        { value: "45", label: "Public repos" },
+        { value: "32", label: "Open PRs" },
+        { value: "41", label: "PRs authored" }
       ],
       links: [
         {
@@ -431,9 +453,19 @@ export const siteContent = {
       ]
     },
     shipped: {
-      title: "Published and shipped",
-      note: "Live today in public repos or benchmark artifacts.",
+      title: "Merged and shipped",
+      note: "Live today in public repos, benchmark artifacts, or merged upstream contributions.",
       items: [
+        {
+          target: "Mastra",
+          title: "Merged MCP tool-response interoperability fix",
+          status: "Merged Mar 18",
+          href: "https://github.com/mastra-ai/mastra/pull/14372",
+          summary:
+            "Extracts content from MCP tool responses without outputSchema so tool outputs do not disappear in agent flows.",
+          stars: "22.1k",
+          tags: ["Merged PR", "MCP", "Interoperability", "TypeScript"]
+        },
         {
           target: "Published benchmark",
           title: "6-model judge reliability benchmark with Cohen's kappa",
@@ -455,8 +487,8 @@ export const siteContent = {
       ]
     },
     pending: {
-      title: "Submitted upstream PRs",
-      note: "Open upstream on March 17, 2026 and separated from shipped work intentionally.",
+      title: "Selected live upstream PRs",
+      note: "Open upstream on March 18, 2026 after removing closed unsuccessful PRs from the page.",
       items: [
         {
           target: "Vercel AI SDK",
@@ -469,33 +501,14 @@ export const siteContent = {
           tags: ["Security", "SSRF", "DNS rebinding", "TypeScript"]
         },
         {
-          target: "LiteLLM",
-          title: "Fix TOCTOU race in LiteLLM's token-per-minute limiter",
-          status: "Open PR",
-          href: "https://github.com/BerriAI/litellm/pull/23775",
-          summary:
-            "Reserves estimated tokens pre-call so concurrent requests cannot bypass the configured token ceiling under load.",
-          stars: "39.4k",
-          tags: ["Concurrency", "Rate limiting", "TOCTOU", "Python"]
-        },
-        {
           target: "MCP servers",
           title: "Guard GitLab enterprise repository search against crashes",
           status: "Open PR",
           href: "https://github.com/modelcontextprotocol/servers/pull/3611",
           summary:
             "Fixes an edge-case server response that can crash repository search on enterprise setups.",
-          stars: "81.3k",
+          stars: "81.4k",
           tags: ["MCP", "GitLab", "Protocol reliability", "TypeScript"]
-        },
-        {
-          target: "Anthropic Claude Agent SDK",
-          title: "Route debug output away from the JSON protocol stream",
-          status: "Open PR",
-          href: "https://github.com/anthropics/claude-agent-sdk-typescript/pull/235",
-          summary:
-            "Moves debug output to stderr so stdout remains valid JSON during debugging.",
-          tags: ["Agent SDK", "JSON protocol", "Debugging", "TypeScript"]
         },
         {
           target: "CrewAI",
@@ -504,8 +517,28 @@ export const siteContent = {
           href: "https://github.com/crewAIInc/crewAI/pull/4912",
           summary:
             "Improves provider portability for Bedrock and Gemini MCP tools.",
-          stars: "46.3k",
+          stars: "46.5k",
           tags: ["Bedrock", "Gemini", "MCP", "Schema design"]
+        },
+        {
+          target: "OpenAI Agents Python",
+          title: "Preserve MCP and reasoning item types in remove_all_tools",
+          status: "Open PR",
+          href: "https://github.com/openai/openai-agents-python/pull/2700",
+          summary:
+            "Fixes missing MCP and reasoning item types so tool-removal flows do not silently lose information.",
+          stars: "20.1k",
+          tags: ["OpenAI Agents", "MCP", "Reasoning items", "Python"]
+        },
+        {
+          target: "LangChain.js",
+          title: "Route Anthropic content blocks through the standard formatter",
+          status: "Open PR",
+          href: "https://github.com/langchain-ai/langchainjs/pull/10435",
+          summary:
+            "Keeps Anthropic HumanMessage content blocks aligned with the framework's standard formatting path.",
+          stars: "17.3k",
+          tags: ["LangChain", "Anthropic", "Message formatting", "TypeScript"]
         }
       ]
     },
@@ -518,18 +551,11 @@ export const siteContent = {
         summary: "Avoids client-side validation failures when tools correctly return error payloads."
       },
       {
-        target: "FastChat",
-        title: "Add judge consistency and position-bias metrics",
+        target: "Anthropic Claude Agent SDK",
+        title: "Route debug output away from the JSON protocol stream",
         status: "Open PR",
-        href: "https://github.com/lm-sys/FastChat/pull/3810",
-        summary: "Adds position-bias reporting and Cohen's kappa so llm_judge outputs are easier to trust."
-      },
-      {
-        target: "Mastra",
-        title: "Extract content from MCP tool responses without outputSchema",
-        status: "Open PR",
-        href: "https://github.com/mastra-ai/mastra/pull/14372",
-        summary: "Improves interoperability for MCP tools that omit explicit output schema definitions."
+        href: "https://github.com/anthropics/claude-agent-sdk-typescript/pull/235",
+        summary: "Moves debug output to stderr so stdout remains valid JSON during debugging."
       },
       {
         target: "Vercel AI SDK",
@@ -539,95 +565,74 @@ export const siteContent = {
         summary: "Improves observability when providers return structured error details in streaming responses."
       },
       {
-        target: "LangChain.js",
-        title: "Route Anthropic HumanMessage contentBlocks through the standard formatter",
+        target: "FastChat",
+        title: "Add judge consistency and position-bias metrics",
         status: "Open PR",
-        href: "https://github.com/langchain-ai/langchainjs/pull/10435",
-        summary: "Keeps Anthropic content blocks aligned with the framework's standard message formatting path."
+        href: "https://github.com/lm-sys/FastChat/pull/3810",
+        summary: "Adds position-bias reporting and Cohen's kappa so llm_judge outputs are easier to trust."
       },
       {
-        target: "token-aware-rate-limiter",
-        title: "Public reference implementation",
-        status: "Public repo",
-        href: "https://github.com/joaquinhuigomez/token-aware-rate-limiter",
-        summary: "Standalone LLM rate limiting system with fairness metrics and live observability."
-      },
-      {
-        target: "llm-judge-calibrator",
-        title: "Public judge calibration framework",
-        status: "Public repo",
-        href: "https://github.com/joaquinhuigomez/llm-judge-calibrator",
-        summary: "Bias detection and judge-reliability reporting packaged as a lightweight tool."
-      },
-      {
-        target: "agent-eval",
-        title: "Public coding-agent comparison harness",
-        status: "Public repo",
-        href: "https://github.com/joaquinhuigomez/agent-eval",
-        summary: "Compares coding agents on custom tasks with pass rate, cost, time, and consistency."
-      },
-      {
-        target: "LiteLLM",
-        title: "Propose Jain's fairness index for team-level rate limiting",
-        status: "Proposal",
-        href: "https://github.com/BerriAI/litellm/issues/20996#issuecomment-4070259346",
-        summary: "Suggested a fairness metric grounded in the token-aware rate-limiting work."
-      },
-      {
-        target: "Awesome-LLMOps",
-        title: "Add token-aware-rate-limiter to curated list",
+        target: "Continue",
+        title: "Fix Ollama MCP tool calling for Mistral and Gemma3 models",
         status: "Open PR",
-        href: "https://github.com/tensorchord/Awesome-LLMOps/pull/299",
-        summary: "Placed the project in a larger LLMOps discovery ecosystem."
+        href: "https://github.com/continuedev/continue/pull/11523",
+        summary: "Improves tool-calling compatibility for newer Ollama-served models."
       },
       {
-        target: "everything-claude-code",
-        title: "Add agent-eval skill",
+        target: "Docling",
+        title: "Handle external image references in DOCX files",
         status: "Open PR",
-        href: "https://github.com/affaan-m/everything-claude-code/pull/540",
-        summary: "Brought the evaluation harness into the Claude Code skills ecosystem."
+        href: "https://github.com/docling-project/docling/pull/3148",
+        summary: "Fixes external image-reference handling in DOCX parsing flows."
       },
       {
-        target: "crewAI",
-        title: "Provider-agnostic schema for Bedrock and Gemini MCP tools",
+        target: "Docling",
+        title: "Handle PermissionError for directory input on Windows CLI",
         status: "Open PR",
-        href: "https://github.com/crewAIInc/crewAI/pull/4912",
-        summary: "Improves cross-provider tool compatibility in agent workflows."
+        href: "https://github.com/docling-project/docling/pull/3149",
+        summary: "Improves CLI robustness when directory inputs hit Windows permission edges."
       },
       {
-        target: "Hive",
-        title: "Execution-time evaluation hook for agent nodes",
+        target: "DeepEval",
+        title: "Fix NoneType crash in trimAndLoadJson",
         status: "Open PR",
-        href: "https://github.com/aden-hive/hive/pull/6543",
-        summary: "Adds multidimensional evaluation at node-execution time for agent systems."
-      },
-      {
-        target: "Mastra",
-        title: "Extract content from MCP tool responses without outputSchema",
-        status: "Open PR",
-        href: "https://github.com/mastra-ai/mastra/pull/14372",
-        summary: "Improves interoperability for MCP tools that omit explicit output schema definitions."
+        href: "https://github.com/confident-ai/deepeval/pull/2558",
+        summary: "Prevents a NoneType crash path when the model returns None."
       },
       {
         target: "Chroma",
         title: "Use idiomatic Jest assertions in JS client tests",
         status: "Open PR",
         href: "https://github.com/chroma-core/chroma/pull/6673",
-        summary: "A smaller TypeScript contribution to improve test clarity and maintainability."
+        summary: "A smaller TypeScript fix that improves test clarity and maintainability."
       },
       {
-        target: "6-Judge Benchmark",
-        title: "Publish cross-vendor judge calibration results",
-        status: "Published benchmark",
-        href: "https://github.com/joaquinhuigomez/llm-judge-calibrator/blob/master/benchmark/RESULTS.md",
-        summary: "Published comparative calibration results across major model providers."
+        target: "OpenAI tiktoken",
+        title: "Add PyInstaller hooks for tiktoken",
+        status: "Open PR",
+        href: "https://github.com/openai/tiktoken/pull/509",
+        summary: "Improves packaging support for applications that bundle tiktoken."
       },
       {
-        target: "awesome-ai-agents",
-        title: "Submit agent-eval to curated ecosystem list",
-        status: "Submitted",
-        href: "https://github.com/e2b-dev/awesome-ai-agents",
-        summary: "Extended the project's distribution into the agent tooling discovery ecosystem."
+        target: "Microsoft AutoGen",
+        title: "Fix extra_body silently dropped during load_component",
+        status: "Open PR",
+        href: "https://github.com/microsoft/autogen/pull/7421",
+        summary: "Preserves extra_body so component loading does not silently drop provider options."
+      },
+      {
+        target: "Ollama",
+        title: "Fix streaming timeout during tool-call composition",
+        status: "Open PR",
+        href: "https://github.com/ollama/ollama/pull/14932",
+        summary: "Addresses a timeout edge case during streaming tool-call composition."
+      },
+      {
+        target: "Langfuse",
+        title: "Add input_text and output_text pricing for Gemini models",
+        status: "Open PR",
+        href: "https://github.com/langfuse/langfuse/pull/12647",
+        summary: "Improves pricing-model accuracy for Gemini usage accounting."
       }
     ]
   },

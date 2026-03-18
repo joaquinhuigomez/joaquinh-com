@@ -372,8 +372,12 @@ const renderProject = (project) => `
     </div>
     <div class="card-heading-row">
       <h3>${project.title}</h3>
-      <a class="inline-link" href="${project.href}" target="_blank" rel="noreferrer">
-        View repo
+      <a
+        class="inline-link"
+        href="${project.href}"
+        ${project.external === false ? "" : 'target="_blank" rel="noreferrer"'}
+      >
+        ${project.ctaLabel || "View repo"}
       </a>
     </div>
     <p class="card-description">${project.description}</p>
@@ -555,46 +559,46 @@ const renderFootprintMap = () => `
       <path
         class="map-region"
         data-region="latam"
-        d="M60 56c15 0 30 4 37 13 7 10 9 22 7 31-2 10-10 19-15 29-5 11-4 26-13 39-7 10-18 16-25 13-8-4-11-19-8-32 4-17 4-28-3-40-5-8-13-16-12-26 2-15 14-27 32-27Z"
+        d="M64 36 80 39 90 46 98 50 104 57 102 64 107 70 101 77 92 80 86 89 86 100 92 109 88 121 81 134 73 145 69 158 62 168 56 166 55 153 52 141 46 130 45 118 49 104 56 92 62 82 69 73 74 63 68 52 58 49 54 42Z"
       />
       <path
         class="map-region"
         data-region="europe"
-        d="M172 54c10-8 28-10 42-7 12 2 23 9 26 18 3 8-4 15-13 18-10 3-14 8-20 13-7 6-16 9-24 7-9-2-17-9-19-18-2-10 1-22 8-31Z"
+        d="M157 61 166 55 177 52 184 46 194 45 202 49 210 46 217 50 221 56 229 59 231 66 224 70 216 69 213 75 206 77 203 84 198 88 193 83 187 82 183 87 187 96 182 100 177 92 171 88 164 88 158 83 154 76 149 71 151 65Z"
       />
       <path
         class="map-region"
         data-region="asia"
-        d="M223 43c18-8 44-9 66-3 15 4 31 14 36 28 5 14-5 27-21 31-14 4-26 1-37 3-10 2-17 10-28 11-15 1-30-5-38-17-8-11-9-27-1-39 5-6 12-11 23-14Z"
+        d="M216 41 231 37 246 38 258 42 272 41 286 46 300 49 313 55 325 64 332 72 330 80 320 84 309 84 301 88 295 96 285 100 276 101 270 109 261 112 253 104 249 95 242 90 233 89 225 94 216 95 210 89 209 80 201 76 200 67 206 58 212 50Z"
       />
 
-      <path class="map-route" d="M98 118C126 98 152 85 180 79" />
-      <path class="map-route" d="M188 78C214 67 236 65 256 69" />
-      <path class="map-route" d="M180 83C164 90 145 99 126 111" />
+      <path class="map-route" d="M76 138C108 109 146 84 188 66" />
+      <path class="map-route" d="M194 69C222 60 248 61 277 73" />
+      <path class="map-route" d="M178 82C154 95 126 104 91 116" />
 
       <g class="map-marker" data-region="latam" style="--delay: 0s">
-        <circle class="marker-pulse" cx="92" cy="110" r="11" />
-        <circle class="marker-dot" cx="92" cy="110" r="4" />
+        <circle class="marker-pulse" cx="86" cy="75" r="11" />
+        <circle class="marker-dot" cx="86" cy="75" r="4" />
       </g>
       <g class="map-marker" data-region="latam" style="--delay: 0.45s">
-        <circle class="marker-pulse" cx="111" cy="89" r="10" />
-        <circle class="marker-dot" cx="111" cy="89" r="4" />
+        <circle class="marker-pulse" cx="76" cy="139" r="10" />
+        <circle class="marker-dot" cx="76" cy="139" r="4" />
       </g>
       <g class="map-marker" data-region="europe" style="--delay: 0.2s">
-        <circle class="marker-pulse" cx="184" cy="79" r="10" />
-        <circle class="marker-dot" cx="184" cy="79" r="4" />
+        <circle class="marker-pulse" cx="188" cy="63" r="10" />
+        <circle class="marker-dot" cx="188" cy="63" r="4" />
       </g>
       <g class="map-marker" data-region="europe" style="--delay: 0.65s">
-        <circle class="marker-pulse" cx="199" cy="71" r="10" />
-        <circle class="marker-dot" cx="199" cy="71" r="4" />
+        <circle class="marker-pulse" cx="201" cy="78" r="10" />
+        <circle class="marker-dot" cx="201" cy="78" r="4" />
       </g>
       <g class="map-marker" data-region="asia" style="--delay: 0.35s">
         <circle class="marker-pulse" cx="269" cy="72" r="11" />
         <circle class="marker-dot" cx="269" cy="72" r="4" />
       </g>
       <g class="map-marker" data-region="asia" style="--delay: 0.75s">
-        <circle class="marker-pulse" cx="285" cy="84" r="10" />
-        <circle class="marker-dot" cx="285" cy="84" r="4" />
+        <circle class="marker-pulse" cx="292" cy="91" r="10" />
+        <circle class="marker-dot" cx="292" cy="91" r="4" />
       </g>
     </svg>
   </div>
