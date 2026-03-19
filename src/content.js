@@ -8,7 +8,7 @@ export const siteContent = {
   nav: [
     { label: "Profile", href: "#proof" },
     { label: "Projects", href: "#projects" },
-    { label: "Voice lab", href: "/labs/voice-workspace/" },
+    { label: "Verba", href: "/labs/verba/" },
     { label: "Open source", href: "#open-source" },
     { label: "Amazon", href: "#case-study" },
     { label: "Contact", href: "#contact" }
@@ -123,8 +123,8 @@ export const siteContent = {
         icon: "spark"
       },
       {
-        label: "Voice workspace",
-        href: "/labs/voice-workspace/",
+        label: "Verba",
+        href: "/labs/verba/",
         external: false,
         style: "secondary",
         icon: "workflow"
@@ -281,11 +281,11 @@ export const siteContent = {
     ]
   },
   stats: {
-    verifiedOn: "Last verified March 18, 2026 from GitHub profile and live PR search.",
+    verifiedOn: "Last verified March 19, 2026 from GitHub profile and live PR search.",
     items: [
-      { value: "41", label: "PRs authored", detail: "public GitHub PR history" },
+      { value: "3", label: "Merged upstream", detail: "Mastra, Docling, and Phoenix" },
       { value: "45", label: "Public repos", detail: "live GitHub profile count" },
-      { value: "32", label: "Open PRs", detail: "active upstream contributions" },
+      { value: "28", label: "Active PRs", detail: "current upstream work in review" },
       { value: "1440", label: "Hours / year", detail: "estimated internal ops impact" }
     ]
   },
@@ -352,12 +352,12 @@ export const siteContent = {
   projects: [
     {
       icon: "workflow",
-      title: "Multilingual Voice Workspace",
-      href: "/labs/voice-workspace/",
+      title: "Verba",
+      href: "/labs/verba/case-study/",
       external: false,
-      ctaLabel: "Open lab",
+      ctaLabel: "Read case study",
       description:
-        "A premium multilingual speech-to-draft workspace with raw transcript preservation, uncertainty surfacing, and controlled rewrite, translation, and prompt-generation modes.",
+        "A premium multilingual speech-to-draft product with raw transcript preservation, ambiguity surfacing, and benchmark-backed eval loops.",
       highlights: [
         "raw vs processed separation",
         "uncertainty flags",
@@ -403,41 +403,41 @@ export const siteContent = {
   ],
   openSource: {
     intro:
-      "Open-source work focused on the AI infrastructure quality layer: serving, evaluation, and integration reliability.",
+      "I contribute where AI products usually break in practice: security, interoperability, evaluation trust, and the operational glue between providers, tools, and user-facing systems.",
     statusNote:
-      "Status checked March 18, 2026. Merged upstream work, public tools, and still-open PRs are separated intentionally.",
+      "Status checked March 19, 2026. Shipped and merged outcomes are shown first; current upstream work stays secondary.",
     narrative: {
-      title: "Why this work matters",
+      title: "Why this matters for product teams",
       body:
-        "AI companies are scaling routing, eval, and tool-use stacks faster than they are hardening them. I focus on the failure modes that quietly hit cost, quality, and debuggability.",
+        "The bottleneck for many AI products is no longer getting a model response. It is getting a system that is secure, observable, interoperable, and dependable enough for real users and real operators. That is the layer I like working on.",
       commercial:
-        "If the rate limiter leaks, you cannot price predictably. If the eval judge is noisy, you cannot trust model decisions. If tool integrations drop data, agents fail in ways users cannot debug.",
+        "This work sits between product judgment and technical execution: deciding which failures matter, aligning people around them, and getting fixes shipped across shared infrastructure.",
       failureModes: [
         {
-          title: "Serving layer",
+          title: "Product trust",
           detail:
-            "Concurrency bugs turn configured limits into unpredictable spend and provider-throttling cascades."
+            "Silent failures around tools, provider behavior, or external inputs quickly become support issues and lost user confidence."
         },
         {
-          title: "Evaluation layer",
+          title: "Delivery velocity",
           detail:
-            "LLM-as-judge pipelines look objective until you measure bias and consistency directly."
+            "Noisy evaluation and brittle integrations slow launches because teams cannot trust what they are measuring."
         },
         {
-          title: "Integration layer",
+          title: "Scale economics",
           detail:
-            "Protocol bugs create silent data loss, validator crashes, and hard-to-debug agent behavior."
+            "Weak controls around compatibility, pricing, or routing turn growth into operational drag."
         }
       ]
     },
     githubPanel: {
       title: "GitHub is the live proof layer",
       body:
-        "The fastest way to inspect current work is GitHub: public repos, upstream PRs, benchmark artifacts, and protocol-level fixes that show how I think about reliability.",
+        "GitHub is the clearest public record of how I work: shipped tools, merged upstream fixes, and active contributions across the AI tooling stack.",
       metrics: [
         { value: "45", label: "Public repos" },
-        { value: "32", label: "Open PRs" },
-        { value: "41", label: "PRs authored" }
+        { value: "3", label: "Merged upstream" },
+        { value: "28", label: "Active PRs" }
       ],
       links: [
         {
@@ -446,15 +446,15 @@ export const siteContent = {
           icon: "github"
         },
         {
-          label: "Rate limiter repo",
-          href: "https://github.com/joaquinhuigomez/token-aware-rate-limiter",
-          icon: "rate"
+          label: "Merged PRs",
+          href: "https://github.com/pulls?q=is%3Apr+author%3Ajoaquinhuigomez+is%3Amerged+sort%3Aupdated-desc",
+          icon: "spark"
         }
       ]
     },
     shipped: {
-      title: "Merged and shipped",
-      note: "Live today in public repos, benchmark artifacts, or merged upstream contributions.",
+      title: "Selected shipped wins",
+      note: "Recent shipped outcomes first, then the broader body of public work.",
       items: [
         {
           target: "Mastra",
@@ -462,9 +462,18 @@ export const siteContent = {
           status: "Merged Mar 18",
           href: "https://github.com/mastra-ai/mastra/pull/14372",
           summary:
-            "Extracts content from MCP tool responses without outputSchema so tool outputs do not disappear in agent flows.",
+            "Prevented silent tool-output loss in agent workflows by fixing how MCP tool responses are handled.",
           stars: "22.1k",
-          tags: ["Merged PR", "MCP", "Interoperability", "TypeScript"]
+          tags: ["Merged PR", "Agent reliability", "MCP", "Interoperability"]
+        },
+        {
+          target: "Recent upstream merges",
+          title: "Phoenix and Docling fixes merged on March 19",
+          status: "Merged Mar 19",
+          href: "https://github.com/pulls?q=is%3Apr+author%3Ajoaquinhuigomez+is%3Amerged+sort%3Aupdated-desc",
+          summary:
+            "A tracing-related Phoenix fix and a Windows CLI reliability fix in Docling both merged the next day, showing follow-through across adjacent AI tooling.",
+          tags: ["Merged PRs", "Observability", "CLI reliability", "AI tooling"]
         },
         {
           target: "Published benchmark",
@@ -472,8 +481,8 @@ export const siteContent = {
           status: "Published",
           href: "https://github.com/joaquinhuigomez/llm-judge-calibrator/blob/master/benchmark/RESULTS.md",
           summary:
-            "Cross-vendor judge calibration with position-swap evaluation and Cohen's kappa.",
-          tags: ["LLM eval", "Benchmarking", "Cohen's kappa", "Bias detection"]
+            "Turned evaluator reliability into something teams can measure before trusting it in model-selection decisions.",
+          tags: ["LLM eval", "Decision quality", "Reliability", "Benchmarking"]
         },
         {
           target: "Public tools",
@@ -481,14 +490,14 @@ export const siteContent = {
           status: "Shipped",
           href: "#projects",
           summary:
-            "Built token-aware-rate-limiter, llm-judge-calibrator, and agent-eval before touching upstream infra code.",
-          tags: ["Python", "TypeScript", "Redis", "Agent evaluation"]
+            "Built token-aware-rate-limiter, llm-judge-calibrator, and agent-eval first, then used that depth to contribute upstream with more judgment.",
+          tags: ["Platform thinking", "Execution", "Python", "TypeScript"]
         }
       ]
     },
     pending: {
-      title: "Selected live upstream PRs",
-      note: "Open upstream on March 18, 2026 after removing closed unsuccessful PRs from the page.",
+      title: "Current upstream work",
+      note: "A smaller set of active PRs with clear product or platform impact. Lower-signal or unsuccessful work has been removed from the page.",
       items: [
         {
           target: "Vercel AI SDK",
@@ -496,9 +505,9 @@ export const siteContent = {
           status: "Open PR",
           href: "https://github.com/vercel/ai/pull/13512",
           summary:
-            "Found and patched a DNS rebinding SSRF path in validateDownloadUrl.",
-          stars: "22.7k",
-          tags: ["Security", "SSRF", "DNS rebinding", "TypeScript"]
+            "Targets a security issue that matters directly for platform trust when AI systems fetch external resources.",
+          stars: "22.8k",
+          tags: ["Security", "Platform trust", "SSRF", "TypeScript"]
         },
         {
           target: "MCP servers",
@@ -506,19 +515,9 @@ export const siteContent = {
           status: "Open PR",
           href: "https://github.com/modelcontextprotocol/servers/pull/3611",
           summary:
-            "Fixes an edge-case server response that can crash repository search on enterprise setups.",
-          stars: "81.4k",
-          tags: ["MCP", "GitLab", "Protocol reliability", "TypeScript"]
-        },
-        {
-          target: "CrewAI",
-          title: "Provider-agnostic tool schema for Bedrock and Gemini MCP tools",
-          status: "Open PR",
-          href: "https://github.com/crewAIInc/crewAI/pull/4912",
-          summary:
-            "Improves provider portability for Bedrock and Gemini MCP tools.",
-          stars: "46.5k",
-          tags: ["Bedrock", "Gemini", "MCP", "Schema design"]
+            "Improves enterprise reliability by preventing a crash path in GitLab repository search.",
+          stars: "81.5k",
+          tags: ["Enterprise reliability", "MCP", "GitLab", "TypeScript"]
         },
         {
           target: "OpenAI Agents Python",
@@ -526,23 +525,27 @@ export const siteContent = {
           status: "Open PR",
           href: "https://github.com/openai/openai-agents-python/pull/2700",
           summary:
-            "Fixes missing MCP and reasoning item types so tool-removal flows do not silently lose information.",
+            "Keeps agent-system state consistent by preserving MCP and reasoning items during tool-removal flows.",
           stars: "20.1k",
-          tags: ["OpenAI Agents", "MCP", "Reasoning items", "Python"]
-        },
-        {
-          target: "LangChain.js",
-          title: "Route Anthropic content blocks through the standard formatter",
-          status: "Open PR",
-          href: "https://github.com/langchain-ai/langchainjs/pull/10435",
-          summary:
-            "Keeps Anthropic HumanMessage content blocks aligned with the framework's standard formatting path.",
-          stars: "17.3k",
-          tags: ["LangChain", "Anthropic", "Message formatting", "TypeScript"]
+          tags: ["Agent platform", "MCP", "Reasoning items", "Python"]
         }
       ]
     },
     extended: [
+      {
+        target: "CrewAI",
+        title: "Provider-agnostic tool schema for Bedrock and Gemini MCP tools",
+        status: "Open PR",
+        href: "https://github.com/crewAIInc/crewAI/pull/4912",
+        summary: "Improves cross-provider portability for MCP tool usage."
+      },
+      {
+        target: "LangChain.js",
+        title: "Route Anthropic content blocks through the standard formatter",
+        status: "Open PR",
+        href: "https://github.com/langchain-ai/langchainjs/pull/10435",
+        summary: "Keeps Anthropic content blocks aligned with the framework's standard formatting path."
+      },
       {
         target: "MCP TypeScript SDK",
         title: "Skip structured content validation on error payloads",
@@ -558,67 +561,11 @@ export const siteContent = {
         summary: "Moves debug output to stderr so stdout remains valid JSON during debugging."
       },
       {
-        target: "Vercel AI SDK",
-        title: "Include full error object in chat SSE stream error chunks",
-        status: "Open PR",
-        href: "https://github.com/vercel/ai/pull/13511",
-        summary: "Improves observability when providers return structured error details in streaming responses."
-      },
-      {
-        target: "FastChat",
-        title: "Add judge consistency and position-bias metrics",
-        status: "Open PR",
-        href: "https://github.com/lm-sys/FastChat/pull/3810",
-        summary: "Adds position-bias reporting and Cohen's kappa so llm_judge outputs are easier to trust."
-      },
-      {
         target: "Continue",
         title: "Fix Ollama MCP tool calling for Mistral and Gemma3 models",
         status: "Open PR",
         href: "https://github.com/continuedev/continue/pull/11523",
         summary: "Improves tool-calling compatibility for newer Ollama-served models."
-      },
-      {
-        target: "Docling",
-        title: "Handle external image references in DOCX files",
-        status: "Open PR",
-        href: "https://github.com/docling-project/docling/pull/3148",
-        summary: "Fixes external image-reference handling in DOCX parsing flows."
-      },
-      {
-        target: "Docling",
-        title: "Handle PermissionError for directory input on Windows CLI",
-        status: "Open PR",
-        href: "https://github.com/docling-project/docling/pull/3149",
-        summary: "Improves CLI robustness when directory inputs hit Windows permission edges."
-      },
-      {
-        target: "DeepEval",
-        title: "Fix NoneType crash in trimAndLoadJson",
-        status: "Open PR",
-        href: "https://github.com/confident-ai/deepeval/pull/2558",
-        summary: "Prevents a NoneType crash path when the model returns None."
-      },
-      {
-        target: "Chroma",
-        title: "Use idiomatic Jest assertions in JS client tests",
-        status: "Open PR",
-        href: "https://github.com/chroma-core/chroma/pull/6673",
-        summary: "A smaller TypeScript fix that improves test clarity and maintainability."
-      },
-      {
-        target: "OpenAI tiktoken",
-        title: "Add PyInstaller hooks for tiktoken",
-        status: "Open PR",
-        href: "https://github.com/openai/tiktoken/pull/509",
-        summary: "Improves packaging support for applications that bundle tiktoken."
-      },
-      {
-        target: "Microsoft AutoGen",
-        title: "Fix extra_body silently dropped during load_component",
-        status: "Open PR",
-        href: "https://github.com/microsoft/autogen/pull/7421",
-        summary: "Preserves extra_body so component loading does not silently drop provider options."
       },
       {
         target: "Ollama",
@@ -628,11 +575,32 @@ export const siteContent = {
         summary: "Addresses a timeout edge case during streaming tool-call composition."
       },
       {
+        target: "Vercel AI SDK",
+        title: "Include full error object in chat SSE stream error chunks",
+        status: "Open PR",
+        href: "https://github.com/vercel/ai/pull/13511",
+        summary: "Improves observability when providers return structured error details in streaming responses."
+      },
+      {
         target: "Langfuse",
         title: "Add input_text and output_text pricing for Gemini models",
         status: "Open PR",
         href: "https://github.com/langfuse/langfuse/pull/12647",
         summary: "Improves pricing-model accuracy for Gemini usage accounting."
+      },
+      {
+        target: "FastChat",
+        title: "Add judge consistency and position-bias metrics",
+        status: "Open PR",
+        href: "https://github.com/lm-sys/FastChat/pull/3810",
+        summary: "Adds position-bias reporting and Cohen's kappa so llm_judge outputs are easier to trust."
+      },
+      {
+        target: "OpenAI tiktoken",
+        title: "Add PyInstaller hooks for tiktoken",
+        status: "Open PR",
+        href: "https://github.com/openai/tiktoken/pull/509",
+        summary: "Improves packaging support for applications that bundle tiktoken."
       }
     ]
   },
