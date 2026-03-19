@@ -18,7 +18,7 @@ export const siteContent = {
     lead: "I lead and build",
     title: "AI systems teams can trust in production.",
     description:
-      "Concurrency leaks, noisy evals, and orchestration edge cases that decide whether enterprise AI systems actually work.",
+      "I work on the side of AI that survives contact with reality: better decisions, cleaner execution, and systems people can actually run.",
     proofLine:
       "Skip-level L5 return offer during hiring freeze · consistently rated Exceeds · $140MM+ cumulative savings delivered",
     proofTags: [
