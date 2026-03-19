@@ -879,6 +879,58 @@ a {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.project-card-featured {
+  grid-column: span 2;
+}
+
+.project-card-tarot {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 16% 18%, rgba(255, 208, 120, 0.34), transparent 26%),
+    radial-gradient(circle at 84% 18%, rgba(120, 214, 201, 0.22), transparent 24%),
+    radial-gradient(circle at 62% 82%, rgba(214, 117, 171, 0.18), transparent 28%),
+    linear-gradient(180deg, rgba(34, 31, 58, 0.98), rgba(22, 20, 38, 0.98));
+  border-color: rgba(234, 192, 112, 0.26);
+  color: #f7f2ea;
+}
+
+.project-card-tarot .card-topline,
+.project-card-tarot .inline-link,
+.project-card-tarot h3 {
+  color: #f4d38f;
+}
+
+.project-card-tarot .card-description {
+  color: rgba(247, 242, 234, 0.82);
+}
+
+.project-card-tarot .project-icon {
+  background: linear-gradient(135deg, rgba(247, 200, 116, 0.32), rgba(197, 122, 180, 0.32));
+  color: #fff3d7;
+  box-shadow: 0 10px 24px rgba(16, 32, 42, 0.18);
+}
+
+.project-card-tarot .tag-chip {
+  background: rgba(255, 250, 243, 0.12);
+  border-color: rgba(244, 211, 143, 0.18);
+  color: rgba(247, 242, 234, 0.82);
+}
+
+.project-card-tarot::after {
+  content: "";
+  position: absolute;
+  top: 0.9rem;
+  right: 1rem;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 218, 140, 0.28), transparent 58%),
+    radial-gradient(circle at 50% 50%, rgba(121, 214, 201, 0.12), transparent 74%);
+  pointer-events: none;
+}
+
 .project-card:nth-child(2) {
   background:
     linear-gradient(180deg, rgba(255, 248, 241, 0.98), rgba(255, 252, 248, 0.96)),
@@ -1797,6 +1849,10 @@ a {
   .profile-title-row {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .project-card-featured {
+    grid-column: auto;
   }
 }
 

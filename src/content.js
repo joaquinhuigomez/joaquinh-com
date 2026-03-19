@@ -351,6 +351,23 @@ export const siteContent = {
   },
   projects: [
     {
+      icon: "tarot",
+      title: "Tarot Truth Teller",
+      href: "https://tarot.joaquinh.com/",
+      external: true,
+      ctaLabel: "Open tarot app",
+      topline: "Fun AI project",
+      theme: "tarot",
+      featured: true,
+      description:
+        "A multilingual AI tarot miniapp with Telegram-native flows, shareable reading cards, and a voice that is sharp, honest, and a little bit funny.",
+      highlights: [
+        "multilingual readings",
+        "Telegram mini app",
+        "shareable reading cards"
+      ]
+    },
+    {
       icon: "workflow",
       title: "Verba",
       href: "/labs/verba/case-study/",

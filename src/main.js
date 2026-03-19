@@ -130,6 +130,20 @@ const iconMap = {
       <path d="M8 21h8" />
     </svg>
   `,
+  tarot: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="5" y="3.5" width="14" height="17" rx="2.5" />
+      <path d="M12 7.2v1.8" />
+      <path d="M12 14.9v1.9" />
+      <path d="m9.1 10.7 1.4.7 1.5-.7 1.4.7 1.5-.7" />
+      <circle cx="12" cy="12.2" r="1.9" />
+      <path d="m8 5.4.7.7" />
+      <path d="m16 5.4-.7.7" />
+      <path d="M8.2 18.1h7.6" />
+      <path d="m7.6 8.4.7-.3" />
+      <path d="m16.4 8.4-.7-.3" />
+    </svg>
+  `,
   agent: `
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
       <rect x="4" y="5" width="16" height="14" rx="3" />
@@ -363,12 +377,12 @@ const renderMiniMetric = (item) => `
 `;
 
 const renderProject = (project) => `
-  <article class="project-card" data-reveal>
+  <article class="project-card${project.theme ? ` project-card-${project.theme}` : ""}${project.featured ? " project-card-featured" : ""}" data-reveal>
     <div class="project-icon-row">
       <div class="project-icon">
         ${renderIcon(project.icon)}
       </div>
-      <span class="card-topline">Flagship project</span>
+      <span class="card-topline">${project.topline || "Flagship project"}</span>
     </div>
     <div class="card-heading-row">
       <h3>${project.title}</h3>
