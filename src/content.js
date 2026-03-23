@@ -5,6 +5,201 @@ export const siteContent = {
       "AI infrastructure reliability across serving, evaluation, and agent orchestration, with Amazon work and open-source contributions across MCP and adjacent agent ecosystems.",
     url: "https://joaquinh.com"
   },
+  openSourcePage: {
+    meta: {
+      title: "Joaquin Hui Gomez | Open-Source Contributions",
+      description:
+        "Merged upstream fixes, active platform contributions, and public reliability tooling across AI infrastructure, evaluation, and agent ecosystems.",
+      url: "https://joaquinh.com/open-source/"
+    },
+    nav: [
+      { label: "Home", href: "/" },
+      { label: "Merged wins", href: "#merged" },
+      { label: "Current work", href: "#current" },
+      { label: "Public tools", href: "#tools" },
+      { label: "GitHub", href: "https://github.com/joaquinhuigomez", external: true }
+    ],
+    intro: {
+      eyebrow: "Open source record",
+      title: "Shipped fixes, active platform work, and public reliability tooling",
+      body:
+        "This page is the denser version of the OSS story: what has already shipped upstream, what is currently in flight, and the public tools that sit underneath the contribution work.",
+      note:
+        "Last verified March 23, 2026 from live GitHub profile and PR history."
+    },
+    metrics: [
+      { value: "45", label: "Public repos" },
+      { value: "5", label: "Merged upstream" },
+      { value: "24", label: "Open PRs" }
+    ],
+    merged: {
+      title: "Merged upstream outcomes",
+      note:
+        "These are the highest-signal external wins to highlight first: concrete fixes, shipped into widely used projects.",
+      items: [
+        {
+          target: "OpenAI Agents Python",
+          title: "Merged fix preserving MCP and reasoning items during tool cleanup",
+          status: "Merged Mar 21",
+          href: "https://github.com/openai/openai-agents-python/pull/2700",
+          summary:
+            "Helps agent teams keep tool-state transitions reliable instead of silently dropping structured context during cleanup flows.",
+          stars: "20.2k",
+          tags: ["Merged PR", "Agent reliability", "Python", "MCP"]
+        },
+        {
+          target: "Mastra",
+          title: "Merged MCP tool-response interoperability fix",
+          status: "Merged Mar 18",
+          href: "https://github.com/mastra-ai/mastra/pull/14372",
+          summary:
+            "Prevents tool output from disappearing in agent workflows, which matters directly for operator trust and debugging quality.",
+          stars: "22.2k",
+          tags: ["Merged PR", "MCP", "Interoperability", "Agent reliability"]
+        },
+        {
+          target: "Docling",
+          title: "Merged Windows CLI reliability fix for directory input handling",
+          status: "Merged Mar 19",
+          href: "https://github.com/docling-project/docling/pull/3149",
+          summary:
+            "Turns an avoidable CLI failure into a cleaner operator experience for teams processing document workloads across environments.",
+          stars: "56.3k",
+          tags: ["Merged PR", "CLI reliability", "Documents", "Operator UX"]
+        },
+        {
+          target: "Phoenix",
+          title: "Merged tracing export fix for cleaner observability usage",
+          status: "Merged Mar 19",
+          href: "https://github.com/Arize-ai/phoenix/pull/12201",
+          summary:
+            "Improves the tracing path teams rely on when they need observability that is easy to integrate instead of fragile at the edges.",
+          stars: "9.0k",
+          tags: ["Merged PR", "Observability", "Tracing", "JavaScript"]
+        },
+        {
+          target: "everything-claude-code",
+          title: "Agent Eval adopted as a Claude Code skill in a 100k+ star repository",
+          status: "Merged Mar 20",
+          href: "https://github.com/affaan-m/everything-claude-code/pull/540",
+          summary:
+            "External adoption proof that the agent-evaluation work is useful beyond my own repos and practical enough for other builders to pick up quickly.",
+          stars: "100.7k",
+          tags: ["Merged PR", "Distribution", "Agent evaluation", "OSS adoption"]
+        }
+      ]
+    },
+    current: {
+      title: "Selected current upstream work",
+      note:
+        "A curated set of still-open PRs with clear platform, product, or operator relevance. Closed or lower-signal work stays off the page.",
+      items: [
+        {
+          target: "MCP servers",
+          title: "Guard GitLab enterprise repository search against crashes",
+          status: "Open PR",
+          href: "https://github.com/modelcontextprotocol/servers/pull/3611",
+          summary:
+            "Improves enterprise reliability by preventing a crash path in GitLab repository search, where one edge case can take out a useful workflow.",
+          stars: "81.9k",
+          tags: ["Enterprise reliability", "MCP", "GitLab", "TypeScript"]
+        },
+        {
+          target: "Vercel AI SDK",
+          title: "Prevent SSRF bypass via DNS rebinding",
+          status: "Open PR",
+          href: "https://github.com/vercel/ai/pull/13512",
+          summary:
+            "Targets a security issue that matters directly for platform trust when AI systems fetch and validate external resources.",
+          stars: "22.9k",
+          tags: ["Security", "Platform trust", "SSRF", "TypeScript"]
+        },
+        {
+          target: "CrewAI",
+          title: "Provider-agnostic tool schema for Bedrock and Gemini MCP tools",
+          status: "Open PR",
+          href: "https://github.com/crewAIInc/crewAI/pull/4912",
+          summary:
+            "Improves portability across providers so teams do not have to treat tool usage as provider-specific glue code.",
+          stars: "47.0k",
+          tags: ["Portability", "MCP", "Schema design", "TypeScript"]
+        },
+        {
+          target: "Anthropic Claude Agent SDK",
+          title: "Route debug output away from the JSON protocol stream",
+          status: "Open PR",
+          href: "https://github.com/anthropics/claude-agent-sdk-typescript/pull/235",
+          summary:
+            "Keeps debugging usable without corrupting the protocol stream, which matters when teams need both traceability and stable execution.",
+          stars: "1.0k",
+          tags: ["Protocol reliability", "Anthropic", "Debugging", "TypeScript"]
+        },
+        {
+          target: "Ollama",
+          title: "Fix streaming timeout during tool-call composition",
+          status: "Open PR",
+          href: "https://github.com/ollama/ollama/pull/14932",
+          summary:
+            "Addresses a timeout edge case in tool-call composition that can turn an otherwise healthy workflow into a fragile one under load.",
+          stars: "166.0k",
+          tags: ["Streaming", "Tool calling", "Reliability", "Go"]
+        },
+        {
+          target: "Microsoft AutoGen",
+          title: "Fix extra_body being silently dropped during component loading",
+          status: "Open PR",
+          href: "https://github.com/microsoft/autogen/pull/7421",
+          summary:
+            "Preserves structured configuration instead of losing it silently, which is the kind of failure that wastes time because it looks like user error.",
+          stars: "56.1k",
+          tags: ["Configuration", "Agent platform", "Reliability", "Python"]
+        }
+      ]
+    },
+    tools: {
+      title: "Public tools and published evidence",
+      note:
+        "The upstream contribution work is backed by standalone public projects and benchmarks rather than drive-by patches.",
+      items: [
+        {
+          target: "LLM Judge Calibrator",
+          title: "Published 6-model judge reliability benchmark with Cohen's kappa",
+          status: "Published",
+          href: "https://github.com/joaquinhuigomez/llm-judge-calibrator/blob/master/benchmark/RESULTS.md",
+          summary:
+            "Turns evaluator reliability into something teams can measure before trusting it in model-selection or regression decisions.",
+          tags: ["LLM eval", "Benchmarking", "Decision quality", "Reliability"]
+        },
+        {
+          target: "Token-Aware Rate Limiter",
+          title: "Reference implementation for multi-tenant LLM rate limiting",
+          status: "Shipped",
+          href: "https://github.com/joaquinhuigomez/token-aware-rate-limiter",
+          summary:
+            "A public implementation grounded in fairness metrics, atomic Redis design, and real-time observability for LLM API workloads.",
+          tags: ["Rate limiting", "Redis", "Fairness", "Python"]
+        },
+        {
+          target: "Agent Eval",
+          title: "Head-to-head coding-agent harness with external distribution proof",
+          status: "Shipped",
+          href: "https://github.com/joaquinhuigomez/agent-eval",
+          summary:
+            "Built to compare coding agents on pass rate, cost, time, and consistency, then later adopted externally as a Claude Code skill.",
+          tags: ["Agent evaluation", "Execution", "OSS adoption", "Python"]
+        },
+        {
+          target: "GitHub profile",
+          title: "Live merged PR record and current contribution pipeline",
+          status: "Live",
+          href: "https://github.com/joaquinhuigomez",
+          summary:
+            "The profile remains the fastest way to inspect the full repo history, merged work, and the active contribution pipeline in one place.",
+          tags: ["GitHub", "Live record", "Public proof", "History"]
+        }
+      ]
+    }
+  },
   nav: [
     { label: "Profile", href: "#proof" },
     { label: "Projects", href: "#projects" },
@@ -67,16 +262,16 @@ export const siteContent = {
       {
         icon: "network",
         label: "#AIInfra",
-        title: "AI infrastructure reliability",
+        title: "AI infrastructure quality layer",
         summary:
-          "Public work focused on the quality layer underneath AI products: serving, evaluation, and tool integration.",
+          "Public work focused on the reliability layer underneath AI products: tool integration, evaluation trust, and operator-safe system behavior.",
         bullets: [
-          "Merged an MCP tool-response interoperability fix in Mastra",
-          "Patched SSRF DNS-rebinding exposure in the Vercel AI SDK",
-          "Improved MCP and agent-SDK protocol reliability"
+          "Merged fixes in OpenAI Agents Python and Mastra",
+          "Shipped support across observability and document-tooling workflows in Phoenix and Docling",
+          "Current work in Vercel AI SDK, MCP servers, and adjacent agent platforms"
         ],
-        href: "#open-source",
-        cta: "Open OSS work"
+        href: "/open-source/",
+        cta: "Open the OSS record"
       },
       {
         icon: "judge",
@@ -87,9 +282,9 @@ export const siteContent = {
         bullets: [
           "Published a 6-model judge benchmark with Cohen's kappa",
           "Measured position bias in cost-optimized eval judges",
-          "Built tooling before upstream contributions"
+          "Built tooling before pushing ideas upstream"
         ],
-        href: "#open-source",
+        href: "/open-source/#tools",
         cta: "View benchmark work"
       },
       {
@@ -101,7 +296,7 @@ export const siteContent = {
         bullets: [
           "LLM-assisted intake and recommendations around deterministic pipelines",
           "Schema-disciplined experiment setup and post-run analysis",
-          "Protocol-level fixes across MCP and agent SDKs"
+          "Agent-evaluation work later adopted as a Claude Code skill externally"
         ],
         href: "#projects",
         cta: "See key projects"
@@ -233,7 +428,7 @@ export const siteContent = {
       {
         icon: "certificate",
         label: "Technical scope",
-        value: "AWS, MLOps, eval",
+        value: "AWS, Python, AI infra",
         popover: {
           kind: "technical",
           title: "Hands-on technical scope",
@@ -256,7 +451,7 @@ export const siteContent = {
           bullets: [
             "Built AWS-native orchestration for long-running business experiments and simulation workflows",
             "Shipped Python and TypeScript tools for rate limiting, judge calibration, and agent evaluation",
-            "Contributed reliability fixes across Vercel AI SDK, Mastra, MCP servers, CrewAI, OpenAI Agents, and Anthropic's agent SDK"
+            "Merged fixes in OpenAI Agents Python, Mastra, Phoenix, and Docling; active work continues across adjacent AI platforms"
           ],
           tags: ["AWS", "Serverless", "Python", "TypeScript", "LLM eval", "AI infra"]
         }
@@ -281,18 +476,18 @@ export const siteContent = {
     ]
   },
   stats: {
-    verifiedOn: "Last verified March 19, 2026 from GitHub profile and live PR search.",
+    verifiedOn: "Last verified March 23, 2026 from GitHub profile and live PR history.",
     items: [
-      { value: "3", label: "Merged upstream", detail: "Mastra, Docling, and Phoenix" },
+      { value: "5", label: "Merged upstream", detail: "external repos only" },
       { value: "45", label: "Public repos", detail: "live GitHub profile count" },
-      { value: "28", label: "Active PRs", detail: "current upstream work in review" },
+      { value: "24", label: "Open PRs", detail: "selected work still in review" },
       { value: "1440", label: "Hours / year", detail: "estimated internal ops impact" }
     ]
   },
   profile: {
     title: "Operator profile",
     body:
-      "I care about the unglamorous AI infrastructure problems that decide whether a product actually works: concurrency, evaluation noise, protocol correctness, and operator usability.",
+      "I work where product judgment meets technical execution: taking ambiguous AI opportunities, turning them into operating systems teams can trust, and staying close enough to the stack to know what will break in production.",
     chips: ["Amazon", "Accenture", "PwC", "St. Gallen", "HKU", "London"],
     notes: [
       {
@@ -414,47 +609,44 @@ export const siteContent = {
       highlights: [
         "YAML task definitions",
         "isolated execution",
-        "report generation"
+        "adopted in 100k+ star repo"
       ]
     }
   ],
   openSource: {
     intro:
-      "I contribute where AI products usually break in practice: security, interoperability, evaluation trust, and the operational glue between providers, tools, and user-facing systems.",
+      "I contribute to the reliability layer underneath AI products: the security, interoperability, evaluation trust, and execution details that decide whether teams can actually ship them.",
     statusNote:
-      "Status checked March 19, 2026. Shipped and merged outcomes are shown first; current upstream work stays secondary.",
+      "Updated March 23, 2026 from live GitHub history. Homepage highlights shipped upstream outcomes first; deeper detail lives on the dedicated OSS page.",
     narrative: {
       title: "Why this matters for product teams",
       body:
-        "The bottleneck for many AI products is no longer getting a model response. It is getting a system that is secure, observable, interoperable, and dependable enough for real users and real operators. That is the layer I like working on.",
+        "When AI systems fail, it rarely looks dramatic. It looks like bad decisions, brittle handoffs, unclear ownership, and teams slowing down because they no longer trust the system.",
       commercial:
-        "This work sits between product judgment and technical execution: deciding which failures matter, aligning people around them, and getting fixes shipped across shared infrastructure.",
+        "That is the layer I like working on: choosing the failure modes worth fixing, aligning people around them, and pushing changes through shared infrastructure.",
       failureModes: [
         {
-          title: "Product trust",
-          detail:
-            "Silent failures around tools, provider behavior, or external inputs quickly become support issues and lost user confidence."
+          title: "Trust",
+          detail: "Silent breakage turns into confused operators, fragile launches, and lost confidence."
         },
         {
-          title: "Delivery velocity",
-          detail:
-            "Noisy evaluation and brittle integrations slow launches because teams cannot trust what they are measuring."
+          title: "Velocity",
+          detail: "Weak evaluation or brittle tooling slows teams because they cannot trust the signal."
         },
         {
-          title: "Scale economics",
-          detail:
-            "Weak controls around compatibility, pricing, or routing turn growth into operational drag."
+          title: "Economics",
+          detail: "Reliability gaps show up as wasted time, extra cost, and harder scaling decisions."
         }
       ]
     },
     githubPanel: {
       title: "GitHub is the live proof layer",
       body:
-        "GitHub is the clearest public record of how I work: shipped tools, merged upstream fixes, and active contributions across the AI tooling stack.",
+        "GitHub is the clearest public record of how I work: shipped tools, merged upstream fixes, and a still-active contribution pipeline across the AI tooling stack.",
       metrics: [
         { value: "45", label: "Public repos" },
-        { value: "3", label: "Merged upstream" },
-        { value: "28", label: "Active PRs" }
+        { value: "5", label: "Merged upstream" },
+        { value: "24", label: "Open PRs" }
       ],
       links: [
         {
@@ -463,163 +655,63 @@ export const siteContent = {
           icon: "github"
         },
         {
-          label: "Merged PRs",
-          href: "https://github.com/pulls?q=is%3Apr+author%3Ajoaquinhuigomez+is%3Amerged+sort%3Aupdated-desc",
-          icon: "spark"
+          label: "Full OSS page",
+          href: "/open-source/",
+          icon: "spark",
+          external: false
         }
       ]
     },
     shipped: {
       title: "Selected shipped wins",
-      note: "Recent shipped outcomes first, then the broader body of public work.",
+      note: "Four homepage cards, each chosen for product consequence and team-level signal.",
       items: [
+        {
+          target: "OpenAI Agents Python",
+          title: "Merged fix preserving MCP and reasoning items during tool cleanup",
+          status: "Merged Mar 21",
+          href: "https://github.com/openai/openai-agents-python/pull/2700",
+          summary:
+            "Keeps agent-system state reliable during cleanup flows, so teams do not lose structured context in a place that is hard to debug after the fact.",
+          stars: "20.2k",
+          tags: ["Merged PR", "Agent reliability", "Python", "MCP"]
+        },
         {
           target: "Mastra",
           title: "Merged MCP tool-response interoperability fix",
           status: "Merged Mar 18",
           href: "https://github.com/mastra-ai/mastra/pull/14372",
           summary:
-            "Prevented silent tool-output loss in agent workflows by fixing how MCP tool responses are handled.",
-          stars: "22.1k",
-          tags: ["Merged PR", "Agent reliability", "MCP", "Interoperability"]
+            "Prevents tool output from disappearing in agent workflows, which matters directly for operator trust and debugging quality.",
+          stars: "22.2k",
+          tags: ["Merged PR", "Interoperability", "MCP", "Agent reliability"]
         },
         {
-          target: "Recent upstream merges",
-          title: "Phoenix and Docling fixes merged on March 19",
+          target: "Docling",
+          title: "Merged Windows CLI reliability fix for directory input handling",
           status: "Merged Mar 19",
-          href: "https://github.com/pulls?q=is%3Apr+author%3Ajoaquinhuigomez+is%3Amerged+sort%3Aupdated-desc",
+          href: "https://github.com/docling-project/docling/pull/3149",
           summary:
-            "A tracing-related Phoenix fix and a Windows CLI reliability fix in Docling both merged the next day, showing follow-through across adjacent AI tooling.",
-          tags: ["Merged PRs", "Observability", "CLI reliability", "AI tooling"]
+            "Turns an avoidable CLI failure into a cleaner operator experience for teams running document-processing workloads across environments.",
+          stars: "56.3k",
+          tags: ["Merged PR", "CLI reliability", "Operator UX", "Documents"]
         },
         {
-          target: "Published benchmark",
-          title: "6-model judge reliability benchmark with Cohen's kappa",
-          status: "Published",
-          href: "https://github.com/joaquinhuigomez/llm-judge-calibrator/blob/master/benchmark/RESULTS.md",
+          target: "Phoenix",
+          title: "Merged tracing export fix for cleaner observability usage",
+          status: "Merged Mar 19",
+          href: "https://github.com/Arize-ai/phoenix/pull/12201",
           summary:
-            "Turned evaluator reliability into something teams can measure before trusting it in model-selection decisions.",
-          tags: ["LLM eval", "Decision quality", "Reliability", "Benchmarking"]
-        },
-        {
-          target: "Public tools",
-          title: "Three standalone reliability tools shipped in public",
-          status: "Shipped",
-          href: "#projects",
-          summary:
-            "Built token-aware-rate-limiter, llm-judge-calibrator, and agent-eval first, then used that depth to contribute upstream with more judgment.",
-          tags: ["Platform thinking", "Execution", "Python", "TypeScript"]
+            "Improves a tracing path teams rely on when they need observability that is easy to wire in instead of fragile at the edges.",
+          stars: "9.0k",
+          tags: ["Merged PR", "Observability", "Tracing", "JavaScript"]
         }
       ]
     },
-    pending: {
-      title: "Current upstream work",
-      note: "A smaller set of active PRs with clear product or platform impact. Lower-signal or unsuccessful work has been removed from the page.",
-      items: [
-        {
-          target: "Vercel AI SDK",
-          title: "Prevent SSRF bypass via DNS rebinding",
-          status: "Open PR",
-          href: "https://github.com/vercel/ai/pull/13512",
-          summary:
-            "Targets a security issue that matters directly for platform trust when AI systems fetch external resources.",
-          stars: "22.8k",
-          tags: ["Security", "Platform trust", "SSRF", "TypeScript"]
-        },
-        {
-          target: "MCP servers",
-          title: "Guard GitLab enterprise repository search against crashes",
-          status: "Open PR",
-          href: "https://github.com/modelcontextprotocol/servers/pull/3611",
-          summary:
-            "Improves enterprise reliability by preventing a crash path in GitLab repository search.",
-          stars: "81.5k",
-          tags: ["Enterprise reliability", "MCP", "GitLab", "TypeScript"]
-        },
-        {
-          target: "OpenAI Agents Python",
-          title: "Preserve MCP and reasoning item types in remove_all_tools",
-          status: "Open PR",
-          href: "https://github.com/openai/openai-agents-python/pull/2700",
-          summary:
-            "Keeps agent-system state consistent by preserving MCP and reasoning items during tool-removal flows.",
-          stars: "20.1k",
-          tags: ["Agent platform", "MCP", "Reasoning items", "Python"]
-        }
-      ]
-    },
-    extended: [
-      {
-        target: "CrewAI",
-        title: "Provider-agnostic tool schema for Bedrock and Gemini MCP tools",
-        status: "Open PR",
-        href: "https://github.com/crewAIInc/crewAI/pull/4912",
-        summary: "Improves cross-provider portability for MCP tool usage."
-      },
-      {
-        target: "LangChain.js",
-        title: "Route Anthropic content blocks through the standard formatter",
-        status: "Open PR",
-        href: "https://github.com/langchain-ai/langchainjs/pull/10435",
-        summary: "Keeps Anthropic content blocks aligned with the framework's standard formatting path."
-      },
-      {
-        target: "MCP TypeScript SDK",
-        title: "Skip structured content validation on error payloads",
-        status: "Open PR",
-        href: "https://github.com/modelcontextprotocol/typescript-sdk/pull/1690",
-        summary: "Avoids client-side validation failures when tools correctly return error payloads."
-      },
-      {
-        target: "Anthropic Claude Agent SDK",
-        title: "Route debug output away from the JSON protocol stream",
-        status: "Open PR",
-        href: "https://github.com/anthropics/claude-agent-sdk-typescript/pull/235",
-        summary: "Moves debug output to stderr so stdout remains valid JSON during debugging."
-      },
-      {
-        target: "Continue",
-        title: "Fix Ollama MCP tool calling for Mistral and Gemma3 models",
-        status: "Open PR",
-        href: "https://github.com/continuedev/continue/pull/11523",
-        summary: "Improves tool-calling compatibility for newer Ollama-served models."
-      },
-      {
-        target: "Ollama",
-        title: "Fix streaming timeout during tool-call composition",
-        status: "Open PR",
-        href: "https://github.com/ollama/ollama/pull/14932",
-        summary: "Addresses a timeout edge case during streaming tool-call composition."
-      },
-      {
-        target: "Vercel AI SDK",
-        title: "Include full error object in chat SSE stream error chunks",
-        status: "Open PR",
-        href: "https://github.com/vercel/ai/pull/13511",
-        summary: "Improves observability when providers return structured error details in streaming responses."
-      },
-      {
-        target: "Langfuse",
-        title: "Add input_text and output_text pricing for Gemini models",
-        status: "Open PR",
-        href: "https://github.com/langfuse/langfuse/pull/12647",
-        summary: "Improves pricing-model accuracy for Gemini usage accounting."
-      },
-      {
-        target: "FastChat",
-        title: "Add judge consistency and position-bias metrics",
-        status: "Open PR",
-        href: "https://github.com/lm-sys/FastChat/pull/3810",
-        summary: "Adds position-bias reporting and Cohen's kappa so llm_judge outputs are easier to trust."
-      },
-      {
-        target: "OpenAI tiktoken",
-        title: "Add PyInstaller hooks for tiktoken",
-        status: "Open PR",
-        href: "https://github.com/openai/tiktoken/pull/509",
-        summary: "Improves packaging support for applications that bundle tiktoken."
-      }
-    ]
+    cta: {
+      label: "See full OSS record",
+      href: "/open-source/"
+    }
   },
   caseStudy: {
     title: "'26 Amazon ATS Program AI Hackathon Most Innovative Solution",
@@ -648,28 +740,6 @@ export const siteContent = {
     details: [
       "Built a simulation and experiment layer that combined deterministic analysis, LLM-assisted planning, and async AWS-native orchestration.",
       "Used actual production metrics rather than backtests alone, because the network changes continuously and backward-looking wins do not always hold."
-    ]
-  },
-  whyAi: {
-    title: "How I think about AI systems",
-    body:
-      "Less model theater, more systems that can be trusted, measured, and owned by a real team.",
-    principles: [
-      {
-        icon: "shield",
-        title: "Reliability over novelty",
-        detail: "If a system cannot be trusted under constraints, it is not ready for real work."
-      },
-      {
-        icon: "ruler",
-        title: "Evaluation before claims",
-        detail: "I prefer tools and benchmarks that make model behavior measurable instead of anecdotal."
-      },
-      {
-        icon: "nodes",
-        title: "Orchestration for outcomes",
-        detail: "The useful AI work is often in the glue: routing, validation, fallback logic, and operational fit."
-      }
     ]
   },
   contact: {
@@ -702,36 +772,5 @@ export const siteContent = {
         icon: "instagram"
       }
     ]
-  },
-  social: {
-    x: {
-      title: "On X",
-      body:
-        "Travel, food, and a less formal side of me outside work.",
-      href: "https://twitter.com/ViajaryTragar",
-      handle: "@ViajaryTragar",
-      tags: ["Travel", "Food", "Languages"]
-    },
-    instagram: {
-      title: "Outside work",
-      body:
-        "Travel and photography are where I reset.",
-      items: [
-        {
-          imageSrc: "/ig-vinicunca.jpg",
-          title: "Vinicunca",
-          likes: "309 likes",
-          meta: "Peru | Rainbow Mountain",
-          href: "https://www.instagram.com/p/B0tqsMjAf3P/"
-        },
-        {
-          imageSrc: "/ig-rigi.jpg",
-          title: "Rigi",
-          likes: "277 likes",
-          meta: "Switzerland",
-          href: "https://www.instagram.com/p/BrdtMgaAIZ5/"
-        }
-      ]
-    }
   }
 };

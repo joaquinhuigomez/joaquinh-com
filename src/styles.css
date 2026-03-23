@@ -104,7 +104,7 @@ a {
 }
 
 .section {
-  padding: 0.95rem 0 2.85rem;
+  padding: 0.95rem 0 2.45rem;
 }
 
 .site-header {
@@ -178,6 +178,7 @@ a {
 }
 
 .hero-layout,
+.page-intro-grid,
 .profile-grid,
 .open-layout,
 .case-study-layout,
@@ -188,6 +189,10 @@ a {
 
 .hero-layout {
   grid-template-columns: minmax(0, 1.26fr) minmax(220px, 0.62fr);
+}
+
+.page-intro-grid {
+  grid-template-columns: minmax(0, 1.06fr) minmax(280px, 0.64fr);
 }
 
 .hero-copy,
@@ -332,6 +337,7 @@ a {
 }
 
 .hero h1,
+.page-title,
 .section-header h2,
 .profile-title,
 .bio-panel h3,
@@ -354,6 +360,12 @@ a {
   font-size: clamp(1.45rem, 2.5vw, 1.9rem);
   max-width: 18ch;
   line-height: 1.15;
+}
+
+.page-title {
+  font-size: clamp(1.55rem, 2.8vw, 2.15rem);
+  max-width: 18ch;
+  line-height: 1.1;
 }
 
 .section-header h2,
@@ -791,6 +803,12 @@ a {
   margin-bottom: 0.8rem;
 }
 
+.section-cta-row {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 0.9rem;
+}
+
 .section-copy {
   margin: 0;
 }
@@ -1087,11 +1105,18 @@ a {
 
 .shipped-grid,
 .pending-grid,
-.extended-grid {
+.extended-grid,
+.oss-merged-grid,
+.oss-current-grid,
+.oss-tools-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .shipped-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.oss-tools-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -1636,12 +1661,16 @@ a {
 }
 
 .contact-section {
-  padding-bottom: 3.6rem;
+  padding-bottom: 2.8rem;
 }
 
 .contact-shell {
   grid-template-columns: minmax(290px, 0.88fr) minmax(0, 1.12fr);
   align-items: start;
+}
+
+.contact-shell-single {
+  grid-template-columns: 1fr;
 }
 
 .contact-links,
@@ -1783,6 +1812,7 @@ a {
 
 @media (max-width: 1100px) {
   .hero-layout,
+  .page-intro-grid,
   .profile-grid,
   .open-board,
   .case-study-layout,
@@ -1796,6 +1826,9 @@ a {
   .shipped-grid,
   .pending-grid,
   .extended-grid,
+  .oss-merged-grid,
+  .oss-current-grid,
+  .oss-tools-grid,
   .principle-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1832,6 +1865,9 @@ a {
   .shipped-grid,
   .pending-grid,
   .extended-grid,
+  .oss-merged-grid,
+  .oss-current-grid,
+  .oss-tools-grid,
   .social-stack,
   .principle-grid,
   .popover-metric-grid,
@@ -1878,6 +1914,10 @@ a {
 
   .hero h1 {
     font-size: clamp(1.28rem, 6vw, 1.6rem);
+  }
+
+  .page-title {
+    font-size: clamp(1.35rem, 6.4vw, 1.85rem);
   }
 
   .button-row,

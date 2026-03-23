@@ -3,6 +3,8 @@ import { siteContent } from "./content.js";
 
 const app = document.querySelector("#app");
 const currentYear = new Date().getFullYear();
+const currentPath = window.location.pathname.replace(/index\.html$/, "");
+const isOpenSourcePage = currentPath === "/open-source/" || currentPath === "/open-source";
 
 const iconMap = {
   github: `
@@ -235,11 +237,13 @@ const iconMap = {
 };
 
 const setMeta = () => {
-  document.title = siteContent.meta.title;
+  const pageMeta = isOpenSourcePage ? siteContent.openSourcePage.meta : siteContent.meta;
+
+  document.title = pageMeta.title;
 
   const description = document.querySelector('meta[name="description"]');
   if (description) {
-    description.setAttribute("content", siteContent.meta.description);
+    description.setAttribute("content", pageMeta.description);
   }
 
   let canonical = document.querySelector('link[rel="canonical"]');
@@ -248,13 +252,13 @@ const setMeta = () => {
     canonical.rel = "canonical";
     document.head.append(canonical);
   }
-  canonical.href = siteContent.meta.url;
+  canonical.href = pageMeta.url;
 
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Joaquin Hui Gomez",
-    url: siteContent.meta.url,
+    url: pageMeta.url,
     image: `${siteContent.meta.url}${siteContent.hero.snapshot.imageSrc}`,
     jobTitle: "Program Manager",
     worksFor: {
@@ -295,6 +299,26 @@ const renderButton = (button) => {
     </a>
   `;
 };
+
+const renderNavLink = (item) => {
+  const target = item.external ? ' target="_blank" rel="noreferrer"' : "";
+
+  return `<a class="nav-link" href="${item.href}"${target}>${item.label}</a>`;
+};
+
+const renderSiteHeader = (navItems, brandHref = "#hero") => `
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="${brandHref}">
+        <span class="brand-mark">JH</span>
+        <span class="brand-copy">Joaquin Hui Gomez</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        ${navItems.map(renderNavLink).join("")}
+      </nav>
+    </div>
+  </header>
+`;
 
 const renderQuickFact = (item, index) => `
   <button
@@ -437,7 +461,7 @@ const renderFailureMode = (item) => `
 `;
 
 const renderGithubLink = (item) => `
-  <a class="mini-link" href="${item.href}" target="_blank" rel="noreferrer">
+  <a class="mini-link" href="${item.href}"${item.external === false ? "" : ' target="_blank" rel="noreferrer"'}>
     ${renderIcon(item.icon)}
     <span>${item.label}</span>
   </a>
@@ -718,368 +742,356 @@ const renderPopover = (payload) => `
   </div>
 `;
 
-const render = () => {
-  app.innerHTML = `
-    <div class="site-shell">
-      <div class="page-aurora page-aurora-left"></div>
-      <div class="page-aurora page-aurora-right"></div>
+const renderHomePage = () => `
+  <div class="site-shell">
+    <div class="page-aurora page-aurora-left"></div>
+    <div class="page-aurora page-aurora-right"></div>
 
-      <header class="site-header">
-        <div class="container header-inner">
-          <a class="brand" href="#hero">
-            <span class="brand-mark">JH</span>
-            <span class="brand-copy">Joaquin Hui Gomez</span>
-          </a>
-          <nav class="site-nav" aria-label="Primary">
-            ${siteContent.nav
-              .map((item) => `<a class="nav-link" href="${item.href}">${item.label}</a>`)
-              .join("")}
-          </nav>
+    ${renderSiteHeader(siteContent.nav, "#hero")}
+
+    <main id="main">
+      <section id="hero" class="hero section">
+        <div class="container hero-layout">
+          <div class="hero-copy" data-reveal>
+            <p class="section-eyebrow">${siteContent.hero.eyebrow}</p>
+            <div class="hero-title-lockup">
+              <span class="hero-lead">${siteContent.hero.lead}</span>
+              <h1>${siteContent.hero.title}</h1>
+            </div>
+            <p class="hero-description">${siteContent.hero.description}</p>
+
+            <div class="proof-chip-shell">
+              <p class="section-eyebrow">Keyword proof</p>
+              <div class="proof-chip-row">
+                ${siteContent.hero.proofTags.map(renderProofChip).join("")}
+              </div>
+            </div>
+
+            <div class="fact-grid">
+              ${siteContent.hero.quickFacts.map(renderQuickFact).join("")}
+            </div>
+
+            <div class="button-row">
+              ${siteContent.hero.buttons.map(renderButton).join("")}
+            </div>
+
+            <p class="proof-line">${siteContent.hero.proofLine}</p>
+          </div>
+
+          <aside class="hero-profile" data-reveal>
+            <div class="portrait-frame">
+              <img
+                class="portrait-image"
+                src="${siteContent.hero.snapshot.imageSrc}"
+                alt="${siteContent.hero.snapshot.imageAlt}"
+              />
+              <div class="portrait-badge">${siteContent.hero.snapshot.location}</div>
+            </div>
+
+            <div class="profile-summary">
+              <p class="intro-kicker">Profile snapshot</p>
+              <div class="profile-title-row">
+                ${siteContent.hero.snapshot.brandIcon ? renderIcon(siteContent.hero.snapshot.brandIcon, "brand-inline-icon") : ""}
+                <h2 class="profile-title">${siteContent.hero.snapshot.title}</h2>
+              </div>
+              <p class="profile-blurb">${siteContent.hero.snapshot.blurb}</p>
+              <p class="profile-blurb profile-blurb-secondary">${siteContent.hero.snapshot.detail}</p>
+              <div class="tag-row profile-tag-row">
+                ${siteContent.hero.snapshot.tags.map((tag) => `<span class="tag-chip">${tag}</span>`).join("")}
+              </div>
+              <div class="credential-row">
+                ${siteContent.hero.credentials
+                  .map((credential) => `<span class="credential-chip">${credential}</span>`)
+                  .join("")}
+              </div>
+            </div>
+          </aside>
         </div>
-      </header>
 
-      <main id="main">
-        <section id="hero" class="hero section">
-          <div class="container hero-layout">
-            <div class="hero-copy" data-reveal>
-              <p class="section-eyebrow">${siteContent.hero.eyebrow}</p>
-              <div class="hero-title-lockup">
-                <span class="hero-lead">${siteContent.hero.lead}</span>
-                <h1>${siteContent.hero.title}</h1>
-              </div>
-              <p class="hero-description">${siteContent.hero.description}</p>
+        <div class="hero-popover" id="hero-popover" hidden></div>
+      </section>
 
-              <div class="proof-chip-shell">
-                <p class="section-eyebrow">Keyword proof</p>
-                <div class="proof-chip-row">
-                  ${siteContent.hero.proofTags.map(renderProofChip).join("")}
-                </div>
-              </div>
-
-              <div class="fact-grid">
-                ${siteContent.hero.quickFacts.map(renderQuickFact).join("")}
-              </div>
-
-              <div class="button-row">
-                ${siteContent.hero.buttons.map(renderButton).join("")}
-              </div>
-
-              <p class="proof-line">${siteContent.hero.proofLine}</p>
-            </div>
-
-              <aside class="hero-profile" data-reveal>
-              <div class="portrait-frame">
-                <img
-                  class="portrait-image"
-                  src="${siteContent.hero.snapshot.imageSrc}"
-                  alt="${siteContent.hero.snapshot.imageAlt}"
-                />
-                <div class="portrait-badge">${siteContent.hero.snapshot.location}</div>
-              </div>
-
-              <div class="profile-summary">
-                <p class="intro-kicker">Profile snapshot</p>
-                <div class="profile-title-row">
-                  ${siteContent.hero.snapshot.brandIcon ? renderIcon(siteContent.hero.snapshot.brandIcon, "brand-inline-icon") : ""}
-                  <h2 class="profile-title">${siteContent.hero.snapshot.title}</h2>
-                </div>
-                <p class="profile-blurb">${siteContent.hero.snapshot.blurb}</p>
-                <p class="profile-blurb profile-blurb-secondary">${siteContent.hero.snapshot.detail}</p>
-                <div class="tag-row profile-tag-row">
-                  ${siteContent.hero.snapshot.tags.map((tag) => `<span class="tag-chip">${tag}</span>`).join("")}
-                </div>
-                <div class="credential-row">
-                  ${siteContent.hero.credentials
-                    .map((credential) => `<span class="credential-chip">${credential}</span>`)
-                    .join("")}
-                </div>
-              </div>
-            </aside>
+      <section id="proof" class="section">
+        <div class="container">
+          <div class="section-header section-header-compact" data-reveal>
+            <p class="section-eyebrow">Proof strip</p>
+            <h2>Public work, measured impact</h2>
+            <p class="section-copy">${siteContent.stats.verifiedOn}</p>
           </div>
 
-          <div class="hero-popover" id="hero-popover" hidden></div>
-        </section>
-
-        <section id="proof" class="section">
-          <div class="container">
-            <div class="section-header section-header-compact" data-reveal>
-              <p class="section-eyebrow">Proof strip</p>
-              <h2>Public work, measured impact</h2>
-              <p class="section-copy">${siteContent.stats.verifiedOn}</p>
-            </div>
-
-            <div class="stat-grid">
-              ${siteContent.stats.items.map(renderStatCard).join("")}
-            </div>
-
-            <div class="profile-grid">
-              <article class="bio-panel profile-panel-wide" data-reveal>
-                <div class="panel-head">
-                  <div>
-                    <p class="section-eyebrow">About</p>
-                    <h3>${siteContent.profile.title}</h3>
-                  </div>
-                  <div class="chip-row">
-                    ${siteContent.profile.chips
-                      .map((chip) => `<span class="chip">${chip}</span>`)
-                      .join("")}
-                  </div>
-                </div>
-                <p class="section-copy">${siteContent.profile.body}</p>
-                <div class="profile-note-grid">
-                  ${siteContent.profile.notes.map((item, index) => renderProfileNote(item, index)).join("")}
-                </div>
-              </article>
-
-              <article class="thesis-panel thesis-panel-wide" data-reveal>
-                <div class="thesis-layout">
-                  <div class="thesis-main">
-                    <p class="section-eyebrow">${siteContent.thesis.eyebrow}</p>
-                    <h3>${siteContent.thesis.title}</h3>
-                    <p class="thesis-meta">${siteContent.thesis.meta}</p>
-                    <p class="section-copy">${siteContent.thesis.summary}</p>
-                  </div>
-                  <div class="thesis-side">
-                    <ul class="detail-list">
-                      ${siteContent.thesis.bullets.map((detail) => `<li>${detail}</li>`).join("")}
-                    </ul>
-                    <div class="mini-metric-grid thesis-metric-grid">
-                      ${siteContent.thesis.stats.map(renderMiniMetric).join("")}
-                    </div>
-                  </div>
-                </div>
-              </article>
-            </div>
+          <div class="stat-grid">
+            ${siteContent.stats.items.map(renderStatCard).join("")}
           </div>
-        </section>
 
-        <section id="projects" class="section">
-          <div class="container">
-            <div class="section-header section-header-compact" data-reveal>
-              <p class="section-eyebrow">Projects</p>
-              <h2>Key Projects</h2>
-            </div>
-
-            <div class="project-grid">
-              ${siteContent.projects.map(renderProject).join("")}
-            </div>
-          </div>
-        </section>
-
-        <section id="open-source" class="section">
-          <div class="container">
-            <div class="section-header section-header-compact" data-reveal>
-              <p class="section-eyebrow">Open source</p>
-              <h2>Git / OpenSource Contributions</h2>
-              <p class="section-copy">${siteContent.openSource.intro}</p>
-              <p class="section-note">${siteContent.openSource.statusNote}</p>
-            </div>
-
-            <div class="open-board">
-              <aside class="github-panel open-card-shell" data-reveal>
-                <div class="github-mark">
-                  ${renderIcon("github")}
+          <div class="profile-grid">
+            <article class="bio-panel profile-panel-wide" data-reveal>
+              <div class="panel-head">
+                <div>
+                  <p class="section-eyebrow">About</p>
+                  <h3>${siteContent.profile.title}</h3>
                 </div>
-                <p class="card-topline">Live proof layer</p>
-                <h3>${siteContent.openSource.githubPanel.title}</h3>
-                <p>${siteContent.openSource.githubPanel.body}</p>
-                <div class="mini-metric-grid">
-                  ${siteContent.openSource.githubPanel.metrics.map(renderMiniMetric).join("")}
+                <div class="chip-row">
+                  ${siteContent.profile.chips.map((chip) => `<span class="chip">${chip}</span>`).join("")}
                 </div>
-                <div class="mini-link-row">
-                  ${siteContent.openSource.githubPanel.links.map(renderGithubLink).join("")}
-                </div>
-              </aside>
-
-              <article class="quality-panel open-card-shell open-card-wide" data-reveal>
-                <p class="card-topline">Portfolio narrative</p>
-                <h3>${siteContent.openSource.narrative.title}</h3>
-                <p class="section-copy">${siteContent.openSource.narrative.body}</p>
-
-                <div class="quality-grid">
-                  ${siteContent.openSource.narrative.failureModes.map(renderFailureMode).join("")}
-                </div>
-
-                <p class="quality-commercial">${siteContent.openSource.narrative.commercial}</p>
-              </article>
-
-              <section class="open-subsection open-card-shell" data-reveal>
-                <div class="subsection-head">
-                  <div>
-                    <p class="section-eyebrow">Published / shipped</p>
-                    <h3>${siteContent.openSource.shipped.title}</h3>
-                  </div>
-                  <p>${siteContent.openSource.shipped.note}</p>
-                </div>
-
-                <div class="contribution-grid shipped-grid">
-                  ${siteContent.openSource.shipped.items.map(renderContribution).join("")}
-                </div>
-              </section>
-
-              <section class="open-subsection open-card-shell" data-reveal>
-                <div class="subsection-head">
-                  <div>
-                    <p class="section-eyebrow">Pending upstream</p>
-                    <h3>${siteContent.openSource.pending.title}</h3>
-                  </div>
-                  <p>${siteContent.openSource.pending.note}</p>
-                </div>
-
-                <div class="contribution-grid pending-grid">
-                  ${siteContent.openSource.pending.items.map(renderContribution).join("")}
-                </div>
-              </section>
-            </div>
-
-          </div>
-        </section>
-
-        <section id="case-study" class="section">
-          <div class="container">
-            <div class="section-header section-header-compact" data-reveal>
-              <p class="section-eyebrow">Case study</p>
-              <h2>${siteContent.caseStudy.title}</h2>
-              <p class="section-copy">${siteContent.caseStudy.summary}</p>
-            </div>
-
-            <div class="case-study-layout">
-              <article class="impact-panel" data-reveal>
-                <p class="case-study-subtitle">${siteContent.caseStudy.subtitle}</p>
-                <div class="impact-highlight-row">
-                  <span class="highlight-pill">Award: ${siteContent.caseStudy.award}</span>
-                  <span class="highlight-pill">Impact: ${siteContent.caseStudy.impact}</span>
-                </div>
-                <ul class="detail-list">
-                  ${siteContent.caseStudy.details.map((detail) => `<li>${detail}</li>`).join("")}
-                </ul>
-              </article>
-
-              <div class="case-metric-grid">
-                ${siteContent.caseStudy.metrics.map(renderCaseMetric).join("")}
               </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="why-ai" class="section">
-          <div class="container">
-            <div class="section-header section-header-compact" data-reveal>
-              <p class="section-eyebrow">Why I care about AI systems</p>
-              <h2>${siteContent.whyAi.title}</h2>
-              <p class="section-copy">${siteContent.whyAi.body}</p>
-            </div>
-
-            <div class="principle-grid">
-              ${siteContent.whyAi.principles.map(renderPrinciple).join("")}
-            </div>
-          </div>
-        </section>
-
-        <section id="contact" class="section contact-section">
-          <div class="container contact-shell">
-            <article class="contact-panel" data-reveal>
-              <div class="contact-head">
-                <p class="section-eyebrow">Contact / links</p>
-                <h2>${siteContent.contact.title}</h2>
-                <p class="section-copy">${siteContent.contact.body}</p>
-              </div>
-
-              <div class="contact-links">
-                ${siteContent.contact.links.map(renderContactLink).join("")}
+              <p class="section-copy">${siteContent.profile.body}</p>
+              <div class="profile-note-grid">
+                ${siteContent.profile.notes.map((item, index) => renderProfileNote(item, index)).join("")}
               </div>
             </article>
 
-            <div class="social-stack">
-              <article class="social-panel x-panel" data-reveal>
-                <div class="social-head">
-                  <div class="social-title-row">
-                    ${renderIcon("x")}
-                    <div>
-                      <h3>${siteContent.social.x.title}</h3>
-                      <p>${siteContent.social.x.body}</p>
-                    </div>
-                  </div>
-                  <a class="inline-link" href="${siteContent.social.x.href}" target="_blank" rel="noreferrer">
-                    Open profile
-                  </a>
+            <article class="thesis-panel thesis-panel-wide" data-reveal>
+              <div class="thesis-layout">
+                <div class="thesis-main">
+                  <p class="section-eyebrow">${siteContent.thesis.eyebrow}</p>
+                  <h3>${siteContent.thesis.title}</h3>
+                  <p class="thesis-meta">${siteContent.thesis.meta}</p>
+                  <p class="section-copy">${siteContent.thesis.summary}</p>
                 </div>
-                <div class="x-profile-card">
-                  <strong>${siteContent.social.x.handle}</strong>
-                  <p>${siteContent.social.x.body}</p>
-                  <div class="tag-row social-tag-row">
-                    ${siteContent.social.x.tags.map((tag) => `<span class="tag-chip">${tag}</span>`).join("")}
+                <div class="thesis-side">
+                  <ul class="detail-list">
+                    ${siteContent.thesis.bullets.map((detail) => `<li>${detail}</li>`).join("")}
+                  </ul>
+                  <div class="mini-metric-grid thesis-metric-grid">
+                    ${siteContent.thesis.stats.map(renderMiniMetric).join("")}
                   </div>
                 </div>
-              </article>
-
-              <article class="social-panel instagram-panel" data-reveal>
-                <div class="social-head">
-                  <div class="social-title-row">
-                    ${renderIcon("instagram")}
-                    <div>
-                      <h3>${siteContent.social.instagram.title}</h3>
-                      <p>${siteContent.social.instagram.body}</p>
-                    </div>
-                  </div>
-                  <a class="inline-link" href="https://www.instagram.com/kinaventurero" target="_blank" rel="noreferrer">
-                    Open profile
-                  </a>
-                </div>
-
-                <div class="instagram-track instagram-track-static">
-                  ${siteContent.social.instagram.items.map(renderInstagramItem).join("")}
-                </div>
-              </article>
-            </div>
+              </div>
+            </article>
           </div>
-        </section>
-
-        <section class="section contribution-tail-section">
-          <div class="container">
-            <div class="toggle-wrap toggle-wrap-bottom" data-reveal>
-              <button
-                class="button button-secondary toggle-button"
-                id="contribution-toggle"
-                type="button"
-                aria-expanded="false"
-                aria-controls="more-contributions"
-              >
-                View all contributions
-              </button>
-            </div>
-
-            <div class="contribution-grid extended-grid extended-grid-bottom" id="more-contributions" hidden>
-              ${siteContent.openSource.extended.map(renderContribution).join("")}
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer class="site-footer">
-        <div class="container footer-inner">
-          <p>Joaquin Hui Gomez</p>
-          <p>${currentYear} | Built for joaquinh.com</p>
         </div>
-      </footer>
-    </div>
-  `;
-};
+      </section>
 
-const initContributionToggle = () => {
-  const button = document.querySelector("#contribution-toggle");
-  const moreSection = document.querySelector("#more-contributions");
+      <section id="projects" class="section">
+        <div class="container">
+          <div class="section-header section-header-compact" data-reveal>
+            <p class="section-eyebrow">Projects</p>
+            <h2>Key Projects</h2>
+          </div>
 
-  if (!button || !moreSection) {
-    return;
-  }
+          <div class="project-grid">
+            ${siteContent.projects.map(renderProject).join("")}
+          </div>
+        </div>
+      </section>
 
-  button.addEventListener("click", () => {
-    const expanded = button.getAttribute("aria-expanded") === "true";
-    button.setAttribute("aria-expanded", String(!expanded));
-    button.textContent = expanded ? "View all contributions" : "Hide extra contributions";
-    moreSection.hidden = expanded;
-  });
+      <section id="open-source" class="section">
+        <div class="container">
+          <div class="section-header section-header-compact" data-reveal>
+            <p class="section-eyebrow">Open source</p>
+            <h2>Git / OpenSource Contributions</h2>
+            <p class="section-copy">${siteContent.openSource.intro}</p>
+            <p class="section-note">${siteContent.openSource.statusNote}</p>
+          </div>
+
+          <div class="open-board">
+            <aside class="github-panel open-card-shell" data-reveal>
+              <div class="github-mark">
+                ${renderIcon("github")}
+              </div>
+              <p class="card-topline">Live proof layer</p>
+              <h3>${siteContent.openSource.githubPanel.title}</h3>
+              <p>${siteContent.openSource.githubPanel.body}</p>
+              <div class="mini-metric-grid">
+                ${siteContent.openSource.githubPanel.metrics.map(renderMiniMetric).join("")}
+              </div>
+              <div class="mini-link-row">
+                ${siteContent.openSource.githubPanel.links.map(renderGithubLink).join("")}
+              </div>
+            </aside>
+
+            <article class="quality-panel open-card-shell open-card-wide" data-reveal>
+              <p class="card-topline">Portfolio narrative</p>
+              <h3>${siteContent.openSource.narrative.title}</h3>
+              <p class="section-copy">${siteContent.openSource.narrative.body}</p>
+              ${
+                siteContent.openSource.narrative.failureModes?.length
+                  ? `<div class="quality-grid">${siteContent.openSource.narrative.failureModes
+                      .map(renderFailureMode)
+                      .join("")}</div>`
+                  : ""
+              }
+              <p class="quality-commercial">${siteContent.openSource.narrative.commercial}</p>
+            </article>
+
+            <section class="open-subsection open-card-shell" data-reveal>
+              <div class="subsection-head">
+                <div>
+                  <p class="section-eyebrow">Published / shipped</p>
+                  <h3>${siteContent.openSource.shipped.title}</h3>
+                </div>
+                <p>${siteContent.openSource.shipped.note}</p>
+              </div>
+
+              <div class="contribution-grid shipped-grid">
+                ${siteContent.openSource.shipped.items.map(renderContribution).join("")}
+              </div>
+
+              <div class="section-cta-row">
+                <a class="button button-secondary" href="${siteContent.openSource.cta.href}">
+                  ${renderIcon("arrow", "button-icon")}
+                  <span>${siteContent.openSource.cta.label}</span>
+                </a>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section id="case-study" class="section">
+        <div class="container">
+          <div class="section-header section-header-compact" data-reveal>
+            <p class="section-eyebrow">Case study</p>
+            <h2>${siteContent.caseStudy.title}</h2>
+            <p class="section-copy">${siteContent.caseStudy.summary}</p>
+          </div>
+
+          <div class="case-study-layout">
+            <article class="impact-panel" data-reveal>
+              <p class="case-study-subtitle">${siteContent.caseStudy.subtitle}</p>
+              <div class="impact-highlight-row">
+                <span class="highlight-pill">Award: ${siteContent.caseStudy.award}</span>
+                <span class="highlight-pill">Impact: ${siteContent.caseStudy.impact}</span>
+              </div>
+              <ul class="detail-list">
+                ${siteContent.caseStudy.details.map((detail) => `<li>${detail}</li>`).join("")}
+              </ul>
+            </article>
+
+            <div class="case-metric-grid">
+              ${siteContent.caseStudy.metrics.map(renderCaseMetric).join("")}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section contact-section">
+        <div class="container contact-shell contact-shell-single">
+          <article class="contact-panel" data-reveal>
+            <div class="contact-head">
+              <p class="section-eyebrow">Contact / links</p>
+              <h2>${siteContent.contact.title}</h2>
+              <p class="section-copy">${siteContent.contact.body}</p>
+            </div>
+
+            <div class="contact-links">
+              ${siteContent.contact.links.map(renderContactLink).join("")}
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>Joaquin Hui Gomez</p>
+        <p>${currentYear} | Built for joaquinh.com</p>
+      </div>
+    </footer>
+  </div>
+`;
+
+const renderOpenSourcePage = () => `
+  <div class="site-shell">
+    <div class="page-aurora page-aurora-left"></div>
+    <div class="page-aurora page-aurora-right"></div>
+
+    ${renderSiteHeader(siteContent.openSourcePage.nav, "/")}
+
+    <main id="main">
+      <section class="hero section page-intro-section">
+        <div class="container page-intro-grid">
+          <article class="hero-copy page-intro-card" data-reveal>
+            <p class="section-eyebrow">${siteContent.openSourcePage.intro.eyebrow}</p>
+            <h1 class="page-title">${siteContent.openSourcePage.intro.title}</h1>
+            <p class="hero-description">${siteContent.openSourcePage.intro.body}</p>
+            <p class="section-note">${siteContent.openSourcePage.intro.note}</p>
+            <div class="button-row">
+              <a class="button button-primary" href="/">
+                ${renderIcon("chevronLeft", "button-icon")}
+                <span>Back home</span>
+              </a>
+              <a class="button button-secondary" href="https://github.com/joaquinhuigomez" target="_blank" rel="noreferrer">
+                ${renderIcon("github", "button-icon")}
+                <span>View GitHub</span>
+              </a>
+            </div>
+          </article>
+
+          <aside class="github-panel open-card-shell page-proof-card" data-reveal>
+            <div class="github-mark">
+              ${renderIcon("github")}
+            </div>
+            <p class="card-topline">Live proof layer</p>
+            <h3>GitHub remains the source of truth</h3>
+            <p>Merged outcomes, active work, and repo history are all visible in the public record.</p>
+            <div class="mini-metric-grid">
+              ${siteContent.openSourcePage.metrics.map(renderMiniMetric).join("")}
+            </div>
+            <div class="mini-link-row">
+              <a class="mini-link" href="https://github.com/pulls?q=is%3Apr+author%3Ajoaquinhuigomez+is%3Amerged+sort%3Aupdated-desc" target="_blank" rel="noreferrer">
+                ${renderIcon("spark")}
+                <span>Merged PRs</span>
+              </a>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="merged" class="section">
+        <div class="container">
+          <div class="section-header section-header-compact" data-reveal>
+            <p class="section-eyebrow">Merged wins</p>
+            <h2>${siteContent.openSourcePage.merged.title}</h2>
+            <p class="section-copy">${siteContent.openSourcePage.merged.note}</p>
+          </div>
+
+          <div class="contribution-grid oss-merged-grid">
+            ${siteContent.openSourcePage.merged.items.map(renderContribution).join("")}
+          </div>
+        </div>
+      </section>
+
+      <section id="current" class="section">
+        <div class="container">
+          <div class="section-header section-header-compact" data-reveal>
+            <p class="section-eyebrow">Current work</p>
+            <h2>${siteContent.openSourcePage.current.title}</h2>
+            <p class="section-copy">${siteContent.openSourcePage.current.note}</p>
+          </div>
+
+          <div class="contribution-grid oss-current-grid">
+            ${siteContent.openSourcePage.current.items.map(renderContribution).join("")}
+          </div>
+        </div>
+      </section>
+
+      <section id="tools" class="section">
+        <div class="container">
+          <div class="section-header section-header-compact" data-reveal>
+            <p class="section-eyebrow">Public evidence</p>
+            <h2>${siteContent.openSourcePage.tools.title}</h2>
+            <p class="section-copy">${siteContent.openSourcePage.tools.note}</p>
+          </div>
+
+          <div class="contribution-grid oss-tools-grid">
+            ${siteContent.openSourcePage.tools.items.map(renderContribution).join("")}
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>Joaquin Hui Gomez</p>
+        <p>${currentYear} | Built for joaquinh.com</p>
+      </div>
+    </footer>
+  </div>
+`;
+
+const render = () => {
+  app.innerHTML = isOpenSourcePage ? renderOpenSourcePage() : renderHomePage();
 };
 
 const initHeroPopover = () => {
@@ -1278,6 +1290,5 @@ const initReveal = () => {
 
 setMeta();
 render();
-initContributionToggle();
 initHeroPopover();
 initReveal();
