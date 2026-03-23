@@ -1073,6 +1073,7 @@ a {
 .open-subsection {
   display: grid;
   gap: 0.8rem;
+  grid-column: 1 / -1;
 }
 
 .open-card-shell {
@@ -1113,7 +1114,7 @@ a {
 }
 
 .shipped-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .oss-tools-grid {
