@@ -339,7 +339,7 @@ export const siteContent = {
         value: "Amazon PM | $100MM+/yr",
         popover: {
           kind: "role",
-          title: "Amazon PM with technical scope",
+          title: "Amazon PM with ML product scope",
           summary:
             "Program management across PM, SDE, research, and Ops, focused on defining and launching ML decision systems under real operational constraints.",
           metrics: [
@@ -465,7 +465,7 @@ export const siteContent = {
       title: "Amazon Program Manager",
       location: "London, United Kingdom",
       blurb:
-        "Amazon PM operating at the intersection of program leadership and technical execution across MLOps, experimentation, serverless orchestration, and AI-enabled operations.",
+        "Amazon PM operating at the intersection of product leadership and technical execution across MLOps, experimentation, serverless orchestration, and AI-enabled operations.",
       detail:
         "I define requirements, metrics, and launch paths for operator-facing ML systems, then work across business stakeholders, SDEs, and scientists to get them into production.",
       tags: ["#MLOps", "#Serverless", "#AIInfra", "#ProgramLeadership", "#LLMEval"]
@@ -495,7 +495,7 @@ export const siteContent = {
         icon: "amazon",
         label: "Amazon PM",
         detail:
-          "Program leadership with technical scope across logistics optimization, orchestration, and AI-enabled operations.",
+          "ML product and program leadership across logistics optimization, orchestration, and AI-enabled operations.",
         popover: {
           kind: "note",
           title: "Amazon PM operating context",
