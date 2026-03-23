@@ -247,17 +247,17 @@ export const siteContent = {
       },
       {
         icon: "bridge",
-        label: "#CloudMigration",
-        title: "Cloud migration with business ownership",
+        label: "#MLProductLaunch",
+        title: "ML product launch ownership",
         summary:
-          "Moved operational tooling toward AWS-backed workflows while translating ambiguous business rules into production systems.",
+          "I define requirements, operating metrics, and launch paths for ML decision systems used by operators, then work across PM, SDE, and science to ship them into production.",
         bullets: [
-          "Owned automation and cloud-migration recommendations in Amazon middle-mile operations",
-          "Launched dashboards, scripts, and ETL-backed analytics into production",
-          "Bridged business stakeholders, SDEs, and research scientists"
+          "Owned product requirements and decision artifacts for next-generation ML policy launches",
+          "Aligned PM, SDE, scientists, and Ops around production behavior and success metrics",
+          "Used live operating outcomes, not backtests alone, to judge launch quality"
         ],
-        href: "#proof",
-        cta: "See broader background"
+        href: "#case-study",
+        cta: "See Amazon product work"
       },
       {
         icon: "network",
@@ -341,7 +341,7 @@ export const siteContent = {
           kind: "role",
           title: "Amazon PM with technical scope",
           summary:
-            "Program management across SDE and research partnerships, focused on production decision systems in logistics and experimentation.",
+            "Program management across PM, SDE, research, and Ops, focused on defining and launching ML decision systems under real operational constraints.",
           metrics: [
             { value: "$100MM+/yr", label: "Node-level speed impact" },
             { value: "$14MM", label: "Finance-validated savings" },
@@ -350,6 +350,7 @@ export const siteContent = {
           bullets: [
             "Received a skip-level return offer from L4 to L5 during the hiring-freeze period",
             "Consistently rated Exceeds and delivered cumulative $140MM+ savings over my career",
+            "Owned BRD / requirements artifacts and launch alignment for new generations of ML policy and simulation products used by operations",
             "Led node-level optimization across 200 delivery stations under hard cost, labor, and promise constraints",
             "Built AWS-native experiment orchestration for 1-5 GB deterministic bundles and async simulation runs",
             "Automated planning and audit workflows for roughly 1,000 trucks and 4-5MM packages per week"
@@ -466,7 +467,7 @@ export const siteContent = {
       blurb:
         "Amazon PM operating at the intersection of program leadership and technical execution across MLOps, experimentation, serverless orchestration, and AI-enabled operations.",
       detail:
-        "I work across operators, business stakeholders, SDEs, and research scientists to turn ambiguous operational problems into production decision systems with measurable financial impact.",
+        "I define requirements, metrics, and launch paths for operator-facing ML systems, then work across business stakeholders, SDEs, and scientists to get them into production.",
       tags: ["#MLOps", "#Serverless", "#AIInfra", "#ProgramLeadership", "#LLMEval"]
     },
     credentials: [
@@ -499,7 +500,7 @@ export const siteContent = {
           kind: "note",
           title: "Amazon PM operating context",
           body:
-            "I worked across Amazon's first, middle, and last mile to solve network-level problems across the EU and globally, often on programs tied to SVP strategic goals. I led a team and processes handling 50+ dynamic inputs and 30+ metrics while managing ML parameter changes across 200+ nodes affecting 100,000+ trucks weekly across the EU. That operating context is why I build AI systems with a strong bias toward governance, reliable execution, automated validation, and AI audits that combine agentic workflows with deterministic tools. Under my program leadership, two ML launches before Q4 peak helped deliver record reductions in delivery misses and the fastest network speed from 2024 to 2025."
+            "I worked across Amazon's first, middle, and last mile to solve network-level problems across the EU and globally, often on programs tied to SVP strategic goals. I led a team and processes handling 50+ dynamic inputs and 30+ metrics while managing ML parameter changes across 200+ nodes affecting 100,000+ trucks weekly across the EU. A core part of that role was turning ambiguous operational problems into launched ML products with clear requirements, decision logic, and measurable outcomes. That operating context is why I build AI systems with a strong bias toward governance, reliable execution, automated validation, and AI audits that combine agentic workflows with deterministic tools. Under my program leadership, two ML launches before Q4 peak helped deliver record reductions in delivery misses and the fastest network speed from 2024 to 2025."
         }
       },
       {
@@ -717,7 +718,7 @@ export const siteContent = {
     title: "'26 Amazon ATS Program AI Hackathon Most Innovative Solution",
     subtitle: "Amazon PM | applied AI and production operations",
     summary:
-      "Amazon PM work with technical scope, partnering with SDEs and research scientists to turn optimization and experimentation systems into faster business decisions.",
+      "Amazon PM work spanning product definition, ML launch ownership, and technical execution: aligning PM, SDE, science, and Ops to ship decision systems that improved speed and delivered measurable savings.",
     award: "Most Innovative",
     impact: "1440 hours / year estimated savings",
     metrics: [
@@ -738,6 +739,7 @@ export const siteContent = {
       }
     ],
     details: [
+      "Defined requirements and launch artifacts for new generations of existing ML decision systems, aligning PM, SDE, scientists, and Ops around production rollout, operator behavior, and success metrics.",
       "Built a simulation and experiment layer that combined deterministic analysis, LLM-assisted planning, and async AWS-native orchestration.",
       "Used actual production metrics rather than backtests alone, because the network changes continuously and backward-looking wins do not always hold."
     ]
