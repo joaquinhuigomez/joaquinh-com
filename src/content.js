@@ -25,12 +25,12 @@ export const siteContent = {
       body:
         "This page is the denser version of the OSS story: what has already shipped upstream, what is currently in flight, and the public tools that sit underneath the contribution work.",
       note:
-        "Last verified March 23, 2026 from live GitHub profile and PR history."
+        "Last verified March 24, 2026 from live GitHub profile and PR history."
     },
     metrics: [
-      { value: "45", label: "Public repos" },
-      { value: "5", label: "Merged upstream" },
-      { value: "24", label: "Open PRs" }
+      { value: "47", label: "Public repos" },
+      { value: "6", label: "Merged upstream" },
+      { value: "25", label: "Open PRs" }
     ],
     merged: {
       title: "Merged upstream outcomes",
@@ -38,34 +38,34 @@ export const siteContent = {
         "These are the highest-signal external wins to highlight first: concrete fixes, shipped into widely used projects.",
       items: [
         {
+          target: "Continue",
+          title: "Merged Ollama MCP tool-calling fix for Mistral and Gemma3 models",
+          status: "Merged Mar 24",
+          href: "https://github.com/continuedev/continue/pull/11523",
+          summary:
+            "Improves tool-calling reliability in a widely used AI coding environment, which matters directly when teams want local-model workflows that behave predictably instead of failing at model-specific edges.",
+          stars: "32.0k",
+          tags: ["Merged PR", "Tool calling", "Ollama", "Developer workflows"]
+        },
+        {
           target: "OpenAI Agents Python",
           title: "Merged fix preserving MCP and reasoning items during tool cleanup",
           status: "Merged Mar 21",
           href: "https://github.com/openai/openai-agents-python/pull/2700",
           summary:
             "Helps agent teams keep tool-state transitions reliable instead of silently dropping structured context during cleanup flows.",
-          stars: "20.2k",
+          stars: "20.3k",
           tags: ["Merged PR", "Agent reliability", "Python", "MCP"]
         },
         {
-          target: "Mastra",
-          title: "Merged MCP tool-response interoperability fix",
-          status: "Merged Mar 18",
-          href: "https://github.com/mastra-ai/mastra/pull/14372",
+          target: "everything-claude-code",
+          title: "Agent Eval adopted as a Claude Code skill in a 100k+ star repository",
+          status: "Merged Mar 20",
+          href: "https://github.com/affaan-m/everything-claude-code/pull/540",
           summary:
-            "Prevents tool output from disappearing in agent workflows, which matters directly for operator trust and debugging quality.",
-          stars: "22.2k",
-          tags: ["Merged PR", "MCP", "Interoperability", "Agent reliability"]
-        },
-        {
-          target: "Docling",
-          title: "Merged Windows CLI reliability fix for directory input handling",
-          status: "Merged Mar 19",
-          href: "https://github.com/docling-project/docling/pull/3149",
-          summary:
-            "Turns an avoidable CLI failure into a cleaner operator experience for teams processing document workloads across environments.",
-          stars: "56.3k",
-          tags: ["Merged PR", "CLI reliability", "Documents", "Operator UX"]
+            "External adoption proof that the agent-evaluation work is useful beyond my own repos and practical enough for other builders to pick up quickly.",
+          stars: "104.6k",
+          tags: ["Merged PR", "Distribution", "Agent evaluation", "OSS adoption"]
         },
         {
           target: "Phoenix",
@@ -78,14 +78,24 @@ export const siteContent = {
           tags: ["Merged PR", "Observability", "Tracing", "JavaScript"]
         },
         {
-          target: "everything-claude-code",
-          title: "Agent Eval adopted as a Claude Code skill in a 100k+ star repository",
-          status: "Merged Mar 20",
-          href: "https://github.com/affaan-m/everything-claude-code/pull/540",
+          target: "Docling",
+          title: "Merged Windows CLI reliability fix for directory input handling",
+          status: "Merged Mar 19",
+          href: "https://github.com/docling-project/docling/pull/3149",
           summary:
-            "External adoption proof that the agent-evaluation work is useful beyond my own repos and practical enough for other builders to pick up quickly.",
-          stars: "100.7k",
-          tags: ["Merged PR", "Distribution", "Agent evaluation", "OSS adoption"]
+            "Turns an avoidable CLI failure into a cleaner operator experience for teams processing document workloads across environments.",
+          stars: "56.4k",
+          tags: ["Merged PR", "CLI reliability", "Documents", "Operator UX"]
+        },
+        {
+          target: "Mastra",
+          title: "Merged MCP tool-response interoperability fix",
+          status: "Merged Mar 18",
+          href: "https://github.com/mastra-ai/mastra/pull/14372",
+          summary:
+            "Prevents tool output from disappearing in agent workflows, which matters directly for operator trust and debugging quality.",
+          stars: "22.3k",
+          tags: ["Merged PR", "MCP", "Interoperability", "Agent reliability"]
         }
       ]
     },
@@ -101,7 +111,7 @@ export const siteContent = {
           href: "https://github.com/modelcontextprotocol/servers/pull/3611",
           summary:
             "Improves enterprise reliability by preventing a crash path in GitLab repository search, where one edge case can take out a useful workflow.",
-          stars: "81.9k",
+          stars: "82.0k",
           tags: ["Enterprise reliability", "MCP", "GitLab", "TypeScript"]
         },
         {
@@ -111,7 +121,7 @@ export const siteContent = {
           href: "https://github.com/vercel/ai/pull/13512",
           summary:
             "Targets a security issue that matters directly for platform trust when AI systems fetch and validate external resources.",
-          stars: "22.9k",
+          stars: "23.0k",
           tags: ["Security", "Platform trust", "SSRF", "TypeScript"]
         },
         {
@@ -121,7 +131,7 @@ export const siteContent = {
           href: "https://github.com/crewAIInc/crewAI/pull/4912",
           summary:
             "Improves portability across providers so teams do not have to treat tool usage as provider-specific glue code.",
-          stars: "47.0k",
+          stars: "47.1k",
           tags: ["Portability", "MCP", "Schema design", "TypeScript"]
         },
         {
@@ -151,7 +161,7 @@ export const siteContent = {
           href: "https://github.com/microsoft/autogen/pull/7421",
           summary:
             "Preserves structured configuration instead of losing it silently, which is the kind of failure that wastes time because it looks like user error.",
-          stars: "56.1k",
+          stars: "56.2k",
           tags: ["Configuration", "Agent platform", "Reliability", "Python"]
         }
       ]
@@ -266,7 +276,7 @@ export const siteContent = {
         summary:
           "Public work focused on the reliability layer underneath AI products: tool integration, evaluation trust, and operator-safe system behavior.",
         bullets: [
-          "Merged fixes in OpenAI Agents Python and Mastra",
+          "Merged fixes in Continue, OpenAI Agents Python, and Mastra",
           "Shipped support across observability and document-tooling workflows in Phoenix and Docling",
           "Current work in Vercel AI SDK, MCP servers, and adjacent agent platforms"
         ],
@@ -452,7 +462,7 @@ export const siteContent = {
           bullets: [
             "Built AWS-native orchestration for long-running business experiments and simulation workflows",
             "Shipped Python and TypeScript tools for rate limiting, judge calibration, and agent evaluation",
-            "Merged fixes in OpenAI Agents Python, Mastra, Phoenix, and Docling; active work continues across adjacent AI platforms"
+            "Merged fixes in Continue, OpenAI Agents Python, Mastra, Phoenix, and Docling; active work continues across adjacent AI platforms"
           ],
           tags: ["AWS", "Serverless", "Python", "TypeScript", "LLM eval", "AI infra"]
         }
@@ -477,11 +487,11 @@ export const siteContent = {
     ]
   },
   stats: {
-    verifiedOn: "Last verified March 23, 2026 from GitHub profile and live PR history.",
+    verifiedOn: "Last verified March 24, 2026 from GitHub profile and live PR history.",
     items: [
-      { value: "5", label: "Merged upstream", detail: "external repos only" },
-      { value: "45", label: "Public repos", detail: "live GitHub profile count" },
-      { value: "24", label: "Open PRs", detail: "selected work still in review" },
+      { value: "6", label: "Merged upstream", detail: "external repos only" },
+      { value: "47", label: "Public repos", detail: "live GitHub profile count" },
+      { value: "25", label: "Open PRs", detail: "selected work still in review" },
       { value: "1440", label: "Hours / year", detail: "estimated internal ops impact" }
     ]
   },
@@ -618,7 +628,7 @@ export const siteContent = {
     intro:
       "I contribute to the reliability layer underneath AI products: the security, interoperability, evaluation trust, and execution details that decide whether teams can actually ship them.",
     statusNote:
-      "Updated March 23, 2026 from live GitHub history. Homepage highlights shipped upstream outcomes first; deeper detail lives on the dedicated OSS page.",
+      "Updated March 24, 2026 from live GitHub history. Homepage highlights shipped upstream outcomes first; deeper detail lives on the dedicated OSS page.",
     narrative: {
       title: "Why this matters for product teams",
       body:
@@ -645,9 +655,9 @@ export const siteContent = {
       body:
         "GitHub is the clearest public record of how I work: shipped tools, merged upstream fixes, and a still-active contribution pipeline across the AI tooling stack.",
       metrics: [
-        { value: "45", label: "Public repos" },
-        { value: "5", label: "Merged upstream" },
-        { value: "24", label: "Open PRs" }
+        { value: "47", label: "Public repos" },
+        { value: "6", label: "Merged upstream" },
+        { value: "25", label: "Open PRs" }
       ],
       links: [
         {
@@ -668,13 +678,23 @@ export const siteContent = {
       note: "Four homepage cards, each chosen for product consequence and team-level signal.",
       items: [
         {
+          target: "Continue",
+          title: "Merged Ollama MCP tool-calling fix for Mistral and Gemma3 models",
+          status: "Merged Mar 24",
+          href: "https://github.com/continuedev/continue/pull/11523",
+          summary:
+            "Makes local-model tooling more dependable in a popular AI coding environment, which matters when teams want model choice without unpredictable tool-call failures.",
+          stars: "32.0k",
+          tags: ["Merged PR", "Tool calling", "Ollama", "Developer workflows"]
+        },
+        {
           target: "OpenAI Agents Python",
           title: "Merged fix preserving MCP and reasoning items during tool cleanup",
           status: "Merged Mar 21",
           href: "https://github.com/openai/openai-agents-python/pull/2700",
           summary:
             "Keeps agent-system state reliable during cleanup flows, so teams do not lose structured context in a place that is hard to debug after the fact.",
-          stars: "20.2k",
+          stars: "20.3k",
           tags: ["Merged PR", "Agent reliability", "Python", "MCP"]
         },
         {
@@ -684,18 +704,8 @@ export const siteContent = {
           href: "https://github.com/mastra-ai/mastra/pull/14372",
           summary:
             "Prevents tool output from disappearing in agent workflows, which matters directly for operator trust and debugging quality.",
-          stars: "22.2k",
+          stars: "22.3k",
           tags: ["Merged PR", "Interoperability", "MCP", "Agent reliability"]
-        },
-        {
-          target: "Docling",
-          title: "Merged Windows CLI reliability fix for directory input handling",
-          status: "Merged Mar 19",
-          href: "https://github.com/docling-project/docling/pull/3149",
-          summary:
-            "Turns an avoidable CLI failure into a cleaner operator experience for teams running document-processing workloads across environments.",
-          stars: "56.3k",
-          tags: ["Merged PR", "CLI reliability", "Operator UX", "Documents"]
         },
         {
           target: "Phoenix",
