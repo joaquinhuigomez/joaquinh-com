@@ -1,25 +1,458 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Merged upstream fixes, active platform contributions, and public reliability tooling across AI infrastructure, evaluation, and agent ecosystems."
-    />
-    <meta name="theme-color" content="#f4efe6" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <title>Joaquin Hui Gomez | Open-Source Contributions</title>
-  </head>
-  <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Open source — Joaquin Hui Gomez</title>
+<meta name="description" content="The merged-PR record: 39 merged upstream PRs and 33 open across 46 external repos since March 2026, including first-party Anthropic and OpenAI merges. 17 merges named in release notes across 10 projects.">
+<meta name="theme-color" content="#faf9f5">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,ital,wght@6..72,0,400;6..72,0,500;6..72,1,400&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/src/tokens.css">
+<style>
+  .nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--paper) 92%, transparent); border-bottom: 1px solid var(--rule); }
+  .nav-inner { max-width: var(--container); margin-inline: auto; padding: 16px var(--space-5); display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-5); }
+  .nav-mark { font-family: var(--font-heading); font-size: 18px; }
+  .nav-mark .dot { color: var(--accent); }
+  .nav-back { font-size: var(--t-body-sm); color: var(--gray-2); }
+  .nav-back:hover { color: var(--ink); }
+  .nav-right { display: flex; align-items: center; gap: var(--space-4); }
+  .nav-social { display: inline-flex; align-items: center; gap: 10px; padding-left: var(--space-4); border-left: 1px solid var(--rule); }
+  .nav-social a { color: var(--gray-2); display: inline-flex; transition: color var(--dur-hover) var(--ease); }
+  .nav-social a:hover { color: var(--accent); }
+  .nav-social svg { width: 16px; height: 16px; }
+
+  .page-head { padding-block: 96px var(--space-7); }
+  .page-head .eyebrow { margin-bottom: var(--space-4); }
+  .page-head h1 { font-size: clamp(40px, 6vw, 72px); line-height: 1.05; letter-spacing: -0.02em; max-width: 18ch; }
+  .page-head h1 em { font-style: italic; color: var(--ink-2); }
+  .page-head p { margin-top: var(--space-5); max-width: 60ch; color: var(--ink-2); font-size: 19px; }
+
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-5); margin-top: var(--space-7); padding-top: var(--space-7); border-top: 1px solid var(--rule); }
+  @media (min-width: 760px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+  .stat .num { font-family: var(--font-heading); font-size: 56px; line-height: 1; letter-spacing: -0.02em; }
+  .stat .num em { font-style: italic; color: var(--accent); font-size: 28px; vertical-align: super; margin-left: 2px; }
+  .stat .label { display: block; font-size: var(--t-meta); color: var(--gray-2); margin-top: 8px; }
+
+  .sub-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-5); margin-bottom: var(--space-6); padding-bottom: var(--space-3); border-bottom: 1px solid var(--rule); }
+  .sub-head h2 { font-size: 28px; }
+  .sub-head .count { font-family: var(--font-mono); font-size: var(--t-meta); color: var(--gray-2); }
+
+  .ledger { border-top: 1px solid var(--rule); }
+  .row {
+    display: grid; grid-template-columns: 1fr; gap: var(--space-2);
+    padding: var(--space-5) 0; border-bottom: 1px solid var(--rule);
+    transition: background var(--dur-hover) var(--ease);
+  }
+  .row:hover { background: var(--paper-3); }
+  .row:hover .target { color: var(--accent); }
+  @media (min-width: 800px) {
+    .row { grid-template-columns: 240px 1fr 130px 90px 90px; align-items: baseline; gap: var(--space-5); }
+  }
+  .row .target { font-family: var(--font-mono); font-size: var(--t-body-sm); transition: color var(--dur-hover) var(--ease); }
+  .row .target em { color: var(--gray-2); font-style: normal; }
+  .row .summary { color: var(--ink-2); font-size: var(--t-body-sm); }
+  .row .stars, .row .when { font-family: var(--font-mono); font-size: var(--t-meta); color: var(--gray-2); }
+  .row .target em a { border-bottom: 1px solid var(--rule); transition: color var(--dur-hover) var(--ease), border-color var(--dur-hover) var(--ease); }
+  .row .target em a:hover { color: var(--accent); border-color: var(--accent); }
+
+  .rel-lede { max-width: 72ch; color: var(--ink-2); font-size: var(--t-body-sm); margin-bottom: var(--space-5); }
+  .releases { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr; column-gap: var(--space-6); border-top: 1px solid var(--rule); }
+  @media (min-width: 900px) { .releases { grid-template-columns: repeat(2, 1fr); } }
+  .rel { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2) var(--space-3); padding: var(--space-3) 0; border-bottom: 1px solid var(--rule); min-width: 0; }
+  .rel .proj { font-family: var(--font-mono); font-size: var(--t-body-sm); overflow-wrap: anywhere; }
+  .rel .prs { font-family: var(--font-mono); font-size: var(--t-meta); color: var(--gray-2); }
+  .rel .prs a:hover { color: var(--accent); }
+  .rel .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-left: auto; }
+  .rel .tags .pill { font-family: var(--font-mono); transition: border-color var(--dur-hover) var(--ease), color var(--dur-hover) var(--ease); }
+  .rel .tags .pill:hover { border-color: var(--ink); color: var(--ink); }
+  .rel-note { margin-top: var(--space-4); }
+
+  .evidence-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-5); }
+  @media (min-width: 760px) { .evidence-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1000px) { .evidence-grid { grid-template-columns: repeat(4, 1fr); } }
+  .ev-card { padding: var(--space-5); background: var(--paper-3); border: 1px solid var(--rule); display: flex; flex-direction: column; transition: border-color var(--dur-hover) var(--ease); }
+  .ev-card:hover { border-color: var(--ink); }
+  .ev-card .kind { font-family: var(--font-mono); font-size: 11px; color: var(--gray-2); letter-spacing: 0.06em; text-transform: lowercase; }
+  .ev-card h3 { margin-top: var(--space-2); font-size: 19px; line-height: 1.3; }
+  .ev-card p { margin-top: var(--space-3); font-size: var(--t-body-sm); color: var(--ink-2); flex: 1; }
+  .ev-card .meta { margin-top: var(--space-4); }
+
+  /* — technical write-up section — */
+  .writeup {
+    max-width: 680px;
+    margin-inline: auto;
+  }
+  .writeup .eyebrow { color: var(--accent); margin-bottom: var(--space-3); }
+  .writeup h3 {
+    font-family: var(--font-heading);
+    font-size: clamp(22px, 2.4vw, 28px);
+    line-height: 1.25;
+    margin-bottom: var(--space-3);
+    letter-spacing: -0.012em;
+  }
+  .writeup h3 em { font-style: italic; color: var(--ink-2); }
+  .writeup .writeup-meta {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--gray-2); letter-spacing: 0.04em;
+    margin-bottom: var(--space-5);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--rule);
+  }
+  .writeup p {
+    font-size: 16px; line-height: 1.65;
+    color: var(--ink-2);
+    margin-bottom: var(--space-4);
+  }
+  .writeup p strong { color: var(--ink); font-weight: 500; }
+  .writeup ol {
+    padding-left: var(--space-5);
+    margin: var(--space-4) 0;
+    list-style: decimal;
+  }
+  .writeup ol li {
+    font-size: 16px; line-height: 1.6;
+    color: var(--ink-2);
+    margin-bottom: var(--space-3);
+  }
+  .writeup ol li strong { color: var(--ink); font-weight: 500; }
+  .writeup a.inline-link {
+    border-bottom: 1px solid var(--ink);
+    transition: border-color var(--dur-hover) var(--ease), color var(--dur-hover) var(--ease);
+  }
+  .writeup a.inline-link:hover { border-color: var(--accent); color: var(--accent); }
+
+  .footer { padding: var(--space-7) 0 var(--space-6); color: var(--gray-2); font-size: var(--t-meta); border-top: 1px solid var(--rule); }
+  .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-mark">joaquin hui g<span class="dot">.</span></a>
+    <div class="nav-right">
+      <a href="/" class="nav-back">← back</a>
+      <span class="nav-social">
+        <a href="https://github.com/joaquinhuigomez" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></a>
+        <a href="https://www.linkedin.com/in/joaquin-h-352927a9/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5 1.78 1.78 0 0 1 6.5 8.25zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg></a>
+        <a href="https://x.com/ViajaryTragar" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://www.instagram.com/kinaventurero" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58 0 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.2 0 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58 0-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85 0-3.2 0-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.18 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07c-4.36.2-6.78 2.62-6.98 6.98C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.36-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.36-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg></a>
+      </span>
+    </div>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <div class="eyebrow">open source</div>
+    <h1>Open-source contributions across the <em>AI infrastructure stack.</em></h1>
+    <p>39 merged upstream PRs and 33 open across 46 external repos since March 2026, including <strong>first-party merges in Anthropic's Claude Agent SDK and OpenAI's Agents SDK</strong>. Coverage spans LLM serving, agent frameworks, RAG, document AI, voice agents, observability, MLOps, and data infrastructure.</p>
+
+    <div class="stats">
+      <div class="stat"><div class="num">39</div><span class="label">merged · since march 2026</span></div>
+      <div class="stat"><div class="num">33</div><span class="label">in flight</span></div>
+      <div class="stat"><div class="num">46</div><span class="label">repos · merged or open</span></div>
+      <div class="stat"><div class="num">17</div><span class="label">merges named in release notes · across 10 projects</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="section" style="background: var(--paper-3); border-block: 1px solid var(--rule);">
+  <div class="container">
+    <header class="sub-head"><h2>shipped in releases</h2><span class="count">17 merges · 10 projects</span></header>
+    <p class="rel-lede">17 of the 39 merged PRs are named in the published release notes of 10 projects. Version tags link to the release notes; PR numbers link to the pull request.</p>
+    <ul class="releases">
+      <li class="rel">
+        <span class="proj">openai/openai-agents-python</span>
+        <span class="prs"><a href="https://github.com/openai/openai-agents-python/pull/2700" target="_blank" rel="noopener">#2700</a></span>
+        <span class="tags"><a class="pill" href="https://github.com/openai/openai-agents-python/releases/tag/v0.13.0" target="_blank" rel="noopener">v0.13.0</a></span>
+      </li>
+      <li class="rel">
+        <span class="proj">huggingface/transformers</span>
+        <span class="prs"><a href="https://github.com/huggingface/transformers/pull/45582" target="_blank" rel="noopener">#45582</a></span>
+        <span class="tags"><a class="pill" href="https://github.com/huggingface/transformers/releases/tag/v5.7.0" target="_blank" rel="noopener">v5.7.0</a></span>
+      </li>
+      <li class="rel">
+        <span class="proj">huggingface/huggingface_hub</span>
+        <span class="prs"><a href="https://github.com/huggingface/huggingface_hub/pull/3997" target="_blank" rel="noopener">#3997</a> <a href="https://github.com/huggingface/huggingface_hub/pull/4062" target="_blank" rel="noopener">#4062</a></span>
+        <span class="tags"><a class="pill" href="https://github.com/huggingface/huggingface_hub/releases/tag/v1.9.0" target="_blank" rel="noopener">v1.9.0</a><a class="pill" href="https://github.com/huggingface/huggingface_hub/releases/tag/v1.12.0" target="_blank" rel="noopener">v1.12.0</a></span>
+      </li>
+      <li class="rel">
+        <span class="proj">axolotl-ai-cloud/axolotl</span>
+        <span class="prs"><a href="https://github.com/axolotl-ai-cloud/axolotl/pull/3555" target="_blank" rel="noopener">#3555</a> <a href="https://github.com/axolotl-ai-cloud/axolotl/pull/3575" target="_blank" rel="noopener">#3575</a> <a href="https://github.com/axolotl-ai-cloud/axolotl/pull/3595" target="_blank" rel="noopener">#3595</a></span>
+        <span class="tags"><a class="pill" href="https://github.com/axolotl-ai-cloud/axolotl/releases/tag/v0.16.0" target="_blank" rel="noopener">v0.16.0</a><a class="pill" href="https://github.com/axolotl-ai-cloud/axolotl/releases/tag/v0.17.0" target="_blank" rel="noopener">v0.17.0</a></span>
+      </li>
+      <li class="rel">
+        <span class="proj">livekit/agents</span>
+        <span class="prs"><a href="https://github.com/livekit/agents/pull/5403" target="_blank" rel="noopener">#5403</a> <a href="https://github.com/livekit/agents/pull/5506" target="_blank" rel="noopener">#5506</a></span>
+        <span class="tags"><a class="pill" href="https://github.com/livekit/agents/releases/tag/livekit-agents%401.5.3" target="_blank" rel="noopener">1.5.3</a><a class="pill" href="https://github.com/livekit/agents/releases/tag/livekit-agents%401.5.7" target="_blank" rel="noopener">1.5.7</a></span>
+      </li>
+      <li class="rel">
+        <span class="proj">zenml-io/zenml</span>
+        <span class="prs"><a href="https://github.com/zenml-io/zenml/pull/4686" target="_blank" rel="noopener">#4686</a> <a href="https://github.com/zenml-io/zenml/pull/4748" target="_blank" rel="noopener">#4748</a></span>
+        <span class="tags"><a class="pill" href="https://github.com/zenml-io/zenml/releases/tag/0.94.4" target="_blank" rel="noopener">0.94.4</a><a class="pill" href="https://github.com/zenml-io/zenml/releases/tag/0.95.0" target="_blank" rel="noopener">0.95.0</a></span>
+      </li>
+      <li class="rel">
+        <span class="proj">continuedev/continue</span>
+        <span class="prs"><a href="https://github.com/continuedev/continue/pull/11523" target="_blank" rel="noopener">#11523</a></span>
+        <span class="tags"><a class="pill" href="https://github.com/continuedev/continue/releases/tag/v1.2.18-vscode" target="_blank" rel="noopener">v1.2.18-vscode</a><a class="pill" href="https://github.com/continuedev/continue/releases/tag/v1.3.34-vscode" target="_blank" rel="noopener">v1.3.34-vscode</a><a class="pill" href="https://github.com/continuedev/continue/releases/tag/v1.0.63-jetbrains" target="_blank" rel="noopener">v1.0.63-jetbrains</a><a class="pill" href="https://github.com/continuedev/continue/releases/tag/v1.0.64-jetbrains" target="_blank" rel="noopener">v1.0.64-jetbrains</a></span>
+      </li>
+      <li class="rel">
+        <span class="proj">apache/arrow-rs</span>
+        <span class="prs"><a href="https://github.com/apache/arrow-rs/pull/9623" target="_blank" rel="noopener">#9623</a></span>
+        <span class="tags"><a class="pill" href="https://github.com/apache/arrow-rs/releases/tag/58.2.0" target="_blank" rel="noopener">58.2.0</a></span>
+      </li>
+      <li class="rel">
+        <span class="proj">Automattic/harper</span>
+        <span class="prs"><a href="https://github.com/Automattic/harper/pull/3093" target="_blank" rel="noopener">#3093</a> <a href="https://github.com/Automattic/harper/pull/3213" target="_blank" rel="noopener">#3213</a></span>
+        <span class="tags"><a class="pill" href="https://github.com/Automattic/harper/releases/tag/v2.0.0" target="_blank" rel="noopener">v2.0.0</a><a class="pill" href="https://github.com/Automattic/harper/releases/tag/v2.1.0" target="_blank" rel="noopener">v2.1.0</a></span>
+      </li>
+      <li class="rel">
+        <span class="proj">lancedb/lancedb</span>
+        <span class="prs"><a href="https://github.com/lancedb/lancedb/pull/3731" target="_blank" rel="noopener">#3731</a> <a href="https://github.com/lancedb/lancedb/pull/4192" target="_blank" rel="noopener">#4192</a></span>
+        <span class="tags"><a class="pill" href="https://github.com/lancedb/lancedb/releases/tag/v0.37.1" target="_blank" rel="noopener">v0.37.1</a><a class="pill" href="https://github.com/lancedb/lancedb/releases/tag/v0.40.0-beta.0" target="_blank" rel="noopener">v0.40.0-beta.0</a></span>
+      </li>
+    </ul>
+    <p class="rel-note meta">Also listed in contributor rosters for polars and ray releases.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <header class="sub-head">
+      <h2>merged wins</h2>
+      <span class="count">15 repos · 23 of 39 merged PRs · ordered by signal</span>
+    </header>
+
+    <div class="ledger">
+      <a class="row" href="https://github.com/anthropics/claude-agent-sdk-python/pull/927" target="_blank" rel="noopener">
+        <div class="target">anthropics/claude-agent-sdk-python <em>#927</em></div>
+        <div class="summary"><strong>First-party Anthropic agent SDK.</strong> Raised the minimum mcp version to close CVE-2025-66416 (MCP DNS-rebinding protection off by default); released in v0.2.82 within hours of merge.</div>
+        <div><span class="pill status-merged"><span class="dot"></span>merged</span></div>
+        <div class="stars">★ 8.2k</div>
+        <div class="when mono"><time datetime="2026-05-14">may 2026</time></div>
+      </a>
+      <a class="row" href="https://github.com/openai/openai-agents-python/pull/2700" target="_blank" rel="noopener">
+        <div class="target">openai/openai-agents-python <em>#2700</em></div>
+        <div class="summary"><strong>First-party OpenAI agents SDK.</strong> Stopped tool cleanup from silently dropping MCP and reasoning items from an agent's history; shipped in v0.13.0.</div>
+        <div><span class="pill status-merged"><span class="dot"></span>merged</span></div>
+        <div class="stars">★ 29.8k</div>
+        <div class="when mono"><time datetime="2026-03-21">mar 2026</time></div>
+      </a>
+      <a class="row" href="https://github.com/huggingface/transformers/pull/45582" target="_blank" rel="noopener">
+        <div class="target">huggingface/transformers <em>#45582</em></div>
+        <div class="summary">Removed a stale, misleading num_return_sequences warning on the continuous-batching generate path; shipped in v5.7.0.</div>
+        <div><span class="pill status-merged"><span class="dot"></span>merged</span></div>
+        <div class="stars">★ 166.8k</div>
+        <div class="when mono"><time datetime="2026-04-24">apr 2026</time></div>
+      </a>
+      <a class="row" href="https://github.com/docling-project/docling/pull/3149" target="_blank" rel="noopener">
+        <div class="target">docling-project/docling <em>#3149</em></div>
+        <div class="summary">Fixed a PermissionError crash when the CLI is given a directory on Windows.</div>
+        <div><span class="pill status-merged"><span class="dot"></span>merged</span></div>
+        <div class="stars">★ 68.2k</div>
+        <div class="when mono"><time datetime="2026-03-19">mar 2026</time></div>
+      </a>
+      <a class="row" href="https://github.com/BerriAI/litellm/pull/25599" target="_blank" rel="noopener">
+        <div class="target">BerriAI/litellm <em>#25599</em></div>
+        <div class="summary">Captured time-to-first-token for streaming /v1/messages across Anthropic, Bedrock, and Vertex AI.</div>
+        <div><span class="pill status-merged"><span class="dot"></span>merged</span></div>
+        <div class="stars">★ 59.9k</div>
+        <div class="when mono"><time datetime="2026-04-16">apr 2026</time></div>
+      </a>
+      <div class="row">
+        <div class="target">run-llama/llama_index <em><a href="https://github.com/run-llama/llama_index/pull/21423" target="_blank" rel="noopener">#21423</a> + <a href="https://github.com/run-llama/llama_index/pull/21172" target="_blank" rel="noopener">#21172</a></em></div>
+        <div class="summary">Passed Anthropic thinking_delta through streaming output; fixed input_file serialization for the OpenAI Responses API.</div>
+        <div><span class="pill status-merged"><span class="dot"></span>merged ×2</span></div>
+        <div class="stars">★ 52.4k</div>
+        <div class="when mono" title="2026-05-04, 2026-03-27">mar–may 2026</div>
+      </div>
+      <div class="row">
+        <div class="target">ray-project/ray <em><a href="https://github.com/ray-project/ray/pull/62144" target="_blank" rel="noopener">#62144</a> + <a href="https://github.com/ray-project/ray/pull/64110" target="_blank" rel="noopener">#64110</a></em></div>
+        <div class="summary">Made Serve autoscaling use wall-clock time so scale-up does not drift; used the user's model_id instead of a remote URI as the cache key for vLLM engine configs.</div>
+        <div><span class="pill status-merged"><span class="dot"></span>merged ×2</span></div>
+        <div class="stars">★ 43.9k</div>
+        <div class="when mono" title="2026-04-03, 2026-06-26">apr–jun 2026</div>
+      </div>
+      <a class="row" href="https://github.com/pola-rs/polars/pull/27088" target="_blank" rel="noopener">
+        <div class="target">pola-rs/polars <em>#27088</em></div>
+        <div class="summary">Fixed a panic when over was given an empty order_by.</div>
+        <div><span class="pill status-merged"><span class="dot"></span>merged</span></div>
+        <div class="stars">★ 39.9k</div>
+        <div class="when mono"><time datetime="2026-04-08">apr 2026</time></div>
+      </a>
+      <a class="row" href="https://github.com/continuedev/continue/pull/11523" target="_blank" rel="noopener">
+        <div class="target">continuedev/continue <em>#11523</em></div>
+        <div class="summary">Fixed MCP tool calling for Mistral and Gemma3 models running through Ollama.</div>
+        <div><span class="pill status-merged"><span class="dot"></span>merged</span></div>
+        <div class="stars">★ 36.1k</div>
+        <div class="when mono"><time datetime="2026-03-24">mar 2026</time></div>
+      </a>
+      <a class="row" href="https://github.com/mastra-ai/mastra/pull/14372" target="_blank" rel="noopener">
+        <div class="target">mastra-ai/mastra <em>#14372</em></div>
+        <div class="summary">Extracted content from MCP tool responses that have no outputSchema, so tool output stops disappearing.</div>
+        <div><span class="pill status-merged"><span class="dot"></span>merged</span></div>
+        <div class="stars">★ 28.4k</div>
+        <div class="when mono"><time datetime="2026-03-18">mar 2026</time></div>
+      </a>
+      <div class="row">
+        <div class="target">transact-rs/sqlx <em><a href="https://github.com/transact-rs/sqlx/pull/4203" target="_blank" rel="noopener">#4203</a> + <a href="https://github.com/transact-rs/sqlx/pull/4202" target="_blank" rel="noopener">#4202</a> + <a href="https://github.com/transact-rs/sqlx/pull/4219" target="_blank" rel="noopener">#4219</a></em></div>
+        <div class="summary">Three SQLite fixes: REGEXP coercion; replaced from_utf8_unchecked in error handling; lossy handling of invalid UTF-8 in custom collations.</div>
+        <div><span class="pill status-merged"><span class="dot"></span>merged ×3</span></div>
+        <div class="stars">★ 17.5k</div>
+        <div class="when mono" title="2026-03-30 to 2026-04-07">mar–apr 2026</div>
+      </div>
+      <div class="row">
+        <div class="target">livekit/agents <em><a href="https://github.com/livekit/agents/pull/5403" target="_blank" rel="noopener">#5403</a> + <a href="https://github.com/livekit/agents/pull/5506" target="_blank" rel="noopener">#5506</a></em></div>
+        <div class="summary">Emitted OTel span events for developer-role messages; reported the Deepgram connection-lifetime remainder so voice usage matches billing.</div>
+        <div><span class="pill status-merged"><span class="dot"></span>merged ×2</span></div>
+        <div class="stars">★ 14.4k</div>
+        <div class="when mono" title="2026-04-10, 2026-04-23">apr 2026</div>
+      </div>
+      <div class="row">
+        <div class="target">axolotl-ai-cloud/axolotl <em><a href="https://github.com/axolotl-ai-cloud/axolotl/pull/3555" target="_blank" rel="noopener">#3555</a> + <a href="https://github.com/axolotl-ai-cloud/axolotl/pull/3575" target="_blank" rel="noopener">#3575</a> + <a href="https://github.com/axolotl-ai-cloud/axolotl/pull/3595" target="_blank" rel="noopener">#3595</a></em></div>
+        <div class="summary">Three merges in the fine-tuning framework: added precompute_ref_log_probs to the config schema; skipped a redundant evaluation on checkpoint resume; handled list content on system messages in the Qwen 3.5 chat template.</div>
+        <div><span class="pill status-merged"><span class="dot"></span>merged ×3</span></div>
+        <div class="stars">★ 12.5k</div>
+        <div class="when mono" title="2026-04-01 to 2026-04-13">apr 2026</div>
+      </div>
+      <div class="row">
+        <div class="target">lancedb/lancedb <em><a href="https://github.com/lancedb/lancedb/pull/3731" target="_blank" rel="noopener">#3731</a> + <a href="https://github.com/lancedb/lancedb/pull/4192" target="_blank" rel="noopener">#4192</a></em></div>
+        <div class="summary">Made open_table distinguish a corrupt table from a missing one; turned a panic on invalid table names into a proper error.</div>
+        <div><span class="pill status-merged"><span class="dot"></span>merged ×2</span></div>
+        <div class="stars">★ 11.6k</div>
+        <div class="when mono" title="2026-07-30, 2026-09-16">jul–sep 2026</div>
+      </div>
+      <a class="row" href="https://github.com/apache/arrow-rs/pull/9623" target="_blank" rel="noopener">
+        <div class="target">apache/arrow-rs <em>#9623</em></div>
+        <div class="summary">Fixed the IPC reader failing when a null-only column has no dictionary batch; verified against the Arrow spec by the PMC reviewer.</div>
+        <div><span class="pill status-merged"><span class="dot"></span>merged</span></div>
+        <div class="stars">★ 3.6k</div>
+        <div class="when mono"><time datetime="2026-04-08">apr 2026</time></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background: var(--paper-3); border-block: 1px solid var(--rule);">
+  <div class="container">
+    <header class="sub-head"><h2>current work</h2><span class="count">5 of 33 · selected by signal</span></header>
+    <div class="ledger">
+      <a class="row" href="https://github.com/anthropics/claude-agent-sdk-python/pull/892" target="_blank" rel="noopener">
+        <div class="target">anthropics/claude-agent-sdk-python <em>#892</em></div>
+        <div class="summary"><strong>First-party Anthropic agent SDK; open, awaiting maintainer review.</strong> Reap MCP grandchild processes on close via a process group so shutdown does not leak subprocesses.</div>
+        <div><span class="pill status-open"><span class="dot"></span>open</span></div>
+        <div class="stars">★ 8.2k</div>
+        <div class="when mono"><time datetime="2026-04-28">apr 2026</time></div>
+      </a>
+      <a class="row" href="https://github.com/weaviate/weaviate-python-client/pull/2173" target="_blank" rel="noopener">
+        <div class="target">weaviate/weaviate-python-client <em>#2173</em></div>
+        <div class="summary">Stop mutating a reused vector_index_config when adding a quantizer. Approved 2026-09-28.</div>
+        <div><span class="pill status-review"><span class="dot"></span>approved</span></div>
+        <div class="stars">★ 228</div>
+        <div class="when mono"><time datetime="2026-09-24">sep 2026</time></div>
+      </a>
+      <a class="row" href="https://github.com/lancedb/lancedb/pull/4203" target="_blank" rel="noopener">
+        <div class="target">lancedb/lancedb <em>#4203</em></div>
+        <div class="summary">Stop table_names from listing loose .lance files as tables. Follow-on to two merged lancedb fixes.</div>
+        <div><span class="pill status-open"><span class="dot"></span>open</span></div>
+        <div class="stars">★ 11.6k</div>
+        <div class="when mono"><time datetime="2026-09-16">sep 2026</time></div>
+      </a>
+      <a class="row" href="https://github.com/topoteretes/cognee/pull/5192" target="_blank" rel="noopener">
+        <div class="target">topoteretes/cognee <em>#5192</em></div>
+        <div class="summary">Run guarded text-to-SQL through exec_driver_sql instead of text().</div>
+        <div><span class="pill status-open"><span class="dot"></span>open</span></div>
+        <div class="stars">★ 31.2k</div>
+        <div class="when mono"><time datetime="2026-09-23">sep 2026</time></div>
+      </a>
+      <a class="row" href="https://github.com/chroma-core/chroma/pull/7390" target="_blank" rel="noopener">
+        <div class="target">chroma-core/chroma <em>#7390</em></div>
+        <div class="summary">Reject NUL bytes in documents to protect the FTS5 index.</div>
+        <div><span class="pill status-open"><span class="dot"></span>open</span></div>
+        <div class="stars">★ 29.4k</div>
+        <div class="when mono"><time datetime="2026-07-05">jul 2026</time></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <article class="writeup">
+      <div class="eyebrow">selected technical write-up</div>
+      <h3>Production inference autoscaling — Ray Serve scale-up timing under <em>real traffic</em>.</h3>
+      <div class="writeup-meta">compute infra · production model serving · ray serve · 2026-04 · ~520 words</div>
+
+      <p>When you serve a production LLM at scale, the <strong>autoscaler is the contract between your latency SLO and your inference cost</strong>. Under-provision and TTFT regresses; over-provision and the bill compounds against models that don't always need them.</p>
+
+      <p>Ray Serve is the layer that owns this contract for a meaningful slice of the open-source model-serving stack — including teams running on <strong>KubeRay over Kubernetes</strong>, on <strong>EKS / GKE / AKS for multi-cloud parity</strong>, and on standalone clusters with <strong>GPU and accelerator pools</strong> attached. The autoscaler decides when to spin up replicas, when to wind them down, and how to do this under bursty traffic without thrashing.</p>
+
+      <p><a class="inline-link" href="https://github.com/ray-project/ray/pull/62144" target="_blank" rel="noopener">PR #62144</a> (merged April 3, 2026) corrected a timing drift in the scale-up path. The autoscaler's decision loop was running on a periodic check cycle, but the wall-clock path was drifting under real traffic — meaning <strong>scale-up decisions were being made later than the policy intended</strong>. Under steady load this is invisible; under bursty load, drift translates directly into TTFT regression for a measurable share of requests during the scale-up window.</p>
+
+      <p>The fix lives in the controller-loop timing path. The implementation detail is small (a few lines of clock arithmetic); the operational implication isn't. Production model serving teams running Ray Serve in inference roles — whether on KubeRay, on Cloudflare Workers AI, on Bedrock or Vertex backends layered behind LiteLLM gateways, or directly against accelerators in fleet deployments — depend on the autoscaler tracking the policy it advertises. <strong>Drift turns the policy into a fiction.</strong></p>
+
+      <p>This is the category of contribution that doesn't show up in feature dashboards but matters when teams are actually shipping inference at scale. It pairs cleanly with the <a class="inline-link" href="https://github.com/BerriAI/litellm/pull/25599" target="_blank" rel="noopener">LiteLLM <code class="mono" style="font-size: 14px">/v1/messages</code> TTFT instrumentation</a> — once you can observe TTFT correctly across providers, the autoscaler timing is the next thing operators need to be honest. Both are pieces of the same loop: <strong>measure → decide → act → measure</strong>.</p>
+
+      <p>Three implications worth surfacing:</p>
+
+      <ol>
+        <li><strong>Scale-up timing is multi-cloud-invariant.</strong> Ray Serve runs identically on EKS, GKE, AKS, and on bare-metal clusters with NVIDIA, AMD, or Trainium pools. The fix lifts every deployment topology equivalently. There is no AWS-specific carve-out.</li>
+
+        <li><strong>GPU and accelerator scheduling under autoscaling is a coupled problem.</strong> Ray's resource scheduler hands GPU placement to the autoscaler's replica decisions; drift in one propagates to the other. A fix in the timing path also tightens GPU placement in practice.</li>
+
+        <li><strong>Production observability requires the autoscaler to be honest.</strong> Scale events surface in Prometheus exporters; drift means the metrics say one thing and the underlying behavior is another. Operator trust collapses fast when this happens.</li>
+      </ol>
+
+      <p>The merged contribution is one fix in one repo, but the reasoning is the operating thesis: <strong>inference-stack reliability is downstream of timing, observability, and scheduler honesty, in that order.</strong> The OSS contributions in this repo gravitate toward that frame deliberately — Ray Serve, LiteLLM TTFT capture, Continue's MCP tool calling, OpenAI Agents Python's MCP cleanup, Mastra's tool-response interop — all in the scheduling-or-instrumentation layer that operators depend on.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section" style="background: var(--paper-3); border-block: 1px solid var(--rule);">
+  <div class="container">
+    <header class="sub-head"><h2>public evidence</h2><span class="count">tools · benchmarks · adoption</span></header>
+    <div class="evidence-grid">
+      <a class="ev-card" href="https://github.com/joaquinhuigomez/llm-judge-calibrator/blob/master/benchmark/RESULTS.md" target="_blank" rel="noopener">
+        <div class="kind">benchmark · published</div>
+        <h3>LLM Judge Calibrator</h3>
+        <p>6-model judge reliability benchmark with Cohen's kappa, position-bias detection, and verbosity analysis. Turns evaluator reliability into something teams can measure before trusting it in model-selection decisions.</p>
+        <div class="meta">github · joaquinhuigomez/llm-judge-calibrator</div>
+      </a>
+      <a class="ev-card" href="https://github.com/joaquinhuigomez/token-aware-rate-limiter" target="_blank" rel="noopener">
+        <div class="kind">tool · shipped</div>
+        <h3>Token-Aware Rate Limiter</h3>
+        <p>Multi-tenant LLM rate limiting with atomic Redis Lua token buckets, Jain's fairness index, and a real-time observability dashboard. Reference implementation for fair LLM API workloads.</p>
+        <div class="meta">github · joaquinhuigomez/token-aware-rate-limiter</div>
+      </a>
+      <a class="ev-card" href="https://github.com/joaquinhuigomez/agent-eval" target="_blank" rel="noopener">
+        <div class="kind">tool · adopted upstream</div>
+        <h3>Agent Eval</h3>
+        <p>Head-to-head coding-agent harness with pass rate, cost, time, and consistency reporting. Adopted upstream as a skill in the ECC Claude Code skills collection.</p>
+        <div class="meta">github · joaquinhuigomez/agent-eval</div>
+      </a>
+      <a class="ev-card" href="https://github.com/joaquinhuigomez" target="_blank" rel="noopener">
+        <div class="kind">profile · live</div>
+        <h3>GitHub profile</h3>
+        <p>The fastest way to inspect the full repo history, the merged work, and the active contribution pipeline in one place. Updated daily.</p>
+        <div class="meta">github · joaquinhuigomez</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <span>© 2026 Joaquin Hui Gomez</span>
+      <span class="mono">cloudflare pages · last verified september 29, 2026</span>
+    </div>
+  </div>
+</footer>
+
+</body>
 </html>

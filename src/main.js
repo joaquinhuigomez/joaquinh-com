@@ -439,6 +439,15 @@ const renderContribution = (item) => `
       <span class="contribution-status">${item.status}</span>
     </div>
     <h3>${item.title}</h3>
+    ${
+      item.starBar
+        ? `
+          <div class="contribution-star-track" aria-hidden="true">
+            <span class="contribution-star-fill" style="width: ${item.starBar}%"></span>
+          </div>
+        `
+        : ""
+    }
     <p>${item.summary}</p>
     ${
       item.tags?.length
@@ -460,10 +469,29 @@ const renderFailureMode = (item) => `
   </article>
 `;
 
+const renderBreadthGroup = (group) => `
+  <article class="breadth-group">
+    <p class="breadth-label">${group.label}</p>
+    <div class="tag-row breadth-tag-row">
+      ${group.items.map((item) => `<span class="tag-chip">${item}</span>`).join("")}
+    </div>
+  </article>
+`;
+
 const renderGithubLink = (item) => `
   <a class="mini-link" href="${item.href}"${item.external === false ? "" : ' target="_blank" rel="noreferrer"'}>
     ${renderIcon(item.icon)}
     <span>${item.label}</span>
+  </a>
+`;
+
+const renderHeroAccentBadge = (item) => `
+  <a class="hero-accent-badge" href="${item.href}"${item.external === false ? "" : ' target="_blank" rel="noreferrer"'}>
+    ${renderIcon(item.icon, "hero-accent-icon")}
+    <div class="hero-accent-copy">
+      <strong>${item.value}</strong>
+      <span>${item.label}</span>
+    </div>
   </a>
 `;
 
@@ -564,13 +592,68 @@ const renderProgrammingLanguage = (item) => `
   </article>
 `;
 
-const renderRegionPanel = (item) => `
-  <article class="region-panel" data-region-block="${item.id}">
-    <p class="region-label">${item.label}</p>
-    <p class="region-subtitle">${item.subtitle}</p>
-    <ul class="popover-list compact-list">
-      ${item.items.map((entry) => `<li>${entry}</li>`).join("")}
-    </ul>
+const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+const getFootprintLabelDimensions = (location) => {
+  const width = Math.max(76, Math.ceil(location.label.length * 6.7 + (location.isCurrent ? 78 : 36)));
+
+  return {
+    width,
+    height: location.isCurrent ? 32 : 28
+  };
+};
+
+const getFootprintLabelLineEnd = (location, dimensions) => {
+  const { x, y } = location.labelAnchor;
+  const right = x + dimensions.width;
+  const bottom = y + dimensions.height;
+  const lineY = clamp(location.marker.y, y + 7, bottom - 7);
+  const lineX = clamp(location.marker.x, x + 14, right - 14);
+
+  if (location.marker.x < x) {
+    return { x, y: lineY };
+  }
+
+  if (location.marker.x > right) {
+    return { x: right, y: lineY };
+  }
+
+  if (location.marker.y < y) {
+    return { x: lineX, y };
+  }
+
+  if (location.marker.y > bottom) {
+    return { x: lineX, y: bottom };
+  }
+
+  return { x: lineX, y: y + dimensions.height / 2 };
+};
+
+const renderFootprintLocationPill = (location) => `
+  <button
+    class="location-pill"
+    type="button"
+    data-location-pill="${location.id}"
+    data-region="${location.regionId}"
+    aria-pressed="false"
+  >
+    <span class="location-pill-flag" aria-hidden="true">${location.flag}</span>
+    <span>${location.label}</span>
+  </button>
+`;
+
+const renderFootprintDetailCard = (location, regionLookup) => `
+  <article class="location-detail-card" data-location-panel="${location.id}" data-region="${location.regionId}" hidden>
+    <p class="location-detail-kicker">${regionLookup[location.regionId]?.label || ""}</p>
+    <div class="location-detail-title-row">
+      <h4 class="location-detail-title">
+        <span class="location-detail-flag" aria-hidden="true">${location.flag}</span>
+        <span>${location.label}</span>
+      </h4>
+      ${location.isCurrent ? '<span class="location-current-chip">Current base</span>' : ""}
+    </div>
+    <p class="location-detail-role">${location.title}</p>
+    <p class="location-detail-summary">${location.summary}</p>
   </article>
 `;
 
@@ -584,60 +667,95 @@ const renderPopoverAction = (payload) =>
     `
     : "";
 
-const renderFootprintMap = () => `
+const renderFootprintMarker = (location, index) => {
+  const dimensions = getFootprintLabelDimensions(location);
+  const lineEnd = getFootprintLabelLineEnd(location, dimensions);
+
+  return `
+    <g
+      class="map-location${location.isCurrent ? " is-current" : ""}"
+      data-location-trigger="${location.id}"
+      data-region="${location.regionId}"
+      data-active="false"
+      data-region-active="false"
+      tabindex="0"
+      role="button"
+      focusable="true"
+      aria-label="${location.label}"
+      aria-pressed="false"
+    >
+      <circle
+        class="marker-pulse"
+        cx="${location.marker.x}"
+        cy="${location.marker.y}"
+        r="${location.isCurrent ? 12 : 10}"
+        style="--delay: ${(index * 0.14).toFixed(2)}s"
+      />
+      <line
+        class="map-label-line"
+        x1="${location.marker.x}"
+        y1="${location.marker.y}"
+        x2="${lineEnd.x}"
+        y2="${lineEnd.y}"
+      />
+      <foreignObject
+        class="map-label-fo"
+        x="${location.labelAnchor.x}"
+        y="${location.labelAnchor.y}"
+        width="${dimensions.width}"
+        height="${dimensions.height}"
+      >
+        <div
+          xmlns="http://www.w3.org/1999/xhtml"
+          class="map-label-badge${location.isCurrent ? " is-current" : ""} align-${location.labelAnchor.align || "start"}"
+        >
+          <span class="map-label-flag" aria-hidden="true">${location.flag}</span>
+          <span class="map-label-text">${location.label}</span>
+          ${location.isCurrent ? '<span class="map-label-current">Current</span>' : ""}
+        </div>
+      </foreignObject>
+      <circle class="marker-halo" cx="${location.marker.x}" cy="${location.marker.y}" r="${location.isCurrent ? 7.8 : 6.4}" />
+      <circle class="marker-ring" cx="${location.marker.x}" cy="${location.marker.y}" r="${location.isCurrent ? 6.1 : 5.1}" />
+      <circle class="marker-core" cx="${location.marker.x}" cy="${location.marker.y}" r="${location.isCurrent ? 3.8 : 3.2}" />
+    </g>
+  `;
+};
+
+const renderFootprintMap = (payload) => `
   <div class="map-stage">
     <svg
       class="footprint-map"
-      viewBox="0 0 360 190"
+      viewBox="0 0 360 206"
       role="img"
-      aria-label="Map showing Joaquin Hui Gomez's footprints in Asia, Latin America, and Europe"
+      aria-label="Map showing Joaquin Hui Gomez's footprint across Europe, Asia, and Latin America"
     >
-      <rect x="0" y="0" width="360" height="190" rx="18" class="map-ocean" />
+      <rect x="0" y="0" width="360" height="206" rx="18" class="map-ocean" />
+
+      <path class="map-graticule" d="M18 50C82 62 141 68 202 63C261 58 313 48 340 37" />
+      <path class="map-graticule" d="M16 103C79 92 140 90 204 98C266 106 316 104 342 95" />
+      <path class="map-graticule" d="M24 160C91 145 151 143 215 150C274 157 320 153 341 146" />
 
       <path
         class="map-region"
-        data-region="latam"
-        d="M64 36 80 39 90 46 98 50 104 57 102 64 107 70 101 77 92 80 86 89 86 100 92 109 88 121 81 134 73 145 69 158 62 168 56 166 55 153 52 141 46 130 45 118 49 104 56 92 62 82 69 73 74 63 68 52 58 49 54 42Z"
+        data-region-shape="latam"
+        d="M67 34C74 28 86 31 93 38C98 44 98 53 93 61C88 70 84 79 86 88C88 100 93 111 91 123C89 136 81 149 73 163C68 171 63 175 58 172C54 169 52 160 50 149C48 136 42 121 41 107C40 92 45 77 53 64C59 54 64 44 67 34Z"
       />
       <path
         class="map-region"
-        data-region="europe"
-        d="M157 61 166 55 177 52 184 46 194 45 202 49 210 46 217 50 221 56 229 59 231 66 224 70 216 69 213 75 206 77 203 84 198 88 193 83 187 82 183 87 187 96 182 100 177 92 171 88 164 88 158 83 154 76 149 71 151 65Z"
+        data-region-shape="europe"
+        d="M159 64C166 56 178 51 190 50C200 49 210 53 218 51C227 50 235 54 239 61C242 68 239 75 233 79C228 83 224 88 217 90C210 92 203 88 196 90C189 92 183 96 176 93C170 90 165 84 161 78C158 73 156 68 159 64Z"
       />
       <path
         class="map-region"
-        data-region="asia"
-        d="M216 41 231 37 246 38 258 42 272 41 286 46 300 49 313 55 325 64 332 72 330 80 320 84 309 84 301 88 295 96 285 100 276 101 270 109 261 112 253 104 249 95 242 90 233 89 225 94 216 95 210 89 209 80 201 76 200 67 206 58 212 50Z"
+        data-region-shape="asia"
+        d="M225 46C238 39 256 38 271 43C282 46 293 48 304 53C316 58 326 67 329 76C331 84 324 91 314 93C305 95 299 99 293 106C287 112 278 115 270 113C261 111 254 106 247 100C240 94 235 90 228 92C221 94 215 90 213 82C211 74 215 66 221 59C226 55 228 50 225 46Z"
       />
 
-      <path class="map-route" d="M76 138C108 109 146 84 188 66" />
-      <path class="map-route" d="M194 69C222 60 248 61 277 73" />
-      <path class="map-route" d="M178 82C154 95 126 104 91 116" />
+      <path class="map-route" d="M181 66C214 57 247 58 278 62" />
+      <path class="map-route" d="M179 70C152 84 120 91 86 90" />
+      <path class="map-route" d="M176 78C145 98 111 119 73 141" />
 
-      <g class="map-marker" data-region="latam" style="--delay: 0s">
-        <circle class="marker-pulse" cx="86" cy="75" r="11" />
-        <circle class="marker-dot" cx="86" cy="75" r="4" />
-      </g>
-      <g class="map-marker" data-region="latam" style="--delay: 0.45s">
-        <circle class="marker-pulse" cx="76" cy="139" r="10" />
-        <circle class="marker-dot" cx="76" cy="139" r="4" />
-      </g>
-      <g class="map-marker" data-region="europe" style="--delay: 0.2s">
-        <circle class="marker-pulse" cx="188" cy="63" r="10" />
-        <circle class="marker-dot" cx="188" cy="63" r="4" />
-      </g>
-      <g class="map-marker" data-region="europe" style="--delay: 0.65s">
-        <circle class="marker-pulse" cx="201" cy="78" r="10" />
-        <circle class="marker-dot" cx="201" cy="78" r="4" />
-      </g>
-      <g class="map-marker" data-region="asia" style="--delay: 0.35s">
-        <circle class="marker-pulse" cx="269" cy="72" r="11" />
-        <circle class="marker-dot" cx="269" cy="72" r="4" />
-      </g>
-      <g class="map-marker" data-region="asia" style="--delay: 0.75s">
-        <circle class="marker-pulse" cx="292" cy="91" r="10" />
-        <circle class="marker-dot" cx="292" cy="91" r="4" />
-      </g>
+      ${payload.locations.map((location, index) => renderFootprintMarker(location, index)).join("")}
     </svg>
   </div>
 `;
@@ -689,21 +807,26 @@ const renderPopoverBody = (payload) => {
   }
 
   if (payload.kind === "map") {
+    const regionLookup = Object.fromEntries(payload.regions.map((region) => [region.id, region]));
+
     return `
-      ${renderFootprintMap()}
+      ${renderFootprintMap(payload)}
       <div class="region-chip-row">
         ${payload.regions
           .map(
             (region) => `
-              <button class="region-chip" type="button" data-region-chip="${region.id}">
+              <button class="region-chip" type="button" data-region-chip="${region.id}" aria-pressed="false">
                 ${region.label}
               </button>
             `
           )
           .join("")}
       </div>
-      <div class="region-grid">
-        ${payload.regions.map(renderRegionPanel).join("")}
+      <div class="location-pill-row">
+        ${payload.locations.map(renderFootprintLocationPill).join("")}
+      </div>
+      <div class="location-detail-stack">
+        ${payload.locations.map((location) => renderFootprintDetailCard(location, regionLookup)).join("")}
       </div>
     `;
   }
@@ -771,8 +894,11 @@ const renderHomePage = () => `
               ${siteContent.hero.quickFacts.map(renderQuickFact).join("")}
             </div>
 
-            <div class="button-row">
-              ${siteContent.hero.buttons.map(renderButton).join("")}
+            <div class="hero-action-row">
+              <div class="button-row">
+                ${siteContent.hero.buttons.map(renderButton).join("")}
+              </div>
+              ${siteContent.hero.accentBadge ? renderHeroAccentBadge(siteContent.hero.accentBadge) : ""}
             </div>
 
             <p class="proof-line">${siteContent.hero.proofLine}</p>
@@ -875,7 +1001,7 @@ const renderHomePage = () => `
         </div>
       </section>
 
-      <section id="open-source" class="section">
+      <section id="open-source" class="section open-source-section">
         <div class="container">
           <div class="section-header section-header-compact" data-reveal>
             <p class="section-eyebrow">Open source</p>
@@ -912,6 +1038,15 @@ const renderHomePage = () => `
                   : ""
               }
               <p class="quality-commercial">${siteContent.openSource.narrative.commercial}</p>
+            </article>
+
+            <article class="breadth-panel open-card-shell open-card-wide" data-reveal>
+              <p class="card-topline">Contribution breadth</p>
+              <h3>${siteContent.openSource.breadth.title}</h3>
+              <p class="section-copy">${siteContent.openSource.breadth.body}</p>
+              <div class="breadth-grid">
+                ${siteContent.openSource.breadth.groups.map(renderBreadthGroup).join("")}
+              </div>
             </article>
 
             <section class="open-subsection open-card-shell" data-reveal>
@@ -1185,23 +1320,112 @@ const initHeroPopover = () => {
     hideTimer = window.setTimeout(hide, 120);
   };
 
-  const initMapDetail = () => {
+  const initMapDetail = (payload) => {
     const regionChips = Array.from(popover.querySelectorAll("[data-region-chip]"));
-    if (!regionChips.length) {
+    const regionShapes = Array.from(popover.querySelectorAll("[data-region-shape]"));
+    const locationTriggers = Array.from(popover.querySelectorAll("[data-location-trigger]"));
+    const locationPills = Array.from(popover.querySelectorAll("[data-location-pill]"));
+    const locationPanels = Array.from(popover.querySelectorAll("[data-location-panel]"));
+    const pointerReadyAt = window.performance.now() + 180;
+
+    if (!regionChips.length || !locationTriggers.length) {
       return;
     }
 
-    const activateRegion = (region) => {
-      popover.dataset.region = region;
+    const locationsById = new Map(payload.locations.map((location) => [location.id, location]));
+
+    const getFirstLocationForRegion = (regionId) =>
+      payload.locations.find((location) => location.regionId === regionId)?.id || payload.defaultLocationId;
+
+    const activateLocation = (locationId) => {
+      const location = locationsById.get(locationId);
+
+      if (!location) {
+        return;
+      }
+
+      popover.dataset.region = location.regionId;
+      popover.dataset.location = location.id;
+
+      regionChips.forEach((chip) => {
+        const active = chip.dataset.regionChip === location.regionId;
+        chip.dataset.active = String(active);
+        chip.setAttribute("aria-pressed", String(active));
+      });
+
+      regionShapes.forEach((shape) => {
+        shape.dataset.active = String(shape.dataset.regionShape === location.regionId);
+      });
+
+      locationTriggers.forEach((trigger) => {
+        const regionActive = trigger.dataset.region === location.regionId;
+        const active = trigger.dataset.locationTrigger === location.id;
+        trigger.dataset.regionActive = String(regionActive);
+        trigger.dataset.active = String(active);
+        trigger.setAttribute("aria-pressed", String(active));
+      });
+
+      locationPills.forEach((pill) => {
+        const visible = pill.dataset.region === location.regionId;
+        const active = visible && pill.dataset.locationPill === location.id;
+        pill.hidden = !visible;
+        pill.dataset.active = String(active);
+        pill.setAttribute("aria-pressed", String(active));
+      });
+
+      locationPanels.forEach((panel) => {
+        const active = panel.dataset.locationPanel === location.id;
+        panel.hidden = !active;
+        panel.dataset.active = String(active);
+      });
     };
 
-    activateRegion("europe");
+    const activateRegion = (regionId) => {
+      const currentLocation = locationsById.get(popover.dataset.location);
+      const nextLocationId =
+        currentLocation?.regionId === regionId ? currentLocation.id : getFirstLocationForRegion(regionId);
+
+      activateLocation(nextLocationId);
+    };
+
+    const bindLocationTarget = (target, getLocationId) => {
+      target.addEventListener("pointerenter", () => {
+        if (window.performance.now() < pointerReadyAt) {
+          return;
+        }
+        activateLocation(getLocationId(target));
+      });
+      target.addEventListener("focus", () => activateLocation(getLocationId(target)));
+      target.addEventListener("click", (event) => {
+        event.preventDefault();
+        activateLocation(getLocationId(target));
+      });
+      target.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          activateLocation(getLocationId(target));
+        }
+      });
+    };
 
     regionChips.forEach((chip) => {
-      chip.addEventListener("pointerenter", () => activateRegion(chip.dataset.regionChip));
+      chip.addEventListener("pointerenter", () => {
+        if (window.performance.now() < pointerReadyAt) {
+          return;
+        }
+        activateRegion(chip.dataset.regionChip);
+      });
       chip.addEventListener("focus", () => activateRegion(chip.dataset.regionChip));
-      chip.addEventListener("click", () => activateRegion(chip.dataset.regionChip));
+      chip.addEventListener("click", (event) => {
+        event.preventDefault();
+        activateRegion(chip.dataset.regionChip);
+      });
     });
+
+    locationTriggers.forEach((target) => bindLocationTarget(target, (node) => node.dataset.locationTrigger));
+    locationPills.forEach((target) => bindLocationTarget(target, (node) => node.dataset.locationPill));
+
+    activateLocation(payload.defaultLocationId || getFirstLocationForRegion(payload.defaultRegionId || "europe"));
   };
 
   const open = (trigger, shouldLock = false) => {
@@ -1226,7 +1450,7 @@ const initHeroPopover = () => {
     positionPopover(trigger);
 
     if (payload.kind === "map") {
-      initMapDetail();
+      initMapDetail(payload);
     }
   };
 

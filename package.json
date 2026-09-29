@@ -6,7 +6,15 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "db:migrate:local": "printf 'y\\n' | npx wrangler d1 migrations apply verba-evals --local",
+    "db:migrate:remote": "printf 'y\\n' | npx wrangler d1 migrations apply verba-evals --remote",
+    "preview:pages": "npm run build && npm run db:migrate:local && npx wrangler pages dev dist",
+    "preview:verba": "npx concurrently -k -n ASR,PAGES -c yellow,cyan \"npm:asr:local\" \"npm:preview:pages\"",
+    "deploy:pages": "npm run build && npm run db:migrate:remote && npx wrangler pages deploy dist --project-name joaquinh-com --branch main --commit-dirty true",
+    "asr:local": "uv run --with faster-whisper --with fastapi --with uvicorn --with python-multipart python scripts/local_asr_server.py",
+    "eval:verba": "node scripts/run_verba_eval.mjs",
+    "scorecard:verba": "node scripts/run_verba_eval.mjs --providers local --publish-scorecard public/verba-support-scorecard.json --publish-report public/verba-benchmark-report.md"
   },
   "devDependencies": {
     "vite": "^7.1.12"

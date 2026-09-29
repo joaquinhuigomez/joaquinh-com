@@ -1,19 +1,1212 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="AI infrastructure reliability across serving, evaluation, and agent orchestration, with Amazon work and open-source contributions across MCP and adjacent agent ecosystems." />
-    <meta name="theme-color" content="#f4efe6" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
-    <title>Joaquin Hui Gomez | AI Infrastructure Reliability</title>
-  </head>
-  <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Joaquin Hui Gomez — Technical Program Manager · AI infrastructure</title>
+<meta name="description" content="Technical Program Manager · AI infrastructure · London. 39 merged upstream PRs since March 2026, 17 named in the release notes of 10 shipped projects, including first-party merges in Anthropic's Claude Agent SDK and OpenAI's Agents SDK. Claude Certified Architect – Professional, PMP, 5× AWS certified. Production ML and Gen AI programs at Amazon (PM II).">
+<meta name="theme-color" content="#faf9f5">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,ital,wght@6..72,0,400;6..72,0,500;6..72,1,400&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/src/tokens.css">
+<style>
+  /* page-specific scaffolding only. systemic styles live in tokens.css */
+
+  /* — top nav — */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    border-bottom: 1px solid transparent;
+    backdrop-filter: none;
+    transition: border-color var(--dur-hover) var(--ease);
+  }
+  .nav.scrolled { border-bottom-color: var(--rule); }
+  .nav-inner {
+    max-width: var(--container);
+    margin-inline: auto;
+    padding: 16px var(--space-5);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-5);
+  }
+  .nav-mark { font-family: var(--font-heading); font-size: 18px; letter-spacing: -0.01em; }
+  .nav-mark .dot { color: var(--accent); }
+  .nav-links { display: flex; gap: var(--space-5); font-size: var(--t-body-sm); color: var(--gray-2); align-items: center; }
+  .nav-links a { transition: color var(--dur-hover) var(--ease); }
+  .nav-links a:hover { color: var(--ink); }
+  @media (max-width: 600px) {
+    .nav-links { gap: var(--space-3); font-size: var(--t-meta); }
+    .nav-links .hide-sm { display: none; }
+  }
+  .nav-social {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-left: var(--space-4); padding-left: var(--space-4);
+    border-left: 1px solid var(--rule);
+  }
+  .nav-social a {
+    color: var(--gray-2); display: inline-flex;
+    transition: color var(--dur-hover) var(--ease);
+  }
+  .nav-social a:hover { color: var(--accent); }
+  .nav-social svg { width: 16px; height: 16px; }
+  @media (max-width: 600px) {
+    .nav-social { margin-left: var(--space-3); padding-left: var(--space-3); gap: 8px; }
+    .nav-social svg { width: 15px; height: 15px; }
+  }
+
+  /* — HERO — densified — */
+  .hero { padding-block: 64px 56px; }
+  @media (max-width: 768px) { .hero { padding-block: 40px 32px; } }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: "portrait" "copy";
+    gap: var(--space-5);
+  }
+  @media (min-width: 900px) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1fr) 220px;
+      grid-template-areas: "copy portrait";
+      gap: var(--space-7);
+      align-items: end;
+    }
+  }
+  .hero-grid > .hero-copy { grid-area: copy; min-width: 0; }
+  .hero-grid > .portrait { grid-area: portrait; }
+  .hero h1 {
+    font-size: clamp(36px, 4.8vw, 60px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    max-width: 14ch;
+  }
+  .hero h1 em { font-style: italic; color: var(--ink-2); }
+  .hero .lede { margin-top: var(--space-4); max-width: 60ch; font-size: 17px; color: var(--ink-2); line-height: 1.5; }
+  .hero-meta {
+    margin-top: var(--space-4);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    color: var(--gray-2);
+    font-size: var(--t-meta);
+  }
+  .hero-meta .now { display: inline-flex; align-items: center; gap: 6px; color: var(--ink); }
+  .hero-meta .now .pulse {
+    width: 7px; height: 7px; border-radius: 999px;
+    background: var(--accent);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 50%, transparent);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-meta .now .pulse { animation: pulse 2.4s var(--ease) 1; }
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 50%, transparent); }
+    100% { box-shadow: 0 0 0 12px transparent; }
+  }
+
+  /* portrait — minimal frame, ring + duotone */
+  .portrait {
+    position: relative;
+    width: 132px;
+    aspect-ratio: 4 / 5;
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+  @media (min-width: 900px) {
+    .portrait { width: 220px; margin-left: auto; }
+  }
+  .portrait img {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+  .portrait::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, transparent 0%, transparent 60%, color-mix(in srgb, var(--ink) 30%, transparent) 100%),
+      radial-gradient(120% 80% at 30% 30%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%);
+    mix-blend-mode: multiply;
+    z-index: 2;
+  }
+  .portrait::after {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid color-mix(in srgb, var(--paper) 60%, transparent);
+    z-index: 3;
+    pointer-events: none;
+  }
+  .portrait-tag {
+    position: absolute;
+    bottom: 10px; left: 12px;
+    color: var(--paper);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    z-index: 4;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+  }
+
+  /* — section header — densified — */
+  .section { padding-block: 64px; }
+  @media (max-width: 768px) { .section { padding-block: 48px; } }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-5);
+    margin-bottom: var(--space-5);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--rule);
+  }
+  .sec-head h2 { font-size: clamp(22px, 2.4vw, 26px); }
+  .sec-head .right { color: var(--gray-2); font-size: var(--t-meta); }
+
+  /* — selected work — */
+  .work-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-5); }
+  @media (min-width: 760px) { .work-grid { grid-template-columns: repeat(3, 1fr); } }
+  .work-card {
+    display: flex; flex-direction: column;
+    background: var(--paper-3);
+    border: 1px solid var(--rule);
+    padding: var(--space-4);
+    transition: border-color var(--dur-hover) var(--ease);
+  }
+  .work-card:hover { border-color: var(--ink); }
+  .work-thumb {
+    aspect-ratio: 16 / 10;
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    margin-bottom: var(--space-4);
+    position: relative; overflow: hidden;
+  }
+  .work-thumb svg { width: 100%; height: 100%; }
+  .work-card h3 { font-size: 19px; margin-bottom: var(--space-2); }
+  .work-card p { font-size: 14px; color: var(--ink-2); margin-bottom: var(--space-3); line-height: 1.5; }
+  .work-card .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+  .work-card .tag {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--gray-2); text-transform: lowercase; letter-spacing: 0.04em;
+  }
+  .work-card .tag::before { content: "·  "; color: var(--gray); }
+  .work-card .tag:first-child::before { content: ""; }
+
+  /* — open source — */
+  .oss { display: grid; grid-template-columns: 1fr; gap: var(--space-7); }
+  @media (min-width: 900px) { .oss { grid-template-columns: 280px minmax(0, 1fr); gap: var(--space-9); } }
+  .oss-intro p { color: var(--ink-2); margin-bottom: var(--space-5); }
+  .oss-stat {
+    font-family: var(--font-heading);
+    font-size: 36px; line-height: 1; letter-spacing: -0.02em;
+  }
+  .oss-stat .label {
+    display: block; font-family: var(--font-body);
+    font-size: var(--t-meta); color: var(--gray-2); margin-top: 6px;
+  }
+  .oss-list { border-top: 1px solid var(--rule); }
+  .oss-row {
+    display: grid; grid-template-columns: 1fr;
+    gap: var(--space-2);
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--rule);
+    transition: background var(--dur-hover) var(--ease);
+  }
+  @media (min-width: 720px) {
+    .oss-row { grid-template-columns: 220px 1fr 110px 70px; align-items: baseline; gap: var(--space-4); padding: 14px 0; }
+  }
+  .oss-row:hover { background: var(--paper-3); }
+  .oss-row:hover .oss-target { color: var(--accent); }
+  .oss-target { font-family: var(--font-mono); font-size: var(--t-body-sm); transition: color var(--dur-hover) var(--ease); }
+  .oss-summary { color: var(--ink-2); font-size: var(--t-body-sm); }
+  .oss-stars { font-family: var(--font-mono); font-size: var(--t-meta); color: var(--gray-2); }
+
+  /* — background + footprint — */
+  .background { background: var(--paper-3); }
+  /* 2-column Background — prose left, evidence stack right.
+     Stacks on mobile, splits at desktop. */
+  .bg-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    align-items: start;
+  }
+  @media (min-width: 900px) {
+    .bg-grid {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: var(--space-7);
+    }
+  }
+  .bg-prose { min-width: 0; }
+  .bg-prose p { font-size: 16px; line-height: 1.65; margin-bottom: var(--space-4); color: var(--ink-2); }
+  .bg-prose p.lead { font-size: 19px; line-height: 1.55; color: var(--ink); }
+  .bg-aside { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
+  /* tighten the aside blocks since they're now stacking vertically in a narrower column */
+  .bg-aside .cert-row { margin-top: 0; }
+  .bg-aside .leadership-block,
+  .bg-aside .thesis-block { margin-top: 0; }
+  .thesis {
+    margin-top: var(--space-5);
+    padding: var(--space-4) var(--space-5);
+    border-left: 2px solid var(--accent);
+    background: var(--paper);
+  }
+  .thesis .label {
+    display: block; font-size: var(--t-meta);
+    color: var(--gray-2); margin-bottom: 6px; letter-spacing: 0.06em;
+  }
+  .thesis q { font-family: var(--font-heading); font-size: 18px; line-height: 1.45; quotes: none; color: var(--ink); font-style: italic; }
+
+  /* — FOOTPRINT showcase — full-width below the text — */
+  .footprint {
+    margin-top: var(--space-6);
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    overflow: hidden;
+  }
+  .footprint-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding: var(--space-4) var(--space-5);
+    border-bottom: 1px solid var(--rule);
+    gap: var(--space-4);
+  }
+  .footprint-head .title { font-family: var(--font-heading); font-size: 18px; }
+  .footprint-head .legend {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--gray-2); letter-spacing: 0.04em;
+  }
+  .footprint-head .legend span { display: inline-flex; align-items: center; gap: 5px; margin-left: 14px; }
+  .footprint-head .legend .swatch { width: 8px; height: 8px; border-radius: 999px; background: var(--ink); }
+  .footprint-head .legend .swatch.now { background: var(--accent); }
+
+  /* footprint-body now single-column — map fills full row.
+     city-list sidebar removed; the city-details cards below are the canonical interaction. */
+  .footprint-body { display: block; }
+
+  .map-wrap { position: relative; aspect-ratio: 16 / 10; background: linear-gradient(180deg, var(--paper) 0%, var(--paper-3) 100%); }
+  @media (max-width: 820px) { .map-wrap { aspect-ratio: 4 / 3; } }
+  .map-wrap svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .map-caption {
+    position: absolute; bottom: 12px; left: 14px; right: 14px;
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--gray-2); letter-spacing: 0.04em;
+    display: flex; justify-content: flex-end;
+    pointer-events: none;
+  }
+
+  /* — city descriptions grid (below the map) — */
+  .footprint-details {
+    border-top: 1px solid var(--rule);
+    padding: var(--space-5);
+    background: var(--paper);
+  }
+  .footprint-details-grid {
+    display: grid; grid-template-columns: 1fr; gap: var(--space-5) var(--space-4);
+  }
+  @media (min-width: 600px) { .footprint-details-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1000px) { .footprint-details-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .fp-detail {
+    min-width: 0;
+    cursor: pointer;
+    padding: var(--space-3);
+    margin: calc(-1 * var(--space-3));
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: border-color var(--dur-hover) var(--ease), background var(--dur-hover) var(--ease);
+  }
+  .fp-detail:hover, .fp-detail:focus, .fp-detail.active { outline: none; border-color: var(--rule); background: var(--paper-3); }
+  .fp-detail.now.active, .fp-detail.now:hover, .fp-detail.now:focus { border-color: var(--accent); }
+  .fp-detail .head {
+    display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; flex-wrap: wrap;
+  }
+  .fp-detail .head .flag { font-size: 16px; line-height: 1; }
+  .fp-detail .head .name { font-family: var(--font-heading); font-size: 17px; color: var(--ink); }
+  .fp-detail .head .country { color: var(--gray-2); font-size: var(--t-meta); }
+  .fp-detail .role {
+    font-family: var(--font-mono); font-size: 11px; color: var(--gray-2);
+    letter-spacing: 0.04em; margin-bottom: var(--space-2); text-transform: lowercase;
+  }
+  .fp-detail .body { font-size: 13px; color: var(--ink-2); line-height: 1.5; }
+  .fp-detail.now .head .name { color: var(--accent); font-style: italic; }
+  .fp-detail.now .role { color: var(--accent); }
+  .city-label {
+    font-family: var(--font-heading); font-size: 12px; fill: var(--ink);
+    paint-order: stroke; stroke: var(--paper); stroke-width: 4px; stroke-linejoin: round;
+  }
+  .city-label.now { fill: var(--accent); font-style: italic; }
+
+  /* — labs (smaller secondary cards) — */
+  .labs-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-4); }
+  @media (min-width: 720px) { .labs-grid { grid-template-columns: 1fr 1fr; gap: var(--space-5); } }
+  .lab-card {
+    display: block;
+    padding: var(--space-4);
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    transition: border-color var(--dur-hover) var(--ease);
+    position: relative;
+  }
+  .lab-card:hover { border-color: var(--ink); }
+  .lab-card .lab-meta {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--gray-2); letter-spacing: 0.06em; margin-bottom: var(--space-2);
+  }
+  .lab-card h3 { font-size: 22px; margin-bottom: 6px; }
+  .lab-card p { font-size: 14px; color: var(--ink-2); line-height: 1.5; margin-bottom: var(--space-3); }
+  .lab-card .lab-cta {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--gray-2); letter-spacing: 0.04em;
+  }
+  .lab-card:hover .lab-cta { color: var(--accent); }
+
+  /* — compact logo band between hero and selected work — */
+  .logo-band {
+    border-block: 1px solid var(--rule);
+    background: var(--paper-3);
+    padding-block: var(--space-4);
+  }
+  .logo-band-row {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: var(--space-4) var(--space-5);
+    justify-content: center;
+  }
+  .logo-band-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--gray-2);
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+  }
+  .logo-band-divider {
+    width: 1px;
+    height: 22px;
+    background: var(--rule);
+  }
+  .logo-band .logo {
+    height: 20px; width: auto;
+    opacity: 0.55;
+    filter: grayscale(1);
+    transition: opacity var(--dur-hover) var(--ease);
+  }
+  .logo-band .logo:hover { opacity: 1; }
+  .logo-band .logo img { display: block; height: 100%; width: auto; }
+  @media (max-width: 720px) {
+    .logo-band-row { gap: var(--space-3) var(--space-4); justify-content: flex-start; }
+    .logo-band .logo { height: 18px; }
+    .logo-band-divider { display: none; }
+  }
+
+  /* — institution logo strip (legacy, in Background section) — */
+  .logo-strip {
+    margin-top: var(--space-6);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--rule);
+  }
+  .logo-strip-label {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--gray-2); letter-spacing: 0.08em;
+    text-transform: lowercase; margin-bottom: var(--space-3);
+  }
+  .logo-row {
+    display: flex; flex-wrap: wrap;
+    gap: var(--space-5) var(--space-6);
+    align-items: center;
+  }
+  .logo-row .logo {
+    height: 22px; width: auto;
+    opacity: 0.6;
+    filter: grayscale(1);
+    transition: opacity var(--dur-hover) var(--ease);
+  }
+  .logo-row .logo:hover { opacity: 1; }
+  .logo-row .logo img { display: block; height: 100%; width: auto; }
+
+  /* — AWS / certs chip row — */
+  .cert-row {
+    display: flex; flex-wrap: wrap; gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+  .cert-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--ink-2); letter-spacing: 0.04em;
+  }
+  .cert-chip::before {
+    content: ""; width: 6px; height: 6px; border-radius: 999px;
+    background: var(--data-blue);
+  }
+  /* Claude cert — brand-accented, leads the row */
+  .cert-chip--brand { border-color: var(--accent); color: var(--ink); }
+  .cert-chip--brand::before { display: none; }
+  .cert-chip .cert-ico { width: 12px; height: 12px; display: block; }
+  .hero .hero-creds { margin-top: var(--space-4); }
+  .cert-note {
+    margin-top: var(--space-2); font-size: 13px; line-height: 1.5;
+    color: var(--ink-2); max-width: 52ch;
+  }
+  .contact-note {
+    margin-top: var(--space-3); font-size: 16px; line-height: 1.5;
+    color: var(--ink-2); max-width: 44ch;
+  }
+
+  /* — leadership / DEI block — */
+  .leadership-block {
+    margin-top: var(--space-5);
+    padding: var(--space-4) var(--space-5);
+    background: var(--paper);
+    border: 1px solid var(--rule);
+  }
+  .leadership-block h4 {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--gray-2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-3);
+    font-weight: 500;
+  }
+  .leadership-list { display: flex; flex-direction: column; gap: var(--space-2); }
+  .leadership-list li {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    padding-left: var(--space-3);
+    border-left: 2px solid var(--rule);
+  }
+  .leadership-list li:hover { border-left-color: var(--accent); }
+  .leadership-list strong { color: var(--ink); font-weight: 500; }
+  .leadership-list em { font-style: italic; color: var(--accent); }
+
+  /* — thesis — already styled, slim variant — */
+  .thesis-block {
+    margin-top: var(--space-5);
+    padding: var(--space-4) var(--space-5);
+    background: var(--paper);
+    border: 1px solid var(--rule);
+  }
+  .thesis-block h4 {
+    font-family: var(--font-body); font-size: 11px;
+    color: var(--gray-2); letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: var(--space-2); font-weight: 500;
+  }
+  .thesis-block .title { font-family: var(--font-heading); font-size: 17px; line-height: 1.35; color: var(--ink); margin-bottom: var(--space-2); }
+  .thesis-block .meta { font-size: 13px; color: var(--gray-2); }
+  .thesis-block .stats { display: flex; gap: var(--space-5); margin-top: var(--space-3); flex-wrap: wrap; }
+  .thesis-block .stats .stat-num { font-family: var(--font-heading); font-size: 22px; line-height: 1; color: var(--ink); }
+  .thesis-block .stats .stat-num em { color: var(--accent); font-style: normal; }
+  .thesis-block .stats .stat-lbl { display: block; font-size: 11px; color: var(--gray-2); margin-top: 4px; font-family: var(--font-mono); }
+
+  /* — contact — */
+  .contact { border-top: 1px solid var(--rule); }
+  .social-row {
+    display: flex; flex-wrap: wrap; gap: var(--space-3);
+    margin-top: var(--space-4);
+  }
+  .social {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    color: var(--ink);
+    font-size: var(--t-body-sm);
+    transition: border-color var(--dur-hover) var(--ease), color var(--dur-hover) var(--ease);
+  }
+  .social:hover { border-color: var(--ink); color: var(--accent); }
+  .social svg { flex-shrink: 0; }
+  .contact-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-5); align-items: end; }
+  @media (min-width: 760px) { .contact-grid { grid-template-columns: 1fr auto; } }
+  .contact h2 { font-size: clamp(28px, 3.6vw, 44px); line-height: 1.08; letter-spacing: -0.015em; max-width: 18ch; }
+  .contact h2 em { font-style: italic; color: var(--ink-2); }
+  .contact-actions { display: flex; flex-direction: column; gap: var(--space-3); align-items: flex-start; }
+  @media (min-width: 760px) { .contact-actions { align-items: flex-end; } }
+
+  /* — footer — */
+  .footer { padding: var(--space-7) 0 var(--space-6); color: var(--gray-2); font-size: var(--t-meta); border-top: 1px solid var(--rule); }
+  .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-3); }
+  .footer .mono { color: var(--gray-2); }
+
+  .skip-link { position: absolute; left: -9999px; top: 0; }
+  .skip-link:focus { left: var(--space-3); top: var(--space-3); padding: 6px 10px; background: var(--ink); color: var(--paper); z-index: 100; }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#work">Skip to content</a>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-mark">joaquin hui g<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="#work">work</a>
+      <a href="#oss">oss</a>
+      <a href="#labs" class="hide-sm">labs</a>
+      <a href="#background" class="hide-sm">background</a>
+      <span class="nav-social">
+        <a href="https://github.com/joaquinhuigomez" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></a>
+        <a href="https://www.linkedin.com/in/joaquin-h-352927a9/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5 1.78 1.78 0 0 1 6.5 8.25zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg></a>
+        <a href="https://x.com/ViajaryTragar" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://www.instagram.com/kinaventurero" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58 0 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.2 0 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58 0-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85 0-3.2 0-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.18 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07c-4.36.2-6.78 2.62-6.98 6.98C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.36-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.36-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg></a>
+      </span>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow fade-in">technical program manager · ai infrastructure · london</div>
+        <h1 class="fade-in d-1" style="margin-top: var(--space-4)">
+          AI systems<br>
+          teams can trust<br>
+          <em>in production.</em>
+        </h1>
+        <p class="lede fade-in d-2">
+          <strong>Day job:</strong> PM II at Amazon, leading production ML and Gen AI programs across European operations. I shipped an agentic AI system idea-to-production in <strong>two weeks</strong> (internal hackathon, Most Innovative 2026): <strong>7-figure annualized savings</strong>, <strong>&gt;1,400 hours/year of manual analysis time reclaimed</strong>. I built the <strong>LLM-as-judge eval pipeline</strong> behind successive frontier-model migrations (<strong>≥30% inference-cost reduction per call</strong>), and led two 2025 production ML launches with <strong>9-figure annualized impact</strong>, validated on live metrics: build → measure → review → iterate at network scale.
+        </p>
+        <p class="lede fade-in d-2">
+          <strong>Public record:</strong> 39 merged upstream PRs since March 2026, <strong>17 named in the release notes of shipped projects</strong> (Transformers, OpenAI Agents SDK, Axolotl, LanceDB, Apache Arrow), including first-party merges in <a class="link" href="https://github.com/anthropics/claude-agent-sdk-python/pull/927" target="_blank" rel="noopener">Anthropic's Claude Agent SDK</a> and <a class="link" href="https://github.com/openai/openai-agents-python/pull/2700" target="_blank" rel="noopener">OpenAI's Agents SDK</a>. HKU law + business, St. Gallen Master's <em>magna cum laude</em>, six natural languages.
+        </p>
+        <div class="cert-row hero-creds fade-in d-3">
+          <span class="cert-chip cert-chip--brand"><img class="cert-ico" src="/logos/claude.svg" alt="" />Claude Certified Architect – Professional</span>
+          <span class="cert-chip">PMP · Above Target ×3</span>
+          <span class="cert-chip">5× AWS Certified</span>
+        </div>
+        <div class="hero-meta fade-in d-3">
+          <span>amazon · accenture · pwc</span>
+          <span>·</span>
+          <span>3 continents</span>
+          <span>·</span>
+          <span>english · 中文 · 粵語 · español · français · português</span>
+        </div>
+      </div>
+
+      <div class="portrait fade-in d-3" aria-hidden="true">
+        <img src="/portrait-night.png" alt="">
+        <span class="portrait-tag">london · 2026</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ LOGO BAND — work + education (between hero and selected work) ============ -->
+<aside class="logo-band">
+  <div class="container">
+    <div class="logo-band-row">
+      <span class="logo-band-label">work</span>
+      <span class="logo" title="Amazon (current · PM II)"><img src="/logos/amazon.svg" alt="Amazon"></span>
+      <span class="logo" title="Accenture (consulting · Beijing)"><img src="/logos/accenture.svg" alt="Accenture"></span>
+      <span class="logo" title="PwC (consulting · Shanghai)"><img src="/logos/pwc.svg" alt="PwC"></span>
+      <span class="logo-band-divider"></span>
+      <span class="logo-band-label">education</span>
+      <span class="logo" title="University of Hong Kong · LLB + BBA"><img src="/logos/hku.svg" alt="HKU"></span>
+      <span class="logo" title="University of St. Gallen · MA Strategy &amp; International Management, magna cum laude"><img src="/logos/hsg.svg" alt="HSG St. Gallen"></span>
+      <span class="logo" title="Universidad de los Andes · master's exchange"><img src="/logos/uniandes.svg" alt="Uniandes"></span>
+      <span class="logo" title="Pontificia Universidad Católica de Chile · undergrad exchange"><img src="/logos/uc-chile.svg" alt="UC Chile"></span>
+    </div>
+  </div>
+</aside>
+
+<!-- ============ SELECTED WORK ============ -->
+<section class="section" id="work">
+  <div class="container">
+    <header class="sec-head">
+      <div>
+        <div class="eyebrow">01 — selected work</div>
+        <h2 style="margin-top: var(--space-2)">Production AI work, cross-system program delivery, and a published eval benchmark.</h2>
+      </div>
+      <div class="right">amazon · public</div>
+    </header>
+
+    <div class="work-grid">
+      <article class="work-card">
+        <div class="work-thumb">
+          <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="200" fill="#141413"/>
+            <text x="20" y="28" font-family="JetBrains Mono" font-size="9" fill="#788c5d" letter-spacing="1">▲ MOST INNOVATIVE · 2026</text>
+            <line x1="20" y1="38" x2="300" y2="38" stroke="#2a2a28" stroke-width="0.5"/>
+
+            <text x="20" y="80" font-family="Newsreader" font-style="italic" font-size="32" font-weight="400" fill="#faf9f5" letter-spacing="-1">Agentic AI</text>
+            <text x="20" y="100" font-family="JetBrains Mono" font-size="9" fill="#d97757">for operations planning</text>
+
+            <line x1="20" y1="116" x2="300" y2="116" stroke="#2a2a28" stroke-width="0.5"/>
+
+            <text x="20" y="142" font-family="Newsreader" font-size="26" font-weight="500" fill="#d97757" letter-spacing="-0.5">2 weeks</text>
+            <text x="20" y="156" font-family="JetBrains Mono" font-size="7" fill="#8a887f">idea → production · live shipped</text>
+
+            <text x="170" y="142" font-family="Newsreader" font-size="22" font-weight="500" fill="#faf9f5" letter-spacing="-0.5">7-figure</text>
+            <text x="170" y="156" font-family="JetBrains Mono" font-size="7" fill="#8a887f">annualized savings · &gt;1.4K hrs/yr</text>
+
+            <text x="20" y="178" font-family="JetBrains Mono" font-size="9" fill="#faf9f5">LLM intake · deterministic prep · async AWS orch.</text>
+
+            <text x="20" y="194" font-family="JetBrains Mono" font-size="8" fill="#788c5d">▲ internal AI hackathon · most innovative · 2026</text>
+          </svg>
+        </div>
+        <h3>Agentic AI for operations planning</h3>
+        <p>Won <strong>Most Innovative Solution, 2026</strong> at an internal Amazon AI hackathon. Built an agentic system that compresses a multi-day analyst loop into <strong>under two hours</strong> — <strong>tool-using LLM agent</strong> over <strong>schema-disciplined deterministic preprocessing</strong> of multi-GB experiment bundles, plus <strong>async AWS-native orchestration</strong> across Lambda, Step Functions, S3, and DynamoDB. <strong>Shipped idea-to-production in two weeks</strong>; eliminates <strong>&gt;1,400 hours/year</strong> of manual analysis time on what was previously a 40+ hour analyst process; <strong>7-figure annualized savings</strong>; live in production.</p>
+        <div class="tags">
+          <span class="tag">agentic ai</span>
+          <span class="tag">tool use</span>
+          <span class="tag">aws-native</span>
+          <span class="tag">in production</span>
+        </div>
+      </article>
+
+      <article class="work-card">
+        <div class="work-thumb">
+          <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="200" fill="#faf9f5"/>
+            <text x="20" y="28" font-family="JetBrains Mono" font-size="9" fill="#8a887f" letter-spacing="1">PRODUCTION ML · CROSS-SYSTEM DELIVERY</text>
+            <line x1="20" y1="38" x2="300" y2="38" stroke="#d8d6cc" stroke-width="0.5"/>
+
+            <text x="20" y="78" font-family="Newsreader" font-size="38" font-weight="500" fill="#141413" letter-spacing="-1">9-figure</text>
+            <text x="20" y="94" font-family="JetBrains Mono" font-size="8" fill="#d97757">annualized · business-review validated</text>
+
+            <line x1="20" y1="110" x2="300" y2="110" stroke="#d8d6cc" stroke-width="0.5"/>
+
+            <g font-family="JetBrains Mono" font-size="9" fill="#141413">
+              <text x="20" y="130">▸ continent-scale network · 50+ inputs · 30+ metrics</text>
+              <text x="20" y="146">▸ BRDs · launches · eval loops · live-metric validation</text>
+              <text x="20" y="162">▸ multi-system integration · rollout · audit · instr.</text>
+              <text x="20" y="178">▸ millions of automated decisions / week</text>
+            </g>
+
+            <text x="20" y="194" font-family="JetBrains Mono" font-size="8" fill="#788c5d">▲ amazon · pm II · london · since 2023</text>
+          </svg>
+        </div>
+        <h3>Production ML programs · cross-system delivery</h3>
+        <p>Owner of BRDs, launches, and the simulation + eval loops behind production ML decision systems running on a <strong>continent-scale network · hundreds of nodes</strong>. Modeled across <strong>50+ dynamic inputs · 30+ operational metrics</strong>; <strong>millions of automated decisions per week</strong>; multi-system integration across planning, audit, and instrumentation pipelines. Two production launches in 2025 produced record reliability gains, validated on <strong>live metrics, not backtests</strong>. <strong>9-figure annualized impact</strong> earned through the business-review loop, then channeled into the next <strong>Kaizen-driven sprint</strong> on the same systems — the build → measure → review → iterate cycle that defines the work.</p>
+        <div class="tags">
+          <span class="tag">ml policy</span>
+          <span class="tag">simulation</span>
+          <span class="tag">multi-system</span>
+          <span class="tag">live metrics</span>
+        </div>
+      </article>
+
+      <article class="work-card">
+        <div class="work-thumb">
+          <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="200" fill="#141413"/>
+            <text x="20" y="28" font-family="JetBrains Mono" font-size="9" fill="#d97757" letter-spacing="1">▲ EVAL · MIGRATION · POST-TRAINING</text>
+            <line x1="20" y1="38" x2="300" y2="38" stroke="#2a2a28" stroke-width="0.5"/>
+
+            <text x="20" y="78" font-family="Newsreader" font-style="italic" font-size="28" font-weight="400" fill="#faf9f5" letter-spacing="-1">LLM-as-judge</text>
+            <text x="20" y="102" font-family="Newsreader" font-style="italic" font-size="28" font-weight="400" fill="#faf9f5" letter-spacing="-1">eval pipeline</text>
+
+            <line x1="20" y1="116" x2="300" y2="116" stroke="#2a2a28" stroke-width="0.5"/>
+
+            <g font-family="JetBrains Mono" font-size="9" fill="#faf9f5">
+              <text x="20" y="134">▸ qualitative rubric · 6 criteria</text>
+              <text x="20" y="148">▸ quantitative · latency · tokens · cost</text>
+              <text x="20" y="162">▸ system · tool-call accuracy · refusal rate</text>
+              <text x="20" y="176">▸ adversarial honesty probe</text>
+            </g>
+
+            <text x="20" y="194" font-family="JetBrains Mono" font-size="8" fill="#788c5d">▲ amazon · frontier-model migration · 2026</text>
+          </svg>
+        </div>
+        <h3>Gen-AI eval &amp; frontier-model migration framework</h3>
+        <p>Built an internal <strong>LLM-as-judge eval pipeline</strong> combining <strong>qualitative rubric scoring</strong> (6 criteria: depth, rigor, actionability, accuracy, reasoning, conciseness), <strong>quantitative metrics</strong> (latency, tokens, cost-per-call), and <strong>system metrics</strong> (tool-call accuracy, citation coverage, hallucination rate, correct-refusal rate on adversarial probes). Used it to justify and execute <strong>successive frontier-model migrations across three model generations</strong> with explicit <strong>ROI and opportunity-cost framing</strong> — quality gains in double-digit pp on tool-call accuracy and citation coverage, hallucination rate cut by an order of magnitude, <strong>≥30% inference-cost reduction per call</strong>. <strong>Prompt, model, and eval artifacts version-controlled</strong>; cutover atomic with predecessor model pinned for archival replay. <strong>Cost-per-call instrumented as a first-class metric in the AWS pipeline</strong> (Bedrock + Lambda + DynamoDB telemetry) alongside latency and quality. Public companion: <a class="link" href="/open-source/#tools">LLM Judge Calibrator</a> — same methodology, open-sourced.</p>
+        <div class="tags">
+          <span class="tag">model evaluation</span>
+          <span class="tag">model migration</span>
+          <span class="tag">post-training</span>
+          <span class="tag">alignment</span>
+          <span class="tag">aws bedrock</span>
+          <span class="tag">cost monitoring</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPEN SOURCE (now #02) ============ -->
+<section class="section" id="oss" style="background: var(--paper-3); border-block: 1px solid var(--rule);">
+  <div class="container">
+    <header class="sec-head" style="border-bottom-color: var(--rule);">
+      <div>
+        <div class="eyebrow">02 — open source</div>
+        <h2 style="margin-top: var(--space-2)">Open-source contributions across the AI infrastructure stack.</h2>
+      </div>
+      <div class="right"><a class="link muted" href="/open-source/">full ledger →</a></div>
+    </header>
+
+    <div class="oss">
+      <div class="oss-intro">
+        <p>39 merged upstream PRs since March 2026 across the AI infrastructure stack: <strong>first-party</strong> (Anthropic Claude Agent SDK, OpenAI Agents SDK), <strong>LLM serving</strong> (HuggingFace Transformers, LiteLLM), <strong>compute &amp; orchestration</strong> (Ray Serve, ZenML), <strong>post-training &amp; fine-tuning</strong> (axolotl), <strong>RAG &amp; data</strong> (LlamaIndex, Docling, LanceDB, Apache Arrow), <strong>agents &amp; MCP tooling</strong> (Continue, Mastra). <strong>17 of them are named in the release notes</strong> of 10 shipped projects, so each one is checkable.</p>
+        <div style="display:flex; gap: var(--space-7); margin-top: var(--space-5); flex-wrap: wrap;">
+          <div class="oss-stat">39<span class="label">merged · since mar 2026</span></div>
+          <div class="oss-stat">17<span class="label">in release notes</span></div>
+          <div class="oss-stat">10<span class="label">shipped projects</span></div>
+        </div>
+      </div>
+
+      <div class="oss-list">
+        <a class="oss-row" href="https://github.com/anthropics/claude-agent-sdk-python/pull/927" target="_blank" rel="noopener">
+          <div class="oss-target">anthropics/claude-agent-sdk-python</div>
+          <div class="oss-summary"><strong>First-party Anthropic.</strong> Raised the minimum MCP version to close CVE-2025-66416 (DNS-rebinding protection off by default); released in v0.2.82 within hours of merge.</div>
+          <div><span class="pill status-merged"><span class="dot"></span>merged · may 14</span></div>
+          <div class="oss-stars">★ 8.2k</div>
+        </a>
+        <a class="oss-row" href="https://github.com/openai/openai-agents-python/pull/2700" target="_blank" rel="noopener">
+          <div class="oss-target">openai/openai-agents-python</div>
+          <div class="oss-summary"><strong>First-party OpenAI.</strong> Stopped tool-cleanup from silently dropping MCP and reasoning items from an agent's history; shipped in v0.13.0.</div>
+          <div><span class="pill status-merged"><span class="dot"></span>merged · mar 21</span></div>
+          <div class="oss-stars">★ 29.8k</div>
+        </a>
+        <a class="oss-row" href="https://github.com/huggingface/transformers/pull/45582" target="_blank" rel="noopener">
+          <div class="oss-target">huggingface/transformers</div>
+          <div class="oss-summary"><strong>LLM serving.</strong> Removed a stale, misleading num_return_sequences warning on the continuous-batching generate path; shipped in v5.7.0.</div>
+          <div><span class="pill status-merged"><span class="dot"></span>merged · apr 24</span></div>
+          <div class="oss-stars">★ 166.8k</div>
+        </a>
+        <a class="oss-row" href="https://github.com/ray-project/ray/pull/64110" target="_blank" rel="noopener">
+          <div class="oss-target">ray-project/ray</div>
+          <div class="oss-summary"><strong>Compute &amp; serving.</strong> Two merges: Serve autoscaling on wall-clock time so scale-up stops drifting; vLLM engine configs cached by model_id instead of a remote URI.</div>
+          <div><span class="pill status-merged"><span class="dot"></span>2× merged · apr, jun</span></div>
+          <div class="oss-stars">★ 43.9k</div>
+        </a>
+        <a class="oss-row" href="https://github.com/BerriAI/litellm/pull/25599" target="_blank" rel="noopener">
+          <div class="oss-target">BerriAI/litellm</div>
+          <div class="oss-summary"><strong>LLM gateway.</strong> Time-to-first-token capture for streaming /v1/messages across Anthropic, Bedrock, and Vertex AI.</div>
+          <div><span class="pill status-merged"><span class="dot"></span>merged · apr 16</span></div>
+          <div class="oss-stars">★ 59.9k</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SIDE PROJECTS (now #03) ============ -->
+<section class="section" id="labs">
+  <div class="container">
+    <header class="sec-head" style="margin-bottom: var(--space-5);">
+      <div>
+        <div class="eyebrow">03 — side projects</div>
+        <h2 style="margin-top: var(--space-2)">Other things I've built on the side.</h2>
+      </div>
+      <div class="right">public urls · in development</div>
+    </header>
+
+    <div class="labs-grid">
+      <a class="lab-card" href="/labs/verba/">
+        <div class="lab-meta">multilingual speech-to-draft</div>
+        <h3>Verba</h3>
+        <p>Workspace that preserves raw transcripts, surfaces ambiguity, and runs a multi-provider eval loop across English, 中文, español, français, and português. In daily personal use.</p>
+        <span class="lab-cta">open ↗</span>
+      </a>
+
+      <a class="lab-card" href="https://tarot.joaquinh.com/" target="_blank" rel="noopener">
+        <div class="lab-meta">multilingual AI · telegram mini app</div>
+        <h3>Tarot Truth Teller</h3>
+        <p>Trilingual AI tarot in 繁體中文 / español / english. Telegram-native flows and shareable reading cards. Voice that's deadpan and a little funny.</p>
+        <span class="lab-cta">open ↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BACKGROUND + FOOTPRINT ============ -->
+<section class="section background" id="background">
+  <div class="container">
+    <header class="sec-head">
+      <div>
+        <div class="eyebrow">04 — background</div>
+        <h2 style="margin-top: var(--space-2)">Three continents, six languages, one operating thesis.</h2>
+      </div>
+      <div class="right">education · work · footprint</div>
+    </header>
+
+    <div class="bg-grid">
+      <!-- LEFT: prose narrative + working thesis as punchline -->
+      <div class="bg-prose">
+        <p class="lead">I started in Hong Kong with dual LLB + BBA degrees at HKU, did a magna cum laude master's in Strategy &amp; International Management at St. Gallen with a GenAI thesis on LLMs, agents, alignment, and governance, exchanged in Bogotá and Santiago, led an NGO in Guatemala, consulted out of Beijing with Accenture (market-entry strategy, Oracle ERP migration, ML revenue modeling) and Shanghai with PwC (SAP system integration), and joined Amazon as a Business Analyst in Luxembourg before rotating to the L5 PM II role in London in 2023.</p>
+
+        <p>My background compounds into how I build with AI. <strong>Legal training</strong> (HKU LLB) shapes the way I write specs and structure prompts — AI as systems operating inside explicit rules, authorities, and validation layers. <strong>Strategic + consulting training</strong> (St. Gallen Master's, Accenture, PwC) shapes the MECE problem decomposition, the customer-back planning under ambiguity, and the structured prompting habit that turns vibe-coding into rigor. <strong>Multilingual + cross-continent operating range</strong> (six natural languages, three continents) shapes how I read AI behavior across languages and locales — and is part of why I built Verba. <strong>PM craft</strong> shapes how I scaffold agentic teams, the knowledge bases they ground in, and the pipelines they run on. Together, this is how the in-production agentic system above went from idea to live in <strong>two weeks</strong>.</p>
+
+        <div class="thesis">
+          <span class="label">working thesis</span>
+          <q>The next decade of AI is won by the teams that make capability claims honest. Capabilities are the input. The eval loop is the product.</q>
+        </div>
+      </div>
+
+      <!-- RIGHT: structured evidence stack — certs, leadership, master's thesis -->
+      <div class="bg-aside">
+        <div class="cert-row">
+          <span class="cert-chip cert-chip--brand"><img class="cert-ico" src="/logos/claude.svg" alt="Claude" />Claude Certified Architect – Professional · 2026</span>
+          <span class="cert-chip">PMP · Above Target in all 3 domains · 2026</span>
+          <span class="cert-chip">AWS Certified Generative AI Developer – Professional · 2026</span>
+          <span class="cert-chip">AWS Certified Solutions Architect – Associate · 2026</span>
+          <span class="cert-chip">5× AWS certified · incl. Developer, AI &amp; Cloud Practitioner</span>
+          <span class="cert-chip">Professional Scrum Master</span>
+        </div>
+        <p class="cert-note">PMP prep ran as a one-day build: a calibrated drill engine plus adversarial QA, then Above Target in all three domains of the 2026 exam.</p>
+
+        <div class="leadership-block">
+          <h4>leadership · cross-functional programs · DEI</h4>
+          <ul class="leadership-list">
+            <li><strong>Cross-functional program ownership</strong> — coordinated production-ML rollouts across <strong>5+ stakeholder teams</strong> (PM, SDE, ML research, operations) on EU-wide footprint · <strong>two-pizza-team structure</strong>. Owned BRDs, launch artifacts, and eval loops; coordinated through stakeholder leads on each launch. Led the <strong>4-person build team</strong> behind the agentic platform; <strong>up to 20 teams</strong> now run my internal tools without me, including production- and legal-critical workflows.</li>
+            <li><strong>Operational rigor</strong> — owned <strong>Correction-of-Error post-incident reviews read at VP level</strong>; written runbooks and SLO-style targets on live network migrations; program-managed carrier-facing tooling used by <strong>up to 50,000 carriers</strong> across the EU.</li>
+            <li><strong>Mentorship track record</strong> — coached 1 intern and mentored 2 to full-time return offers; every intern and direct mentee to date received one, through company-wide hiring freezes. Coached through both technical execution and PM-craft skill development.</li>
+            <li><strong>Cross-cultural delivery</strong> — operated and shipped across <strong>3 continents and 6 natural languages</strong>: consulting tenure in Beijing (Accenture) and Shanghai (PwC), master's-era programs in Latin America, current EU operations leadership.</li>
+            <li><strong>ERG involvement</strong> — active in Glamazon and the Asian &amp; Latino affinity groups at Amazon. Diversity is a leadership lens, not a checkbox.</li>
+            <li><strong>NGO leadership</strong> — led <em>Niños de Xela</em> for one year. Sustainable agricultural-product diversification and long-term business-model design with underprivileged indigenous women in Quetzaltenango, Guatemala. Main speaker and point of contact during in-country fieldwork; organized fundraising events.</li>
+          </ul>
+        </div>
+
+        <div class="thesis-block">
+          <h4>master's thesis · st. gallen · 2024</h4>
+          <div class="title">A systems view of generative AI in no-code / low-code development — built around LLMs, agents, alignment, and governance rather than prompt theater.</div>
+          <div class="meta">Supervisor: Dr. Edona Elshan · graded magna cum laude</div>
+          <div class="stats">
+            <div><span class="stat-num">50K<em>+</em></span><span class="stat-lbl">reddit entries · chained pipeline</span></div>
+            <div><span class="stat-num">3</span><span class="stat-lbl">pillars · LLMs · agents · governance</span></div>
+            <div><span class="stat-num">Pydantic</span><span class="stat-lbl">agent coordination layer</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ FOOTPRINT SHOWCASE — full-width ============ -->
+    <div class="footprint" id="footprint">
+          <div class="footprint-head">
+            <div class="title">footprint</div>
+            <div class="legend">
+              <span><span class="swatch"></span>past</span>
+              <span><span class="swatch now"></span>current</span>
+            </div>
+          </div>
+
+          <div class="footprint-body">
+            <!-- abstracted dot-grid map · full-width row -->
+            <div class="map-wrap">
+              <svg viewBox="0 0 960 560" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                <defs>
+                  <radialGradient id="glowAccent" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#d97757" stop-opacity="0.55"/>
+                    <stop offset="60%" stop-color="#d97757" stop-opacity="0.08"/>
+                    <stop offset="100%" stop-color="#d97757" stop-opacity="0"/>
+                  </radialGradient>
+                  <radialGradient id="glowInk" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#141413" stop-opacity="0.18"/>
+                    <stop offset="100%" stop-color="#141413" stop-opacity="0"/>
+                  </radialGradient>
+                </defs>
+
+                <g id="dotgrid" fill="#5a584f"></g>
+                <path id="worldline" d="" fill="none" stroke="#141413" stroke-width="1" stroke-dasharray="3 4" opacity="0.0"/>
+                <path id="worldline-active" d="" fill="none" stroke="#d97757" stroke-width="1.25" opacity="0.0"/>
+                <g id="cities"></g>
+                <g id="city-labels"></g>
+              </svg>
+
+              <div class="map-caption">
+                <span id="map-status">hover a city · london current</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- city descriptions — main signals per location -->
+          <div class="footprint-details">
+            <div class="footprint-details-grid">
+              <div class="fp-detail now" data-city="london" data-x="470" data-y="108" tabindex="0">
+                <div class="head"><span class="flag">🇬🇧</span><span class="name">London</span><span class="country">UK</span></div>
+                <div class="role">2023 — present · pm II</div>
+                <p class="body">Amazon PM II. Production ML &amp; Gen AI programs across European operations. Active OSS contributor across the AI infrastructure stack — <strong>merged first-party contribution in Anthropic's Claude Agent SDK</strong>, with further Anthropic PRs in flight (Agent SDK, Cookbooks, Go SDK).</p>
+              </div>
+
+              <div class="fp-detail" data-city="luxembourg" data-x="496" data-y="126" tabindex="0">
+                <div class="head"><span class="flag">🇱🇺</span><span class="name">Luxembourg</span><span class="country">LU</span></div>
+                <div class="role">amazon · business analyst</div>
+                <p class="body">Amazon Business Analyst. Analytics, automation, and cloud-planning work across EU operations finance. Foundation for the later return to Amazon at PM II.</p>
+              </div>
+
+              <div class="fp-detail" data-city="stgallen" data-x="505" data-y="132" tabindex="0">
+                <div class="head"><span class="flag">🇨🇭</span><span class="name">St. Gallen</span><span class="country">CH</span></div>
+                <div class="role">master's · magna cum laude</div>
+                <p class="body">University of St. Gallen — MA Strategy &amp; International Management. GenAI thesis on LLMs, agents, alignment, and governance: chained pipeline over <strong>50K+ Reddit entries</strong> with Pydantic-coordinated agents.</p>
+              </div>
+
+              <div class="fp-detail" data-city="hongkong" data-x="784" data-y="211" tabindex="0">
+                <div class="head"><span class="flag">🇭🇰</span><span class="name">Hong Kong</span><span class="country">HK</span></div>
+                <div class="role">hku · llb + bba</div>
+                <p class="body">The University of Hong Kong — dual LLB + BBA. Scholarships and debating-society leadership. Legal training that shapes how I build AI systems: explicit rules, authorities, validation layers.</p>
+              </div>
+
+              <div class="fp-detail" data-city="beijing" data-x="790" data-y="156" tabindex="0">
+                <div class="head"><span class="flag">🇨🇳</span><span class="name">Beijing</span><span class="country">CN</span></div>
+                <div class="role">accenture · consultant</div>
+                <p class="body">Accenture Consultant. Three engagement areas: <strong>China market-entry strategy</strong> for global liquor clients; <strong>Oracle ERP integration and migration</strong> for a major electronics manufacturer; <strong>revenue-strategy modeling using ML</strong>. Cross-cultural delivery at large-org scale.</p>
+              </div>
+
+              <div class="fp-detail" data-city="shanghai" data-x="804" data-y="183" tabindex="0">
+                <div class="head"><span class="flag">🇨🇳</span><span class="name">Shanghai</span><span class="country">CN</span></div>
+                <div class="role">pwc · consultant · sap</div>
+                <p class="body">PwC Consultant. <strong>SAP system integration and migration</strong> across Greater China clients. Trilingual delivery in English / 中文 / 粵語.</p>
+              </div>
+
+              <div class="fp-detail" data-city="bogota" data-x="282" data-y="265" tabindex="0">
+                <div class="head"><span class="flag">🇨🇴</span><span class="name">Bogotá</span><span class="country">CO</span></div>
+                <div class="role">u. de los andes · master exchange</div>
+                <p class="body">Universidad de los Andes — master's exchange. Latin American economy, accounting rules, and business context. Spanish + Portuguese operating range deepened.</p>
+              </div>
+
+              <div class="fp-detail" data-city="quetzaltenango" data-x="236" data-y="234" tabindex="0">
+                <div class="head"><span class="flag">🇬🇹</span><span class="name">Quetzaltenango</span><span class="country">GT</span></div>
+                <div class="role">niños de xela · 1-yr ngo lead</div>
+                <p class="body">Year-long lead of <strong>Niños de Xela</strong> — sustainable agricultural-product diversification and long-term business-model design with underprivileged indigenous women in Quetzaltenango. Main speaker and point of contact during in-country fieldwork; organized fundraising events.</p>
+              </div>
+
+              <div class="fp-detail" data-city="santiago" data-x="292" data-y="384" tabindex="0">
+                <div class="head"><span class="flag">🇨🇱</span><span class="name">Santiago</span><span class="country">CL</span></div>
+                <div class="role">u. católica · undergrad exchange</div>
+                <p class="body">Pontificia Universidad Católica de Chile — undergrad exchange. Sharpened cross-cultural operating range and Latin American context for early business-strategy work.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section contact" id="contact">
+  <div class="container">
+    <div class="eyebrow">05 — contact</div>
+    <div class="contact-grid" style="margin-top: var(--space-5)">
+      <div>
+        <h2>
+          Get in touch.
+        </h2>
+        <p class="contact-note">Open to TPM and technical program roles on inference, agents, and evaluation. Based in London, open to relocation.</p>
+      </div>
+      <div class="contact-actions">
+        <div class="social-row">
+          <a class="social" href="https://github.com/joaquinhuigomez" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+            <span>github</span>
+          </a>
+          <a class="social" href="https://www.linkedin.com/in/joaquin-h-352927a9/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5 1.78 1.78 0 0 1 6.5 8.25zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+            <span>linkedin</span>
+          </a>
+          <a class="social" href="https://x.com/ViajaryTragar" target="_blank" rel="noopener" aria-label="X">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span>x</span>
+          </a>
+          <a class="social" href="https://www.instagram.com/kinaventurero" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2.16c3.2 0 3.58 0 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.2 0 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58 0-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85 0-3.2 0-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.18 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07c-4.36.2-6.78 2.62-6.98 6.98C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.36-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.36-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
+            <span>instagram</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <span>© 2026 Joaquin Hui Gomez</span>
+      <span class="mono">cloudflare pages · last updated 2026-04-28</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/world-continents.js"></script>
+<script>
+/* — fade-in entrance — */
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('.fade-in').forEach(el => el.classList.add('animated'));
+})();
+
+/* — nav border on scroll — */
+(function () {
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+/* — FOOTPRINT showcase — abstracted dot-grid + cities + connecting line — */
+(function () {
+  const dotGroup = document.getElementById('dotgrid');
+  const cityGroup = document.getElementById('cities');
+  const labelGroup = document.getElementById('city-labels');
+  const worldline = document.getElementById('worldline');
+  const worldlineActive = document.getElementById('worldline-active');
+  const status = document.getElementById('map-status');
+
+  // — accurate continent masks from Natural Earth 1:110m land (public domain),
+  //   simplified via Douglas-Peucker, projected to viewBox 960×560.
+  //   Loaded as window.WORLD_CONTINENTS by /world-continents.js
+  const continents = (window.WORLD_CONTINENTS || []).map(c => ({ points: c.points }));
+
+  function inside(x, y, poly) {
+    let c = false;
+    for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+      const xi = poly[i][0], yi = poly[i][1];
+      const xj = poly[j][0], yj = poly[j][1];
+      const hit = ((yi > y) !== (yj > y)) && (x < ((xj - xi) * (y - yi)) / (yj - yi) + xi);
+      if (hit) c = !c;
+    }
+    return c;
+  }
+  function inAnyContinent(x, y) {
+    for (const c of continents) if (inside(x, y, c.points)) return true;
+    return false;
+  }
+
+  const STEP = 11;
+  const frag = document.createDocumentFragment();
+  for (let y = 80; y <= 520; y += STEP) {
+    for (let x = 40; x <= 920; x += STEP) {
+      const jx = x + (((x * 3 + y * 7) % 5) - 2) * 0.4;
+      const jy = y + (((x * 5 + y * 11) % 5) - 2) * 0.4;
+      if (inAnyContinent(jx, jy)) {
+        const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        dot.setAttribute('cx', jx.toFixed(1));
+        dot.setAttribute('cy', jy.toFixed(1));
+        const r = 1.4 + (Math.abs(280 - jy) / 280) * 0.5;
+        dot.setAttribute('r', r.toFixed(2));
+        const dx = (jx - 480) / 480;
+        const dy = (jy - 280) / 280;
+        const d = Math.min(1, Math.hypot(dx, dy));
+        dot.setAttribute('opacity', (0.75 - d * 0.18).toFixed(2));
+        frag.appendChild(dot);
+      }
+    }
+  }
+  dotGroup.appendChild(frag);
+
+  // Cards in the city-details grid (below the map) drive map highlights.
+  const rows = Array.from(document.querySelectorAll('.fp-detail'));
+  const cities = rows.map(r => ({
+    el: r,
+    id: r.dataset.city,
+    x: +r.dataset.x,
+    y: +r.dataset.y,
+    name: r.querySelector('.name').textContent,
+    now: r.classList.contains('now'),
+  }));
+
+  // chronological order: HK → Santiago → Bogotá → Quetzaltenango → St. Gallen → Beijing/Shanghai → Luxembourg → London
+  const order = ['hongkong', 'santiago', 'bogota', 'quetzaltenango', 'stgallen', 'beijing', 'shanghai', 'luxembourg', 'london'];
+  const ordered = order.map(id => cities.find(c => c.id === id)).filter(Boolean);
+
+  function buildPath(pts) {
+    if (pts.length < 2) return '';
+    let d = `M ${pts[0].x} ${pts[0].y}`;
+    for (let i = 1; i < pts.length; i++) {
+      const p0 = pts[i - 1], p1 = pts[i];
+      const mx = (p0.x + p1.x) / 2;
+      const my = (p0.y + p1.y) / 2 - Math.min(40, Math.abs(p1.x - p0.x) * 0.12);
+      d += ` Q ${mx.toFixed(1)} ${my.toFixed(1)} ${p1.x} ${p1.y}`;
+    }
+    return d;
+  }
+
+  worldline.setAttribute('d', buildPath(ordered));
+  worldline.setAttribute('opacity', '0.35');
+
+  cities.forEach(c => {
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.setAttribute('class', 'city-dot' + (c.now ? ' now' : ''));
+    g.style.cursor = 'pointer';
+
+    const halo = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    halo.setAttribute('cx', c.x);
+    halo.setAttribute('cy', c.y);
+    halo.setAttribute('r', 22);
+    halo.setAttribute('fill', `url(#${c.now ? 'glowAccent' : 'glowInk'})`);
+    halo.setAttribute('opacity', c.now ? '1' : '0');
+
+    const ring = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    ring.setAttribute('cx', c.x);
+    ring.setAttribute('cy', c.y);
+    ring.setAttribute('r', c.now ? 7 : 4);
+    ring.setAttribute('fill', 'none');
+    ring.setAttribute('stroke', c.now ? '#d97757' : '#141413');
+    ring.setAttribute('stroke-width', c.now ? 1.25 : 0.9);
+    ring.setAttribute('opacity', c.now ? 1 : 0.45);
+
+    const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    dot.setAttribute('cx', c.x);
+    dot.setAttribute('cy', c.y);
+    dot.setAttribute('r', c.now ? 3 : 2.2);
+    dot.setAttribute('fill', c.now ? '#d97757' : '#141413');
+
+    g.appendChild(halo);
+    g.appendChild(ring);
+    g.appendChild(dot);
+    cityGroup.appendChild(g);
+
+    c.svg = { g, halo, ring, dot };
+
+    const lbl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    lbl.setAttribute('x', c.x + 10);
+    lbl.setAttribute('y', c.y + 4);
+    lbl.setAttribute('class', 'city-label' + (c.now ? ' now' : ''));
+    lbl.setAttribute('opacity', c.now ? 1 : 0);
+    lbl.textContent = c.name;
+    labelGroup.appendChild(lbl);
+    c.label = lbl;
+  });
+
+  function setActive(id) {
+    cities.forEach(c => {
+      const isActive = c.id === id;
+      c.el.classList.toggle('active', isActive || (c.now && !id));
+      c.svg.halo.setAttribute('opacity', (isActive || c.now) ? '1' : '0');
+      c.svg.ring.setAttribute('r', isActive ? 9 : (c.now ? 7 : 4));
+      c.svg.ring.setAttribute('opacity', isActive ? 1 : (c.now ? 1 : 0.45));
+      c.label.setAttribute('opacity', (isActive || c.now) ? 1 : 0);
+    });
+
+    if (id) {
+      const c = cities.find(x => x.id === id);
+      status.textContent = `${c.name.toLowerCase()} · ${c.el.querySelector('.role').textContent.toLowerCase()}`;
+      const london = cities.find(x => x.id === 'london');
+      if (c.id !== 'london') {
+        worldlineActive.setAttribute('d', buildPath([london, c]));
+        worldlineActive.setAttribute('opacity', 1);
+      } else {
+        worldlineActive.setAttribute('opacity', 0);
+      }
+    } else {
+      worldlineActive.setAttribute('opacity', 0);
+      status.textContent = 'hover a city · london current';
+    }
+  }
+
+  rows.forEach(r => {
+    r.addEventListener('mouseenter', () => setActive(r.dataset.city));
+    r.addEventListener('focus', () => setActive(r.dataset.city));
+    r.addEventListener('mouseleave', () => setActive(null));
+    r.addEventListener('blur', () => setActive(null));
+  });
+
+  cities.forEach(c => {
+    c.svg.g.addEventListener('mouseenter', () => setActive(c.id));
+    c.svg.g.addEventListener('mouseleave', () => setActive(null));
+  });
+})();
+</script>
+</body>
 </html>

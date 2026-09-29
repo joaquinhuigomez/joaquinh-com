@@ -1,0 +1,279 @@
+@import "./verba-shared.css";
+
+.verba-case-study-page {
+  padding-bottom: 2.4rem;
+}
+
+.verba-case-study-page .verba-heading-xl {
+  font-size: clamp(1.38rem, 2.15vw, 2rem);
+  line-height: 0.98;
+}
+
+.verba-case-study-page .verba-heading-lg {
+  font-size: clamp(1rem, 1.55vw, 1.32rem);
+  line-height: 1.06;
+}
+
+.verba-case-study-page .verba-heading-md {
+  font-size: clamp(0.98rem, 1.25vw, 1.14rem);
+}
+
+.verba-case-study-page .verba-copy,
+.verba-case-study-page .verba-soft-copy {
+  font-size: 0.92rem;
+  line-height: 1.52;
+}
+
+.verba-case-main {
+  display: grid;
+  gap: 0.9rem;
+  padding-bottom: 0.5rem;
+}
+
+.verba-case-nav {
+  display: inline-flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.verba-case-hero,
+.verba-case-panel,
+.verba-case-cta {
+  border: 1px solid var(--verba-line);
+  border-radius: var(--verba-radius-lg);
+  background: var(--verba-paper);
+  box-shadow: var(--verba-shadow);
+}
+
+.verba-case-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.98fr);
+  gap: 0.9rem;
+  padding: 0.8rem;
+}
+
+.verba-case-hero-copy {
+  display: grid;
+  gap: 0.62rem;
+  align-content: start;
+  padding: 0.9rem 0.82rem;
+}
+
+.verba-case-hero-copytext {
+  max-width: 40ch;
+}
+
+.verba-case-hero-visual {
+  padding: 0.74rem;
+  border-radius: var(--verba-radius-lg);
+  background:
+    linear-gradient(180deg, rgba(255, 253, 250, 0.98), rgba(255, 248, 240, 0.92)),
+    var(--verba-paper);
+  overflow: hidden;
+}
+
+.verba-case-visual-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.verba-case-visual-svg .verba-case-flow {
+  animation: verbaCaseFlow 2.4s linear infinite;
+}
+
+.verba-case-visual-svg .verba-case-runner {
+  animation: verbaCaseRunner 3.1s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(17, 93, 101, 0.28));
+}
+
+.verba-case-proof-strip {
+  margin-top: 0.15rem;
+}
+
+.verba-case-section {
+  display: grid;
+  gap: 0.72rem;
+}
+
+.verba-case-grid-two,
+.verba-case-method-grid,
+.verba-case-scenario-grid {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.verba-case-grid-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.verba-case-panel,
+.verba-case-method-card,
+.verba-case-scenario-card,
+.verba-case-scorecard-empty,
+.verba-case-cta {
+  padding: 0.88rem;
+}
+
+.verba-case-list {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.verba-case-list li {
+  display: grid;
+  gap: 0.18rem;
+  padding: 0.76rem 0.82rem;
+  border-radius: var(--verba-radius-md);
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid var(--verba-line);
+}
+
+.verba-case-list strong {
+  font-size: 0.92rem;
+}
+
+.verba-case-list span {
+  color: var(--verba-ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.verba-case-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-top: 0.65rem;
+}
+
+.verba-case-head {
+  max-width: 44rem;
+}
+
+.verba-case-method-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.verba-case-method-card {
+  display: grid;
+  gap: 0.72rem;
+}
+
+.verba-case-method-card .verba-story-card-step {
+  width: fit-content;
+}
+
+.verba-case-scenario-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.verba-case-scenario-card {
+  display: grid;
+  gap: 0.72rem;
+}
+
+.verba-case-scorecard {
+  display: grid;
+  gap: 0.72rem;
+}
+
+.verba-case-scorecard-table {
+  display: grid;
+  gap: 0.32rem;
+}
+
+.verba-case-scorecard-head,
+.verba-case-scorecard-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.72rem 0.82rem;
+  border-radius: var(--verba-radius-md);
+}
+
+.verba-case-scorecard-head {
+  background: rgba(22, 36, 49, 0.04);
+  color: var(--verba-ink-soft);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.verba-case-scorecard-row {
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid var(--verba-line);
+}
+
+.verba-case-scorecard-row strong {
+  font-size: 0.92rem;
+}
+
+.verba-case-scorecard-row span {
+  color: var(--verba-ink-soft);
+  font-size: 0.9rem;
+}
+
+.verba-case-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.verba-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--verba-line);
+}
+
+@keyframes verbaCaseFlow {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+@keyframes verbaCaseRunner {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(188px);
+  }
+}
+
+@media (max-width: 1080px) {
+  .verba-case-hero,
+  .verba-case-grid-two,
+  .verba-case-method-grid,
+  .verba-case-scenario-grid,
+  .verba-case-cta {
+    grid-template-columns: 1fr;
+  }
+
+  .verba-case-cta {
+    display: grid;
+  }
+
+  .verba-case-scorecard-head,
+  .verba-case-scorecard-row {
+    grid-template-columns: minmax(0, 1fr) repeat(3, minmax(0, 0.65fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .verba-case-study-page .verba-heading-xl {
+    font-size: 1.28rem;
+  }
+
+  .verba-case-scorecard-head,
+  .verba-case-scorecard-row {
+    grid-template-columns: 1.1fr 0.7fr 0.9fr 0.7fr;
+    font-size: 0.82rem;
+  }
+}

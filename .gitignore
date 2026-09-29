@@ -2,3 +2,16 @@ node_modules
 dist
 .DS_Store
 .wrangler
+.dev.vars
+evals/reports
+*sage*
+private/
+
+# Internal / non-site material — this repo is PUBLIC
+evals/
+output/
+design-handoff/
+.playwright-cli/
+.claude/
+AGENTS.md
+*.zip

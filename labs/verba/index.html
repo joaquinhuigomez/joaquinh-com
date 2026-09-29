@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Verba — multilingual speech, made publishable</title>
+<meta name="description" content="Verba is a multilingual speech-to-draft workspace with raw transcript preservation, ambiguity surfacing, and a benchmark-backed eval loop. Built end-to-end on Cloudflare Workers.">
+<meta name="theme-color" content="#faf9f5">
+<link rel="icon" href="/verba-mark.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,ital,wght@6..72,0,400;6..72,0,500;6..72,1,400&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/src/tokens.css">
+<style>
+  .nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--paper) 92%, transparent); border-bottom: 1px solid var(--rule); }
+  .nav-inner { max-width: var(--container); margin-inline: auto; padding: 16px var(--space-5); display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-5); }
+  .nav-mark { font-family: var(--font-heading); font-size: 18px; }
+  .nav-mark .dot { color: var(--accent); }
+  .nav-links { display: flex; gap: var(--space-5); font-size: var(--t-body-sm); color: var(--gray-2); align-items: center; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-social { display: inline-flex; align-items: center; gap: 10px; padding-left: var(--space-4); margin-left: var(--space-2); border-left: 1px solid var(--rule); }
+  .nav-social a { color: var(--gray-2); display: inline-flex; transition: color var(--dur-hover) var(--ease); }
+  .nav-social a:hover { color: var(--accent); }
+  .nav-social svg { width: 16px; height: 16px; }
+
+  .hero { padding-block: 96px 64px; }
+  .hero .eyebrow { color: var(--accent); }
+  .hero h1 { font-size: clamp(44px, 6.5vw, 88px); line-height: 1.02; letter-spacing: -0.025em; max-width: 14ch; margin-top: var(--space-4); }
+  .hero h1 em { font-style: italic; color: var(--ink-2); }
+  .hero .lede { margin-top: var(--space-5); max-width: 60ch; font-size: 19px; color: var(--ink-2); line-height: 1.55; }
+  .hero .actions { margin-top: var(--space-6); display: flex; gap: var(--space-3); flex-wrap: wrap; }
+
+  .composition {
+    margin-top: var(--space-8);
+    border: 1px solid var(--rule);
+    background: var(--paper-3);
+    aspect-ratio: 16 / 8;
+    position: relative; overflow: hidden;
+  }
+  .composition .pane { position: absolute; background: var(--paper); border: 1px solid var(--rule); box-shadow: var(--elev-1); }
+  .composition .pane.transcribe { left: 6%; top: 18%; width: 28%; height: 64%; }
+  .composition .pane.polish    { left: 36%; top: 10%; width: 28%; height: 70%; box-shadow: var(--elev-2); }
+  .composition .pane.compare   { left: 66%; top: 14%; width: 28%; height: 68%; }
+  .composition .pane h4 {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gray-2); padding: 10px 12px; border-bottom: 1px solid var(--rule); margin: 0;
+  }
+  .composition .pane .lines { padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; }
+  .composition .pane .lines i { display: block; height: 4px; background: var(--paper-2); border-radius: 2px; }
+  .composition .pane.polish .lines i.hl { background: color-mix(in srgb, var(--accent) 35%, var(--paper-2)); }
+  .composition .pane.compare .col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 10px 12px; }
+  .composition .pane.compare .col > div { display: flex; flex-direction: column; gap: 4px; }
+  .composition .pane.compare .col i { display: block; height: 3px; background: var(--paper-2); border-radius: 2px; }
+  .composition .pane.compare .col .b i { background: color-mix(in srgb, var(--data-blue) 50%, var(--paper-2)); }
+  .composition .arrow { position: absolute; top: 50%; height: 1px; background: var(--ink); opacity: 0.4; }
+  .composition .arrow.a1 { left: 34%; width: 2%; }
+  .composition .arrow.a2 { left: 64%; width: 2%; }
+  .composition .label-tag {
+    position: absolute; font-family: var(--font-mono); font-size: 10px;
+    color: var(--gray-2); letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .composition .label-tag.t1 { left: 6%; bottom: 10%; }
+  .composition .label-tag.t2 { left: 36%; bottom: 6%; color: var(--accent); }
+  .composition .label-tag.t3 { left: 66%; bottom: 8%; }
+
+  .how { padding-block: var(--rhythm); border-top: 1px solid var(--rule); }
+  .how-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-7); }
+  @media (min-width: 800px) { .how-grid { grid-template-columns: repeat(4, 1fr); } }
+  .step .num { font-family: var(--font-mono); font-size: var(--t-meta); color: var(--accent); letter-spacing: 0.1em; }
+  .step h3 { margin-top: var(--space-2); font-size: 22px; }
+  .step p { margin-top: var(--space-3); font-size: var(--t-body-sm); color: var(--ink-2); }
+
+  .cta { padding-block: var(--rhythm); border-top: 1px solid var(--rule); background: var(--paper-3); }
+  .cta-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-5); align-items: end; }
+  @media (min-width: 760px) { .cta-grid { grid-template-columns: 1fr auto; } }
+  .cta h2 { font-size: clamp(32px, 4.5vw, 56px); line-height: 1.05; max-width: 18ch; }
+  .cta h2 em { font-style: italic; color: var(--ink-2); }
+  .cta-actions { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+
+  .footer { padding: var(--space-7) 0 var(--space-6); color: var(--gray-2); font-size: var(--t-meta); border-top: 1px solid var(--rule); }
+  .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-mark">joaquin hui g<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="/">home</a>
+      <a href="/labs/verba/case-study/">case study</a>
+      <a href="/labs/verba/workspace/">open workspace →</a>
+      <span class="nav-social">
+        <a href="https://github.com/joaquinhuigomez" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></a>
+        <a href="https://www.linkedin.com/in/joaquin-h-352927a9/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5 1.78 1.78 0 0 1 6.5 8.25zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg></a>
+        <a href="https://x.com/ViajaryTragar" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      </span>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow">labs · verba</div>
+    <h1>Multilingual speech, <em>made publishable.</em></h1>
+    <p class="lede">Verba turns spoken notes into credible written output across English, 中文, español, français, and português. Raw transcript preserved. Ambiguity surfaced, not papered over. Drafts compared across providers, scored against a fixed rubric, and exportable as JSONL — all on the same Cloudflare edge that serves this site.</p>
+    <div class="actions">
+      <a class="btn" href="/labs/verba/workspace/">open the workspace →</a>
+      <a class="btn ghost" href="/labs/verba/case-study/">read the case study</a>
+    </div>
+
+    <div class="composition" aria-hidden="true">
+      <div class="pane transcribe">
+        <h4>transcribe</h4>
+        <div class="lines">
+          <i style="width: 92%"></i><i style="width: 78%"></i><i style="width: 88%"></i><i style="width: 60%"></i><i style="width: 84%"></i><i style="width: 70%"></i><i style="width: 90%"></i>
+        </div>
+      </div>
+      <div class="pane polish">
+        <h4>polish</h4>
+        <div class="lines">
+          <i style="width: 92%"></i><i class="hl" style="width: 70%"></i><i style="width: 88%"></i><i class="hl" style="width: 50%"></i><i style="width: 84%"></i><i style="width: 90%"></i><i class="hl" style="width: 64%"></i><i style="width: 78%"></i>
+        </div>
+      </div>
+      <div class="pane compare">
+        <h4>compare</h4>
+        <div class="col">
+          <div class="a"><i style="width:90%"></i><i style="width:70%"></i><i style="width:80%"></i><i style="width:60%"></i><i style="width:84%"></i></div>
+          <div class="b"><i style="width:88%"></i><i style="width:74%"></i><i style="width:66%"></i><i style="width:90%"></i><i style="width:54%"></i></div>
+        </div>
+      </div>
+      <div class="arrow a1"></div>
+      <div class="arrow a2"></div>
+      <span class="label-tag t1">01 transcribe</span>
+      <span class="label-tag t2">02 polish</span>
+      <span class="label-tag t3">03 compare · log</span>
+    </div>
+  </div>
+</header>
+
+<section class="how">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom: var(--space-5)">how it works</div>
+    <div class="how-grid">
+      <div class="step"><div class="num">01</div><h3>Transcribe</h3><p>Drop audio. Whisper-style transcription with confidence-scored segments. Multilingual by default.</p></div>
+      <div class="step"><div class="num">02</div><h3>Polish</h3><p>Rewrite, translate, or generate a prompt — three deliberate modes. Diff highlighted inline against the raw transcript.</p></div>
+      <div class="step"><div class="num">03</div><h3>Compare</h3><p>Run the polished output through multiple providers in parallel. Side-by-side diff. Cost and latency captured per call.</p></div>
+      <div class="step"><div class="num">04</div><h3>Log eval</h3><p>Score outputs with a fixed rubric. Persist to D1. Export the eval log as JSONL for downstream analysis.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <div class="cta-grid">
+      <h2>Built end-to-end on Cloudflare. <em>In daily use.</em></h2>
+      <div class="cta-actions">
+        <a class="btn" href="/labs/verba/workspace/">open workspace →</a>
+        <a class="btn ghost" href="/labs/verba/case-study/">case study</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <span>© 2026 Joaquin Hui Gomez</span>
+      <span class="mono">cloudflare pages</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
