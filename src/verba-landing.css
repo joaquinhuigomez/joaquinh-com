@@ -1,0 +1,557 @@
+@import "./verba-shared.css";
+
+.verba-landing {
+  padding-bottom: 2.1rem;
+}
+
+.verba-landing .verba-heading-xl {
+  font-size: clamp(1.34rem, 2vw, 1.92rem);
+  line-height: 0.99;
+}
+
+.verba-landing .verba-heading-lg {
+  font-size: clamp(1rem, 1.5vw, 1.32rem);
+  line-height: 1.08;
+}
+
+.verba-landing .verba-heading-md {
+  font-size: clamp(0.98rem, 1.2vw, 1.12rem);
+}
+
+.verba-landing .verba-copy,
+.verba-landing .verba-soft-copy {
+  font-size: 0.92rem;
+  line-height: 1.52;
+}
+
+.verba-hero {
+  padding: 0.2rem 0 0.8rem;
+}
+
+.verba-hero-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.82fr);
+  gap: 0.8rem;
+  padding: 0.72rem;
+}
+
+.verba-hero-copy,
+.verba-hero-visual,
+.verba-founder-card,
+.verba-story-card,
+.verba-comparison-card,
+.verba-principle-card,
+.verba-cta-band,
+.verba-support-panel {
+  border: 1px solid var(--verba-line);
+  border-radius: var(--verba-radius-lg);
+  background: var(--verba-paper);
+  box-shadow: var(--verba-shadow);
+}
+
+.verba-hero-copy {
+  padding: 0.82rem;
+  display: grid;
+  align-content: start;
+  gap: 0.58rem;
+}
+
+.verba-hero-subcopy {
+  max-width: 38ch;
+}
+
+.verba-hero-visual {
+  padding: 0.7rem;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 250, 0.98), rgba(255, 248, 240, 0.92)),
+    var(--verba-paper);
+}
+
+.verba-hero-visual svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 320px;
+}
+
+.verba-hero-visual .verba-hero-panel-left,
+.verba-hero-visual .verba-hero-panel-right {
+  transform-box: fill-box;
+  transform-origin: center center;
+}
+
+.verba-hero-visual .verba-hero-panel-left {
+  animation: verbaPanelLift 4.6s ease-in-out infinite;
+}
+
+.verba-hero-visual .verba-hero-panel-right {
+  animation: verbaPanelLift 4.6s ease-in-out infinite 0.55s;
+}
+
+.verba-hero-visual .verba-hero-wave-1,
+.verba-hero-visual .verba-hero-wave-2,
+.verba-hero-visual .verba-hero-wave-3,
+.verba-hero-visual .verba-hero-wave-4 {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: verbaWave 2.8s ease-in-out infinite;
+}
+
+.verba-hero-visual .verba-hero-wave-2 {
+  animation-delay: 0.18s;
+}
+
+.verba-hero-visual .verba-hero-wave-3 {
+  animation-delay: 0.34s;
+}
+
+.verba-hero-visual .verba-hero-wave-4 {
+  animation-delay: 0.5s;
+}
+
+.verba-hero-visual .verba-hero-arrow {
+  animation: verbaArrow 3.6s ease-in-out infinite;
+}
+
+.verba-hero-visual .verba-hero-flow {
+  animation: verbaFlow 2.4s linear infinite;
+}
+
+.verba-hero-visual .verba-hero-runner {
+  animation: verbaRunner 2.8s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(17, 93, 101, 0.32));
+}
+
+.verba-hero-visual .verba-hero-dot-1,
+.verba-hero-visual .verba-hero-dot-2,
+.verba-hero-visual .verba-hero-dot-3 {
+  animation: verbaPulse 2.7s ease-in-out infinite;
+}
+
+.verba-hero-visual .verba-hero-dot-2 {
+  animation-delay: 0.18s;
+}
+
+.verba-hero-visual .verba-hero-dot-3 {
+  animation-delay: 0.36s;
+}
+
+.verba-proof-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.verba-landing .verba-badge-stat {
+  padding: 0.58rem 0.66rem;
+}
+
+.verba-landing .verba-badge-stat strong {
+  font-size: 0.84rem;
+  line-height: 1.05;
+}
+
+.verba-founder-card {
+  padding: 0.82rem 0.9rem;
+}
+
+.verba-founder-layout {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: center;
+}
+
+.verba-founder-media,
+.verba-founder-copy {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.verba-founder-portrait {
+  width: 110px;
+  height: 132px;
+  display: block;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 22px;
+  border: 1px solid rgba(22, 36, 49, 0.12);
+  box-shadow: 0 18px 36px rgba(22, 36, 49, 0.12);
+}
+
+.verba-founder-badge {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.9rem;
+  padding: 0 0.7rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid var(--verba-line);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  color: var(--verba-ink-soft);
+}
+
+.verba-section {
+  margin-top: 0.85rem;
+}
+
+.verba-section-shell {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.verba-section-head {
+  display: grid;
+  gap: 0.45rem;
+  max-width: 44rem;
+}
+
+.verba-story-grid,
+.verba-principle-grid,
+.verba-support-grid {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.verba-story-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.verba-story-card,
+.verba-principle-card {
+  padding: 0.85rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.verba-story-card p,
+.verba-principle-card p {
+  margin: 0;
+}
+
+.verba-story-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.verba-story-card-step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 0.6rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--verba-line);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8rem;
+}
+
+.verba-comparison-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.48fr) minmax(0, 0.12fr) minmax(0, 0.48fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.verba-comparison-card {
+  padding: 0.82rem;
+  display: grid;
+  gap: 0.72rem;
+}
+
+.verba-comparison-artifact {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.8rem;
+  border-radius: var(--verba-radius-md);
+  border: 1px solid var(--verba-line);
+  background: rgba(255, 255, 255, 0.8);
+  min-height: 12rem;
+}
+
+.verba-comparison-artifact-processed {
+  background: linear-gradient(180deg, rgba(17, 93, 101, 0.06), rgba(255, 255, 255, 0.9));
+}
+
+.verba-compare-arrow {
+  display: grid;
+  place-items: center;
+  color: var(--verba-accent-strong);
+}
+
+.verba-compare-arrow svg {
+  width: 3rem;
+  height: 3rem;
+}
+
+.verba-principle-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 0.92fr);
+}
+
+.verba-principle-stack {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.verba-principle-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.verba-principle-visual {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.verba-principle-visual-card {
+  border: 1px solid var(--verba-line);
+  border-radius: var(--verba-radius-lg);
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.8rem;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.verba-principle-visual-card svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 140px;
+}
+
+.verba-support-panel {
+  padding: 0.85rem;
+  display: grid;
+  gap: 0.62rem;
+}
+
+.verba-support-grid {
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+.verba-support-chip {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 3.15rem;
+  align-content: start;
+  padding: 0.72rem 0.8rem;
+  min-width: 0;
+}
+
+.verba-support-flag {
+  font-size: 1rem;
+  line-height: 1;
+  align-self: start;
+}
+
+.verba-support-name {
+  font-weight: 600;
+  font-size: 0.88rem;
+  line-height: 1.2;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.verba-support-meta {
+  grid-column: 2;
+  color: var(--verba-ink-soft);
+  font-size: 0.74rem;
+  font-family: "IBM Plex Mono", monospace;
+  min-width: 0;
+  line-height: 1.28;
+  overflow-wrap: anywhere;
+}
+
+.verba-cta-band {
+  padding: 0.9rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.8rem;
+  align-items: center;
+  background:
+    linear-gradient(135deg, rgba(17, 93, 101, 0.08), rgba(200, 108, 65, 0.1)),
+    var(--verba-paper);
+}
+
+.verba-inline-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--verba-accent-strong);
+}
+
+.verba-inline-logo span {
+  font-family: "Fraunces", serif;
+  font-size: 1.2rem;
+  letter-spacing: -0.04em;
+}
+
+.verba-inline-logo svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.verba-landing-footer {
+  padding: 0.9rem 0 0;
+  color: var(--verba-ink-soft);
+}
+
+@media (max-width: 1120px) {
+  .verba-hero-shell,
+  .verba-principle-grid,
+  .verba-cta-band {
+    grid-template-columns: 1fr;
+  }
+
+  .verba-story-grid,
+  .verba-support-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .verba-comparison-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .verba-compare-arrow {
+    min-height: 4rem;
+    transform: rotate(90deg);
+  }
+}
+
+@media (max-width: 760px) {
+  .verba-hero-shell,
+  .verba-proof-strip,
+  .verba-story-grid,
+  .verba-support-grid,
+  .verba-principle-visual {
+    grid-template-columns: 1fr;
+  }
+
+  .verba-hero-copy,
+  .verba-hero-visual,
+  .verba-founder-card,
+  .verba-story-card,
+  .verba-comparison-card,
+  .verba-support-panel,
+  .verba-cta-band,
+  .verba-principle-card,
+  .verba-principle-visual-card {
+    padding: 0.8rem;
+  }
+
+  .verba-founder-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .verba-founder-media {
+    justify-items: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .verba-hero-visual .verba-hero-panel-left,
+  .verba-hero-visual .verba-hero-panel-right,
+  .verba-hero-visual .verba-hero-wave-1,
+  .verba-hero-visual .verba-hero-wave-2,
+  .verba-hero-visual .verba-hero-wave-3,
+  .verba-hero-visual .verba-hero-wave-4,
+  .verba-hero-visual .verba-hero-arrow,
+  .verba-hero-visual .verba-hero-flow,
+  .verba-hero-visual .verba-hero-runner,
+  .verba-hero-visual .verba-hero-dot-1,
+  .verba-hero-visual .verba-hero-dot-2,
+  .verba-hero-visual .verba-hero-dot-3 {
+    animation: none;
+  }
+}
+
+@keyframes verbaWave {
+  0%,
+  100% {
+    transform: scaleY(0.9);
+    opacity: 0.88;
+  }
+
+  50% {
+    transform: scaleY(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes verbaPanelLift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes verbaArrow {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(7px);
+  }
+}
+
+@keyframes verbaFlow {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: -44;
+  }
+}
+
+@keyframes verbaRunner {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.2;
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  72% {
+    opacity: 1;
+  }
+
+  88% {
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: translateX(138px);
+  }
+}
+
+@keyframes verbaPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}

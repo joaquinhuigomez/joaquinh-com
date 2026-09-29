@@ -1,0 +1,85 @@
+/* @font-face stubs for the joaquinh.com handoff bundle.
+ * Drop the woff2 files into /public/fonts/ and these rules pick them up.
+ *
+ * Newsreader (heading) — SIL OFL 1.1, free for self-hosting. Source:
+ *   https://github.com/google/fonts/tree/main/ofl/newsreader
+ *
+ * Inter Tight (body) — SIL OFL 1.1, free for self-hosting. Source:
+ *   https://github.com/rsms/inter
+ *
+ * JetBrains Mono (mono) — Apache 2.0, free for self-hosting. Source:
+ *   https://github.com/JetBrains/JetBrainsMono
+ *
+ * All three families ship Latin Extended-A and -B, which covers the
+ * Spanish / French / Portuguese accents Joaquin needs.
+ */
+
+/* — Newsreader — heading, two opsz settings — */
+@font-face {
+  font-family: "Newsreader";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/newsreader-regular.woff2") format("woff2");
+  unicode-range: U+0000-024F, U+1E00-1EFF, U+2000-206F, U+20A0-20CF, U+2122, U+2190-21FF;
+}
+@font-face {
+  font-family: "Newsreader";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/newsreader-italic.woff2") format("woff2");
+  unicode-range: U+0000-024F, U+1E00-1EFF;
+}
+@font-face {
+  font-family: "Newsreader";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/newsreader-medium.woff2") format("woff2");
+  unicode-range: U+0000-024F, U+1E00-1EFF;
+}
+
+/* — Inter Tight — body — */
+@font-face {
+  font-family: "InterTight";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/inter-tight-regular.woff2") format("woff2");
+  unicode-range: U+0000-024F, U+1E00-1EFF, U+2000-206F, U+20A0-20CF, U+2122;
+}
+@font-face {
+  font-family: "InterTight";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/inter-tight-medium.woff2") format("woff2");
+  unicode-range: U+0000-024F, U+1E00-1EFF;
+}
+@font-face {
+  font-family: "InterTight";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/inter-tight-semibold.woff2") format("woff2");
+  unicode-range: U+0000-024F, U+1E00-1EFF;
+}
+
+/* — JetBrains Mono — code / data — */
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/jetbrains-mono-regular.woff2") format("woff2");
+  unicode-range: U+0000-024F, U+1E00-1EFF;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/jetbrains-mono-medium.woff2") format("woff2");
+  unicode-range: U+0000-024F, U+1E00-1EFF;
+}

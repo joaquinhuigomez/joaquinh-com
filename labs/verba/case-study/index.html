@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Verba — case study</title>
+<meta name="description" content="Verba case study: a multilingual speech-to-draft workspace built on Cloudflare Workers + D1 + Workers AI. Raw transcript preservation, ambiguity surfacing, and a benchmark-backed eval loop.">
+<meta name="theme-color" content="#faf9f5">
+<link rel="icon" href="/verba-mark.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,ital,wght@6..72,0,400;6..72,0,500;6..72,1,400&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/src/tokens.css">
+<style>
+  .nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--paper) 92%, transparent); border-bottom: 1px solid var(--rule); }
+  .nav-inner { max-width: var(--container); margin-inline: auto; padding: 16px var(--space-5); display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-5); }
+  .nav-mark { font-family: var(--font-heading); font-size: 18px; }
+  .nav-mark .dot { color: var(--accent); }
+  .nav-back { font-size: var(--t-body-sm); color: var(--gray-2); }
+  .nav-right { display: flex; align-items: center; gap: var(--space-4); }
+  .nav-social { display: inline-flex; align-items: center; gap: 10px; padding-left: var(--space-4); border-left: 1px solid var(--rule); }
+  .nav-social a { color: var(--gray-2); display: inline-flex; transition: color var(--dur-hover) var(--ease); }
+  .nav-social a:hover { color: var(--accent); }
+  .nav-social svg { width: 16px; height: 16px; }
+
+  .reading { max-width: var(--reading); margin-inline: auto; padding-inline: var(--space-5); }
+
+  .head { padding-block: 96px var(--space-7); }
+  .head .eyebrow { color: var(--accent); }
+  .head h1 { font-size: clamp(40px, 5.5vw, 72px); line-height: 1.05; letter-spacing: -0.02em; max-width: 22ch; margin-top: var(--space-4); }
+  .head .deck { margin-top: var(--space-5); font-size: 21px; color: var(--ink-2); font-family: var(--font-heading); font-style: italic; max-width: 56ch; }
+  .head .meta-row { margin-top: var(--space-7); display: flex; flex-wrap: wrap; gap: var(--space-6); padding-top: var(--space-5); border-top: 1px solid var(--rule); }
+  .head .meta-row div .label { display: block; font-size: 11px; color: var(--gray-2); letter-spacing: 0.08em; text-transform: lowercase; margin-bottom: 4px; font-family: var(--font-mono); }
+
+  .body p { font-size: 17px; line-height: 1.65; color: var(--ink); margin-bottom: var(--space-5); }
+  .body p.lede { font-size: 21px; line-height: 1.5; color: var(--ink-2); }
+  .body h2 { font-size: 28px; margin-top: var(--space-7); margin-bottom: var(--space-4); }
+  .body h3 { font-size: 20px; margin-top: var(--space-6); margin-bottom: var(--space-3); }
+  .body ul { padding-left: 20px; list-style: disc; margin-bottom: var(--space-5); }
+  .body ul li { margin-bottom: 8px; color: var(--ink-2); }
+  .body code.mono { font-size: 13px; }
+
+  .pull {
+    margin: var(--space-7) calc(-1 * var(--space-5));
+    padding: var(--space-6) var(--space-5);
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+  .pull q { font-family: var(--font-heading); font-style: italic; font-size: 30px; line-height: 1.25; quotes: none; color: var(--ink); }
+  .pull .src { display: block; margin-top: var(--space-4); font-size: var(--t-meta); color: var(--gray-2); font-family: var(--font-mono); letter-spacing: 0.04em; }
+
+  .metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-5); margin: var(--space-7) 0; padding: var(--space-5) 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  @media (min-width: 600px) { .metrics { grid-template-columns: repeat(3, 1fr); } }
+  .metric .num { font-family: var(--font-heading); font-size: 44px; line-height: 1; letter-spacing: -0.02em; }
+  .metric .num em { color: var(--accent); font-style: italic; font-size: 24px; vertical-align: super; }
+  .metric .label { display: block; font-size: var(--t-meta); color: var(--gray-2); margin-top: 6px; }
+
+  /* — eval run table — */
+  .eval-block {
+    margin: var(--space-7) calc(-1 * var(--space-5));
+    padding: var(--space-5);
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    background: var(--paper-3);
+  }
+  .eval-block .eval-head {
+    display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-5);
+    align-items: baseline; justify-content: space-between;
+    margin-bottom: var(--space-4);
+  }
+  .eval-block .eval-head h3 { font-family: var(--font-heading); font-size: 22px; line-height: 1.3; margin: 0; }
+  .eval-block .eval-head .meta {
+    font-family: var(--font-mono); font-size: 11px; color: var(--gray-2);
+    letter-spacing: 0.04em;
+  }
+  .eval-summary {
+    display: grid; grid-template-columns: 1fr; gap: var(--space-3) var(--space-4);
+    margin-bottom: var(--space-4); padding: var(--space-3) 0;
+    border-top: 1px dashed var(--rule); border-bottom: 1px dashed var(--rule);
+  }
+  @media (min-width: 600px) { .eval-summary { grid-template-columns: repeat(4, 1fr); } }
+  .eval-summary div { display: flex; flex-direction: column; }
+  .eval-summary .v {
+    font-family: var(--font-heading); font-size: 24px;
+    line-height: 1.1; color: var(--ink); letter-spacing: -0.01em;
+  }
+  .eval-summary .l {
+    font-family: var(--font-mono); font-size: 11px; color: var(--gray-2);
+    margin-top: 2px; letter-spacing: 0.04em;
+  }
+  .eval-table {
+    width: 100%; border-collapse: collapse;
+    font-size: 13px; color: var(--ink-2); line-height: 1.4;
+  }
+  .eval-table th, .eval-table td {
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .eval-table th {
+    font-family: var(--font-mono); font-size: 10px;
+    color: var(--gray-2); letter-spacing: 0.06em; text-transform: uppercase;
+    font-weight: 500;
+    border-bottom-color: var(--ink-2);
+  }
+  .eval-table .case { font-family: var(--font-heading); font-size: 14px; color: var(--ink); }
+  .eval-table .lp { font-family: var(--font-mono); font-size: 12px; color: var(--gray-2); white-space: nowrap; }
+  .eval-table .lat { font-family: var(--font-mono); font-size: 12px; color: var(--ink); white-space: nowrap; }
+  .eval-table .checks { font-family: var(--font-mono); font-size: 11px; line-height: 1.5; }
+  .eval-table .checks .pass { color: var(--status-green); }
+  .eval-table .checks .fail { color: #b34a44; }
+  .eval-table .checks .manual { color: var(--gray-2); }
+  .eval-foot {
+    margin-top: var(--space-4); padding-top: var(--space-3);
+    border-top: 1px dashed var(--rule);
+    font-size: 13px; color: var(--ink-2); line-height: 1.5;
+  }
+  .eval-foot .link {
+    border-bottom: 1px solid var(--ink); padding-bottom: 1px;
+    transition: border-color var(--dur-hover) var(--ease), color var(--dur-hover) var(--ease);
+  }
+  .eval-foot .link:hover { border-color: var(--accent); color: var(--accent); }
+
+  .footer { padding: var(--space-7) 0 var(--space-6); color: var(--gray-2); font-size: var(--t-meta); border-top: 1px solid var(--rule); margin-top: var(--space-9); }
+  .footer-inner { max-width: var(--container); margin-inline: auto; padding-inline: var(--space-5); display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-mark">joaquin hui g<span class="dot">.</span></a>
+    <div class="nav-right">
+      <a href="/labs/verba/" class="nav-back">← verba</a>
+      <span class="nav-social">
+        <a href="https://github.com/joaquinhuigomez" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></a>
+        <a href="https://www.linkedin.com/in/joaquin-h-352927a9/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5 1.78 1.78 0 0 1 6.5 8.25zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg></a>
+        <a href="https://x.com/ViajaryTragar" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      </span>
+    </div>
+  </div>
+</nav>
+
+<header class="head">
+  <div class="reading">
+    <div class="eyebrow">case study · verba</div>
+    <h1>A multilingual speech-to-draft workspace I'd actually trust to ship.</h1>
+    <p class="deck">Raw transcript preservation, ambiguity surfaced, drafts compared across providers, eval loop logged — on Cloudflare Workers + D1 + Workers AI.</p>
+    <div class="meta-row">
+      <div><span class="label">role</span>solo · design + build</div>
+      <div><span class="label">stack</span>HTML/CSS/JS · CF Workers · D1 · Workers AI · OpenAI / Anthropic</div>
+      <div><span class="label">timeline</span>weekends · 2025–2026</div>
+      <div><span class="label">status</span>live · workspace open</div>
+    </div>
+  </div>
+</header>
+
+<article class="body">
+  <div class="reading">
+    <p class="lede">Working across six natural languages, you notice the same failure mode in every speech-to-text product on the market: confidence is hidden, ambiguity is silently resolved, and the draft you receive looks confident even when the model isn't. Verba is the workspace built around the opposite assumption — preserve the raw, surface the doubt, and make the eval loop the artifact.</p>
+
+    <h2>The problem</h2>
+    <p>Most speech-to-draft tools optimise for a single output: a polished paragraph. That's the wrong unit. The unit that matters is the trace from raw audio to a written artifact you'd actually publish. Drop the trace and you can't tell whether the model heard you correctly, whether it translated faithfully, whether the draft is a clean summary or a confident hallucination. For an operator working across English, 中文, español, français, and português, that gap is unworkable.</p>
+
+    <h2>The shape</h2>
+    <p>The flow is sequential but every artifact compounds. Each pane hands its output to the next without a copy-paste, and the eval pane sees all of it.</p>
+    <ul>
+      <li><strong>Transcribe</strong> — drop audio, get text with confidence-scored segments. Whisper-style on Workers AI; chunked uploads to R2.</li>
+      <li><strong>Polish</strong> — three deliberate modes: rewrite, translate, prompt-generate. Diff highlighted inline against the raw transcript.</li>
+      <li><strong>Compare</strong> — run the polished prompt across multiple providers in parallel via <code class="mono">/api/compare</code>. Side-by-side diff. Cost and latency captured.</li>
+      <li><strong>Log eval</strong> — fixed-rubric scoring (faithfulness, concision, structure, terminology). Persisted to D1. JSONL out for downstream analysis.</li>
+    </ul>
+
+    <div class="pull">
+      <q>The eval log is the artifact. Everything before it is scaffolding to make the log honest.</q>
+      <span class="src">— working notes</span>
+    </div>
+
+    <h2>Constraints I picked</h2>
+    <p>No build step beyond Vite. No framework. No backend other than Cloudflare. The same edge that serves joaquinh.com runs the inference. This was a deliberate choice — a cheap, well-understood edge stack is the one I'd actually push to production. If I can't build a workspace I trust on it, the "boring stack wins" thesis is just a posture.</p>
+
+    <h2>Multilingual is not a feature; it's the test</h2>
+    <p>If your speech-to-draft tool only works in English, you're not building for the world your users live in. Verba runs the eval suite in en/zh/es/fr/pt with code-switched audio, and the rubric weights faithfulness above concision deliberately — a polished mistranslation is worse than a clumsy accurate one.</p>
+
+    <div class="eval-block" aria-label="Verba eval sample run">
+      <div class="eval-head">
+        <h3>Sample eval run · 5 multilingual cases</h3>
+        <span class="meta">2026-03-19 · provider: local llama3.2 · cost $0.00</span>
+      </div>
+
+      <div class="eval-summary">
+        <div><span class="v">5 / 5</span><span class="l">cases run · zero failures</span></div>
+        <div><span class="v">1,961 ms</span><span class="l">avg latency · single-shot</span></div>
+        <div><span class="v">86 %</span><span class="l">mandarin pass rate (4 cases)</span></div>
+        <div><span class="v">100 %</span><span class="l">french pass rate (1 case)</span></div>
+      </div>
+
+      <table class="eval-table">
+        <thead>
+          <tr>
+            <th>case</th>
+            <th>lang pair</th>
+            <th>latency</th>
+            <th>checks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="case">Traditional Mandarin stays Traditional</td>
+            <td class="lp">zh → zh · draft</td>
+            <td class="lat">3,423 ms</td>
+            <td class="checks">
+              <span class="pass">✓ traditional-script-preserved</span><br>
+              <span class="fail">✗ same-language-rewrite</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="case">Mandarin to Spanish</td>
+            <td class="lp">zh → es · draft</td>
+            <td class="lat">1,624 ms</td>
+            <td class="checks">
+              <span class="pass">✓ spanish-output</span><br>
+              <span class="pass">✓ no-chinese-leftover</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="case">Colloquial Mandarin with profanity</td>
+            <td class="lp">zh → en · draft</td>
+            <td class="lat">2,204 ms</td>
+            <td class="checks">
+              <span class="pass">✓ policy-behavior-visible</span><br>
+              <span class="manual">○ meaning-preserved (manual)</span><br>
+              <span class="manual">○ no-random-hallucination (manual)</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="case">Code-switched team update</td>
+            <td class="lp">zh → en · draft</td>
+            <td class="lat">1,325 ms</td>
+            <td class="checks">
+              <span class="pass">✓ code-switch-handled</span><br>
+              <span class="pass">✓ english-output</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="case">French prompt generation</td>
+            <td class="lp">fr → en · prompt</td>
+            <td class="lat">1,230 ms</td>
+            <td class="checks">
+              <span class="pass">✓ english-prompt</span><br>
+              <span class="pass">✓ actionable</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="eval-foot">Sample run from the offline eval pipeline (<code class="mono" style="font-size: 12px">npm run eval:verba</code>). Same harness runs against OpenAI, Anthropic, and Workers AI providers in production; per-provider comparison data is exported as JSONL on demand. The single-output failure case (<em>same-language-rewrite</em>) is exactly the kind of falsifiable check the rubric is designed to surface — the model returned a faithful Mandarin output but did not perform the rewrite step. Full report: <a class="link mono" href="/verba-benchmark-report.md" target="_blank" rel="noopener">/verba-benchmark-report.md</a>.</p>
+    </div>
+
+    <h3>Diff rendering</h3>
+    <p>Word-level Myers diff with a 200ms debounce. Anything finer felt jittery; anything coarser hid the model's actual edits.</p>
+
+    <h3>Streaming</h3>
+    <p>Server-sent events all the way. WebSockets were tempting but added a connection-state surface I didn't want for a single-direction stream.</p>
+
+    <div class="metrics">
+      <div class="metric"><div class="num">1,961<em>ms</em></div><span class="label">avg eval latency · local provider</span></div>
+      <div class="metric"><div class="num">5</div><span class="label">languages eval-tested · en zh es fr pt</span></div>
+      <div class="metric"><div class="num">JSONL</div><span class="label">exportable per-run + per-provider</span></div>
+    </div>
+
+    <h2>What's next</h2>
+    <p>Multi-turn evals. The current rubric is single-shot. The honest version of "is this model better" is multi-turn, and the workspace should make that the path of least resistance.</p>
+
+    <div class="pull">
+      <q>The workspace is the eval. If shipping the eval is hard, you'll ship without one.</q>
+      <span class="src">— readme, current</span>
+    </div>
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>© 2026 Joaquin Hui Gomez</span>
+    <span class="mono">cloudflare pages</span>
+  </div>
+</footer>
+</body>
+</html>

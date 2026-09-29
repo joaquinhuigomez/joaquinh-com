@@ -1,3 +1,9 @@
 name = "joaquinh-com"
 compatibility_date = "2026-03-17"
 pages_build_output_dir = "./dist"
+
+[[d1_databases]]
+binding = "VERBA_EVALS"
+database_name = "verba-evals"
+database_id = "0059f7c6-78e4-46a6-868f-ec94dc83a1e1"
+migrations_dir = "migrations"

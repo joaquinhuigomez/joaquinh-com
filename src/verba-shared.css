@@ -1,0 +1,89 @@
+/* verba shared tokens — remapped to the joaquinh.com new palette
+ * Anthropic-aligned: paper / ink / single orange accent / status green / data blue.
+ * Existing class names in verba-workspace.css / verba-landing.css / verba-case-study.css continue to work;
+ * only the variable values changed plus the font family.
+ */
+
+@import "./tokens.css";
+
+:root {
+  color-scheme: light;
+
+  /* — palette remap to new tokens — */
+  --verba-bg: var(--paper);
+  --verba-paper: var(--paper);
+  --verba-paper-strong: var(--paper-3);
+  --verba-ink: var(--ink);
+  --verba-ink-soft: var(--ink-2);
+  --verba-line: var(--rule);
+  --verba-line-strong: var(--gray);
+  --verba-accent: var(--accent);
+  --verba-accent-strong: #b85a3e;            /* darker orange for hover/active */
+  --verba-accent-soft: rgba(217, 119, 87, 0.12);
+  --verba-copper: var(--accent);             /* second copper collapsed onto the same accent — sparing */
+  --verba-copper-soft: rgba(217, 119, 87, 0.10);
+  --verba-success: var(--status-green);
+  --verba-success-soft: rgba(120, 140, 93, 0.14);
+  --verba-danger: #b34a44;
+  --verba-danger-soft: rgba(179, 74, 68, 0.10);
+
+  --verba-shadow: var(--elev-1);
+  --verba-radius-xl: 16px;
+  --verba-radius-lg: 12px;
+  --verba-radius-md: 10px;
+  --verba-radius-sm: 8px;
+
+  font-family: var(--font-body);
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+.verba-body {
+  margin: 0;
+  min-width: 320px;
+  color: var(--verba-ink);
+  background: var(--paper);   /* solid; aurora + grid-bg killed */
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.verba-body::before { content: none; }
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: var(--verba-accent);
+  text-underline-offset: 3px;
+}
+a:hover { text-decoration-color: var(--accent); }
+
+::selection { background: var(--accent); color: var(--paper); }
+
+/* — typography overrides for verba surfaces — */
+.verba-body h1,
+.verba-body h2,
+.verba-body h3,
+.verba-body h4 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  letter-spacing: -0.012em;
+}
+
+.verba-body code,
+.verba-body kbd,
+.verba-body pre {
+  font-family: var(--font-mono);
+}

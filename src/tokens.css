@@ -1,0 +1,283 @@
+/* joaquinh.com — design tokens
+ * Locked palette + spacing scale. Class names and CSS custom properties only.
+ * No utility framework, no preprocessor.
+ */
+
+:root {
+  /* — palette — */
+  --ink: #141413;
+  --ink-2: #2a2a28;
+  --paper: #faf9f5;
+  --paper-2: #e8e6dc;
+  --paper-3: #f2f0e8;
+  --accent: #d97757;        /* orange. sparing. max 1–2 spots per viewport. */
+  --data-blue: #6a9bcc;     /* data viz only */
+  --status-green: #788c5d;  /* status pills only */
+  --gray: #b0aea5;
+  --gray-2: #8a887f;
+  --rule: #d8d6cc;
+
+  /* — type — */
+  --font-heading: "Newsreader", "Iowan Old Style", "Charter", Georgia, serif;
+  --font-body: "InterTight", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
+
+  /* type scale — modest, editorial */
+  --t-eyebrow: 12px;
+  --t-body: 17px;
+  --t-body-sm: 15px;
+  --t-meta: 13px;
+  --t-h3: 22px;
+  --t-h2: 32px;
+  --t-h1: 56px;
+  --t-display: 80px;
+
+  --lh-tight: 1.1;
+  --lh-snug: 1.25;
+  --lh-body: 1.55;
+  --lh-loose: 1.7;
+
+  /* — spacing — base 4 — */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* — layout — */
+  --container: 1120px;
+  --reading: 680px;
+  --rhythm: 96px;
+  --rhythm-mobile: 64px;
+
+  /* — elevation — three levels — */
+  --elev-0: none;
+  --elev-1: 0 1px 0 rgba(20, 20, 19, 0.06), 0 1px 2px rgba(20, 20, 19, 0.04);
+  --elev-2: 0 2px 0 rgba(20, 20, 19, 0.04), 0 12px 28px -12px rgba(20, 20, 19, 0.18);
+
+  /* — motion — */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --dur-hover: 120ms;
+  --dur-enter: 200ms;
+}
+
+/* — reset — minimal — */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+  font-feature-settings: "ss01", "cv11";
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--t-h1); line-height: var(--lh-tight); }
+h2 { font-size: var(--t-h2); line-height: var(--lh-snug); }
+h3 { font-size: var(--t-h3); line-height: var(--lh-snug); }
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+/* — primitives — */
+.container {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--space-5);
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--t-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  color: var(--gray-2);
+  font-feature-settings: "tnum";
+}
+
+.rule {
+  height: 1px;
+  background: var(--rule);
+  border: 0;
+  margin: 0;
+}
+
+.meta {
+  font-size: var(--t-meta);
+  color: var(--gray-2);
+  font-feature-settings: "tnum";
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum";
+}
+
+/* — sections — */
+.section {
+  padding-block: var(--rhythm);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding-block: var(--rhythm-mobile);
+  }
+  :root {
+    --t-h1: 40px;
+    --t-display: 52px;
+    --t-h2: 26px;
+  }
+}
+
+/* — buttons / inline links — */
+.link {
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 1px;
+  transition: border-color var(--dur-hover) var(--ease), color var(--dur-hover) var(--ease);
+}
+.link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.link.muted {
+  border-color: var(--rule);
+  color: var(--gray-2);
+}
+.link.muted:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 10px 16px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  font-size: var(--t-body-sm);
+  transition: background var(--dur-hover) var(--ease), color var(--dur-hover) var(--ease);
+}
+.btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+.btn.ghost {
+  border-color: var(--rule);
+  color: var(--ink-2);
+}
+.btn.ghost:hover {
+  border-color: var(--ink);
+  background: transparent;
+  color: var(--ink);
+}
+
+/* — pills — */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  font-size: var(--t-meta);
+  color: var(--gray-2);
+  background: var(--paper);
+}
+.pill .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--gray);
+}
+.pill.status-merged .dot { background: var(--status-green); }
+.pill.status-open .dot { background: var(--accent); }
+.pill.status-review .dot { background: var(--data-blue); }
+
+/* — entrance fade —
+ * Static visible state. Animation is JS-opt-in via .fade-in.animated to
+ * avoid an iframe quirk where parse-time animations land at currentTime:0
+ * and never tick. Page being visible is non-negotiable.
+ */
+.fade-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in.animated {
+    animation: fadeUp var(--dur-enter) var(--ease) both;
+  }
+  .fade-in.animated.d-1 { animation-delay: 60ms; }
+  .fade-in.animated.d-2 { animation-delay: 120ms; }
+  .fade-in.animated.d-3 { animation-delay: 180ms; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

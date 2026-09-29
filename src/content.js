@@ -23,20 +23,70 @@ export const siteContent = {
       eyebrow: "Open source record",
       title: "Shipped fixes, active platform work, and public reliability tooling",
       body:
-        "This page is the denser version of the OSS story: what has already shipped upstream, what is currently in flight, and the public tools that sit underneath the contribution work.",
+        "28 merged upstream PRs and 40 active PRs across 45 external AI infrastructure repos. First-party contributions to Anthropic, OpenAI, HuggingFace, Microsoft, Meta, Vercel, and Stripe codebases. Coverage spans LLM serving, agent frameworks, RAG, document AI, voice agents, observability, and security — the reliability layer underneath AI products.",
       note:
-        "Last verified March 24, 2026 from live GitHub profile and PR history."
+        "Last verified April 26, 2026 from GitHub profile and live public PR history."
     },
     metrics: [
-      { value: "47", label: "Public repos" },
-      { value: "6", label: "Merged upstream" },
-      { value: "25", label: "Open PRs" }
+      { value: "45", label: "Repos contributed to" },
+      { value: "28", label: "Merged upstream" },
+      { value: "40", label: "Open PRs" }
     ],
     merged: {
       title: "Merged upstream outcomes",
       note:
-        "These are the highest-signal external wins to highlight first: concrete fixes, shipped into widely used projects.",
+        "Top-signal merges across the AI infrastructure stack: HuggingFace Transformers (LLM serving), Docling and LlamaIndex (document AI and RAG), LiteLLM and Ray (serving and orchestration), Continue and OpenAI Agents Python and Mastra (agent and tool-calling ecosystems).",
       items: [
+        {
+          target: "HuggingFace Transformers",
+          title: "Merged generation fix removing stale num_return_sequences warning on continuous batching",
+          status: "Merged Apr 24",
+          href: "https://github.com/huggingface/transformers/pull/45582",
+          summary:
+            "Cleaned up a generation warning that fired incorrectly on the continuous-batching path, keeping production inference logs honest in the canonical LLM serving library.",
+          stars: "159.9k",
+          tags: ["Merged PR", "LLM serving", "Continuous batching", "Python"]
+        },
+        {
+          target: "Docling",
+          title: "Merged Windows CLI PermissionError fix for document conversion",
+          status: "Merged Mar 19",
+          href: "https://github.com/docling-project/docling/pull/3149",
+          summary:
+            "Fixed a Windows CLI failure path that blocked document conversion workflows, making the document-to-data pipeline usable across environments instead of failing on a common local setup.",
+          stars: "58.6k",
+          tags: ["Merged PR", "Document AI", "Cross-platform", "Python"]
+        },
+        {
+          target: "LlamaIndex",
+          title: "Merged input_file serialization fix for the Responses API",
+          status: "Merged Mar 27",
+          href: "https://github.com/run-llama/llama_index/pull/21172",
+          summary:
+            "Fixed nested serialization for file-based Responses API inputs, keeping retrieval and document-processing flows stable as teams adopt the newer OpenAI interface.",
+          stars: "48.9k",
+          tags: ["Merged PR", "RAG", "Serialization", "Python"]
+        },
+        {
+          target: "LiteLLM",
+          title: "Merged TTFT capture for /v1/messages across Anthropic, Bedrock, and Vertex",
+          status: "Merged Apr 16",
+          href: "https://github.com/BerriAI/litellm/pull/25599",
+          summary:
+            "Added time-to-first-token instrumentation on the Anthropic-style streaming path so multi-provider LLM gateways can report consistent latency metrics across Bedrock, Vertex, and Anthropic backends.",
+          stars: "44.7k",
+          tags: ["Merged PR", "LLM serving", "Streaming metrics", "Python"]
+        },
+        {
+          target: "Ray",
+          title: "Merged Serve autoscaling timing fix for delayed scale-up behavior",
+          status: "Merged Apr 3",
+          href: "https://github.com/ray-project/ray/pull/62144",
+          summary:
+            "Corrected Serve autoscaling timing so scale-up decisions happen on the intended wall-clock path instead of drifting under real traffic patterns.",
+          stars: "42.3k",
+          tags: ["Merged PR", "Distributed compute", "Autoscaling", "Python"]
+        },
         {
           target: "Continue",
           title: "Merged Ollama MCP tool-calling fix for Mistral and Gemma3 models",
@@ -44,7 +94,7 @@ export const siteContent = {
           href: "https://github.com/continuedev/continue/pull/11523",
           summary:
             "Improves tool-calling reliability in a widely used AI coding environment, which matters directly when teams want local-model workflows that behave predictably instead of failing at model-specific edges.",
-          stars: "32.0k",
+          stars: "32.8k",
           tags: ["Merged PR", "Tool calling", "Ollama", "Developer workflows"]
         },
         {
@@ -54,38 +104,8 @@ export const siteContent = {
           href: "https://github.com/openai/openai-agents-python/pull/2700",
           summary:
             "Helps agent teams keep tool-state transitions reliable instead of silently dropping structured context during cleanup flows.",
-          stars: "20.3k",
+          stars: "25.2k",
           tags: ["Merged PR", "Agent reliability", "Python", "MCP"]
-        },
-        {
-          target: "everything-claude-code",
-          title: "Agent Eval adopted as a Claude Code skill in a 100k+ star repository",
-          status: "Merged Mar 20",
-          href: "https://github.com/affaan-m/everything-claude-code/pull/540",
-          summary:
-            "External adoption proof that the agent-evaluation work is useful beyond my own repos and practical enough for other builders to pick up quickly.",
-          stars: "104.6k",
-          tags: ["Merged PR", "Distribution", "Agent evaluation", "OSS adoption"]
-        },
-        {
-          target: "Phoenix",
-          title: "Merged tracing export fix for cleaner observability usage",
-          status: "Merged Mar 19",
-          href: "https://github.com/Arize-ai/phoenix/pull/12201",
-          summary:
-            "Improves the tracing path teams rely on when they need observability that is easy to integrate instead of fragile at the edges.",
-          stars: "9.0k",
-          tags: ["Merged PR", "Observability", "Tracing", "JavaScript"]
-        },
-        {
-          target: "Docling",
-          title: "Merged Windows CLI reliability fix for directory input handling",
-          status: "Merged Mar 19",
-          href: "https://github.com/docling-project/docling/pull/3149",
-          summary:
-            "Turns an avoidable CLI failure into a cleaner operator experience for teams processing document workloads across environments.",
-          stars: "56.4k",
-          tags: ["Merged PR", "CLI reliability", "Documents", "Operator UX"]
         },
         {
           target: "Mastra",
@@ -94,7 +114,7 @@ export const siteContent = {
           href: "https://github.com/mastra-ai/mastra/pull/14372",
           summary:
             "Prevents tool output from disappearing in agent workflows, which matters directly for operator trust and debugging quality.",
-          stars: "22.3k",
+          stars: "23.3k",
           tags: ["Merged PR", "MCP", "Interoperability", "Agent reliability"]
         }
       ]
@@ -102,27 +122,47 @@ export const siteContent = {
     current: {
       title: "Selected current upstream work",
       note:
-        "A curated set of still-open PRs with clear platform, product, or operator relevance. Closed or lower-signal work stays off the page.",
+        "A curated set of 40 still-open upstream PRs as of April 26, 2026, led by two direct contributions to Anthropic codebases (Claude Cookbooks and the Anthropic Go SDK) plus active reliability work in Microsoft, Vercel, Chroma, and major agent platforms.",
       items: [
         {
-          target: "MCP servers",
-          title: "Guard GitLab enterprise repository search against crashes",
+          target: "Anthropic Cookbooks",
+          title: "Update outdated model list and fix typos in citations notebook",
           status: "Open PR",
-          href: "https://github.com/modelcontextprotocol/servers/pull/3611",
+          href: "https://github.com/anthropics/claude-cookbooks/pull/444",
           summary:
-            "Improves enterprise reliability by preventing a crash path in GitLab repository search, where one edge case can take out a useful workflow.",
-          stars: "82.0k",
-          tags: ["Enterprise reliability", "MCP", "GitLab", "TypeScript"]
+            "Refreshes the canonical Claude cookbook so the citations notebook matches the current model lineup, keeping the entry point teams hit first when building on Anthropic accurate.",
+          stars: "41.5k",
+          tags: ["Open PR", "Anthropic", "Documentation", "Jupyter Notebook"]
         },
         {
-          target: "Vercel AI SDK",
-          title: "Prevent SSRF bypass via DNS rebinding",
+          target: "Anthropic Go SDK",
+          title: "Make ToolResultBlockParam accept both string and array content",
           status: "Open PR",
-          href: "https://github.com/vercel/ai/pull/13512",
+          href: "https://github.com/anthropics/anthropic-sdk-go/pull/297",
           summary:
-            "Targets a security issue that matters directly for platform trust when AI systems fetch and validate external resources.",
-          stars: "23.0k",
-          tags: ["Security", "Platform trust", "SSRF", "TypeScript"]
+            "Closes a tool-result content gap in the Go SDK so Anthropic-backed agents in Go ecosystems can pass structured tool output without custom marshaling.",
+          stars: "1.0k",
+          tags: ["Open PR", "Anthropic", "Tool calling", "Go"]
+        },
+        {
+          target: "Docling",
+          title: "Add timeout-specific conversion status for document pipelines",
+          status: "Approved",
+          href: "https://github.com/docling-project/docling/pull/3211",
+          summary:
+            "Separates document-level timeouts from page-level failures so downstream systems can distinguish partial output from actual page conversion breakage.",
+          stars: "58.6k",
+          tags: ["Approved PR", "Document AI", "Reliability", "Python"]
+        },
+        {
+          target: "LlamaIndex",
+          title: "Propagate Anthropic thinking_delta through streaming additional_kwargs",
+          status: "Approved",
+          href: "https://github.com/run-llama/llama_index/pull/21423",
+          summary:
+            "Bridges Anthropic's reasoning-delta stream into LlamaIndex's standard streaming surface so RAG pipelines can surface model thinking without custom adapters.",
+          stars: "48.9k",
+          tags: ["Approved PR", "RAG", "Anthropic", "Python"]
         },
         {
           target: "CrewAI",
@@ -131,38 +171,38 @@ export const siteContent = {
           href: "https://github.com/crewAIInc/crewAI/pull/4912",
           summary:
             "Improves portability across providers so teams do not have to treat tool usage as provider-specific glue code.",
-          stars: "47.1k",
-          tags: ["Portability", "MCP", "Schema design", "TypeScript"]
+          stars: "49.9k",
+          tags: ["Open PR", "Portability", "MCP", "Python"]
         },
         {
-          target: "Anthropic Claude Agent SDK",
-          title: "Route debug output away from the JSON protocol stream",
+          target: "Microsoft Semantic Kernel",
+          title: "Fix TextChunker token-count threshold for orphan chunk merging",
           status: "Open PR",
-          href: "https://github.com/anthropics/claude-agent-sdk-typescript/pull/235",
+          href: "https://github.com/microsoft/semantic-kernel/pull/13714",
           summary:
-            "Keeps debugging usable without corrupting the protocol stream, which matters when teams need both traceability and stable execution.",
-          stars: "1.0k",
-          tags: ["Protocol reliability", "Anthropic", "Debugging", "TypeScript"]
+            "Switches the TextChunker merge heuristic from word count to token count, keeping RAG ingestion accurate against the embedding model's actual budget rather than an English-shaped approximation.",
+          stars: "27.7k",
+          tags: ["Open PR", "Microsoft", "RAG", "C#"]
         },
         {
-          target: "Ollama",
-          title: "Fix streaming timeout during tool-call composition",
+          target: "Chroma",
+          title: "Migrate HuggingFace embedding endpoint from deprecated api-inference to router",
           status: "Open PR",
-          href: "https://github.com/ollama/ollama/pull/14932",
+          href: "https://github.com/chroma-core/chroma/pull/6770",
           summary:
-            "Addresses a timeout edge case in tool-call composition that can turn an otherwise healthy workflow into a fragile one under load.",
-          stars: "166.0k",
-          tags: ["Streaming", "Tool calling", "Reliability", "Go"]
+            "Updates the HuggingFace embedding integration in Chroma's vector store to the supported router endpoint, keeping a leading vector DB current as upstream deprecates the old route.",
+          stars: "27.6k",
+          tags: ["Open PR", "Vector DB", "Embeddings", "Rust"]
         },
         {
-          target: "Microsoft AutoGen",
-          title: "Fix extra_body being silently dropped during component loading",
+          target: "Vercel AI SDK",
+          title: "Prevent SSRF bypass via DNS rebinding",
           status: "Open PR",
-          href: "https://github.com/microsoft/autogen/pull/7421",
+          href: "https://github.com/vercel/ai/pull/13512",
           summary:
-            "Preserves structured configuration instead of losing it silently, which is the kind of failure that wastes time because it looks like user error.",
-          stars: "56.2k",
-          tags: ["Configuration", "Agent platform", "Reliability", "Python"]
+            "Targets a security issue that matters directly for platform trust when AI systems fetch and validate external resources.",
+          stars: "23.8k",
+          tags: ["Open PR", "Security", "SSRF", "TypeScript"]
         }
       ]
     },
@@ -195,7 +235,7 @@ export const siteContent = {
           status: "Shipped",
           href: "https://github.com/joaquinhuigomez/agent-eval",
           summary:
-            "Built to compare coding agents on pass rate, cost, time, and consistency, then later adopted externally as a Claude Code skill.",
+            "Built to compare coding agents on pass rate, cost, time, and consistency, then later adopted externally in a widely used coding-agent resource.",
           tags: ["Agent evaluation", "Execution", "OSS adoption", "Python"]
         },
         {
@@ -225,7 +265,7 @@ export const siteContent = {
     description:
       "I work on the side of AI that survives contact with reality: better decisions, cleaner execution, and systems people can actually run.",
     proofLine:
-      "Skip-level L5 return offer during hiring freeze · consistently rated Exceeds · $140MM+ cumulative savings delivered",
+      "Skip-level L5 return offer during hiring freeze · consistently rated Exceeds · $140MM+ cumulative savings · 28 merged PRs across HuggingFace, Docling, LlamaIndex, LiteLLM, Ray, Continue · active PRs in Anthropic, Microsoft, Vercel",
     proofTags: [
       {
         icon: "analytics",
@@ -256,29 +296,29 @@ export const siteContent = {
         cta: "Inspect the case study"
       },
       {
-        icon: "bridge",
-        label: "#MLProductLaunch",
-        title: "ML product launch ownership",
+        icon: "github",
+        label: "#OpenSource",
+        title: "Open-source contribution track record",
         summary:
-          "I define requirements, operating metrics, and launch paths for ML decision systems used by operators, then work across PM, SDE, and science to ship them into production.",
+          "Public engineering shipped into first-party AI codebases at Anthropic, OpenAI, HuggingFace, and Microsoft — visible, reviewable, and running in other teams' production paths.",
         bullets: [
-          "Owned product requirements and decision artifacts for next-generation ML policy launches",
-          "Aligned PM, SDE, scientists, and Ops around production behavior and success metrics",
-          "Used live operating outcomes, not backtests alone, to judge launch quality"
+          "28 merged upstream PRs across external repositories as of April 26, 2026",
+          "68 tracked external public contributions across 45 repositories",
+          "Current work in Anthropic Cookbooks, Anthropic Go SDK, Microsoft Semantic Kernel, Chroma, and Vercel AI"
         ],
-        href: "#case-study",
-        cta: "See Amazon product work"
+        href: "/open-source/",
+        cta: "Inspect the OSS record"
       },
       {
         icon: "network",
         label: "#AIInfra",
         title: "AI infrastructure quality layer",
         summary:
-          "Public work focused on the reliability layer underneath AI products: tool integration, evaluation trust, and operator-safe system behavior.",
+          "Public work on the reliability layer underneath AI products: LLM serving, agent frameworks, document AI, voice agents, and the integration glue that breaks first.",
         bullets: [
-          "Merged fixes in Continue, OpenAI Agents Python, and Mastra",
-          "Shipped support across observability and document-tooling workflows in Phoenix and Docling",
-          "Current work in Vercel AI SDK, MCP servers, and adjacent agent platforms"
+          "Merged fixes in HuggingFace Transformers, Docling, LlamaIndex, LiteLLM, Ray, Continue, OpenAI Agents Python, and Mastra",
+          "Coverage across LLM serving, agent frameworks, RAG, document AI, voice agents, observability, and tool calling",
+          "Current work in Anthropic, Microsoft, Vercel, Chroma, and adjacent agent platforms"
         ],
         href: "/open-source/",
         cta: "Open the OSS record"
@@ -306,7 +346,7 @@ export const siteContent = {
         bullets: [
           "LLM-assisted intake and recommendations around deterministic pipelines",
           "Schema-disciplined experiment setup and post-run analysis",
-          "Agent-evaluation work later adopted as a Claude Code skill externally"
+          "Agent-evaluation work later adopted externally in a major coding-agent resource"
         ],
         href: "#projects",
         cta: "See key projects"
@@ -342,6 +382,13 @@ export const siteContent = {
         icon: "mail"
       }
     ],
+    accentBadge: {
+      icon: "github",
+      value: "28",
+      label: "Merged upstream",
+      href: "https://github.com/pulls?q=is%3Apr+author%3Ajoaquinhuigomez+is%3Amerged+-user%3Ajoaquinhuigomez+sort%3Aupdated-desc",
+      external: true
+    },
     quickFacts: [
       {
         icon: "briefcase",
@@ -377,24 +424,111 @@ export const siteContent = {
           title: "Built and studied across 3 continents",
           summary:
             "Operational range shaped by academic, internship, and work footprints across Asia, Latin America, and Europe.",
+          defaultRegionId: "europe",
+          defaultLocationId: "london",
           regions: [
             {
+              id: "europe",
+              label: "Europe"
+            },
+            {
               id: "asia",
-              label: "Asia",
-              subtitle: "Hong Kong and Beijing",
-              items: ["HKU undergrad", "First internships in Hong Kong and Beijing"]
+              label: "Asia"
             },
             {
               id: "latam",
-              label: "Latin America",
-              subtitle: "Chile and Colombia",
-              items: ["Pontificia Universidad Catolica de Chile", "Universidad de los Andes, Colombia"]
+              label: "Latin America"
+            }
+          ],
+          locations: [
+            {
+              id: "london",
+              label: "London",
+              flag: "🇬🇧",
+              regionId: "europe",
+              marker: { x: 181, y: 66 },
+              labelAnchor: { x: 108, y: 18, align: "start" },
+              isCurrent: true,
+              title: "Amazon Program Manager",
+              summary:
+                "Current base in London, leading AI-enabled operations and ML product execution across planning, orchestration, and launch in Amazon EU."
             },
             {
-              id: "europe",
-              label: "Europe",
-              subtitle: "London, Luxembourg, St. Gallen",
-              items: ["London now", "Amazon internship in Luxembourg", "Master's at St. Gallen"]
+              id: "luxembourg",
+              label: "Luxembourg",
+              flag: "🇱🇺",
+              regionId: "europe",
+              marker: { x: 188, y: 74 },
+              labelAnchor: { x: 204, y: 86, align: "start" },
+              title: "Amazon Business Analyst Intern",
+              summary:
+                "Internship footprint where analytics, automation, and cloud planning work led to a skip-level return offer during the hiring freeze."
+            },
+            {
+              id: "switzerland",
+              label: "Switzerland",
+              flag: "🇨🇭",
+              regionId: "europe",
+              marker: { x: 176, y: 82 },
+              labelAnchor: { x: 92, y: 92, align: "start" },
+              title: "University of St. Gallen",
+              summary:
+                "Master's in Strategy and International Management, magna cum laude, including a GenAI thesis on LLMs, agents, and governance."
+            },
+            {
+              id: "hong-kong",
+              label: "Hong Kong",
+              flag: "🇭🇰",
+              regionId: "asia",
+              marker: { x: 288, y: 86 },
+              labelAnchor: { x: 246, y: 116, align: "start" },
+              title: "The University of Hong Kong",
+              summary:
+                "LLB + BBA foundation with scholarships, debating-society leadership, and the business-law base that shaped later product judgment."
+            },
+            {
+              id: "beijing",
+              label: "Beijing",
+              flag: "🇨🇳",
+              regionId: "asia",
+              marker: { x: 278, y: 62 },
+              labelAnchor: { x: 220, y: 18, align: "start" },
+              title: "PwC Consultant",
+              summary:
+                "Worked on China-market entry, HR digitization, and digital strategy projects for major clients while based in Beijing."
+            },
+            {
+              id: "shanghai",
+              label: "Shanghai",
+              flag: "🇨🇳",
+              regionId: "asia",
+              marker: { x: 298, y: 73 },
+              labelAnchor: { x: 274, y: 54, align: "start" },
+              title: "Greater China market footprint",
+              summary:
+                "Client-facing work tied to China expansion and digital strategy across Greater China, complementing the Beijing consulting base."
+            },
+            {
+              id: "chile",
+              label: "Chile",
+              flag: "🇨🇱",
+              regionId: "latam",
+              marker: { x: 73, y: 141 },
+              labelAnchor: { x: 36, y: 152, align: "start" },
+              title: "Pontificia Universidad Catolica de Chile",
+              summary:
+                "Exchange experience in Chile that expanded Latin American context and sharpened cross-cultural operating range."
+            },
+            {
+              id: "colombia",
+              label: "Colombia",
+              flag: "🇨🇴",
+              regionId: "latam",
+              marker: { x: 86, y: 90 },
+              labelAnchor: { x: 34, y: 52, align: "start" },
+              title: "Universidad de los Andes",
+              summary:
+                "Master's exchange focused on Latin American economy, accounting rules, and business context."
             }
           ]
         }
@@ -462,7 +596,7 @@ export const siteContent = {
           bullets: [
             "Built AWS-native orchestration for long-running business experiments and simulation workflows",
             "Shipped Python and TypeScript tools for rate limiting, judge calibration, and agent evaluation",
-            "Merged fixes in Continue, OpenAI Agents Python, Mastra, Phoenix, and Docling; active work continues across adjacent AI platforms"
+            "Merged fixes in HuggingFace Transformers, Docling, LlamaIndex, LiteLLM, Ray, Continue, OpenAI Agents Python, and Mastra; active work continues in Anthropic, Microsoft, Vercel, Chroma, and adjacent AI platforms"
           ],
           tags: ["AWS", "Serverless", "Python", "TypeScript", "LLM eval", "AI infra"]
         }
@@ -478,7 +612,7 @@ export const siteContent = {
         "Amazon PM operating at the intersection of product leadership and technical execution across MLOps, experimentation, serverless orchestration, and AI-enabled operations.",
       detail:
         "I define requirements, metrics, and launch paths for operator-facing ML systems, then work across business stakeholders, SDEs, and scientists to get them into production.",
-      tags: ["#MLOps", "#Serverless", "#AIInfra", "#ProgramLeadership", "#LLMEval"]
+      tags: ["#MLOps", "#Serverless", "#OpenSource", "#AIInfra", "#ProgramLeadership", "#LLMEval"]
     },
     credentials: [
       "St. Gallen magna cum laude",
@@ -487,12 +621,12 @@ export const siteContent = {
     ]
   },
   stats: {
-    verifiedOn: "Last verified March 24, 2026 from GitHub profile and live PR history.",
+    verifiedOn: "Last verified April 26, 2026 from GitHub profile and live public PR history.",
     items: [
-      { value: "6", label: "Merged upstream", detail: "external repos only" },
-      { value: "47", label: "Public repos", detail: "live GitHub profile count" },
-      { value: "25", label: "Open PRs", detail: "selected work still in review" },
-      { value: "1440", label: "Hours / year", detail: "estimated internal ops impact" }
+      { value: "28", label: "Merged upstream", detail: "external repos only" },
+      { value: "45", label: "Repos contributed to", detail: "across the AI tooling stack" },
+      { value: "68", label: "Public contributions", detail: "merged + open external PRs tracked" },
+      { value: "1.11M+", label: "Combined repo stars", detail: "across contributed repositories" }
     ]
   },
   profile: {
@@ -505,7 +639,7 @@ export const siteContent = {
         icon: "amazon",
         label: "Amazon PM",
         detail:
-          "ML product and program leadership across logistics optimization, orchestration, and AI-enabled operations.",
+          "ML product and program leadership across logistics optimization, orchestration, and AI-enabled operations. Active open-source contributor to AI infrastructure (28 merged PRs).",
         popover: {
           kind: "note",
           title: "Amazon PM operating context",
@@ -626,9 +760,9 @@ export const siteContent = {
   ],
   openSource: {
     intro:
-      "I contribute to the reliability layer underneath AI products: the security, interoperability, evaluation trust, and execution details that decide whether teams can actually ship them.",
+      "28 PRs merged into the AI infrastructure stack — HuggingFace Transformers, Docling, LlamaIndex, LiteLLM, Ray, Continue, OpenAI Agents Python, and Mastra — plus 40 active PRs across Anthropic Cookbooks, the Anthropic Go SDK, Microsoft Semantic Kernel, Chroma, and Vercel AI. Coverage spans LLM serving, agent frameworks, RAG, document AI, voice agents, observability, and security: the reliability layer underneath AI products.",
     statusNote:
-      "Updated March 24, 2026 from live GitHub history. Homepage highlights shipped upstream outcomes first; deeper detail lives on the dedicated OSS page.",
+      "Updated April 26, 2026 from live GitHub history. Homepage highlights shipped upstream outcomes first; deeper detail lives on the dedicated OSS page.",
     narrative: {
       title: "Why this matters for product teams",
       body:
@@ -653,11 +787,11 @@ export const siteContent = {
     githubPanel: {
       title: "GitHub is the live proof layer",
       body:
-        "GitHub is the clearest public record of how I work: shipped tools, merged upstream fixes, and a still-active contribution pipeline across the AI tooling stack.",
+        "GitHub is the clearest public record of how I work: 28 merged upstream fixes across HuggingFace Transformers, Docling, LlamaIndex, LiteLLM, Ray, Continue, OpenAI Agents Python, and Mastra, plus 40 active PRs across Anthropic, Microsoft, Vercel, Chroma, and adjacent AI tooling stacks. The record spans 45 external repos, with 3 approved PRs awaiting merge.",
       metrics: [
-        { value: "47", label: "Public repos" },
-        { value: "6", label: "Merged upstream" },
-        { value: "25", label: "Open PRs" }
+        { value: "45", label: "Repos contributed to" },
+        { value: "28", label: "Merged upstream" },
+        { value: "40", label: "Open PRs" }
       ],
       links: [
         {
@@ -673,10 +807,95 @@ export const siteContent = {
         }
       ]
     },
+    breadth: {
+      title: "Contribution breadth",
+      body:
+        "Coverage across core implementation languages and the parts of the AI infrastructure stack where execution quality actually matters.",
+      groups: [
+        {
+          label: "Languages",
+          items: ["Python", "TypeScript", "Go", "Rust", "C#", "SQL"]
+        },
+        {
+          label: "Verticals",
+          items: [
+            "Agent frameworks",
+            "LLM serving",
+            "RAG",
+            "Document AI",
+            "Voice agents",
+            "Observability",
+            "Tokenization",
+            "Evaluation",
+            "MLOps",
+            "Training/Fine-tuning",
+            "Distributed compute",
+            "Vector databases",
+            "MCP/Tool calling",
+            "Security"
+          ]
+        }
+      ]
+    },
     shipped: {
       title: "Selected shipped wins",
-      note: "Four homepage cards, each chosen for product consequence and team-level signal.",
+      note: "Eight homepage cards chosen for upstream consequence, repo scale, and hiring signal.",
       items: [
+        {
+          target: "HuggingFace Transformers",
+          title: "Merged generation fix removing stale num_return_sequences warning on continuous batching",
+          status: "Merged Apr 24",
+          href: "https://github.com/huggingface/transformers/pull/45582",
+          summary:
+            "Cleaned up a generation warning that fired incorrectly on the continuous-batching path, keeping production inference logs honest in the canonical LLM serving library.",
+          stars: "159.9k",
+          starBar: 100,
+          tags: ["Merged PR", "LLM serving", "Continuous batching", "Python"]
+        },
+        {
+          target: "Docling",
+          title: "Merged Windows CLI PermissionError fix for document conversion",
+          status: "Merged Mar 19",
+          href: "https://github.com/docling-project/docling/pull/3149",
+          summary:
+            "Fixed a Windows CLI failure path that blocked document conversion workflows, making the document-to-data pipeline usable across environments instead of failing on a common local setup.",
+          stars: "58.6k",
+          starBar: 37,
+          tags: ["Merged PR", "Document AI", "Cross-platform", "Python"]
+        },
+        {
+          target: "LlamaIndex",
+          title: "Merged input_file serialization fix for the Responses API",
+          status: "Merged Mar 27",
+          href: "https://github.com/run-llama/llama_index/pull/21172",
+          summary:
+            "Fixed nested serialization for file-based Responses API inputs, keeping retrieval and document-processing flows stable as teams adopt the newer OpenAI interface.",
+          stars: "48.9k",
+          starBar: 31,
+          tags: ["Merged PR", "RAG", "Serialization", "Python"]
+        },
+        {
+          target: "LiteLLM",
+          title: "Merged TTFT capture for /v1/messages across Anthropic, Bedrock, and Vertex",
+          status: "Merged Apr 16",
+          href: "https://github.com/BerriAI/litellm/pull/25599",
+          summary:
+            "Added time-to-first-token instrumentation on the Anthropic-style streaming path so multi-provider LLM gateways can report consistent latency metrics across Bedrock, Vertex, and Anthropic backends.",
+          stars: "44.7k",
+          starBar: 28,
+          tags: ["Merged PR", "LLM serving", "Streaming metrics", "Python"]
+        },
+        {
+          target: "Ray",
+          title: "Merged Serve autoscaling timing fix for delayed scale-up behavior",
+          status: "Merged Apr 3",
+          href: "https://github.com/ray-project/ray/pull/62144",
+          summary:
+            "Corrected Serve autoscaling timing so scale-up decisions happen on the intended wall-clock path instead of drifting under real traffic patterns.",
+          stars: "42.3k",
+          starBar: 26,
+          tags: ["Merged PR", "Distributed compute", "Autoscaling", "Python"]
+        },
         {
           target: "Continue",
           title: "Merged Ollama MCP tool-calling fix for Mistral and Gemma3 models",
@@ -684,7 +903,8 @@ export const siteContent = {
           href: "https://github.com/continuedev/continue/pull/11523",
           summary:
             "Makes local-model tooling more dependable in a popular AI coding environment, which matters when teams want model choice without unpredictable tool-call failures.",
-          stars: "32.0k",
+          stars: "32.8k",
+          starBar: 21,
           tags: ["Merged PR", "Tool calling", "Ollama", "Developer workflows"]
         },
         {
@@ -694,7 +914,8 @@ export const siteContent = {
           href: "https://github.com/openai/openai-agents-python/pull/2700",
           summary:
             "Keeps agent-system state reliable during cleanup flows, so teams do not lose structured context in a place that is hard to debug after the fact.",
-          stars: "20.3k",
+          stars: "25.2k",
+          starBar: 16,
           tags: ["Merged PR", "Agent reliability", "Python", "MCP"]
         },
         {
@@ -704,18 +925,9 @@ export const siteContent = {
           href: "https://github.com/mastra-ai/mastra/pull/14372",
           summary:
             "Prevents tool output from disappearing in agent workflows, which matters directly for operator trust and debugging quality.",
-          stars: "22.3k",
+          stars: "23.3k",
+          starBar: 15,
           tags: ["Merged PR", "Interoperability", "MCP", "Agent reliability"]
-        },
-        {
-          target: "Phoenix",
-          title: "Merged tracing export fix for cleaner observability usage",
-          status: "Merged Mar 19",
-          href: "https://github.com/Arize-ai/phoenix/pull/12201",
-          summary:
-            "Improves a tracing path teams rely on when they need observability that is easy to wire in instead of fragile at the edges.",
-          stars: "9.0k",
-          tags: ["Merged PR", "Observability", "Tracing", "JavaScript"]
         }
       ]
     },

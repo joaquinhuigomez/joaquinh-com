@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-03-19T10:07:53.986Z",
+  "dataset": "evals/verba-benchmark.sample.json",
+  "supportScorecard": [
+    {
+      "language": "Mandarin",
+      "totalCases": 4,
+      "successfulCases": 4,
+      "passRate": 0.86,
+      "rating": "stable"
+    },
+    {
+      "language": "French",
+      "totalCases": 1,
+      "successfulCases": 1,
+      "passRate": 1,
+      "rating": "stable"
+    }
+  ]
+}
