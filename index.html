@@ -3,8 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Joaquin Hui Gomez — Technical Program Manager · AI infrastructure</title>
-<meta name="description" content="Technical Program Manager · AI infrastructure · London. 39 merged upstream PRs since March 2026, 17 named in the release notes of 10 shipped projects, including first-party merges in Anthropic's Claude Agent SDK and OpenAI's Agents SDK. Claude Certified Architect – Professional, PMP, 5× AWS certified. Production ML and Gen AI programs at Amazon (PM II).">
+<title>Joaquin Hui Gomez · Cloud &amp; Gen AI Solutions Architecture · TPM</title>
+<meta name="description" content="Cloud and Gen AI solutions architecture and technical program management. 5× AWS certified, Claude Certified Architect – Professional, PMP. Amazon, London.">
+<link rel="canonical" href="https://joaquinh.com/">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://joaquinh.com/">
+<meta property="og:title" content="Joaquin Hui Gomez · Cloud &amp; Gen AI Solutions Architecture · TPM">
+<meta property="og:description" content="Cloud and Gen AI solutions architecture and technical program management. 5× AWS certified, Claude Certified Architect – Professional, PMP. Amazon, London.">
+<meta property="og:image" content="https://joaquinh.com/portrait-night.png">
+<meta property="og:image:alt" content="Portrait of Joaquin Hui Gomez">
+<meta property="og:site_name" content="Joaquin Hui Gomez">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Joaquin Hui Gomez — Cloud &amp; Gen AI Solutions Architecture">
+<meta name="twitter:description" content="Cloud and Gen AI solutions architecture and technical program management. 5× AWS certified, Claude Certified Architect – Professional, PMP. Amazon, London.">
+<meta name="twitter:image" content="https://joaquinh.com/portrait-night.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Joaquin Hui Gomez", "url": "https://joaquinh.com/", "image": "https://joaquinh.com/portrait-night.png", "jobTitle": "Program Manager", "worksFor": {"@type": "Organization", "name": "Amazon"}, "address": {"@type": "PostalAddress", "addressLocality": "London", "addressCountry": "GB"}, "description": "Cloud and Gen AI solutions architecture and technical program management. 5× AWS certified, Claude Certified Architect – Professional, PMP. Amazon, London.", "knowsAbout": ["Solutions architecture", "Cloud architecture", "Amazon Web Services", "AWS Well-Architected Framework", "Generative AI", "Agentic AI", "Amazon Bedrock", "Retrieval-augmented generation", "LLM evaluation", "Model Context Protocol", "Serverless architecture", "Technical program management", "Customer-facing technical delivery", "MLOps", "Python", "SQL"], "hasCredential": [{"@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "Claude Certified Architect – Professional", "recognizedBy": {"@type": "Organization", "name": "Anthropic"}}, {"@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "AWS Certified Generative AI Developer – Professional", "recognizedBy": {"@type": "Organization", "name": "Amazon Web Services"}}, {"@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "AWS Certified Solutions Architect – Associate", "recognizedBy": {"@type": "Organization", "name": "Amazon Web Services"}}, {"@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "AWS Certified Developer – Associate", "recognizedBy": {"@type": "Organization", "name": "Amazon Web Services"}}, {"@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "AWS Certified AI Practitioner", "recognizedBy": {"@type": "Organization", "name": "Amazon Web Services"}}, {"@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "AWS Certified Cloud Practitioner", "recognizedBy": {"@type": "Organization", "name": "Amazon Web Services"}}, {"@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "Project Management Professional (PMP)", "recognizedBy": {"@type": "Organization", "name": "Project Management Institute"}}, {"@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "Professional Scrum Master", "recognizedBy": {"@type": "Organization", "name": "Scrum.org"}}], "alumniOf": [{"@type": "CollegeOrUniversity", "name": "University of St. Gallen"}, {"@type": "CollegeOrUniversity", "name": "The University of Hong Kong"}], "knowsLanguage": ["en", "zh", "yue", "es", "fr", "pt"], "sameAs": ["https://github.com/joaquinhuigomez", "https://www.linkedin.com/in/joaquin-h-352927a9/", "https://x.com/ViajaryTragar"]}</script>
 <meta name="theme-color" content="#faf9f5">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
@@ -454,6 +467,20 @@
   .cert-chip--brand::before { display: none; }
   .cert-chip .cert-ico { width: 12px; height: 12px; display: block; }
   .hero .hero-creds { margin-top: var(--space-4); }
+
+  /* — architecture / pillars section — */
+  .arch-intro { max-width: 70ch; font-size: 16px; line-height: 1.55; color: var(--ink-2); margin-bottom: var(--space-5); }
+  .pillar-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-4); }
+  @media (min-width: 720px) { .pillar-grid { grid-template-columns: 1fr 1fr; } .pillar--wide { grid-column: 1 / -1; } }
+  @media (min-width: 1080px) { .pillar-grid { grid-template-columns: repeat(3, 1fr); } }
+  .pillar { padding: var(--space-4); border: 1px solid var(--rule); background: var(--paper); }
+  .pillar--wide { border-color: var(--accent); }
+  .pillar .pillar-meta { font-family: var(--font-mono); font-size: 11px; color: var(--gray-2); letter-spacing: 0.06em; margin-bottom: var(--space-2); }
+  .pillar h3 { font-size: 19px; margin-bottom: 6px; }
+  .pillar p { font-size: 14px; line-height: 1.55; color: var(--ink-2); }
+  .stack-row { margin-top: var(--space-5); }
+  .stack-row .stack-label { font-family: var(--font-mono); font-size: 11px; color: var(--gray-2); letter-spacing: 0.06em; display: block; margin-bottom: var(--space-2); }
+  .stack-row .cert-row { margin-top: 0; }
   .cert-note {
     margin-top: var(--space-2); font-size: 13px; line-height: 1.5;
     color: var(--ink-2); max-width: 52ch;
@@ -548,6 +575,7 @@
     <a href="/" class="nav-mark">joaquin hui g<span class="dot">.</span></a>
     <div class="nav-links">
       <a href="#work">work</a>
+      <a href="#architecture" class="hide-sm">architecture</a>
       <a href="#oss">oss</a>
       <a href="#labs" class="hide-sm">labs</a>
       <a href="#background" class="hide-sm">background</a>
@@ -566,22 +594,25 @@
   <div class="container">
     <div class="hero-grid">
       <div class="hero-copy">
-        <div class="eyebrow fade-in">technical program manager · ai infrastructure · london</div>
+        <div class="eyebrow fade-in">cloud &amp; gen ai solutions architecture · technical program management · london</div>
         <h1 class="fade-in d-1" style="margin-top: var(--space-4)">
           AI systems<br>
           teams can trust<br>
           <em>in production.</em>
         </h1>
         <p class="lede fade-in d-2">
-          <strong>Day job:</strong> program manager and AI leader &amp; builder at Amazon, leading production ML and Gen AI programs across European operations. I shipped an agentic AI system idea-to-production in <strong>two weeks</strong> (internal hackathon, Most Innovative 2026): <strong>7-figure annualized savings</strong>, <strong>&gt;1,400 hours/year of manual analysis time reclaimed</strong>. I built the <strong>LLM-as-judge eval pipeline</strong> behind successive frontier-model migrations (<strong>≥30% inference-cost reduction per call</strong>), and led two 2025 production ML launches with <strong>9-figure annualized impact</strong>, validated on live metrics: build → measure → review → iterate at network scale.
+          <strong>Day job:</strong> program manager and AI leader &amp; builder at Amazon, leading production ML and Gen AI programs across European operations. I led a four-person team that shipped an agentic AI system idea-to-production in <strong>two weeks</strong> (internal hackathon, Most Innovative 2026): <strong>7-figure annualized savings</strong>, <strong>&gt;1,400 hours/year of manual analysis time reclaimed</strong>. I built the <strong>LLM-as-judge eval pipeline</strong> behind successive frontier-model migrations (<strong>≥30% inference-cost reduction per call</strong>), and led two 2025 production ML launches with <strong>9-figure annualized impact</strong>, validated on live metrics: build → measure → review → iterate at network scale.
         </p>
         <p class="lede fade-in d-2">
-          <strong>Public record:</strong> 39 merged upstream PRs since March 2026, <strong>17 named in the release notes of shipped projects</strong> (Transformers, OpenAI Agents SDK, Axolotl, LanceDB, Apache Arrow), including first-party merges in <a class="link" href="https://github.com/anthropics/claude-agent-sdk-python/pull/927" target="_blank" rel="noopener">Anthropic's Claude Agent SDK</a> and <a class="link" href="https://github.com/openai/openai-agents-python/pull/2700" target="_blank" rel="noopener">OpenAI's Agents SDK</a>. HKU law + business, St. Gallen Master's <em>magna cum laude</em>, six natural languages.
+          <strong>Architecture:</strong> I design and build the Gen AI systems I ship: serverless agent orchestration on AWS Bedrock, Lambda, and Step Functions, retrieval on OpenSearch Serverless, edge apps on Cloudflare Workers. <strong>5× AWS certified</strong>, including Solutions Architect – Associate and Generative AI Developer – Professional.
+        </p>
+        <p class="lede fade-in d-2">
+          <strong>Public record:</strong> 39 merged upstream PRs since March 2026, <strong>17 named in the release notes of shipped projects</strong> (Transformers, OpenAI Agents SDK, Axolotl, LanceDB, Apache Arrow), including first-party merges in <a class="link" href="https://github.com/anthropics/claude-agent-sdk-python/pull/927" target="_blank" rel="noopener">Anthropic's Claude Agent SDK</a> and <a class="link" href="https://github.com/openai/openai-agents-python/pull/2700" target="_blank" rel="noopener">OpenAI's Agents SDK</a>.
         </p>
         <div class="cert-row hero-creds fade-in d-3">
           <span class="cert-chip cert-chip--brand"><img class="cert-ico" src="/logos/claude.svg" alt="" />Claude Certified Architect – Professional</span>
           <span class="cert-chip">PMP · Above Target ×3</span>
-          <span class="cert-chip">5× AWS Certified</span>
+          <span class="cert-chip">AWS Certified Solutions Architect – Associate · 5× AWS</span>
         </div>
         <div class="hero-meta fade-in d-3">
           <span>amazon · accenture · pwc</span>
@@ -732,12 +763,78 @@
   </div>
 </section>
 
-<!-- ============ OPEN SOURCE (now #02) ============ -->
+<!-- ============ ARCHITECTURE (#02) ============ -->
+<section class="section" id="architecture">
+  <div class="container">
+    <header class="sec-head">
+      <div>
+        <div class="eyebrow">02 — architecture</div>
+        <h2 style="margin-top: var(--space-2)">Cloud generalist, Gen AI specialist: evidence across the Well-Architected pillars.</h2>
+      </div>
+      <div class="right">solutions architecture · program delivery · customer-facing</div>
+    </header>
+
+    <p class="arch-intro">My work spans <strong>solutions architecture</strong>, <strong>technical program management</strong>, and the customer-facing technical delivery that <strong>technical account</strong> roles are built on. Evidence for five of the six AWS Well-Architected pillars follows; sustainability is the gap.</p>
+
+    <div class="pillar-grid">
+      <article class="pillar pillar--wide">
+        <div class="pillar-meta">specialization · generative ai</div>
+        <h3>Agentic systems on AWS Bedrock, designed end to end</h3>
+        <p>Designed and shipped an agentic platform: a tool-using LLM agent over schema-disciplined deterministic preprocessing, retrieval on a Bedrock Knowledge Base (Titan v2 embeddings, OpenSearch Serverless) with citations bound to source rows, and a hybrid serverless control plane: CloudFront, Cognito, and API Gateway in front; Lambda, Step Functions, SQS, S3, and DynamoDB behind; ECS Fargate for long-running jobs. An LLM-as-judge eval pipeline gates every model migration. Claude Certified Architect – Professional; AWS Certified Generative AI Developer – Professional.</p>
+      </article>
+      <article class="pillar">
+        <div class="pillar-meta">pillar · operational excellence</div>
+        <h3>Review loops that change the system</h3>
+        <p>Business reviews feed Kaizen sprints on the same production systems. Owned Correction-of-Error post-incident reviews read at VP level, and ran a live network migration against written runbooks and SLO-style targets.</p>
+      </article>
+      <article class="pillar">
+        <div class="pillar-meta">pillar · security</div>
+        <h3>Closing exposure upstream</h3>
+        <p>Raised the Claude Agent SDK's MCP dependency floor to the patched release for CVE-2025-66416, so SDK users no longer pull the vulnerable version; released within hours of merge. Legal training (HKU LLB) applied to governance: rules, authorities, validation layers. My tools run legal-critical workflows.</p>
+      </article>
+      <article class="pillar">
+        <div class="pillar-meta">pillar · reliability</div>
+        <h3>Failure made legible</h3>
+        <p>A live network migration behind statistical go/no-go gates. Upstream: LanceDB now tells a corrupt table from a missing one and returns typed errors instead of panicking; Ray Serve autoscaling runs on wall-clock time.</p>
+      </article>
+      <article class="pillar">
+        <div class="pillar-meta">pillar · performance efficiency</div>
+        <h3>Measure first</h3>
+        <p>Compressed a multi-day analyst loop to under two hours. Upstream: time-to-first-token capture across Anthropic, Bedrock, and Vertex AI in LiteLLM, and a stable vLLM cache identity in Ray Serve.</p>
+      </article>
+      <article class="pillar">
+        <div class="pillar-meta">pillar · cost optimization</div>
+        <h3>Cost per call as a first-class metric</h3>
+        <p>Instrumented cost per call next to latency and quality in the pipeline. Successive frontier-model migrations cut inference cost per call by 30% or more; the agentic platform returns 7-figure annualized savings.</p>
+      </article>
+      <article class="pillar">
+        <div class="pillar-meta">customer-facing · client delivery</div>
+        <h3>Client and partner delivery</h3>
+        <p>Client delivery at Accenture (Oracle ERP and database migration to cloud; technical liaison across 20+ stakeholders up to C-suite) and PwC (SAP integration, delivered in English, Mandarin, and Cantonese). At Amazon, up to 20 teams self-serve my tools and up to 50,000 carriers use tooling I program-manage. Standing war-room member during peak events.</p>
+      </article>
+    </div>
+
+    <div class="stack-row">
+      <span class="stack-label">stack i have built on</span>
+      <div class="cert-row">
+        <span class="cert-chip">compute · Lambda, Step Functions, ECS Fargate</span>
+        <span class="cert-chip">data · DynamoDB, S3, SQL, OpenSearch Serverless</span>
+        <span class="cert-chip">gen ai · Bedrock, Claude, RAG, evals</span>
+        <span class="cert-chip">edge &amp; access · CloudFront, API Gateway, Cognito</span>
+        <span class="cert-chip">integration · SQS/SNS, MCP</span>
+        <span class="cert-chip">cloudflare · Workers, D1, R2</span>
+        <span class="cert-chip">delivery · Python, CI/CD</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPEN SOURCE (#03) ============ -->
 <section class="section" id="oss" style="background: var(--paper-3); border-block: 1px solid var(--rule);">
   <div class="container">
     <header class="sec-head" style="border-bottom-color: var(--rule);">
       <div>
-        <div class="eyebrow">02 — open source</div>
+        <div class="eyebrow">03 — open source</div>
         <h2 style="margin-top: var(--space-2)">Open-source contributions across the AI infrastructure stack.</h2>
       </div>
       <div class="right"><a class="link muted" href="/open-source/">full ledger →</a></div>
@@ -756,7 +853,7 @@
       <div class="oss-list">
         <a class="oss-row" href="https://github.com/anthropics/claude-agent-sdk-python/pull/927" target="_blank" rel="noopener">
           <div class="oss-target">anthropics/claude-agent-sdk-python</div>
-          <div class="oss-summary"><strong>First-party Anthropic.</strong> Raised the minimum MCP version to close CVE-2025-66416 (DNS-rebinding protection off by default); released in v0.2.82 within hours of merge.</div>
+          <div class="oss-summary"><strong>First-party Anthropic.</strong> Raised the SDK's minimum MCP version to the patched release for CVE-2025-66416 (an MCP SDK flaw: DNS-rebinding protection off by default); released in v0.2.82 within hours of merge.</div>
           <div><span class="pill status-merged"><span class="dot"></span>merged · may 14</span></div>
           <div class="oss-stars">★ 8.2k</div>
         </a>
@@ -794,7 +891,7 @@
   <div class="container">
     <header class="sec-head" style="margin-bottom: var(--space-5);">
       <div>
-        <div class="eyebrow">03 — side projects</div>
+        <div class="eyebrow">04 — side projects</div>
         <h2 style="margin-top: var(--space-2)">Other things I've built on the side.</h2>
       </div>
       <div class="right">public urls · in development</div>
@@ -823,7 +920,7 @@
   <div class="container">
     <header class="sec-head">
       <div>
-        <div class="eyebrow">04 — background</div>
+        <div class="eyebrow">05 — background</div>
         <h2 style="margin-top: var(--space-2)">Three continents, six languages, one operating thesis.</h2>
       </div>
       <div class="right">education · work · footprint</div>
@@ -858,7 +955,7 @@
           <h4>leadership · cross-functional programs · DEI</h4>
           <ul class="leadership-list">
             <li><strong>Cross-functional program ownership</strong> — coordinated production-ML rollouts across <strong>5+ stakeholder teams</strong> (PM, SDE, ML research, operations) on EU-wide footprint · <strong>two-pizza-team structure</strong>. Owned BRDs, launch artifacts, and eval loops; coordinated through stakeholder leads on each launch. Led the <strong>4-person build team</strong> behind the agentic platform; <strong>up to 20 teams</strong> now run my internal tools without me, including production- and legal-critical workflows.</li>
-            <li><strong>Operational rigor</strong> — owned <strong>Correction-of-Error post-incident reviews read at VP level</strong>; written runbooks and SLO-style targets on live network migrations; program-managed carrier-facing tooling used by <strong>up to 50,000 carriers</strong> across the EU.</li>
+            <li><strong>Operational rigor</strong> — owned <strong>Correction-of-Error post-incident reviews read at VP level</strong>; a live network migration run against written runbooks and SLO-style targets; program-managed carrier-facing tooling used by <strong>up to 50,000 carriers</strong> across the EU.</li>
             <li><strong>Mentorship track record</strong> — coached 1 intern and mentored 2 to full-time return offers; every intern and direct mentee to date received one, through company-wide hiring freezes. Coached through both technical execution and PM-craft skill development.</li>
             <li><strong>Cross-cultural delivery</strong> — operated and shipped across <strong>3 continents and 6 natural languages</strong>: consulting tenure in Beijing (Accenture) and Shanghai (PwC), master's-era programs in Latin America, current EU operations leadership.</li>
             <li><strong>ERG involvement</strong> — active in Glamazon and the Asian &amp; Latino affinity groups at Amazon. Diversity is a leadership lens, not a checkbox.</li>
@@ -983,7 +1080,7 @@
 <!-- ============ CONTACT ============ -->
 <section class="section contact" id="contact">
   <div class="container">
-    <div class="eyebrow">05 — contact</div>
+    <div class="eyebrow">06 — contact</div>
     <div class="contact-grid" style="margin-top: var(--space-5)">
       <h2>
         Get in touch.
